@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+/* GLOBAL STYLES
+-------------------------------------------------- */
+.content {
+	min-height: 60%;
+}
+
+hr {
+	border: 1px solid #e9e9e9;
+}
+
+.market-color {
+	color: #E37439;
+}
+.market-color:hover {
+	color: #d8601f;
+}
+.main-header-input-box {
+	background: #e9e9e9;
+}
+
+.main-header-input {
+	border: 0;
+	outline: 0;
+	background: #e9e9e9;
+	border-radius: 10px;
+}
+
+.main-header-input:focus {
+	background: #e9e9e9;
+	box-shadow: none !important;
+}
+
+/////////////////////
+.category-link {
+	text-decoration: none;
+	font-weight: lighter;
+	color: #6c757d;
+}
+
+.category-link:hover {
+	font-weight: bold;
+	color: black;
+}
+
+.product-img {
+	min-height: 300px;
+}
