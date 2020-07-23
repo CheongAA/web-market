@@ -3,21 +3,31 @@
 
 <mapper namespace="com.mju.ict.repository.IUserDAO">
 
-	<insert id="insertUser"
-		parameterType="com.mju.ict.model.User">
+	<insert id="insertUser" parameterType="com.mju.ict.model.User">
 		INSERT INTO tb_user
 		(user_identification,user_name,user_password,
 		user_email,user_gender,
 		user_phone,user_zip,
-		user_address,user_address2,user_birth) 
+		user_address,user_address2,user_birth)
 		VALUES(
 		#{user_identification},#{user_name},#{user_password},#{user_email},#{user_gender},
 		#{user_phone},#{user_zip},#{user_address},#{user_address2},#{user_birth}
 		)
-		
+
 	</insert>
-    <select id="selectUserByIdentification" parameterType="String" resultType="com.mju.ict.model.User">
-        SELECT * FROM tb_user WHERE 
-        user_identification = #{user_identification}
-    </select>
+	<select id="selectUserByIdentification" parameterType="String"
+		resultType="com.mju.ict.model.User">
+		SELECT * FROM tb_user WHERE
+		user_identification = #{user_identification}
+	</select>
+	
+	<select id="selectUserById" parameterType="Integer"
+		resultType="com.mju.ict.model.User">
+		SELECT * FROM tb_user WHERE
+		user_id = #{id}
+	</select>
+	
+	<select id="selectAllUsers" resultType="com.mju.ict.model.User">
+		SELECT * FROM tb_user
+	</select>
 </mapper>

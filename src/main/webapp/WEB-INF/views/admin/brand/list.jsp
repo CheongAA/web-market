@@ -12,8 +12,8 @@
 	<div class="row mt-5">
 		<h3 class="w-100">상품조회 / 수정 / 삭제</h3>
 		<ul class="list-group">
-		<c:forEach var="product" items="${products}" varStatus="status">
-			<li class="list-group-item "><a href="${pageContext.request.contextPath}/admin/product/${product.product_id}"><c:out value="${status.count} " />. <c:out value="${product.product_name}" /></a></li>
+		<c:forEach var="brand" items="${brands}" varStatus="status">
+			<li class="list-group-item "><a href="${pageContext.request.contextPath}/admin/brand/${brand.brand_id}"><c:out value="${status.count} " />. <c:out value="${brand.brand_name}" /></a></li>
 		</c:forEach>
 		</ul>
 	</div>

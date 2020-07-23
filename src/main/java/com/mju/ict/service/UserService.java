@@ -1,5 +1,7 @@
 package com.mju.ict.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,16 @@ public class UserService implements IUserService {
 			isUser =  "1";
 		}
 		return isUser;
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		return userDAO.selectAllUsers();
+	}
+
+	@Override
+	public User getUserById(int id) {
+		return userDAO.selectUserById(id);
 	}
 
 }

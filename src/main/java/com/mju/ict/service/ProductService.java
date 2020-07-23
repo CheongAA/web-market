@@ -15,7 +15,7 @@ public class ProductService implements IProductService{
 	IProductDAO productDAO;
 	
 	@Override
-	public List<Product> getProducts(int category) {
+	public List<Product> getProductsByCategory(int category) {
 		return productDAO.selectProductsByCategory(category);
 	}
 
@@ -33,6 +33,17 @@ public class ProductService implements IProductService{
 	public void registerProduct(Product product) {
 		productDAO.insertProduct(product);
 		
+	}
+
+	@Override
+	public void deleteProductById(int id) {
+		productDAO.deleteProductById(id);
+	}
+
+	@Override
+	public Product updateProduct(Product product) {
+		productDAO.updateProduct(product);
+		return productDAO.selectProductById(product.getProduct_id());
 	}
 
 }

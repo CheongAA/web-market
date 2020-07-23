@@ -29,10 +29,7 @@
 			<div class="dropdown-menu dropdown-menu-right">
 				<a
 					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
-					href="${pageContext.request.contextPath}/admin/product/">상품조회/수정/삭제</a>
-				<a
-					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
-					href="${pageContext.request.contextPath}/admin/product/add">상품등록</a>
+					href="${pageContext.request.contextPath}/admin/user">고객조회</a>
 			</div>
 		</div>
 		<div class="col btn-group border-right justify-content-md-center">
@@ -43,10 +40,10 @@
 			<div class="dropdown-menu dropdown-menu-right">
 				<a
 					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
-					href="${pageContext.request.contextPath}/admin/product/">상품조회/수정/삭제</a>
+					href="${pageContext.request.contextPath}/admin/brand/">브랜드조회/수정/삭제</a>
 				<a
 					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
-					href="${pageContext.request.contextPath}/admin/product/add">상품등록</a>
+					href="${pageContext.request.contextPath}/admin/brand/add">브랜드 등록</a>
 			</div>
 		</div>
 		<div class="col btn-group border-right justify-content-md-center">

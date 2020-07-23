@@ -3,8 +3,39 @@
 
 <mapper namespace="com.mju.ict.repository.IBrandDAO">
 
-	<select id="selectAllBrands" resultType="com.mju.ict.model.Brand">
+	<select id="selectAllBrands"
+		resultType="com.mju.ict.model.Brand">
 		SELECT * FROM tb_brand
 	</select>
+	<select id="selectBrandById" parameterType="Integer"
+		resultType="com.mju.ict.model.Brand">
+		SELECT * FROM tb_brand
+		WHERE
+		brand_id = #{id}
+	</select>
+
+	<insert id="insertBrand" parameterType="com.mju.ict.model.Brand">
+		INSERT INTO tb_brand
+		(brand_name,brand_desc)
+		VALUES
+		(#{brand_name},#{brand_desc})
+	</insert>
+
+	<delete id="deleteBrandById" parameterType="Integer">
+		DELETE FROM
+		tb_brand
+		WHERE
+		brand_id = #{id}
+	</delete>
+
+	<update id="updateBrand"
+		parameterType="com.mju.ict.model.Brand">
+		UPDATE tb_brand
+		SET
+		brand_name =CONCAT("${brand_name}"),
+		brand_desc =CONCAT("${brand_desc}")
+		WHERE
+		brand_id = ${brand_id}
+	</update>
 
 </mapper>

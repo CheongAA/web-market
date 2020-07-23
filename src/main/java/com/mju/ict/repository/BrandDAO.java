@@ -18,6 +18,27 @@ public class BrandDAO implements IBrandDAO{
 	public List<Brand> selectAllBrands() {
 		return sqlSession.selectList("selectAllBrands");
 	}
+
+	@Override
+	public Brand selectBrandById(int id) {
+		return sqlSession.selectOne("selectBrandById",id);
+	}
+
+	@Override
+	public void insertBrand(Brand brand) {
+		sqlSession.insert("insertBrand", brand);
+		
+	}
+
+	@Override
+	public void updateBrand(Brand brand) {
+		sqlSession.update("updateBrand", brand);
+	}
+
+	@Override
+	public void deleteBrandById(int id) {
+		sqlSession.delete("deleteBrandById", id);
+	}
 	
 
 }

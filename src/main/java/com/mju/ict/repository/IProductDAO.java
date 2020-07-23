@@ -12,4 +12,8 @@ public interface IProductDAO {
 	public abstract List<Product> selectAllProducts();
 
 	public abstract void insertProduct(Product product);
+
+	public abstract void deleteProductById(int id);
+
+	public abstract void updateProduct(Product product);
 }

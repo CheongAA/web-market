@@ -32,6 +32,16 @@ public class ProductDAO implements IProductDAO{
 	public void insertProduct(Product product) {
 		sqlSession.insert("insertProduct",product);		
 	}
+
+	@Override
+	public void deleteProductById(int id) {
+		sqlSession.delete("deleteProductById", id);
+	}
+
+	@Override
+	public void updateProduct(Product product) {
+		sqlSession.update("updateProduct", product);
+	}
 	
 
 }

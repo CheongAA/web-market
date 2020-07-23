@@ -5,7 +5,7 @@
 
 	<resultMap type="com.mju.ict.model.Product" id="product">
 		<result column="product_id" property="product_id" />
-		<result column="brand_id" property="product_id" />
+		<result column="brand_id" property="brand_id" />
 		<result column="category_code" property="category_code" />
 		<result column="product_created" property="product_created" />
 		<result column="product_name" property="product_name" />
@@ -70,5 +70,28 @@
 	<select id="selectAllProducts" resultMap="product">
 		SELECT * FROM tb_product
 	</select>
+	
+	<delete id="deleteProductById" parameterType="Integer">
+		DELETE FROM tb_product 
+		WHERE
+		product_id = #{id}
+	</delete>
+	
+	<update id="updateProduct" parameterType="com.mju.ict.model.Product">
+		UPDATE tb_product 
+		SET 
+		brand_id = ${brand_id},
+		category_code = ${category_code},
+		product_name = CONCAT("${product_name}"),
+		product_price = ${product_price},
+		product_quantity = ${product_quantity},
+		product_desc = CONCAT("${product_desc}"),
+		product_material = CONCAT("${product_material}"),
+		product_volume = ${product_volume},
+		on_discount = ${on_discount},
+		on_sale= ${on_sale}
+		WHERE 
+		product_id = ${product_id}
+	</update>
 
 </mapper>

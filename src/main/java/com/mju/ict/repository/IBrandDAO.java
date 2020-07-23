@@ -6,4 +6,12 @@ import com.mju.ict.model.Brand;
 
 public interface IBrandDAO {
 	public abstract List<Brand> selectAllBrands();
+
+	public abstract Brand selectBrandById(int id);
+
+	public abstract void insertBrand(Brand brand);
+
+	public abstract void updateBrand(Brand brand);
+
+	public abstract void deleteBrandById(int id);
 }

@@ -5,17 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자:: 상품 조회 /수정/삭제</title>
 </head>
 <body>
 	<jsp:include page="../admin_header.jsp" flush="false" />
 	<div class="row mt-5">
 		<h3 class="w-100">상품조회 / 수정 / 삭제</h3>
-		<ul class="list-group">
-		<c:forEach var="product" items="${products}" varStatus="status">
-			<li class="list-group-item "><a href="${pageContext.request.contextPath}/admin/product/${product.product_id}"><c:out value="${status.count} " />. <c:out value="${product.product_name}" /></a></li>
-		</c:forEach>
-		</ul>
+		<div class="">
+			<p>"${product.brand_id}"</p>
+			<p>"${product.product_name}"</p>
+			<a
+				href="${pageContext.request.contextPath}/admin/product/update/${product.product_id}">수정</a>
+			<a
+				href="${pageContext.request.contextPath}/admin/product/delete/${product.product_id}">삭제</a>
+		</div>
 	</div>
 </body>
 </html>

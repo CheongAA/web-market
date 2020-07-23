@@ -1,9 +1,13 @@
 package com.mju.ict.service;
 
+import java.util.List;
+
 import com.mju.ict.model.User;
 
 public interface IUserService {
-	abstract public void registerUser(User user); 
-	abstract public User getUserByIdentification(String user_identification);
-	abstract public String getUserByIdentificationBool(String user_identification);
+	public abstract void registerUser(User user); 
+	public abstract User getUserByIdentification(String user_identification);
+	public abstract String getUserByIdentificationBool(String user_identification);
+	public abstract List<User> getAllUsers();
+	public abstract User getUserById(int id);
 }

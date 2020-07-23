@@ -8,4 +8,12 @@ public interface IBrandService {
 
 	public abstract List<Brand> getAllBrands();
 
+	public abstract Brand getBrandById(int id);
+
+	public abstract void registerBrand(Brand brand);
+
+	public abstract Brand updateBrand(Brand brand);
+
+	public abstract void deleteBrandById(int id);
+
 }

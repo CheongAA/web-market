@@ -21,5 +21,27 @@ public class BrandService implements IBrandService{
 		return brandDAO.selectAllBrands();
 	}
 
+	@Override
+	public Brand getBrandById(int id) {
+		return brandDAO.selectBrandById(id);
+	}
+
+	@Override
+	public void registerBrand(Brand brand) {
+		brandDAO.insertBrand(brand);
+	}
+
+	@Override
+	public Brand updateBrand(Brand brand) {
+		brandDAO.updateBrand(brand);
+		return brandDAO.selectBrandById(brand.getBrand_id());
+	}
+
+	@Override
+	public void deleteBrandById(int id) {
+		brandDAO.deleteBrandById(id);
+		
+	}
+
 
 }

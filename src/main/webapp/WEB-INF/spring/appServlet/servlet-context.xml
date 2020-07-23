@@ -72,6 +72,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/admin/*" />
 			<mvc:mapping path="/admin/**/*" />
+			<mvc:mapping path="/admin/**/**/*" />
 			<beans:ref bean="AdminCheckInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

@@ -23,7 +23,7 @@ public class ProductController {
 	
 	@RequestMapping(value = "/products/{category}", method = RequestMethod.GET)
 	public String getProducts(@PathVariable int category,Model model) {
-		List<Product> products = productService.getProducts(category);
+		List<Product> products = productService.getProductsByCategory(category);
 		model.addAttribute("products", products);
 		return "/products";
 	}
