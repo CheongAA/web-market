@@ -18,13 +18,13 @@ hr {
 }
 .main-header-input-box {
 	background: #e9e9e9;
+	border-radius: 50px;
 }
 
 .main-header-input {
 	border: 0;
 	outline: 0;
-	background: #e9e9e9;
-	border-radius: 10px;
+	background: transparent;
 }
 
 .main-header-input:focus {
@@ -45,5 +45,11 @@ hr {
 }
 
 .product-img {
+	position:relative;
 	min-height: 300px;
+}
+
+.product-img-text{
+	position: absolute;
+	top:0px;
 }

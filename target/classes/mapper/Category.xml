@@ -3,13 +3,18 @@
 
 <mapper namespace="com.mju.ict.repository.ICategoryDAO">
 
-	<select id="selectAllCategories" resultType="com.mju.ict.model.Category">
+	<select id="selectAllCategories"
+		resultType="com.mju.ict.model.Category">
 		SELECT * FROM tb_category
 	</select>
-	
-		<select id="selectCategoriesByLarge" parameterType="String" resultType="com.mju.ict.model.Category">
+
+	<select id="selectCurrentCategories" parameterType="Integer"
+		resultType="com.mju.ict.model.Category">
 		SELECT * FROM tb_category
-		where category_code2 = #{large}
+		where 
+		category_code = #{category}
+		OR
+		category_code2 = #{category}
 	</select>
 
 </mapper>

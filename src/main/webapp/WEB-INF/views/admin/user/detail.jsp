@@ -16,5 +16,9 @@
 			<p>"${user.user_name}"</p>
 		</div>
 	</div>
+	<div class="w-100">
+		<a href="${pageContext.request.contextPath}/admin/user"
+			class="btn btn-dark float-right mx-5">목록</a>
+	</div>
 </body>
 </html>

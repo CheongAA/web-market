@@ -1,7 +1,5 @@
 package com.mju.ict.controller;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -20,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mju.ict.model.Address;
 import com.mju.ict.model.User;
+import com.mju.ict.service.IAddressService;
 import com.mju.ict.service.IUserService;
 
 @Controller
@@ -30,28 +30,35 @@ public class UserController {
 
 	@Autowired
 	IUserService userService;
+	
+	@Autowired
+	IAddressService addressService;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
 	// 회원가입
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signup(@RequestParam("user_password2") String user_password2, @ModelAttribute @Valid User user,
-			BindingResult result, HttpSession session, Model model) {
-
+	public String signup(@ModelAttribute @Valid User user,BindingResult result,
+			@ModelAttribute Address address, HttpSession session, Model model) {
 		if (result.hasErrors()) {
 			// 입력값 유효성 검사
 			model.addAttribute("msg", 1);
 			return "signup";
-		} else if (!user.getUser_password().equals(user_password2)) {
-			// 입력한 비밀번호들의 값이 같은지 확인
-			model.addAttribute("msg", 2);
-			return "signup";
-		} else {
-			// 회원가입 성공
+		}else {
+			// 회원가입
 			String encPassword = passwordEncoder.encode(user.getUser_password());
 			user.setUser_password(encPassword);
 			userService.registerUser(user);
+			
+			//기본배송지 등록
+			int user_id = userService.getIdByIdentification(user.getUser_identification());		
+			address.setUser_id(user_id);
+			address.setAddress_recipient(user.getUser_name());
+			address.setAddress_phone(user.getUser_phone());
+			address.setAddress_default(1);
+			addressService.registerAddress(address);
+			
 		}
 
 		return "redirect:/login";
@@ -91,10 +98,10 @@ public class UserController {
 		return "redirect:/";
 	}
 
-	// 마이페이지
-	@RequestMapping(value = "/mypage/order", method = RequestMethod.GET)
-	public String getMypage(@RequestParam HashMap<String, String> userMap, HttpSession session) {
-		return "user/mypage/order-list";
+	// 유저 마이페이지 
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public String getMypage() {
+		return "user/index";
 	}
 
 }

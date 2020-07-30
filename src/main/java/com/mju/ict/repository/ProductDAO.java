@@ -1,6 +1,8 @@
 package com.mju.ict.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,26 @@ public class ProductDAO implements IProductDAO{
 	@Override
 	public void updateProduct(Product product) {
 		sqlSession.update("updateProduct", product);
+	}
+
+	@Override
+	public List<Product> selectProductByBrand(int id) {
+		return sqlSession.selectList("selectProductsByBrand", id);
+	}
+
+	@Override
+	public List<Product> selectDiscountProducts() {
+		return sqlSession.selectList("selectDiscountProducts");
+	}
+
+	@Override
+	public void updateProductSale(Map<String,Integer> map) {
+		sqlSession.update("updateProductSale",map);
+	}
+
+	@Override
+	public List<Product> selectNewProducts() {
+		return sqlSession.selectList("selectNewProducts");
 	}
 	
 

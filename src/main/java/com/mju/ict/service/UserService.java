@@ -46,4 +46,9 @@ public class UserService implements IUserService {
 		return userDAO.selectUserById(id);
 	}
 
+	@Override
+	public int getIdByIdentification(String user_identification) {
+		return userDAO.selectIdByIdentification(user_identification);
+	}
+
 }

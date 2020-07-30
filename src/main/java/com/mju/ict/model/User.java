@@ -18,9 +18,6 @@ public class User {
 //    user_password VARCHAR(255)NOT NULL,
 //    user_gender VARCHAR(255)NOT NULL,
 //    user_phone VARCHAR(255)NOT NULL,
-//    user_zip VARCHAR(255) NOT NULL,
-//    user_address VARCHAR(255) NOT NULL,
-//    user_address2 VARCHAR(255) NOT NULL,
 //    user_level TINYINT(1) NOT NULL default 0
 
 	private int user_id;
@@ -53,15 +50,6 @@ public class User {
 	@Pattern(regexp = "^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$",message = "번호")
 	private String user_phone;
 
-	@NotEmpty
-	private String user_zip;
-
-	@NotEmpty
-	private String user_address;
-
-	@NotEmpty
-	@Size(min = 1,max = 50, message="상세주소")
-	private String user_address2;
 
 	public int getUser_id() {
 		return user_id;
@@ -133,30 +121,6 @@ public class User {
 
 	public void setUser_phone(String user_phone) {
 		this.user_phone = user_phone;
-	}
-
-	public String getUser_zip() {
-		return user_zip;
-	}
-
-	public void setUser_zip(String user_zip) {
-		this.user_zip = user_zip;
-	}
-
-	public String getUser_address() {
-		return user_address;
-	}
-
-	public void setUser_address(String user_address) {
-		this.user_address = user_address;
-	}
-
-	public String getUser_address2() {
-		return user_address2;
-	}
-
-	public void setUser_address2(String user_address2) {
-		this.user_address2 = user_address2;
 	}
 
 	public String getUser_identification() {

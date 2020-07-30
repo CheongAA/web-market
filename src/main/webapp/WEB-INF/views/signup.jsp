@@ -27,12 +27,6 @@
 									alert("정확한 정보를 입력해주세요.")
 								</script>
 							</c:if>
-							<c:if test="${msg == 2}">
-								<script type="text/javascript">
-									alert("비밀번호를 확인해주세요.")
-								</script>
-							</c:if>
-
 							<div class="form-group">
 								<label>아이디</label>
 									<input type="text" name="user_identification"
@@ -95,7 +89,7 @@
 							<div class="form-row">
 								<label class="w-100">주소</label>
 								<div class="col-8 form-group">
-									<input type="text" name="user_zip" id="zip"
+									<input type="text" name="address_zip" id="zip"
 										class="form-control" readonly="readonly">
 								</div>
 								<div class="col-4 form-group">
@@ -105,12 +99,12 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<input type="text" name="user_address" id="address"
+								<input type="text" name="address_detail" id="address"
 									class="form-control" readonly="readonly"> <small
 									id="guide" class="form-text text-muted"></small>
 							</div>
 							<div class="form-group">
-								<input type="text" name="user_address2" id="address2"
+								<input type="text" name="address_detail2" id="address2"
 									class="form-control"> <small
 									class="form-text text-danger" id="validation_address2"></small>
 							</div>

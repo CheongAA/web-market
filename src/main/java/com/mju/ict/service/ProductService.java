@@ -1,6 +1,8 @@
 package com.mju.ict.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +46,36 @@ public class ProductService implements IProductService{
 	public Product updateProduct(Product product) {
 		productDAO.updateProduct(product);
 		return productDAO.selectProductById(product.getProduct_id());
+	}
+
+	@Override
+	public List<Product> getProductsByBrand(int id) {
+		return productDAO.selectProductByBrand(id);
+	}
+
+	@Override
+	public List<Product> getDiscountProducts() {
+		return productDAO.selectDiscountProducts();
+	}
+
+	@Override
+	public void changeProductSale(int id) {
+		Product product = productDAO.selectProductById(id);
+		Map<String,Integer> map = new HashMap<String,Integer>();				   
+		map.put("id", id);
+		
+		if(product.getOn_sale() == 1) {
+			map.put("on_sale", 0);
+		}else {
+			map.put("on_sale", 1);
+		}
+		
+		productDAO.updateProductSale(map);
+	}
+
+	@Override
+	public List<Product> getNewProducts() {
+		return productDAO.selectNewProducts();
 	}
 
 }

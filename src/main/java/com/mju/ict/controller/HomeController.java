@@ -27,11 +27,7 @@ public class HomeController {
 		return "signup";
 	}
 	
-	@RequestMapping(value = "/notice", method = RequestMethod.GET)
-	public String getNotice() {
-		return "category/notice";
-	}
-	
+
 	@RequestMapping(value = "/brand", method = RequestMethod.GET)
 	public String getBrandAll() {
 		return "category/brand";

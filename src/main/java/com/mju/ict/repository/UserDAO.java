@@ -34,4 +34,9 @@ public class UserDAO implements IUserDAO{
 		return sqlSession.selectOne("selectUserById",id);
 	}
 
+	@Override
+	public int selectIdByIdentification(String user_identification) {
+		return sqlSession.selectOne("selectIdByIdentification",user_identification);
+	}
+
 }

@@ -7,6 +7,7 @@
 		<result column="product_id" property="product_id" />
 		<result column="brand_id" property="brand_id" />
 		<result column="category_code" property="category_code" />
+		<result column="discount_id" property="discount_id" />
 		<result column="product_created" property="product_created" />
 		<result column="product_name" property="product_name" />
 		<result column="product_price" property="product_price" />
@@ -14,8 +15,10 @@
 		<result column="product_desc" property="product_desc" />
 		<result column="product_material" property="product_material" />
 		<result column="product_volume" property="product_volume" />
-		<result column="on_discount" property="on_discount" />
 		<result column="on_sale" property="on_sale" />
+		<result column="product_thumbnailImg"
+			property="product_thumbnailImg" />
+		<result column="product_img" property="product_img" />
 
 		<association javaType="com.mju.ict.model.Brand"
 			property="brand">
@@ -29,6 +32,15 @@
 			<result column="category_code2" property="category_code2" />
 			<result column="category_name" property="category_name" />
 		</association>
+
+		<association javaType="com.mju.ict.model.Discount"
+			property="discount">
+			<id column="discount_id" property="discount_id" />
+			<result column="discount_name" property="discount_name" />
+			<result column="discount_rate" property="discount_rate" />
+			<result column="discount_start" property="discount_start" />
+			<result column="discount_end" property="discount_end" />
+		</association>
 	</resultMap>
 
 	<insert id="insertProduct"
@@ -37,14 +49,15 @@
 		(brand_id,category_code,product_name,product_price,
 		product_quantity,product_desc,
 		product_material,product_volume,
-		on_discount,on_sale) 
+		product_thumbnailImg,product_img)
 		VALUES(
 		#{brand_id},#{category_code},#{product_name},#{product_price},
-		#{product_quantity},#{product_desc},#{product_material},#{product_volume},#{on_discount},#{on_sale}
+		#{product_quantity},#{product_desc},#{product_material},#{product_volume},
+		#{product_thumbnailImg},#{product_img}
 		)
-		
+
 	</insert>
-	
+
 	<select id="selectProductsByCategory" parameterType="Integer"
 		resultMap="product">
 		SELECT * FROM tb_product
@@ -56,42 +69,151 @@
 		tb_category
 		ON
 		tb_category.category_code= tb_product.category_code
+		LEFT JOIN
+		tb_discount
+		ON
+		tb_discount.discount_id= tb_product.discount_id
 		WHERE
-		tb_product.category_code Like CONCAT(#{category},'%','%')
+		tb_product.category_code = #{category}
+		OR
+		tb_category.category_code2 = #{category}
 	</select>
 
 	<select id="selectProductById" parameterType="Integer"
 		resultMap="product">
 		SELECT * FROM tb_product
+		LEFT JOIN
+		tb_brand
+		ON
+		tb_brand.brand_id = tb_product.brand_id
+		LEFT JOIN
+		tb_category
+		ON
+		tb_category.category_code= tb_product.category_code
+		LEFT JOIN
+		tb_discount
+		ON
+		tb_discount.discount_id= tb_product.discount_id
 		WHERE
-		product_id = #{id}
+		product_id =
+		#{id}
+	</select>
+
+	<select id="selectProductsByBrand" parameterType="Integer"
+		resultMap="product">
+		SELECT * FROM tb_product
+		LEFT JOIN
+		tb_brand
+		ON
+		tb_brand.brand_id =
+		tb_product.brand_id
+		LEFT JOIN
+		tb_category
+		ON
+		tb_category.category_code=
+		tb_product.category_code
+		LEFT JOIN
+		tb_discount
+		ON
+		tb_discount.discount_id= tb_product.discount_id		
+		WHERE
+		tb_product.brand_id = #{id}
 	</select>
 
 	<select id="selectAllProducts" resultMap="product">
-		SELECT * FROM tb_product
+		SELECT * FROM
+		tb_product
+		LEFT JOIN
+		tb_brand
+		ON
+		tb_brand.brand_id = tb_product.brand_id
+		LEFT JOIN
+		tb_discount
+		ON
+		tb_discount.discount_id= tb_product.discount_id
 	</select>
-	
+
+	<select id="selectDiscountProducts" resultMap="product">
+		SELECT * FROM
+		tb_product
+		LEFT JOIN
+		tb_brand
+		ON
+		tb_brand.brand_id =
+		tb_product.brand_id
+		LEFT JOIN
+		tb_category
+		ON
+		tb_category.category_code=
+		tb_product.category_code
+		LEFT JOIN
+		tb_discount
+		ON
+		tb_discount.discount_id= tb_product.discount_id
+		WHERE
+		tb_product.discount_id is not NULL
+	</select>
+
+	<select id="selectNewProducts" resultMap="product">
+		SELECT * FROM 
+		tb_product 
+		LEFT JOIN
+		tb_brand
+		ON
+		tb_brand.brand_id =
+		tb_product.brand_id
+		LEFT JOIN
+		tb_category
+		ON
+		tb_category.category_code=
+		tb_product.category_code
+		LEFT JOIN
+		tb_discount
+		ON
+		tb_discount.discount_id= tb_product.discount_id
+		where 
+		on_sale = 1 
+		order by 
+		product_created desc
+		limit 10;
+	</select>
+
 	<delete id="deleteProductById" parameterType="Integer">
-		DELETE FROM tb_product 
+		DELETE FROM
+		tb_product
 		WHERE
 		product_id = #{id}
 	</delete>
-	
-	<update id="updateProduct" parameterType="com.mju.ict.model.Product">
-		UPDATE tb_product 
-		SET 
-		brand_id = ${brand_id},
-		category_code = ${category_code},
-		product_name = CONCAT("${product_name}"),
-		product_price = ${product_price},
-		product_quantity = ${product_quantity},
-		product_desc = CONCAT("${product_desc}"),
-		product_material = CONCAT("${product_material}"),
-		product_volume = ${product_volume},
-		on_discount = ${on_discount},
-		on_sale= ${on_sale}
-		WHERE 
-		product_id = ${product_id}
+
+	<update id="updateProduct"
+		parameterType="com.mju.ict.model.Product">
+		UPDATE tb_product
+		SET
+		brand_id = #{brand_id},
+		category_code = #{category_code},
+		product_name =#{product_name},
+		product_price = #{product_price},
+		product_quantity =
+		#{product_quantity},
+		product_desc =#{product_desc},
+		product_material
+		=#{product_material},
+		product_volume = #{product_volume},
+		product_thumbnailImg =
+		#{product_thumbnailImg},
+		product_img =
+		#{product_img}
+		WHERE
+		product_id =
+		${product_id}
+	</update>
+
+	<update id="updateProductSale" parameterType="hashMap">
+		UPDATE tb_product
+		SET
+		on_sale = #{on_sale}
+		WHERE
+		product_id = #{id}
 	</update>
 
 </mapper>

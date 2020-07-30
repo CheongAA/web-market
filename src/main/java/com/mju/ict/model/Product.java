@@ -9,6 +9,8 @@ public class Product {
 //    FOREIGN KEY(brand_id) REFERENCES tb_brand(brand_id),
 //    category_code INT NOT NULL,
 //    FOREIGN KEY(category_code) REFERENCES tb_category(category_code),
+//	  discount_id INT default null,
+//    FOREIGN KEY(discount_id) REFERENCES tb_discount(discount_id),	
 //    product_created DATETIME DEFAULT CURRENT_TIMESTAMP,
 //    product_name VARCHAR(255)NOT NULL,
 //    product_price INT NOT NULL,
@@ -16,12 +18,14 @@ public class Product {
 //    product_desc VARCHAR(300) NOT NULL,
 //    product_material VARCHAR(255)NOT NULL,
 //    product_volume INT NOT NULL,
-//    on_discount TINYINT(1) NOT NULL,
 //    on_sale TINYINT(1) NOT NULL
+//    product_thumbnailImg varchar(200) NOT NULL,
+//    product_img varchar(200) NOT NULL
 	
 	private int product_id;
 	private int brand_id;
 	private int category_code;
+	private int discount_id;
 	private Date product_created;
 	private String product_name;
 	private int product_price;
@@ -29,11 +33,13 @@ public class Product {
 	private String product_desc;
 	private String product_material;
 	private int product_volume;
-	private int on_discount;
 	private int on_sale;
+	private String product_thumbnailImg;
+	private String product_img;
 	
 	private Brand brand;
 	private Category category;
+	private Discount discount;
 	
 	public int getProduct_id() {
 		return product_id;
@@ -96,12 +102,6 @@ public class Product {
 	public void setProduct_volume(int product_volume) {
 		this.product_volume = product_volume;
 	}
-	public int getOn_discount() {
-		return on_discount;
-	}
-	public void setOn_discount(int on_discount) {
-		this.on_discount = on_discount;
-	}
 	public int getOn_sale() {
 		return on_sale;
 	}
@@ -119,6 +119,30 @@ public class Product {
 	}
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+	public String getProduct_thumbnailImg() {
+		return product_thumbnailImg;
+	}
+	public void setProduct_thumbnailImg(String product_thumbnailImg) {
+		this.product_thumbnailImg = product_thumbnailImg;
+	}
+	public String getProduct_img() {
+		return product_img;
+	}
+	public void setProduct_img(String product_img) {
+		this.product_img = product_img;
+	}
+	public int getDiscount_id() {
+		return discount_id;
+	}
+	public void setDiscount_id(int discount_id) {
+		this.discount_id = discount_id;
+	}
+	public Discount getDiscount() {
+		return discount;
+	}
+	public void setDiscount(Discount discount) {
+		this.discount = discount;
 	}
 	
 	

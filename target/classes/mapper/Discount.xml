@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mju.ict.repository.IDiscountDAO">
+
+	<insert id="insertDiscount"
+		parameterType="com.mju.ict.model.Discount">
+		INSERT INTO tb_discount
+		(discount_name,discount_rate,discount_start,discount_end)
+		VALUES(#{discount_name},#{discount_rate},#{discount_start},#{discount_end})
+	</insert>
+	
+	<select id="selectAllDiscounts" resultType="com.mju.ict.model.Discount">
+		SELECT * from tb_discount
+	</select>
+</mapper>

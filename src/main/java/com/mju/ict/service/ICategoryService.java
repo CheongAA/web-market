@@ -6,6 +6,5 @@ import com.mju.ict.model.Category;
 
 public interface ICategoryService {
 	public abstract List<Category> getAllCategories();
-//안씀 
-	public abstract List<Category> getCategoriesByLarge(String large);
+	public abstract List<Category> getCurrentCategories(int category);
 }

@@ -79,16 +79,6 @@
 					rows="3" required="required"><c:out
 						value="${product.product_desc}" /></textarea>
 			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-					name="on_discount" value="1"> <label
-					class="form-check-label" for="inlineCheckbox1">할인</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="inlineCheckbox2"
-					name="on_sale" value="1"> <label class="form-check-label"
-					for="inlineCheckbox2">판매</label>
-			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-dark btn-block">등록</button>
 			</div>

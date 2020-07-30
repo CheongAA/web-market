@@ -7,12 +7,13 @@
 <title>마이페이지</title>
 </head>
 <body>
-	<hr/>
-	<div class="container">
-		<h2>주문목록/배송조회</h2>
-		<div class="row text-center ">
-
+	<div class="row">
+		<jsp:include page="mypage_header.jsp" flush="false" />
+		<div class="col">
+			<h2>주문목록/배송조회</h2>
+			<div class="row text-center "></div>
 		</div>
+
 	</div>
 
 </body>

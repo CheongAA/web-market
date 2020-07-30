@@ -10,4 +10,5 @@ public interface IUserService {
 	public abstract String getUserByIdentificationBool(String user_identification);
 	public abstract List<User> getAllUsers();
 	public abstract User getUserById(int id);
+	public abstract int getIdByIdentification(String user_identification);
 }

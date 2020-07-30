@@ -19,10 +19,9 @@ public class CategoryDAO implements ICategoryDAO{
 		return sqlSession.selectList("selectAllCategories");
 	}
 
-
 	@Override
-	public List<Category> selectCategoriesByLarge(String large) {
-		return sqlSession.selectList("selectCategoriesByLarge",large);
+	public List<Category> selectCurrentCategories(int category) {
+		return sqlSession.selectList("selectCurrentCategories",category);
 	}
 	
 

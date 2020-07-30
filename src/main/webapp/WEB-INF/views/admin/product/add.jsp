@@ -14,7 +14,7 @@
 		<h3 class="w-100 text-center border-bottom pb-5">상품추가</h3>
 		<form class="m-auto"
 			action="${pageContext.request.contextPath}/admin/product/add"
-			method="post">
+			method="post" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="product_name">상품명</label> <input type="text"
 					class="form-control" id="product_name" name="product_name"
@@ -40,12 +40,17 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="product_image">상품설명이미지</label> <input type="file"
-					class="form-control-file" id="exampleFormControlFile1">
+				<label for="product_img">상품대표이미지</label> <input type="file"
+					class="form-control-file" id="product_img" name="file">
+				<div class="select_product_img mt-3">
+					<img src="">
+				</div>
+				<%=request.getRealPath("/")%>
 			</div>
 			<div class="form-group">
-				<label for="product_image">상품이미지</label> <input type="file"
-					class="form-control-file" id="exampleFormControlFile1">
+				<label for="product_descImage">상품 설명이미지</label> <input type="file"
+					class="form-control-file" id="product_descImage"
+					name="product_descImage">
 			</div>
 			<div class="form-group">
 				<label for="product_name">가격</label> <input type="text"
@@ -67,21 +72,10 @@
 					class="form-control" id="product_name" name="product_volume"
 					placeholder="" required="required">
 			</div>
-
 			<div class="form-group">
 				<label for="product_desc">상품설명</label>
 				<textarea class="form-control" id="product_desc" name="product_desc"
 					rows="3" required="required"></textarea>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-					name="on_discount" value="1"> <label
-					class="form-check-label" for="inlineCheckbox1">할인</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="inlineCheckbox2"
-					name="on_sale" value="1"> <label class="form-check-label"
-					for="inlineCheckbox2">판매</label>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-dark btn-block">등록</button>
@@ -89,6 +83,19 @@
 		</form>
 	</div>
 	<script>
+		$("#product_img").on(
+				'change',
+				function() {
+					if (this.files && this.files[0]) {
+						var reader = new FileReader;
+						reader.onload = function(data) {
+							$(".select_product_img img").attr("src",
+									data.target.result).width(200);
+						}
+						reader.readAsDataURL(this.files[0]);
+					}
+				});
+
 		var jsonData = JSON.parse('${categories}');
 		console.log(jsonData);
 

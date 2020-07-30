@@ -6,6 +6,5 @@ import com.mju.ict.model.Category;
 
 public interface ICategoryDAO {
 	public abstract List<Category> selectAllCategories();
-
-	public abstract List<Category> selectCategoriesByLarge(String large);
+	public abstract List<Category> selectCurrentCategories(int category);
 }

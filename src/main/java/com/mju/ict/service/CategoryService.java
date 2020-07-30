@@ -20,9 +20,16 @@ public class CategoryService implements ICategoryService{
 	}
 
 	@Override
-	public List<Category> getCategoriesByLarge(String large) {
-		return categoryDAO.selectCategoriesByLarge(large);
+	public List<Category> getCurrentCategories(int category) {
+		if(category % 100 !=0) {
+			int large = (category / 100) * 100;
+			System.out.println(category);
+			System.out.println(large);
+			return categoryDAO.selectCurrentCategories(large);
+		}
+		return categoryDAO.selectCurrentCategories(category);
 	}
+
 
 
 }
