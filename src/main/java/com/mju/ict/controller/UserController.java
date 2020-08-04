@@ -1,5 +1,7 @@
 package com.mju.ict.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -19,8 +21,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mju.ict.model.Address;
+import com.mju.ict.model.Cart;
 import com.mju.ict.model.User;
 import com.mju.ict.service.IAddressService;
+import com.mju.ict.service.ICartService;
 import com.mju.ict.service.IUserService;
 
 @Controller
@@ -33,6 +37,9 @@ public class UserController {
 	
 	@Autowired
 	IAddressService addressService;
+	
+	@Autowired
+	ICartService cartService;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -94,7 +101,7 @@ public class UserController {
 	// 로그아웃
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
-		session.removeAttribute("user");
+		session.invalidate();
 		return "redirect:/";
 	}
 

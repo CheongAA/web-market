@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mju.ict.repository.IOrderDAO">
+	<insert id="insertOrder"
+		parameterType="com.mju.ict.model.Order">
+		INSERT INTO tb_order
+		(user_id,address_id,buyer_name,buyer_email,buyer_phone,
+		payment_method,order_total_price,order_state)
+		VALUES(
+		#{user_id},#{address_id},#{buyer_name},#{buyer_email},#{buyer_phone},
+		#{payment_method},#{order_total_price},#{order_state})
+	</insert>
+
+</mapper>

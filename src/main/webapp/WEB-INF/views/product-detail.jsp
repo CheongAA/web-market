@@ -6,17 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 디테일</title>
-<script>
-	function getInfo(name) {
-		currentState = document.getElementById(name).style.display;
-		console.log(currentState);
-		if (currentState == "block") {
-			document.getElementById(name).style.display = "none";
-		} else {
-			document.getElementById(name).style.display = "block";
-		}
-	}
-</script>
 </head>
 <body>
 	<div class="row m-4">
@@ -36,6 +25,11 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="hidden" id="product_id" value="${product.product_id}" />
+					<input type="hidden" id="nomal_price"
+						value="${product.product_price}" /> <input type="hidden"
+						id="discount_rate" value="${product.discount.discount_rate}" /> <input
+						type="hidden" id="discount_id" value="${product.discount_id}" />
+
 					<h2>[${product.brand.brand_name}] ${product.product_name}</h2>
 					<p class="text-muted">${product.product_desc}</p>
 					<div class="row">
@@ -43,7 +37,11 @@
 							<tbody>
 								<tr>
 									<th style="width: 40%">가격(1팩)</th>
-									<td id="product_price">${product.product_price}원</td>
+									<td><c:if
+											test="${product.discount_id != 0}">
+											<span class="text-muted h5 font-weight-light"
+									style="text-decoration: line-through">${product.product_price}</span>
+										</c:if> <span class="h5 font-weight-light" id="product_price"></span></td>
 								</tr>
 								<tr>
 									<th style="width: 40%">카테고리</th>
@@ -71,10 +69,10 @@
 						<h3 id="product_total_price" class="">원</h3>
 					</div>
 					<div class="row">
-						<button class="col-sm-6 btn btn-outline-info py-3">SHOPPING
-							BAG</button>
-						<button class="col-sm-6 btn btn-info py-3" id="buy_btn">BUY
-							NOW</button>
+						<button type="button" class="col-sm-6 btn btn-outline-info py-3"
+							id="cart_btn">SHOPPING BAG</button>
+						<button type="button" class="col-sm-6 btn btn-info py-3"
+							id="buy_btn">BUY NOW</button>
 					</div>
 					<div class="row  mt-4">
 						<button class="col btn btn-light text-center">
@@ -218,9 +216,21 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		var isDiscount = $("#discount_id").val();
+		var rate = parseInt($("#discount_rate").val()) / 100;
+		var price = parseInt($("#nomal_price").val());
+
+		if (isDiscount == 1) {
+			$("#product_price").text(rate * price);
+		} else {
+			$("#product_price").text(price);
+		}
+
 		$(document).ready(calTotalPrice);
+
 		$("#product_count").on("change", calTotalPrice);
 		$("#buy_btn").on("click", getOrderPage);
+		$("#cart_btn").on("click", addCart);
 
 		function calTotalPrice() {
 			var price = parseInt($("#product_price").text());
@@ -232,6 +242,21 @@
 		function getOrderPage() {
 			location.href = "/order/" + $("#product_id").val() + "/"
 					+ $("#product_count").val();
+		}
+
+		function addCart() {
+			var form = {
+				product_id : parseInt($("#product_id").val()),
+				product_count : parseInt($("#product_count").val())
+			}
+			$.ajax({
+				url : "/cart",
+				type : "POST",
+				data : form,
+				success : function(data) {
+					alert("장바구니 완료")
+				}
+			});
 		}
 	</script>
 </body>

@@ -84,7 +84,7 @@
 												<c:out value="${address.address_recipient}"></c:out>
 											</h5>
 											<c:out
-												value="${address.address_detail} ${address.address_detail2}"></c:out>
+												value="${address.address_detail}"></c:out>
 											<c:out value="${address.address_phone}"></c:out>
 											<a href="/${address.address_id}">수정</a> <a>선택</a>
 										</div>
@@ -106,6 +106,8 @@
 					<tbody>
 						<c:forEach var="address" items="${addresses}">
 							<c:if test="${address.address_default == 1}">
+								<input type="hidden" id="address_id"
+									value="${address.address_id}" />
 								<tr>
 									<th style="width: 20%">이름</th>
 									<td id="buyer_name">${address.address_recipient}</td>
@@ -159,14 +161,14 @@
 						<tr>
 							<th style="width: 20%">일반결제</th>
 							<td><input class="form-check-input" type="radio"
-								id="nomal-pay" checked> <label class="form-check-label"
-								for="nomal-pay">신용카드</label></td>
+								id="nomal-pay" checked value="일반결제"> <label
+								class="form-check-label" for="nomal-pay">신용카드</label></td>
 						</tr>
 						<tr>
 							<th scope="row">네이버페이 결제</th>
 							<td><input class="form-check-input" type="radio"
-								id="naver-pay"> <label class="form-check-label"
-								for="naver-pay">사진</label></td>
+								id="naver-pay" value="네이버페이"> <label
+								class="form-check-label" for="naver-pay">사진</label></td>
 						</tr>
 					</tbody>
 				</table>
@@ -181,20 +183,17 @@
 		src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 	<script>
-		$(document).ready(calTotalPrice);
-
 		var total;
+		$(document).ready(
+				function() {
+					total = parseInt($("#product_price").text())
+							* parseInt($("#count").text());
+					$(".product_total_price").text(total);
 
-		function calTotalPrice() {
-			var price = parseInt($("#product_price").text());
-			var count = parseInt($("#count").text());
-			total = price * count;
-			$(".product_total_price").text(price * count);
-		}
+				})
+
 		function pay() {
-
 			IMP.init('imp39837562');
-
 			IMP.request_pay({
 				pg : 'inicis', // version 1.1.0부터 지원.
 				pay_method : 'card',
@@ -204,15 +203,31 @@
 				buyer_email : $("#buyer_email").text(),
 				buyer_name : $("#buyer_name").text(),
 				buyer_tel : $("#buyer_phone").text(),
-				buyer_addr : $("#buyer_address").text(),
+				buyer_addr :"주소임",
 				buyer_postcode : $("#buyer_zip").text(),
 			}, function(rsp) {
 				if (rsp.success) {
-					var msg = '결제가 완료되었습니다.';
-					msg += '고유ID : ' + rsp.imp_uid;
-					msg += '상점 거래ID : ' + rsp.merchant_uid;
-					msg += '결제 금액 : ' + rsp.paid_amount;
-					msg += '카드 승인번호 : ' + rsp.apply_num;
+					var form = {
+						address_id : 2,
+						buyer_name : "나",
+						buyer_email : "냐",
+						buyer_phone : "뇨",
+						payment_method : "일반결제",
+						order_total_price : total
+					}
+					console.log(form);
+					$.ajax({
+						url : "/order/complete",
+						type : 'POST',
+						data : form,
+						success : function(data) {
+							var msg = '결제가 완료되었습니다.';
+							msg += '\n고유ID : ' + rsp.imp_uid;
+							msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+							msg += '\결제 금액 : ' + rsp.paid_amount;
+							msg += '카드 승인번호 : ' + rsp.apply_num;
+						}
+					});
 				} else {
 					var msg = '결제에 실패하였습니다.';
 					msg += '에러내용 : ' + rsp.error_msg;

@@ -10,14 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mju.ict.model.Address;
+import com.mju.ict.model.Order;
 import com.mju.ict.model.Product;
 import com.mju.ict.model.User;
 import com.mju.ict.service.IAddressService;
+import com.mju.ict.service.IOrderService;
 import com.mju.ict.service.IProductService;
-
-import net.sf.json.JSONArray;
 
 @Controller
 @RequestMapping("/order")
@@ -28,6 +29,9 @@ public class OrderController {
 	
 	@Autowired
 	IAddressService addressService;
+	
+	@Autowired
+	IOrderService orderService;
 	
 	//주문 페이지
 	@RequestMapping(value = "/{id}/{count}", method = RequestMethod.GET)
@@ -47,5 +51,25 @@ public class OrderController {
 		}
 		
 		return "order/direct";
+	}
+	
+	//주문
+	@ResponseBody
+	@RequestMapping(value = "/complete", method = RequestMethod.POST)
+	public void order( Order order , HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if(user !=null) {
+			order.setUser_id(user.getUser_id());
+		}
+		order.setOrder_state("주문완료");
+		orderService.addOrder(order);
+		System.out.println(order.getBuyer_name());
+
+	}
+	
+	//주문완료 페이지
+	@RequestMapping(value = "/complete", method = RequestMethod.GET)
+	public String getComplete() {
+		return "order/complete";
 	}
 }

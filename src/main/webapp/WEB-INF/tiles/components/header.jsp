@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <header class="py-3">
 	<div class="row justify-content-between">
 		<div class="col-auto mr-auto">
@@ -23,14 +23,14 @@
 				</c:if>
 
 				<div class="btn-group">
-					<a type="button" class="p-2 text-muted"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						고객센터 <i class="fas fa-caret-down"></i>
+					<a type="button" class="p-2 text-muted" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> 고객센터 <i
+						class="fas fa-caret-down"></i>
 					</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item p-3 text-muted" href="/notice">공지사항</a>
-						<a class="dropdown-item p-3 text-muted" href="/logout">자주하는 질문</a>
-						<a class="dropdown-item p-3 text-muted" href="/logout">1:1 문의</a>
+						<a class="dropdown-item p-3 text-muted" href="/notice">공지사항</a> <a
+							class="dropdown-item p-3 text-muted" href="/logout">자주하는 질문</a> <a
+							class="dropdown-item p-3 text-muted" href="/logout">1:1 문의</a>
 					</div>
 				</div>
 			</nav>
@@ -81,7 +81,10 @@
 					aria-hidden="true"></i>
 			</button>
 		</form>
-		<a class="col h3 text-muted font-weight-bold align-self-center"
-			href="#"><i class="fas fa-shopping-cart"></i></a>
+		<a class="col h3 text-muted font-weight-bold align-self-center text-decoration-none"
+			href="/carts"><i class="fas fa-shopping-cart"></i> <c:if
+				test="${carts != null}">
+				<span class="badge badge-pill badge-secondary font-weight-light">${fn:length(carts)}</span>
+			</c:if> </a>
 	</nav>
 </header>

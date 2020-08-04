@@ -25,6 +25,7 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter{
 			response.sendRedirect(request.getContextPath()+"/login");
 			return false;
 		}
+		
 		return true;
 		
 	}

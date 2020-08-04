@@ -11,28 +11,26 @@ public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		return "home";
 	}
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 		return "login";
 	}
-	
-	
+
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup() {
 		return "signup";
 	}
-	
 
 	@RequestMapping(value = "/brand", method = RequestMethod.GET)
 	public String getBrandAll() {
 		return "category/brand";
 	}
 
-	
 
 }

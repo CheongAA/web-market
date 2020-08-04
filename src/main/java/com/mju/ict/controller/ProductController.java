@@ -1,6 +1,9 @@
 package com.mju.ict.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,9 +13,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mju.ict.model.Cart;
 import com.mju.ict.model.Category;
 import com.mju.ict.model.Product;
+import com.mju.ict.model.User;
+import com.mju.ict.service.ICartService;
 import com.mju.ict.service.ICategoryService;
 import com.mju.ict.service.IProductService;
 
@@ -25,6 +32,9 @@ public class ProductController {
 	
 	@Autowired
 	ICategoryService categoryService;
+	
+	@Autowired
+	ICartService cartService;
 	
 	//카테고리별 상품 페이지
 	@RequestMapping(value = "/products/{category}", method = RequestMethod.GET)
@@ -74,6 +84,40 @@ public class ProductController {
 		model.addAttribute("product", product);
 		return "/product-detail";
 	}
+	
+	
+	//////장바구니
+	//장바구니 리스트 페이지
+	@RequestMapping(value = "/carts", method = RequestMethod.GET)
+	public String getCarts(HttpSession session,Model model) {
+		User user = (User) session.getAttribute("user");
+		List<Product> products = new ArrayList<Product>();
+		if(user !=null) {
+			List<Cart> carts = cartService.getCartsByUser(user.getUser_id());
+			for(Cart c:carts) {
+				products.add(productService.getProductById(c.getProduct_id()));
+			}
+		}else {
+			//비회원으로 고칠것
+		}
+		model.addAttribute("products", products);
+		return "carts";
+	}
+
+	//회원 장바구니 등록
+	@ResponseBody
+	@RequestMapping(value = "/cart", method = RequestMethod.POST)
+	public void addCart(Cart cart,HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if(user !=null) {
+			cart.setUser_id(user.getUser_id());
+			cartService.addCart(cart);
+		}else {
+			cartService.addCart(cart);
+		}
+	}
+	
+	
 	
 	////미완성
 	@RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
