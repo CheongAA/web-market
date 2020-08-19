@@ -61,17 +61,17 @@
 				<div class="w-100 border-bottom border-dark py-3">
 					<h4 class="float-left mr-3">받는사람 정보</h4>
 					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-secondary btn-sm"
-						data-toggle="modal" data-target="#exampleModal">변경</button>
+					<button type="button" class="btn btn-secondary btn-sm mx-auto"
+						data-toggle="modal" data-target="#addressModal">배송지 추가</button>
 
 					<!-- Modal -->
-					<div class="modal fade" id="exampleModal" tabindex="-1"
-						role="dialog" aria-labelledby="exampleModalLabel"
+					<div class="modal fade" id="addressModal" tabindex="-1"
+						role="dialog" aria-labelledby="addressModalLabel"
 						aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">배송지 변경</h5>
+									<h5 class="modal-title" id="addressModalLabel">배송지 추가</h5>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-label="Close">
 										<span aria-hidden="true">&times;</span>
@@ -79,22 +79,21 @@
 								</div>
 								<div class="modal-body">
 									<c:forEach var="address" items="${addresses}">
-										<div class="row">
-											<h5>
-												<c:out value="${address.address_recipient}"></c:out>
-											</h5>
-											<c:out
-												value="${address.address_detail}"></c:out>
-											<c:out value="${address.address_phone}"></c:out>
-											<a href="/${address.address_id}">수정</a> <a>선택</a>
+										<div class="border m-3">
+											<h5>${address.address_recipient}</h5>
+											<c:if test="${address.address_default == 1}">
+												<span class="badge badge-pill badge-primary">기본배송지</span>
+											</c:if>
+											<h6>${address.address_zip}</h6>
+											<h6>${address.address_detail}${address.address_detail2}</h6>
+											<h6>${address.address_phone}</h6>
+											<a class="btn btn-sm btn-outline-primary"
+												href="/${address.address_id}">수정</a>
 										</div>
 									</c:forEach>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save
-										changes</button>
+									<button type="button" class="btn btn-primary">배송지 추가</button>
 								</div>
 							</div>
 						</div>
@@ -203,7 +202,7 @@
 				buyer_email : $("#buyer_email").text(),
 				buyer_name : $("#buyer_name").text(),
 				buyer_tel : $("#buyer_phone").text(),
-				buyer_addr :"주소임",
+				buyer_addr : "주소임",
 				buyer_postcode : $("#buyer_zip").text(),
 			}, function(rsp) {
 				if (rsp.success) {

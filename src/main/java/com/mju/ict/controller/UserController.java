@@ -105,10 +105,25 @@ public class UserController {
 		return "redirect:/";
 	}
 
-	// 유저 마이페이지 
+	// 고객 마이페이지 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String getMypage() {
 		return "user/index";
 	}
 
+	
+	// 고객 정보수정 페이지
+	@RequestMapping(value = "/user/update", method = RequestMethod.GET)
+	public String getUserUpdate(Model model, HttpSession session) {
+		return "user/user-update";
+	}
+	
+	// 고객 정보수정
+	@RequestMapping(value = "/user/address", method = RequestMethod.GET)
+	public String getUserAddress(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		List<Address> addresses = addressService.getAddressByUser(user.getUser_id());
+		model.addAttribute("addresses", addresses);
+		return "user/address/list";
+	}
 }

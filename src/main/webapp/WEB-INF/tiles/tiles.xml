@@ -12,6 +12,16 @@
 			value="/WEB-INF/tiles/components/footer.jsp" />
 	</definition>
 
+	<definition name="empty-layout"
+		template="/WEB-INF/tiles/layouts/empty-layout.jsp">
+		<put-attribute name="content" value="" />
+	</definition>
+
+	<definition name="user/address/*" extends="empty-layout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/user/address/{1}.jsp" />
+	</definition>
+
 	<definition name="*" extends="default-layout">
 		<put-attribute name="content"
 			value="/WEB-INF/views/{1}.jsp" />
@@ -24,4 +34,6 @@
 		<put-attribute name="content"
 			value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
 	</definition>
+
+
 </tiles-definitions>

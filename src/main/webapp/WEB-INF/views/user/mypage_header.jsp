@@ -28,7 +28,7 @@
         </h5>      
         <ul class="nav flex-column">     
           <li class="nav-item">
-            <a class="nav-link active" href="/user/update">
+            <a class="nav-link active" href="${pageContext.request.contextPath}/user/update">
            		  정보수정
             </a>
           </li>
