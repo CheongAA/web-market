@@ -8,13 +8,59 @@
 		SELECT * FROM tb_category
 	</select>
 
+	<select id="selectLargeCategories"
+		resultType="com.mju.ict.model.Category">
+		SELECT * FROM tb_category
+		WHERE
+		category_depth = 1
+	</select>
+
 	<select id="selectCurrentCategories" parameterType="Integer"
 		resultType="com.mju.ict.model.Category">
 		SELECT * FROM tb_category
-		where 
+		where
 		category_code = #{category}
 		OR
 		category_code2 = #{category}
 	</select>
 
+	<select id="selectCategoryByCode" parameterType="Integer"
+		resultType="com.mju.ict.model.Category">
+		SELECT * FROM tb_category
+		where
+		category_code =
+		#{category_code}
+	</select>
+
+	<insert id="insertCategory"
+		parameterType="com.mju.ict.model.Category">
+		INSERT INTO tb_category
+		(category_code
+		<if test="category_depth == 2">
+			,category_code2
+		</if>
+		,category_name,category_depth)
+		VALUES
+		(#{category_code}
+		<if test="category_depth == 2">
+			,#{category_code2}
+		</if>
+		,#{category_name},#{category_depth})
+	</insert>
+
+	<delete id="deleteCategoryByCode" parameterType="Integer">
+		DELETE FROM
+		tb_category
+		WHERE
+		category_code = #{category_code}
+	</delete>
+
+	<update id="updateCategory"
+		parameterType="com.mju.ict.model.Category">
+		UPDATE tb_category
+		SET
+		category_name = #{category_name}
+		WHERE
+		category_code = ${category_code}
+	</update>
 </mapper>

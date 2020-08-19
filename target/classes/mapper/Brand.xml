@@ -32,10 +32,10 @@
 		parameterType="com.mju.ict.model.Brand">
 		UPDATE tb_brand
 		SET
-		brand_name =CONCAT("${brand_name}"),
-		brand_desc =CONCAT("${brand_desc}")
+		brand_name =#{brand_name},
+		brand_desc =#{brand_desc}
 		WHERE
-		brand_id = ${brand_id}
+		brand_id = #{brand_id}
 	</update>
 
 </mapper>

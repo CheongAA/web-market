@@ -35,9 +35,8 @@ public class NoticeService implements INoticeService{
 	}
 
 	@Override
-	public Notice updateNotice(Notice notice) {
+	public void updateNotice(Notice notice) {
 		noticeDAO.updateNotice(notice);
-		return noticeDAO.selectNoticeById(notice.getNotice_id());
 	}
 
 	@Override

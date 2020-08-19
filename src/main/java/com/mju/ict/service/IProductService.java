@@ -15,7 +15,7 @@ public interface IProductService {
 
 	public abstract void deleteProductById(int id);
 
-	public abstract Product updateProduct(Product product);
+	public abstract void updateProduct(Product product);
 
 	public abstract List<Product> getProductsByBrand(int id);
 

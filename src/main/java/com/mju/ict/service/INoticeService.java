@@ -14,7 +14,7 @@ public interface INoticeService {
 
 	public abstract void addNoticeView(int id);
 
-	public abstract Notice updateNotice(Notice notice);
+	public abstract void updateNotice(Notice notice);
 
 	public abstract void deleteNoticeById(int id);
 

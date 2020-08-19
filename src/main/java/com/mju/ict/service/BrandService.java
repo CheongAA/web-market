@@ -32,9 +32,8 @@ public class BrandService implements IBrandService{
 	}
 
 	@Override
-	public Brand updateBrand(Brand brand) {
+	public void updateBrand(Brand brand) {
 		brandDAO.updateBrand(brand);
-		return brandDAO.selectBrandById(brand.getBrand_id());
 	}
 
 	@Override

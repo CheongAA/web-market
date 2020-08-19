@@ -12,7 +12,7 @@ public interface IBrandService {
 
 	public abstract void registerBrand(Brand brand);
 
-	public abstract Brand updateBrand(Brand brand);
+	public abstract void updateBrand(Brand brand);
 
 	public abstract void deleteBrandById(int id);
 

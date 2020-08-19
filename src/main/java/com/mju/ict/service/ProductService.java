@@ -43,9 +43,8 @@ public class ProductService implements IProductService{
 	}
 
 	@Override
-	public Product updateProduct(Product product) {
+	public void updateProduct(Product product) {
 		productDAO.updateProduct(product);
-		return productDAO.selectProductById(product.getProduct_id());
 	}
 
 	@Override

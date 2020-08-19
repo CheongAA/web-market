@@ -58,9 +58,7 @@ public class AdminController {
 	@Autowired
 	IUserService userService;
 
-	@Autowired
-	@Qualifier("uploadPath")
-	private String uploadPath;
+	private String uploadPath = "C:\\Users\\HP\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\market\\resources";
 
 	
 	//DATE 형 변환
@@ -154,9 +152,8 @@ public class AdminController {
 	// 상품수정
 	@RequestMapping(value = "/product/update", method = RequestMethod.POST)
 	public String updateProduct(@ModelAttribute @Valid Product product, BindingResult result, Model model) {
-		Product updatedProduct = productService.updateProduct(product);
-		model.addAttribute("product", updatedProduct);
-		return "redirect:/admin/product/" + updatedProduct.getProduct_id();
+		productService.updateProduct(product);
+		return "redirect:/admin/product/" + product.getProduct_id();
 	}
 
 	// 상품 노출 변경
@@ -186,11 +183,68 @@ public class AdminController {
 
 	// 할인 등록
 	@RequestMapping(value = "/discount", method = RequestMethod.POST)
-	public String getProductDiscount(@ModelAttribute @Valid Discount discount, BindingResult result, Model model) {
+	public String addProductDiscount(@ModelAttribute @Valid Discount discount, BindingResult result, Model model) {
 		discountService.registerDiscount(discount);
 
 		return "redirect:/admin/discounts";
 	}
+	
+	
+	// 카테고리관리 페이지
+	@RequestMapping(value = "/category", method = RequestMethod.GET)
+	public String getCategoryAdd(Model model) {
+		List<Category> categories = categoryService.getAllCategories();
+		
+		model.addAttribute("categories", categories);
+		return "admin/product/category-add";
+	}
+	
+	// 카테고리 등록
+	@RequestMapping(value = "/category", method = RequestMethod.POST)
+	public String addCategory(@ModelAttribute @Valid Category category, BindingResult result, Model model) {
+		System.out.println(category.getCategory_code2());
+		categoryService.registerCategory(category);
+
+		List<Category> categories = categoryService.getAllCategories();
+		
+		model.addAttribute("categories", categories);
+
+		return "redirect:/admin/category";
+	}
+
+	// 카테고리 삭제
+	@RequestMapping(value = "/category/delete/{category_code}", method = RequestMethod.GET)
+	public String deleteCategory(@PathVariable int category_code, Model model) {
+		categoryService.deleteCategoryByCode(category_code);
+		return "redirect:/admin/category";
+	}
+	
+	// 카테고리 디테일 페이지
+	@RequestMapping(value = "/category/{category_code}", method = RequestMethod.GET)
+	public String getCategoryDetail(@PathVariable int category_code, Model model) {
+		Category category = categoryService.getCategoryByCode(category_code);
+		List<Product> products = productService.getProductsByCategory(category_code);
+
+		model.addAttribute("category", category);
+		model.addAttribute("products", products);
+		return "admin/product/category-detail";
+	}
+	
+	// 브랜드 수정 페이지
+	@RequestMapping(value = "/category/update/{category_code}", method = RequestMethod.GET)
+	public String getCategoryUpdate(@PathVariable int category_code, Model model) {
+		Category category = categoryService.getCategoryByCode(category_code);
+		model.addAttribute("category", category);
+		return "admin/product/category-update";
+	}
+	
+	// 카테고리 수정
+	@RequestMapping(value = "/category/update", method = RequestMethod.POST)
+	public String updateCategory(@ModelAttribute @Valid Category category, BindingResult result, Model model) {
+		 categoryService.updateCategory(category);
+		return "redirect:/admin/category/" + category.getCategory_code();
+	}
+
 
 	////////////////// 고객/////////////////////////
 	/// 고객조회 페이지
@@ -253,9 +307,8 @@ public class AdminController {
 	// 브랜드 수정
 	@RequestMapping(value = "/brand/update", method = RequestMethod.POST)
 	public String updateBrand(@ModelAttribute @Valid Brand brand, BindingResult result, Model model) {
-		Brand updatedBrand = brandService.updateBrand(brand);
-		model.addAttribute("brand", updatedBrand);
-		return "redirect:/admin/brand/" + updatedBrand.getBrand_id();
+		brandService.updateBrand(brand);
+		return "redirect:/admin/brand/" + brand.getBrand_id();
 	}
 
 	// 브랜드 삭제
@@ -298,14 +351,12 @@ public class AdminController {
 	//공지사항 수정
 	@RequestMapping(value = "/notice/update/{id}", method = RequestMethod.POST)
 	public String updateNotice(@ModelAttribute @Valid Notice notice, BindingResult result, Model model) {
-		Notice updatedNotice = noticeService.updateNotice(notice);
-
-		model.addAttribute("notice", updatedNotice);
+		noticeService.updateNotice(notice);
 		return "redirect:/admin/notice/"+notice.getNotice_id();
 	}
 
 
-	// 브랜드 삭제
+	// 공지사항 삭제
 	@RequestMapping(value = "/notice/delete/{id}", method = RequestMethod.GET)
 	public String deleteNotice(@PathVariable int id, Model model) {
 		noticeService.deleteNoticeById(id);
@@ -324,5 +375,7 @@ public class AdminController {
 		noticeService.registerNotice(notice);
 		return "redirect:/admin/notice";
 	}
+	
+
 
 }

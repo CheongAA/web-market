@@ -47,10 +47,14 @@
 					href="${pageContext.request.contextPath}/admin/product/">상품조회/수정/삭제/판매</a>
 				<a
 					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
-					href="${pageContext.request.contextPath}/admin/discounts">상품할인 조회/등록</a>
+					href="${pageContext.request.contextPath}/admin/discounts">상품할인</a>
 				<a
 					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
 					href="${pageContext.request.contextPath}/admin/product/add">상품등록</a>
+				<hr />
+				<a
+					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
+					href="${pageContext.request.contextPath}/admin/category">카테고리 관리</a>
 			</div>
 		</div>
 		<div class="col btn-group border-right justify-content-md-center">
