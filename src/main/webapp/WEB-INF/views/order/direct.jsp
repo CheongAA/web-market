@@ -60,44 +60,8 @@
 			<div class="row my-5">
 				<div class="w-100 border-bottom border-dark py-3">
 					<h4 class="float-left mr-3">받는사람 정보</h4>
-					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-secondary btn-sm mx-auto"
-						data-toggle="modal" data-target="#addressModal">배송지 추가</button>
-
-					<!-- Modal -->
-					<div class="modal fade" id="addressModal" tabindex="-1"
-						role="dialog" aria-labelledby="addressModalLabel"
-						aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="addressModalLabel">배송지 추가</h5>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<c:forEach var="address" items="${addresses}">
-										<div class="border m-3">
-											<h5>${address.address_recipient}</h5>
-											<c:if test="${address.address_default == 1}">
-												<span class="badge badge-pill badge-primary">기본배송지</span>
-											</c:if>
-											<h6>${address.address_zip}</h6>
-											<h6>${address.address_detail}${address.address_detail2}</h6>
-											<h6>${address.address_phone}</h6>
-											<a class="btn btn-sm btn-outline-primary"
-												href="/${address.address_id}">수정</a>
-										</div>
-									</c:forEach>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-primary">배송지 추가</button>
-								</div>
-							</div>
-						</div>
-					</div>
+					<a href="/user/address" class="btn btn-secondary btn-sm mx-auto"
+						id="address_btn"> 배송지 추가</a>
 				</div>
 
 				<table class="table table-borderless mt-3">
@@ -191,6 +155,14 @@
 
 				})
 
+		$("#address_btn").on('click', getAddressList);
+
+		function getAddressList() {
+			window
+					.open(this.href, '_blank',
+							'width=400px,height=600px,toolbars=no,scrollbars=no,resizable=no');
+			return false;
+		}
 		function pay() {
 			IMP.init('imp39837562');
 			IMP.request_pay({

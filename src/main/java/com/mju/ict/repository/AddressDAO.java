@@ -23,5 +23,25 @@ public class AddressDAO implements IAddressDAO{
 		return sqlSession.selectList("selectAddressByUser", user_id);
 	}
 
+	@Override
+	public Address selectAddressById(int id) {
+		return sqlSession.selectOne("selectAddressById",id);
+	}
+
+	@Override
+	public void updateAddress(Address address) {
+		sqlSession.update("updateAddress",address);
+	}
+
+	@Override
+	public void deleteAddress(int id) {
+		sqlSession.delete("deleteAddress", id);
+	}
+
+	@Override
+	public void updateAddressDefaultZero(int user_id) {
+		sqlSession.update("updateAddressDefaultZero",user_id);
+	}
+
 
 }

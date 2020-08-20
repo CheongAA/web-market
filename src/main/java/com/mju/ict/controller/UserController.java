@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mju.ict.model.Address;
 import com.mju.ict.model.Cart;
+import com.mju.ict.model.Notice;
 import com.mju.ict.model.User;
 import com.mju.ict.service.IAddressService;
 import com.mju.ict.service.ICartService;
@@ -118,7 +120,7 @@ public class UserController {
 		return "user/user-update";
 	}
 	
-	// 고객 정보수정
+	// 고객 배송지 페이지
 	@RequestMapping(value = "/user/address", method = RequestMethod.GET)
 	public String getUserAddress(Model model, HttpSession session) {
 		User user = (User) session.getAttribute("user");
@@ -126,4 +128,42 @@ public class UserController {
 		model.addAttribute("addresses", addresses);
 		return "user/address/list";
 	}
+	
+	// 고객 배송지 추가페이지
+	@RequestMapping(value = "/user/address/add", method = RequestMethod.GET)
+	public String getUserAddresAdd(Model model, HttpSession session) {
+		return "user/address/add";
+	}
+	
+	// 고객 배송지 추가
+	@RequestMapping(value = "/user/address", method = RequestMethod.POST)
+	public String postUserAddress(@ModelAttribute @Valid Address address, BindingResult result) {
+		addressService.registerAddress(address);
+		return "redirect:/user/address";
+	}
+	
+	//배송지 디테일 페이지
+	@RequestMapping(value = "/user/address/{id}", method = RequestMethod.GET)
+	public String getAddressDetail(@PathVariable int id,Model model) {
+		Address address = addressService.getAddressById(id);
+
+		model.addAttribute("address", address);
+		return "user/address/detail";
+	}
+	
+	//배송지 수정
+	@RequestMapping(value = "/user/address/update", method = RequestMethod.POST)
+	public String updateAddress(@ModelAttribute @Valid Address address, BindingResult result, Model model) {
+		addressService.updateAddress(address);
+		return "redirect:/user/address";
+	}
+
+
+	// 배송지 삭제
+	@RequestMapping(value = "/user/address/delete/{id}", method = RequestMethod.GET)
+	public String deleteAddress(@PathVariable int id, Model model) {
+		addressService.deleteAddressById(id);
+		return "redirect:/user/address";
+	}
+
 }

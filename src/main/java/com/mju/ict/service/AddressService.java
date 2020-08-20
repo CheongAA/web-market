@@ -28,5 +28,29 @@ public class AddressService implements IAddressService{
 	}
 
 
+	@Override
+	public Address getAddressById(int id) {
+		return addressDAO.selectAddressById(id);
+	}
+
+
+	@Override
+	public void updateAddress(Address address) {
+		if(address.getAddress_default() == 1) {
+			System.out.println(address.getUser_id());
+			addressDAO.updateAddressDefaultZero(address.getUser_id());
+		}
+		addressDAO.updateAddress(address);
+		
+	}
+
+
+	@Override
+	public void deleteAddressById(int id) {
+		addressDAO.deleteAddress(id);
+		
+	}
+
+
 
 }

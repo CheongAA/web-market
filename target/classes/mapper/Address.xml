@@ -28,10 +28,47 @@
 		#{address_recipient},#{address_default})
 	</insert>
 
-	<select id="selectAddressByUser"
-		parameterType="Integer" resultMap="address">
+	<select id="selectAddressByUser" parameterType="Integer"
+		resultMap="address">
 		SELECT * FROM tb_address
 		WHERE
 		user_id = #{user_id}
 	</select>
+
+	<select id="selectAddressById" parameterType="Integer"
+		resultMap="address">
+		SELECT * FROM tb_address
+		WHERE
+		address_id = #{address_id}
+	</select>
+
+	<update id="updateAddress" parameterType="com.mju.ict.model.Address">
+		UPDATE tb_address
+		SET
+		address_zip =#{address_zip},
+		address_detail =#{address_detail},
+		address_detail2 =#{address_detail2},
+		address_phone =#{address_phone},
+		address_recipient =#{address_recipient},
+		address_default
+		=#{address_default}
+		WHERE
+		address_id = #{address_id}
+	</update>
+	
+	<update id="updateAddressDefaultZero" parameterType="Integer">
+		UPDATE tb_address
+		SET
+		address_default
+		= 0
+		WHERE
+		user_id = #{user_id}
+	</update>
+
+	<delete id="deleteAddress" parameterType="Integer">
+		DELETE FROM
+		tb_address
+		WHERE
+		address_id = #{address_id}
+	</delete>
 </mapper>

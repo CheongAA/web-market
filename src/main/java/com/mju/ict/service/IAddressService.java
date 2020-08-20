@@ -10,4 +10,10 @@ public interface IAddressService {
 
 	public abstract List<Address> getAddressByUser(int user_id);
 
+	public abstract Address getAddressById(int id);
+
+	public abstract void updateAddress(Address address);
+
+	public abstract void deleteAddressById(int id);
+
 }
