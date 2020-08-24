@@ -10,5 +10,6 @@ public interface IUserDAO {
 	public abstract List<User> selectAllUsers();
 	public abstract User selectUserById(int id);
 	public abstract int selectIdByIdentification(String user_identification);
+	public abstract void updateUser(User user);
 
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,16 +55,16 @@ public class OrderController {
 	}
 	
 	//주문
-	@ResponseBody
 	@RequestMapping(value = "/complete", method = RequestMethod.POST)
-	public void order( Order order , HttpSession session) {
+	public void order(@RequestBody Order order , HttpSession session) {
+		System.out.println(order.getBuyer_name());
 		User user = (User) session.getAttribute("user");
 		if(user !=null) {
 			order.setUser_id(user.getUser_id());
 		}
 		order.setOrder_state("주문완료");
-		orderService.addOrder(order);
 		System.out.println(order.getBuyer_name());
+		orderService.addOrder(order);
 
 	}
 	

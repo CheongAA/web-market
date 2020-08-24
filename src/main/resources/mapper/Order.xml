@@ -5,11 +5,13 @@
 	<insert id="insertOrder"
 		parameterType="com.mju.ict.model.Order">
 		INSERT INTO tb_order
-		(user_id,address_id,buyer_name,buyer_email,buyer_phone,
-		payment_method,order_total_price,order_state)
+		(user_id,buyer_name,buyer_email,buyer_phone,
+		recipient_name,recipient_zip,recipient_address,recipient_phone,
+		order_request,payment_method,order_total_price,order_state)
 		VALUES(
-		#{user_id},#{address_id},#{buyer_name},#{buyer_email},#{buyer_phone},
-		#{payment_method},#{order_total_price},#{order_state})
+		#{user_id},#{buyer_name},#{buyer_email},#{buyer_phone},
+		#{recipient_name},#{recipient_zip},#{recipient_address},#{recipient_phone},
+		#{order_request},#{payment_method},#{order_total_price},#{order_state})
 	</insert>
 
 </mapper>

@@ -17,13 +17,8 @@
 				<div class="col-md-6">
 					<div class="card">
 						<article class="card-body">
-							<form:form commandName="user" action="/signup" method="post"
-								autocomplete="off">
-								<c:if test="${msg == 1}">
-									<script type="text/javascript">
-										alert("정확한 정보를 입력해주세요.")
-									</script>
-								</c:if>
+							<form:form action="/user/update" method="post" autocomplete="off">
+								<input type="hidden" name="user_id" value="${user.user_id}" />
 								<div class="form-group">
 									<label>아이디</label> <input type="text"
 										name="user_identification" id="user_identification"
@@ -32,13 +27,13 @@
 								</div>
 								<div class="form-row">
 									<div class="col form-group">
-										<label>비밀번호 </label> <input type="password"
+										<label>새비밀번호 </label> <input type="password"
 											name="user_password" id="user_password" class="form-control"
 											required="required"> <small
 											class="form-text text-danger" id="validation_password"></small>
 									</div>
 									<div class="col form-group">
-										<label>비밀번호 확인</label> <input type="password"
+										<label>새비밀번호 확인</label> <input type="password"
 											name="user_password2" id="user_password2"
 											class="form-control" required="required"> <small
 											class="form-text text-danger" id="validation_password2"></small>
@@ -73,21 +68,14 @@
 										value="${user.user_phone}"> <small
 										class="form-text text-danger" id="validation_phone"></small>
 								</div>
-								<div class="form-group">
-									<label class="form-check form-check-inline"> <input
-										class="form-check-input" type="radio" name="user_gender"
-										value="남" required="required" checked readonly="readonly">
-										<span class="form-check-label"> Male </span>
-									</label> <label class="form-check form-check-inline"> <input
-										class="form-check-input" type="radio" name="user_gender"
-										value="여" required="required" readonly="readonly"> <span
-										class="form-check-label"> Female</span>
-									</label>
-								</div>
-
 								<div class="form-row">
-									<label class="w-100">주소</label> <a href="/user/address"
-										class="btn btn-secondary btn-sm mx-auto" id="address_btn"> 배송지 추가</a>
+									<div class="col form-group">
+										<label class="">성별 : </label><span> ${user.user_gender }</span>
+									</div>
+									<div class="col form-group">
+										<label class="">주소</label> <a href="/user/address"
+											class="btn btn-secondary btn-sm" id="address_btn"> 배송지 추가</a>
+									</div>
 								</div>
 								<div class="form-group my-4">
 									<button type="submit" class="btn btn-dark btn-block"
@@ -105,8 +93,9 @@
 		$("#address_btn").on('click', getAddressList);
 
 		function getAddressList() {
-			window.open(this.href, '_blank',
-					'width=400px,height=600px,toolbars=no,scrollbars=no,resizable=no');
+			window
+					.open(this.href, '_blank',
+							'width=400px,height=600px,toolbars=no,scrollbars=no,resizable=no');
 			return false;
 		}
 	</script>

@@ -51,4 +51,10 @@ public class UserService implements IUserService {
 		return userDAO.selectIdByIdentification(user_identification);
 	}
 
+	@Override
+	public void updateUser(User user) {
+		userDAO.updateUser(user);
+		
+	}
+
 }

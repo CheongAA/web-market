@@ -13,46 +13,47 @@
 		<div class="row text-center mb-5">
 			<h2 class="w-100">주문/결제</h2>
 		</div>
+		<div class="row my-5">
+			<h4>상품 정보</h4>
+			<table class="table text-center">
+				<thead>
+					<tr>
+						<th class="w-75">상품정보</th>
+						<th>수량</th>
+						<th>금액</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>${product.product_name}<small id="product_price">${product.product_price }</small>
+						</td>
+						<td id="count">${count}</td>
+						<td class="product_total_price"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		<form action="/order" method="post">
-			<div class="row my-5">
-				<h4>상품 정보</h4>
-				<table class="table text-center">
-					<thead>
-						<tr>
-							<th class="w-75">상품정보</th>
-							<th>수량</th>
-							<th>금액</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>${product.product_name}<small id="product_price">${product.product_price }</small>
-							</td>
-							<td id="count">${count}</td>
-							<td class="product_total_price"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
 			<div class="row my-5">
 				<h4 class="w-100 border-bottom border-dark py-3">구매자 정보</h4>
 				<table class="col table table-borderless mt-3">
 					<thead>
 						<tr>
 							<th style="width: 20%">이름</th>
-							<td><input name="" value="${user.user_name}" id="user_name" /></td>
+							<td><input name="buyer_name" value="${user.user_name}"
+								id="buyer_name" /></td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<th scope="row">이메일</th>
-							<td><input name="" value="${user.user_email}"
-								id="user_email" /></td>
+							<td><input name="buyer_email" value="${user.user_email}"
+								id="buyer_email" /></td>
 						</tr>
 						<tr>
 							<th scope="row">휴대폰 번호</th>
-							<td><input name="" value="${user.user_phone}"
-								id="user_phone" /></td>
+							<td><input name="buyer_phone" value="${user.user_phone}"
+								id="buyer_phone" /></td>
 						</tr>
 					</tbody>
 				</table>
@@ -69,28 +70,30 @@
 					<tbody>
 						<c:forEach var="address" items="${addresses}">
 							<c:if test="${address.address_default == 1}">
-								<input type="hidden" id="address_id"
-									value="${address.address_id}" />
 								<tr>
 									<th style="width: 20%">이름</th>
-									<td id="buyer_name">${address.address_recipient}</td>
+									<td><input name="recipient_name"
+										value="${address.address_recipient}" id="recipient_name" /></td>
 								</tr>
 								<tr>
 									<th scope="row">우편번호</th>
-									<td id="buyer_zip">${address.address_zip}</td>
+									<td><input name="recipient_zip"
+										value="${address.address_zip}" id="recipient_zip" /></td>
 								</tr>
 								<tr>
 									<th scope="row">배송주소</th>
-									<td id="buyer_address">${address.address_detail}
-										${address.address_detail2}</td>
+									<td><input name="recipient_address"
+										value="${address.address_detail} ${address.address_detail2}"
+										id="recipient_address" /></td>
 								</tr>
 								<tr>
 									<th scope="row">연락처</th>
-									<td id="buyer_phone">${address.address_phone}</td>
+									<td><input name="recipient_phone"
+										value="${address.address_phone}" id="recipient_phone" /></td>
 								</tr>
 								<tr>
 									<th scope="row">배송 요청사항</th>
-									<td><input name="" /></td>
+									<td><input name="order_request" id="order_request"/></td>
 								</tr>
 							</c:if>
 						</c:forEach>
@@ -109,7 +112,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td class="product_total_price"></td>
+							<td class="product_total_price" id="order_total_price"></td>
 							<td>- 0</td>
 							<td></td>
 							<td></td>
@@ -123,14 +126,14 @@
 					<tbody>
 						<tr>
 							<th style="width: 20%">일반결제</th>
-							<td><input class="form-check-input" type="radio"
-								id="nomal-pay" checked value="일반결제"> <label
+							<td><input class="form-check-input" type="radio" name="payment_method"
+								id="payment_method" checked value="일반결제"> <label
 								class="form-check-label" for="nomal-pay">신용카드</label></td>
 						</tr>
 						<tr>
 							<th scope="row">네이버페이 결제</th>
-							<td><input class="form-check-input" type="radio"
-								id="naver-pay" value="네이버페이"> <label
+							<td><input class="form-check-input" type="radio" name="payment_method"
+								id="payment_method" value="네이버페이"> <label
 								class="form-check-label" for="naver-pay">사진</label></td>
 						</tr>
 					</tbody>
@@ -152,7 +155,6 @@
 					total = parseInt($("#product_price").text())
 							* parseInt($("#count").text());
 					$(".product_total_price").text(total);
-
 				})
 
 		$("#address_btn").on('click', getAddressList);
@@ -170,33 +172,40 @@
 				pay_method : 'card',
 				merchant_uid : 'merchant_' + new Date().getTime(),
 				name : '주문명:결제테스트',
-				amount : total, //판매 가격
+				amount : 1, //판매 가격
 				buyer_email : $("#buyer_email").text(),
 				buyer_name : $("#buyer_name").text(),
-				buyer_tel : $("#buyer_phone").text(),
-				buyer_addr : "주소임",
-				buyer_postcode : $("#buyer_zip").text(),
+				buyer_tel : $("#recipient_phone").text(),
+				buyer_addr : $("#recipient_address").text(),
+				buyer_postcode : $("#recipient_zip").text(),
 			}, function(rsp) {
 				if (rsp.success) {
-					var form = {
-						address_id : 2,
-						buyer_name : "나",
-						buyer_email : "냐",
-						buyer_phone : "뇨",
-						payment_method : "일반결제",
-						order_total_price : total
-					}
-					console.log(form);
+					var msg = '결제가 완료되었습니다.';
+					msg += '고유ID : ' + rsp.imp_uid;
+					msg += '상점 거래ID : ' + rsp.merchant_uid;
+					msg += '결제 금액 : ' + rsp.paid_amount;
+					msg += '카드 승인번호 : ' + rsp.apply_num;
+					
 					$.ajax({
 						url : "/order/complete",
-						type : 'POST',
-						data : form,
+						type : "post",
+						dataType:'json',
+						contentType:'application/json;charset=UTF-8',
+						data : {
+							buyer_name : $("#buyer_name").val(),
+							buyer_email : $("#buyer_email").val(),
+							buyer_phone : $("#buyer_phone").val(),
+							recipient_name : $("#recipient_name").val(),
+							recipient_zip : $("#recipient_zip").val(),
+							recipient_address : $("#recipient_address").val(),
+							recipient_phone : $("#recipient_phone").val(),
+							order_request : $("#order_request").val(),
+							payment_method : $("#payment_method").val(),
+							order_total_price : parseInt($("#order_total_price").text(), 10)
+							
+						},
 						success : function(data) {
-							var msg = '결제가 완료되었습니다.';
-							msg += '\n고유ID : ' + rsp.imp_uid;
-							msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-							msg += '\결제 금액 : ' + rsp.paid_amount;
-							msg += '카드 승인번호 : ' + rsp.apply_num;
+							console.log("dd");
 						}
 					});
 				} else {

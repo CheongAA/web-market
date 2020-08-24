@@ -54,7 +54,7 @@
 									style="text-decoration: line-through"><fmt:formatNumber pattern="###,###,###" value="${product.product_price}" />원</span>
 								<span class="market-color h5" id="discount_price"><i
 									class="fas fa-arrow-right"></i>
-									<c:set var="price" value="${(product.product_price * product.discount.discount_rate)/100}" />
+									<c:set var="price" value="${product.product_price-(product.product_price * product.discount.discount_rate)/100}" />
 									<fmt:formatNumber pattern="###,###,###" value="${price}" />원
 									</span>
 							</c:when>

@@ -221,7 +221,7 @@
 		var price = parseInt($("#nomal_price").val());
 
 		if (isDiscount == 1) {
-			$("#product_price").text(rate * price);
+			$("#product_price").text(price-(rate * price));
 		} else {
 			$("#product_price").text(price);
 		}

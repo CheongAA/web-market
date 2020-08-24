@@ -39,4 +39,9 @@ public class UserDAO implements IUserDAO{
 		return sqlSession.selectOne("selectIdByIdentification",user_identification);
 	}
 
+	@Override
+	public void updateUser(User user) {
+		sqlSession.update("updateUser", user);
+	}
+
 }

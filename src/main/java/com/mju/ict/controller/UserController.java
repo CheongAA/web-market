@@ -2,7 +2,9 @@ package com.mju.ict.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -22,8 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mju.ict.model.Address;
-import com.mju.ict.model.Cart;
-import com.mju.ict.model.Notice;
 import com.mju.ict.model.User;
 import com.mju.ict.service.IAddressService;
 import com.mju.ict.service.ICartService;
@@ -85,12 +85,22 @@ public class UserController {
 	// 로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@RequestParam("user_identification") String identification,
-			@RequestParam("user_password") String password, HttpSession session, RedirectAttributes rtt) {
+			@RequestParam("user_password") String password,@RequestParam("rememberId") int rememberId,HttpSession session, RedirectAttributes rtt,HttpServletResponse response) {
 		User user = userService.getUserByIdentification(identification);
 
 		if (user != null) {
 			if (passwordEncoder.matches(password, user.getUser_password())) {
 				session.setAttribute("user", user);
+				if(rememberId == 1) {
+					Cookie cookie = new Cookie("id", user.getUser_identification());
+					cookie.setMaxAge(60*60*24); 
+					response.addCookie(cookie);
+				}else {
+					Cookie cookie = new Cookie("id", null);
+					cookie.setMaxAge(0); 
+					response.addCookie(cookie);
+				}
+
 				return "redirect:/";
 			}
 		}
@@ -104,7 +114,7 @@ public class UserController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:/login";
 	}
 
 	// 고객 마이페이지 
@@ -118,6 +128,18 @@ public class UserController {
 	@RequestMapping(value = "/user/update", method = RequestMethod.GET)
 	public String getUserUpdate(Model model, HttpSession session) {
 		return "user/user-update";
+	}
+	
+	// 고객 정보수정
+	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
+	public String updateUser(@ModelAttribute @Valid User user, BindingResult result, Model model, HttpSession session) {
+		String encPassword = passwordEncoder.encode(user.getUser_password());
+		user.setUser_password(encPassword);
+		userService.updateUser(user);
+		User updatedUser = userService.getUserById(user.getUser_id());
+		session.removeAttribute("user");
+		session.setAttribute("user", updatedUser);
+		return "redirect:/user/update";
 	}
 	
 	// 고객 배송지 페이지
