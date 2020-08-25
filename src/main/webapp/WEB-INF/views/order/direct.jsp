@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,11 +27,25 @@
 				</thead>
 				<tbody>
 					<tr>
-
-						<td>${product.product_name}<small id="product_price">${product.product_price }</small>
+						<td><span class="product_name">${product.product_name}</span>/<c:choose>
+								<c:when test="${product.discount_id != 0}">
+									<c:set var="discount"
+										value="${(product.product_price * product.discount.discount_rate)/100}" />
+									<c:set var="price"
+										value="${product.product_price - (discount)}" />
+									<c:set var="total" value="${price * count}" />
+									<span style="text-decoration: line-through">${product.product_price}</span>
+									<span> <fmt:formatNumber pattern="0" value="${price}" />원
+									</span>
+								</c:when>
+								<c:otherwise>
+									<span>${product.product_price}</span>원									
+									<c:set var="total" value="${product.product_price * count}" />
+								</c:otherwise>
+							</c:choose>
 						</td>
 						<td id="product_count">${count}</td>
-						<td class="product_total_price"></td>
+						<td><span> <fmt:formatNumber pattern="0" value="${total}" /></span>원</td>
 					</tr>
 				</tbody>
 			</table>
@@ -105,19 +120,53 @@
 				<h4 class="w-100 border-bottom border-dark py-3">결제금액</h4>
 				<table class="table table-borderless mt-3">
 					<thead>
-						<tr>
-							<th scope="col">상품금액</th>
-							<th scope="col">상품할인금액</th>
+						<tr class="text-center">
+							<th scope="col">총 상품금액</th>
+							<th scope="col"></th>
+							<th scope="col">할인금액</th>
+							<th scope="col"></th>
 							<th scope="col">배송비</th>
+							<th scope="col"></th>
 							<th scope="col">결제예정금액</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="product_total_price" id="order_total_price"></td>
-							<td>- 0</td>
-							<td></td>
-							<td></td>
+						<tr class="text-center">
+							<c:choose>
+								<c:when test="${product.discount_id == 0}">
+									<td><h1 id="order_products_price">
+											<fmt:formatNumber pattern="0" value="${total}" />
+										</h1></td>
+									<td><h1>-</h1></td>
+									<td><h1 id="order_discount_price">0</h1></td>
+								</c:when>
+								<c:otherwise>
+									<td><h1 id="order_products_price">
+											<fmt:formatNumber pattern="0" value="${product.product_price * count}" />
+										</h1></td>
+									<td><h1>-</h1></td>
+									<td><h1 id="order_discount_price">
+											<fmt:formatNumber pattern="0" value="${discount * count}" />
+										</h1></td>
+								</c:otherwise>
+							</c:choose>
+							<td><h1>+</h1></td>
+							<td><h1 id="order_delivery_price">
+									<c:choose>
+										<c:when test="${total > 50000}">
+											<c:set var="delivery" value="0" />
+											0
+										</c:when>
+										<c:otherwise>
+											<c:set var="delivery" value="2500" />
+											2500
+										</c:otherwise>
+									</c:choose>
+								</h1></td>
+							<td><h1>=</h1></td>
+							<td><h1 id="order_total_price">
+									<fmt:formatNumber pattern="0" value="${total + delivery}" />
+								</h1></td>
 						</tr>
 					</tbody>
 				</table>
@@ -129,14 +178,16 @@
 						<tr>
 							<th style="width: 20%">일반결제</th>
 							<td><input class="form-check-input" type="radio"
-								name="payment_method" id="payment_method" checked value="일반결제">
-								<label class="form-check-label" for="nomal-pay">신용카드</label></td>
+								name="order_payment_method" id="order_payment_method" checked
+								value="일반결제"> <label class="form-check-label"
+								for="nomal-pay">신용카드</label></td>
 						</tr>
 						<tr>
 							<th scope="row">네이버페이 결제</th>
 							<td><input class="form-check-input" type="radio"
-								name="payment_method" id="payment_method" value="네이버페이">
-								<label class="form-check-label" for="naver-pay">사진</label></td>
+								name="order_payment_method" id="order_payment_method"
+								value="네이버페이"> <label class="form-check-label"
+								for="naver-pay">사진</label></td>
 						</tr>
 					</tbody>
 				</table>
@@ -151,14 +202,6 @@
 		src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 	<script>
-		var total;
-		$(document).ready(
-				function() {
-					total = parseInt($("#product_price").text())
-							* parseInt($("#product_count").text());
-					$(".product_total_price").text(total);
-				})
-
 		$("#address_btn").on('click', getAddressList);
 
 		function getAddressList() {
@@ -167,13 +210,14 @@
 							'width=400px,height=600px,toolbars=no,scrollbars=no,resizable=no');
 			return false;
 		}
+
 		function pay() {
 			IMP.init('imp39837562');
 			IMP.request_pay({
 				pg : 'inicis', // version 1.1.0부터 지원.
-				pay_method : 'card',
+				pay_method : $("#order_payment_method").text(),
 				merchant_uid : 'merchant_' + new Date().getTime(),
-				name : 'MARKET : 주문',
+				name : $(".product_name").text(),
 				amount : parseInt($("#order_total_price").text(), 10),
 				buyer_email : $("#buyer_email").text(),
 				buyer_name : $("#buyer_name").text(),
@@ -203,8 +247,15 @@
 										.val(),
 								recipient_phone : $("#recipient_phone").val(),
 								order_request : $("#order_request").val(),
-								payment_method : $("#payment_method").val(),
+								order_payment_method : $(
+										"#order_payment_method").val(),
 								order_state : "주문완료",
+								order_products_price : parseInt($(
+										"#order_products_price").text(), 10),
+								order_discount_price : parseInt($(
+										"#order_discount_price").text(), 10),
+								order_delivery_price : parseInt($(
+										"#order_delivery_price").text(), 10),
 								order_total_price : parseInt($(
 										"#order_total_price").text(), 10)
 							},
@@ -228,5 +279,5 @@
 			});
 		}
 	</script>
-</body>
+	</ body>
 </html>

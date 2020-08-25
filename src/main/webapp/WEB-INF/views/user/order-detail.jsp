@@ -68,11 +68,17 @@
 							<tr class="border-bottom">
 								<th scope="col">결제수단</th>
 								<th scope="col">총 상품 가격</th>
+								<th scope="col">할인가격</th>
+								<th scope="col">배송비</th>
+								<th scope="col">총 결제 가격</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>${order.payment_method}</td>
+								<td>${order.order_payment_method}</td>
+								<td>${order.order_products_price}</td>
+								<td>${order.order_discount_price}</td>
+								<td>${order.order_delivery_price}</td>
 								<td>${order.order_total_price}</td>
 							</tr>
 						</tbody>
