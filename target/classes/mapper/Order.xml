@@ -2,8 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mju.ict.repository.IOrderDAO">
-	<insert id="insertOrder"
-		parameterType="com.mju.ict.model.Order">
+	<resultMap type="com.mju.ict.model.OrderDetail" id="orderDetail">
+		<result column="order_detail_id" property="order_detail_id" />
+		<result column="order_id" property="order_id" />
+		<result column="product_id" property="product_id" />
+		<result column="product_count" property="product_count" />
+
+		<association javaType="com.mju.ict.model.Product"
+			property="product">
+			<id column="product_id" property="product_id" />
+			<result column="product_name" property="product_name" />
+			<result column="product_price" property="product_price" />
+			<result column="product_thumbnailImg" property="product_thumbnailImg" />
+		</association>
+	</resultMap>
+	
+	<resultMap type="com.mju.ict.model.Order" id="order">
+		<result column="order_id" property="order_id" />
+		<result column="user_id" property="user_id" />
+		<result column="buyer_name" property="buyer_name" />
+		<result column="buyer_email" property="buyer_email" />
+		<result column="buyer_phone" property="buyer_phone" />
+		<result column="recipient_name" property="recipient_name" />
+		<result column="recipient_zip" property="recipient_zip" />
+		<result column="recipient_address" property="recipient_address" />
+		<result column="recipient_phone" property="recipient_phone" />
+		<result column="order_request" property="order_request" />
+		<result column="order_created" property="order_created" />
+		<result column="payment_method" property="payment_method" />
+		<result column="order_total_price" property="order_total_price" />
+		<result column="order_state" property="order_state" />
+
+		<collection property="orderDetail"
+			javaType="java.util.List" column="order_id"
+			ofType="orderDetail"
+			select="selectOrderDetailByOrderId" />
+	</resultMap>
+
+
+
+	<insert id="insertOrder" parameterType="com.mju.ict.model.Order"
+		useGeneratedKeys="true" keyProperty="order_id">
 		INSERT INTO tb_order
 		(user_id,buyer_name,buyer_email,buyer_phone,
 		recipient_name,recipient_zip,recipient_address,recipient_phone,
@@ -13,5 +52,24 @@
 		#{recipient_name},#{recipient_zip},#{recipient_address},#{recipient_phone},
 		#{order_request},#{payment_method},#{order_total_price},#{order_state})
 	</insert>
+
+	<select id="selectOrderByUser" parameterType="Integer"
+		resultMap="order">
+		SELECT *
+		FROM tb_order
+		 WHERE user_id = #{user_id}
+	</select>
+	
+	<select id="selectOrderDetailByOrderId" parameterType="Integer"
+		resultMap="orderDetail">
+		SELECT *
+		FROM tb_order_detail
+		LEFT JOIN
+		tb_product
+		ON
+		tb_order_detail.product_id = tb_product.product_id
+		WHERE order_id = #{order_id}
+	</select>
+
 
 </mapper>

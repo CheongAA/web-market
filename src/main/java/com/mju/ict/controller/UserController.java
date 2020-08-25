@@ -24,9 +24,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mju.ict.model.Address;
+import com.mju.ict.model.Order;
 import com.mju.ict.model.User;
 import com.mju.ict.service.IAddressService;
 import com.mju.ict.service.ICartService;
+import com.mju.ict.service.IOrderService;
 import com.mju.ict.service.IUserService;
 
 @Controller
@@ -42,6 +44,9 @@ public class UserController {
 	
 	@Autowired
 	ICartService cartService;
+	
+	@Autowired
+	IOrderService orderService;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -121,6 +126,15 @@ public class UserController {
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String getMypage() {
 		return "user/index";
+	}
+	
+	// 고객 주문조회 페이지
+	@RequestMapping(value = "/user/order", method = RequestMethod.GET)
+	public String getUserOrder(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		List<Order> orders = orderService.getOrderByUser(user.getUser_id());
+		model.addAttribute("orders", orders);
+		return "user/order-list";
 	}
 
 	

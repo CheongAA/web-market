@@ -18,7 +18,7 @@
 					<a class="p-2 text-muted border-right" href="/logout">로그아웃</a>
 				</c:if>
 				<c:if test="${user.user_level == 0}">
-					<a class="p-2 text-muted border-right" href="/user">마이페이지</a>
+					<a class="p-2 text-muted border-right" href="${pageContext.request.contextPath}/user/order">마이페이지</a>
 					<a class="p-2 text-muted border-right" href="/logout">로그아웃</a>
 				</c:if>
 

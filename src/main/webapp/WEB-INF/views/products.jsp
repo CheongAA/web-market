@@ -33,7 +33,7 @@
 				<input type="hidden" id="discount_rate" value="${product.discount.discount_rate}" />
 				<input type="hidden" id="product_price" value="${product.product_price}" />
 				<div class="col-sm-4 mb-5">
-					<a href="/product/${product.product_id}"
+					<a href="${pageContext.request.contextPath}/product/${product.product_id}"
 						class="text-decoration-none"> <img
 						class="w-100 h-75 mb-3 product-img" alt=""
 						src="${product.product_thumbnailImg}"> <c:if

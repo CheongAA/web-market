@@ -1,5 +1,6 @@
 package com.mju.ict.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
@@ -34,6 +35,8 @@ public class Order {
 	private String payment_method;
 	private int order_total_price;
 	private String order_state;
+	
+	private ArrayList<OrderDetail> orderDetail;
 	
 	public int getOrder_id() {
 		return order_id;
@@ -118,6 +121,12 @@ public class Order {
 	}
 	public void setOrder_state(String order_state) {
 		this.order_state = order_state;
+	}
+	public ArrayList<OrderDetail> getOrderDetail() {
+		return orderDetail;
+	}
+	public void setOrderDetail(ArrayList<OrderDetail> orderDetail) {
+		this.orderDetail = orderDetail;
 	}
 
 	

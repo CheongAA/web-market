@@ -13,12 +13,12 @@
         </h5>      
         <ul class="nav flex-column">     
           <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link active" href="${pageContext.request.contextPath}/user/order">
            		  주문조회
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link" href="#">
            		  취소주문조회
             </a>
           </li>      
@@ -28,12 +28,12 @@
         </h5>      
         <ul class="nav flex-column">     
           <li class="nav-item">
-            <a class="nav-link active" href="${pageContext.request.contextPath}/user/update">
+            <a class="nav-link" href="${pageContext.request.contextPath}/user/update">
            		  정보수정
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link" href="#">
            		  회원탈퇴
             </a>
           </li>      
@@ -43,12 +43,12 @@
         </h5>      
         <ul class="nav flex-column">     
           <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link" href="#">
            		  후기조회
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link" href="#">
            		  후기등록
             </a>
           </li>      
@@ -58,12 +58,12 @@
         </h5>      
         <ul class="nav flex-column">     
           <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link" href="#">
            		  문의조회
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link" href="#">
            		  문의등록
             </a>
           </li>      

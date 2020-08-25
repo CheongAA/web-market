@@ -15,6 +15,7 @@
 		</div>
 		<div class="row my-5">
 			<h4>상품 정보</h4>
+			<input type="hidden" value="${product.product_id}" id="product_id" />
 			<table class="table text-center">
 				<thead>
 					<tr>
@@ -25,9 +26,10 @@
 				</thead>
 				<tbody>
 					<tr>
+
 						<td>${product.product_name}<small id="product_price">${product.product_price }</small>
 						</td>
-						<td id="count">${count}</td>
+						<td id="product_count">${count}</td>
 						<td class="product_total_price"></td>
 					</tr>
 				</tbody>
@@ -93,7 +95,7 @@
 								</tr>
 								<tr>
 									<th scope="row">배송 요청사항</th>
-									<td><input name="order_request" id="order_request"/></td>
+									<td><input name="order_request" id="order_request" /></td>
 								</tr>
 							</c:if>
 						</c:forEach>
@@ -126,15 +128,15 @@
 					<tbody>
 						<tr>
 							<th style="width: 20%">일반결제</th>
-							<td><input class="form-check-input" type="radio" name="payment_method"
-								id="payment_method" checked value="일반결제"> <label
-								class="form-check-label" for="nomal-pay">신용카드</label></td>
+							<td><input class="form-check-input" type="radio"
+								name="payment_method" id="payment_method" checked value="일반결제">
+								<label class="form-check-label" for="nomal-pay">신용카드</label></td>
 						</tr>
 						<tr>
 							<th scope="row">네이버페이 결제</th>
-							<td><input class="form-check-input" type="radio" name="payment_method"
-								id="payment_method" value="네이버페이"> <label
-								class="form-check-label" for="naver-pay">사진</label></td>
+							<td><input class="form-check-input" type="radio"
+								name="payment_method" id="payment_method" value="네이버페이">
+								<label class="form-check-label" for="naver-pay">사진</label></td>
 						</tr>
 					</tbody>
 				</table>
@@ -153,7 +155,7 @@
 		$(document).ready(
 				function() {
 					total = parseInt($("#product_price").text())
-							* parseInt($("#count").text());
+							* parseInt($("#product_count").text());
 					$(".product_total_price").text(total);
 				})
 
@@ -171,8 +173,8 @@
 				pg : 'inicis', // version 1.1.0부터 지원.
 				pay_method : 'card',
 				merchant_uid : 'merchant_' + new Date().getTime(),
-				name : '주문명:결제테스트',
-				amount : 1, //판매 가격
+				name : 'MARKET : 주문',
+				amount : parseInt($("#order_total_price").text(), 10),
 				buyer_email : $("#buyer_email").text(),
 				buyer_name : $("#buyer_name").text(),
 				buyer_tel : $("#recipient_phone").text(),
@@ -185,34 +187,44 @@
 					msg += '상점 거래ID : ' + rsp.merchant_uid;
 					msg += '결제 금액 : ' + rsp.paid_amount;
 					msg += '카드 승인번호 : ' + rsp.apply_num;
-					
+
 					$.ajax({
 						url : "/order/complete",
 						type : "post",
-						dataType:'json',
-						contentType:'application/json;charset=UTF-8',
-						data : {
-							buyer_name : $("#buyer_name").val(),
-							buyer_email : $("#buyer_email").val(),
-							buyer_phone : $("#buyer_phone").val(),
-							recipient_name : $("#recipient_name").val(),
-							recipient_zip : $("#recipient_zip").val(),
-							recipient_address : $("#recipient_address").val(),
-							recipient_phone : $("#recipient_phone").val(),
-							order_request : $("#order_request").val(),
-							payment_method : $("#payment_method").val(),
-							order_total_price : parseInt($("#order_total_price").text(), 10)
-							
-						},
+						contentType : 'application/json;charset=UTF-8',
+						data : JSON.stringify({
+							order : {
+								buyer_name : $("#buyer_name").val(),
+								buyer_email : $("#buyer_email").val(),
+								buyer_phone : $("#buyer_phone").val(),
+								recipient_name : $("#recipient_name").val(),
+								recipient_zip : $("#recipient_zip").val(),
+								recipient_address : $("#recipient_address")
+										.val(),
+								recipient_phone : $("#recipient_phone").val(),
+								order_request : $("#order_request").val(),
+								payment_method : $("#payment_method").val(),
+								order_state : "주문완료",
+								order_total_price : parseInt($(
+										"#order_total_price").text(), 10)
+							},
+							orderDetail : {
+								product_id : parseInt($("#product_id").val()),
+								product_count : parseInt($("#product_count")
+										.text())
+							}
+
+						}),
 						success : function(data) {
-							console.log("dd");
+							window.location.href = "/order/complete";
 						}
 					});
+
 				} else {
 					var msg = '결제에 실패하였습니다.';
 					msg += '에러내용 : ' + rsp.error_msg;
+					alert(msg);
 				}
-				alert(msg);
 			});
 		}
 	</script>

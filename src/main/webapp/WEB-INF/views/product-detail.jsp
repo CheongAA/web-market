@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,14 +38,13 @@
 							<tbody>
 								<tr>
 									<th style="width: 40%">가격(1팩)</th>
-									<td><c:if
-											test="${product.discount_id != 0}">
+									<td><c:if test="${product.discount_id != 0}">
 											<span class="text-muted h5 font-weight-light"
-									style="text-decoration: line-through">${product.product_price}</span>
-										</c:if> <span class="h5 font-weight-light" id="product_price"></span></td>
+												style="text-decoration: line-through">${product.product_price}</span>
+										</c:if> <span class="h5 font-weight-light" id="product_price"></span>원</td>
 								</tr>
 								<tr>
-									<th style="width: 40%">카테고리</th>
+									<th style="width: 40%">분류</th>
 									<td>${product.category.category_name}</td>
 								</tr>
 								<tr>
@@ -64,15 +64,15 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="row">
+					<div class="row justify-content-end mt-5">
 						<p class="">총 상품금액 :</p>
-						<h3 id="product_total_price" class="">원</h3>
+						<h4 id="product_total_price" class="">원</h4>
 					</div>
-					<div class="row">
-						<button type="button" class="col-sm-6 btn btn-outline-info py-3"
-							id="cart_btn">SHOPPING BAG</button>
-						<button type="button" class="col-sm-6 btn btn-info py-3"
-							id="buy_btn">BUY NOW</button>
+					<div class="row justify-content-end">
+						<button type="button"
+							class="col-sm-3 btn btn-outline-dark py-3 mx-2" id="cart_btn">장바구니</button>
+						<button type="button" class="col-sm-3 btn btn-dark py-3"
+							id="buy_btn">바로구매</button>
 					</div>
 					<div class="row  mt-4">
 						<button class="col btn btn-light text-center">
@@ -195,7 +195,30 @@
 				</ul>
 			</div>
 			<div class="row pt-5" id="review">
-				<img alt="" src=""> 고객후기
+				<h6>후기</h6>
+				<table class="table mt-3">
+					<thead>
+						<tr>
+							<th scope="col">번호</th>
+							<th scope="col">제목</th>
+							<th scope="col">작성자</th>
+							<th scope="col">작성일</th>
+							<th scope="col">조회</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="review" items="${reviews}" varStatus="status">
+							<tr>
+								<td><c:out value="${status.count} " /></td>
+								<td>${review.review_title}</td>
+								<td>${review.user_identification}</td>
+								<td><fmt:formatDate value="${review.review_created}"
+										pattern="yyyy-MM-dd" /></td>
+								<td>${review.review_view}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
 			<div class="row pt-5">
 				<ul class="col nav nav-tabs">
@@ -221,7 +244,7 @@
 		var price = parseInt($("#nomal_price").val());
 
 		if (isDiscount == 1) {
-			$("#product_price").text(price-(rate * price));
+			$("#product_price").text(price - (rate * price));
 		} else {
 			$("#product_price").text(price);
 		}
