@@ -138,6 +138,15 @@ public class UserController {
 	}
 
 	
+	// 고객 주문 상세조회 페이지
+	@RequestMapping(value = "/user/order/{id}", method = RequestMethod.GET)
+	public String getUserOrderDetail(@PathVariable int id,Model model, HttpSession session) {
+		Order order = orderService.getOrderById(id);
+		model.addAttribute("order", order);
+		return "user/order-detail";
+	}
+
+	
 	// 고객 정보수정 페이지
 	@RequestMapping(value = "/user/update", method = RequestMethod.GET)
 	public String getUserUpdate(Model model, HttpSession session) {

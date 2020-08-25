@@ -12,6 +12,8 @@ public interface IOrderService {
 	public abstract void addOrderDetail(OrderDetail orderDetail);
 
 	public abstract List<Order> getOrderByUser(int user_id);
+
+	public abstract Order getOrderById(int id);
 	
 	
 

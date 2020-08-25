@@ -42,7 +42,7 @@
 							</c:forEach>
 							<div class="col-sm-3 text-center">
 								<h5>${order.order_state}</h5>
-								<a class="btn btn-sm btn-outline-primary btn-block">배송조회</a> <a
+								<a class="btn btn-sm btn-outline-primary btn-block" href="${pageContext.request.contextPath}/user/order/${order.order_id}">주문조회</a> <a
 									class="btn btn-sm btn-outline-primary btn-block">교환신청</a> <a
 									class="btn btn-sm btn-outline-primary btn-block">반품신청</a> <a
 									class="btn btn-sm btn-outline-primary btn-block">후기쓰기</a>

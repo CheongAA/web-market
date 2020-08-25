@@ -35,6 +35,11 @@ public class OrderService implements IOrderService{
 		return orderDAO.selectOrderByUser(user_id);
 	}
 
+	@Override
+	public Order getOrderById(int id) {
+		return orderDAO.selectOrderById(id);
+	}
+
 
 
 }

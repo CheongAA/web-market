@@ -9,4 +9,6 @@ public interface IOrderDAO {
 	public abstract void insertOrder(Order order);
 
 	public abstract List<Order> selectOrderByUser(int user_id);
+
+	public abstract Order selectOrderById(int id);
 }
