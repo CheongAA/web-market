@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.mju.ict.model.Address;
@@ -57,6 +58,7 @@ public class OrderController {
 	}
 
 	// 주문
+	@ResponseBody
 	@RequestMapping(value = "/complete", method = RequestMethod.POST)
 	public void addOrder(@RequestBody Map<String, Object> param, HttpSession session) {
 		User user = (User) session.getAttribute("user");

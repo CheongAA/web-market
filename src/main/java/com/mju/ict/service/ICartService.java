@@ -9,4 +9,6 @@ public interface ICartService {
 	public abstract void addCart(Cart cart);
 
 	public abstract List<Cart> getCartsByUser(int user_id);
+
+	public abstract void updateCart(Cart cart);
 }

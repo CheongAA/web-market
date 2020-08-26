@@ -26,4 +26,9 @@ public class CartDAO implements ICartDAO{
 		return sqlSession.selectList("selectCartsByUser", user_id);
 	}
 
+	@Override
+	public void updateCart(Cart cart) {
+		sqlSession.update("updateCart", cart);
+	}
+
 }

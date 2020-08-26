@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,8 @@
 <title>장바구니</title>
 </head>
 <body>
+	<c:set var="total_products" value="0" />
+	<c:set var="total_discounts" value="0" />
 	<div class="m-5">
 		<div class="row text-center mb-5">
 			<h2 class="w-100">장바구니</h2>
@@ -19,15 +22,15 @@
 			<table class="table text-center">
 				<thead>
 					<tr>
-						<th><input type="checkbox" />전체선택</th>
+						<th><input type="checkbox" id="total_check_input" />전체선택</th>
 						<th class="w-50">상품정보</th>
 						<th>수량</th>
-						<th>금액</th>
+						<th class="w-25">금액</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:choose>
-						<c:when test="${empty products}">
+						<c:when test="${empty carts}">
 							<tr>
 								<td colspan="4" rowspan="4">
 									<h6 class="py-5 my-5 font-weight-bold">장바구니에 담긴 상품이 없습니다.</h6>
@@ -35,49 +38,99 @@
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="product" items="${products}">
+							<c:forEach var="cart" items="${carts}">
+								<c:set var="total_products"
+									value="${total_products + (cart.product.product_price * cart.product_count)}" />
 								<tr>
-									<td><input type="checkbox" /></td>
+									<td class="text-center"><input type="checkbox"
+										class="product_check_input" value="${cart.product.product_id}" /></td>
 									<td>
-										<div>
-											[${product.brand.brand_name}] ${product.product_name} ${product.product_price }
+										<div class="col-sm-12">
+											<img alt="" src="${cart.product.product_thumbnailImg}"
+												class="w-25"> <a
+												href="${pageContext.request.contextPath}/product/${cart.product.product_id}"
+												class="text-dark">${cart.product.product_name}</a> /
+
+											<c:choose>
+												<c:when test="${cart.product.discount_id != 0}">
+													<c:set var="discount"
+														value="${(cart.product.product_price * cart.product.discount.discount_rate)/100}" />
+													<c:set var="total_discounts"
+														value="${total_discounts + (discount * cart.product_count)}" />
+													<c:set var="price"
+														value="${cart.product.product_price - (discount)}" />
+													<c:set var="total" value="${price * cart.product_count}" />
+
+
+													<span style="text-decoration: line-through"
+														id="${cart.product.product_id}_price">${cart.product.product_price}</span>
+													<span> <fmt:formatNumber pattern="0"
+															value="${price}" />원
+													</span>
+
+													<input type="hidden"
+														value="${discount * cart.product_count}"
+														id="${cart.product.product_id}_discounts">
+												</c:when>
+												<c:otherwise>
+													<c:set var="total"
+														value="${cart.product.product_price * cart.product_count}" />
+													<span>${cart.product.product_price}</span>원
+																										<input type="hidden" value="0"
+														id="${cart.product.product_id}_discounts">
+												</c:otherwise>
+											</c:choose>
+											<input type="hidden"
+												value="${cart.product.product_price * cart.product_count}"
+												id="${cart.product.product_id}_products">
 										</div>
 									</td>
-									<td>수정해야됨</td>
-									<td class="product_total_price"></td>
+									<td><input class="form-control" id="${cart.cart_id}"
+										type="number" min="1" max="${cart.product.product_quantity}"
+										value="${cart.product_count}" /></td>
+									<td><span class="product_total_price"><fmt:formatNumber
+												pattern="0" value="${total}" /></span>원</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
+
 				</tbody>
 			</table>
 			<hr />
+			<input type="hidden" value="${total_products}" id="total_products">
+			<input type="hidden" value="${total_discounts}" id="total_discounts">
 			<div class="row my-5">
 				<button type="button" class="btn btn-outline-secondary p-3"
 					id="cart_btn">선택 삭제</button>
 				<button type="button" class="btn btn-outline-secondary p-3"
 					id="buy_btn">품절 상품 삭제</button>
 			</div>
-			<div class="row my-5 py-5 mx-auto ">
-				<div class="col-sm-2 border border-secondary text-center p-5">
-					<p class="text-muted">상품금액</p>
-					<h5 class="m-3 font-weight-bold">2222</h5>
-				</div>
-				<h1 class="col m-5 font-weight-bold text-muted text-center">-</h1>
-				<div class="col-sm-2 border border-secondary text-center p-5">
-					<p class="text-muted">상품할인금액</p>
-					<h5 class="m-3 font-weight-bold">2222</h5>
-				</div>
-				<h1 class="col m-5 font-weight-bold text-muted text-center">+</h1>
-				<div class="col-sm-2 border border-secondary text-center p-5">
-					<p class="text-muted">배송비</p>
-					<h5 class="m-3 font-weight-bold">2222</h5>
-				</div>
-				<h1 class="col m-5 font-weight-bold text-muted text-center">=</h1>
-				<div class="col-sm-2 border border-secondary text-center p-5">
-					<p class="text-muted">결제예정금액</p>
-					<h5 class="m-3 font-weight-bold">2222</h5>
-				</div>
+			<div class="row my-5 border">
+				<table class="table table-borderless mt-3">
+					<thead>
+						<tr class="text-center">
+							<th scope="col">총 상품금액</th>
+							<th scope="col"></th>
+							<th scope="col">할인금액</th>
+							<th scope="col"></th>
+							<th scope="col">배송비</th>
+							<th scope="col"></th>
+							<th scope="col">결제예정금액</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="text-center">
+							<td><h1 id="products_price">0</h1></td>
+							<td><h1>-</h1></td>
+							<td><h1 id="discount_price">0</h1></td>
+							<td><h1>+</h1></td>
+							<td><h1 id="delivery_price">0</h1></td>
+							<td><h1>=</h1></td>
+							<td><h1 id="total_price">0</h1></td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 			<div class="row w-100 mt-3">
 				<button type="button"
@@ -85,5 +138,71 @@
 			</div>
 		</form>
 	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("input[type='checkbox']").prop('checked', false);
+		}
+
+		);
+		$("input[type='number']").on("change", function(e) {
+			const id = e.target.id;
+			const value = e.target.value;
+
+			$.ajax({
+				url : "/cart/update",
+				type : "post",
+				contentType : 'application/json;charset=UTF-8',
+				data : JSON.stringify({
+					cart_id : parseInt(id),
+					product_count : parseInt(value)
+
+				}),
+				success : function(data) {
+					window.location.href = "/carts";
+				}
+			});
+		});
+
+		var products = 0;
+		var discounts = 0;	
+
+
+		$("#total_check_input").on("change", function() {
+			if ($(this).prop('checked')) {
+				products = 0;
+				discounts = 0;	
+				$("input[type='checkbox'].product_check_input").prop('checked', true).trigger('change');
+			} else {
+				$("input[type='checkbox'].product_check_input").prop('checked', false).trigger('change');
+		}});
+
+		$("input[type='checkbox'].product_check_input").on(
+				"change",
+				function(e) {
+					const target = e.target.value;
+					if ($(this).prop('checked')) {
+						products += parseInt($("#" + target + "_products")
+								.val());
+						discounts += parseInt($("#" + target + "_discounts")
+								.val());
+					} else {
+						$("#total_check_input").prop('checked', false)
+						products -= parseInt($("#" + target + "_products")
+								.val());
+						discounts -= parseInt($("#" + target + "_discounts")
+								.val());
+					}
+					var delivery = 0;
+					
+					if (products - discounts < 50000 && products != 0) {
+						delivery = 2500;
+					}
+
+					$("#products_price").text(products);
+					$("#discount_price").text(discounts);					
+					$("#delivery_price").text(delivery);
+					$("#total_price").text(products - discounts + delivery);
+				});
+	</script>
 </body>
 </html>

@@ -24,6 +24,11 @@ public class CartService implements ICartService{
 		return cartDAO.selectCartsByUser(user_id);
 	}
 
+	@Override
+	public void updateCart(Cart cart) {
+		cartDAO.updateCart(cart);
+	}
+
 
 
 }

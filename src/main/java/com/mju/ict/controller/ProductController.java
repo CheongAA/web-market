@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -91,16 +92,13 @@ public class ProductController {
 	@RequestMapping(value = "/carts", method = RequestMethod.GET)
 	public String getCarts(HttpSession session,Model model) {
 		User user = (User) session.getAttribute("user");
-		List<Product> products = new ArrayList<Product>();
+		List<Cart> carts = null;
 		if(user !=null) {
-			List<Cart> carts = cartService.getCartsByUser(user.getUser_id());
-			for(Cart c:carts) {
-				products.add(productService.getProductById(c.getProduct_id()));
-			}
+			carts = cartService.getCartsByUser(user.getUser_id());
 		}else {
 			//비회원으로 고칠것
 		}
-		model.addAttribute("products", products);
+		model.addAttribute("carts", carts);
 		return "carts";
 	}
 
@@ -115,6 +113,13 @@ public class ProductController {
 		}else {
 			cartService.addCart(cart);
 		}
+	}
+	
+	//회원 장바구니 상품 수량 변경
+	@ResponseBody
+	@RequestMapping(value = "/cart/update", method = RequestMethod.POST)
+	public void updateCart(@RequestBody Cart cart,HttpSession session) {
+		cartService.updateCart(cart);
 	}
 	
 	

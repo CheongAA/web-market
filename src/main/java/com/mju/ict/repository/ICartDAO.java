@@ -10,4 +10,6 @@ public interface ICartDAO {
 
 	public abstract List<Cart> selectCartsByUser(int user_id);
 
+	public abstract void updateCart(Cart cart);
+
 }
