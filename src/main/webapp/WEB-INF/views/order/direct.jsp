@@ -29,6 +29,7 @@
 				</thead>
 				<tbody>
 					<c:forEach var="cart" items="${carts}">
+						<input type="hidden" value="${cart.cart_id}" class="cart_id" />
 						<input type="hidden" value="${cart.product_id}" class="product_id" />
 						<input type="hidden" value="${cart.product_count}"
 							class="product_count" />
@@ -205,57 +206,70 @@
 		src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 	<script>
-		var list = new Array();
-
-		var id = $(".product_id");
-		var count = $(".product_count");
-
-		for (var i = 0; i <id.length; i++) {
-			// 객체 생성
-			var data = new Object();
-
-			data.product_id = id[i].value;
-			data.product_count = count[i].value;
-
-			// 리스트에 생성된 객체 삽입
-			list.push(data);
-		}
-		var jsonData = JSON.stringify({
-			order : {
-				buyer_name : $("#buyer_name").val(),
-				buyer_email : $("#buyer_email").val(),
-				buyer_phone : $("#buyer_phone").val(),
-				recipient_name : $("#recipient_name").val(),
-				recipient_zip : $("#recipient_zip").val(),
-				recipient_address : $("#recipient_address")
-						.val(),
-				recipient_phone : $("#recipient_phone").val(),
-				order_request : $("#order_request").val(),
-				order_payment_method : $(
-						"#order_payment_method").val(),
-				order_state : "주문완료",
-				order_products_price : parseInt($(
-						"#order_products_price").text(), 10),
-				order_discount_price : parseInt($(
-						"#order_discount_price").text(), 10),
-				order_delivery_price : parseInt($(
-						"#order_delivery_price").text(), 10),
-				order_total_price : parseInt($(
-						"#order_total_price").text(), 10)
-			}, 
-			orderDetail:list
-
-		});
-		
-		console.log(jsonData);
-		
 		$("#address_btn").on('click', getAddressList);
 
 		function getAddressList() {
-			window
-					.open(this.href, '_blank',
-							'width=400px,height=600px,toolbars=no,scrollbars=no,resizable=no');
+			window.open(this.href, '_blank','width=400px,height=600px,toolbars=no,scrollbars=no,resizable=no');
 			return false;
+		}
+
+		function getOrderDetailJson(){
+			var orderDetailList = new Array();
+
+			var id = $(".product_id");
+			var count = $(".product_count");
+
+			for (var i = 0; i < id.length; i++) {
+				var data = new Object();
+				data.product_id = id[i].value;
+				data.product_count = count[i].value;
+				
+				orderDetailList.push(data);
+			}
+
+			return JSON.stringify({
+				order : {
+					buyer_name : $("#buyer_name").val(),
+					buyer_email : $("#buyer_email").val(),
+					buyer_phone : $("#buyer_phone").val(),
+					recipient_name : $("#recipient_name").val(),
+					recipient_zip : $("#recipient_zip").val(),
+					recipient_address : $("#recipient_address").val(),
+					recipient_phone : $("#recipient_phone").val(),
+					order_request : $("#order_request").val(),
+					order_payment_method : $("#order_payment_method").val(),
+					order_state : "주문완료",
+					order_products_price : parseInt($("#order_products_price")
+							.text(), 10),
+					order_discount_price : parseInt($("#order_discount_price")
+							.text(), 10),
+					order_delivery_price : parseInt($("#order_delivery_price")
+							.text(), 10),
+					order_total_price : parseInt(
+							$("#order_total_price").text(), 10)
+				},
+				orderDetail : orderDetailList
+
+			});
+		}
+
+
+		function deleteCart() {
+			var list = $(".cart_id");
+			var carts = new Array();
+
+			for (var i = 0; i < list.length; i++) {
+				carts.push(parseInt(list[i].value));
+			}
+			
+			$.ajax({
+				url : "/cart/delete",
+				type : "post",
+				contentType : 'application/json;charset=UTF-8',
+				data : JSON.stringify(carts),
+				success : function(data) {
+				}
+			});
 		}
 
 		function pay() {
@@ -283,8 +297,9 @@
 						url : "/order/complete",
 						type : "post",
 						contentType : 'application/json;charset=UTF-8',
-						data : jsonData,
+						data : getOrderDetailJson(),
 						success : function(data) {
+							deleteCart();
 							window.location.href = "/order/complete";
 						}
 					});

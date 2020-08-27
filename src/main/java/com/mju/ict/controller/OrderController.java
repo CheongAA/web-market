@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import com.mju.ict.model.Address;
 import com.mju.ict.model.Cart;
 import com.mju.ict.model.Order;
@@ -68,20 +71,23 @@ public class OrderController {
 		User user = (User) session.getAttribute("user");
 		
 		Gson gson = new Gson();
+		JsonParser jparser = new JsonParser();
+		
 		Order order = gson.fromJson(new Gson().toJson(param.get("order")).toString(), Order.class);
 		
-		OrderDetail orderDetail = gson.fromJson(param.get("orderDetail").toString(), OrderDetail.class);
-//		ObjectMapper mapper = new ObjectMapper();
-//		List<OrderDetail> personList = mapper.readValue(response.getBody(),new TypeReference<List<OrderDetail>>(){});
-//		OrderDetail orderDetail = gson.fromJson(param.get("orderDetail").toString(), OrderDetail.class);
+		JsonElement orderDetail = jparser.parse(param.get("orderDetail").toString());
 		
-//		if (user != null) {
-//			order.setUser_id(user.getUser_id());
-//		}		
-//		orderService.addOrder(order);
-//		
-//		orderDetail.setOrder_id(order.getOrder_id());
-//		orderService.addOrderDetail(orderDetail);
+		List <OrderDetail> orderDetailList = gson.fromJson(orderDetail, (new TypeToken<List<OrderDetail>>() {  }).getType());
+		
+		if (user != null) {
+			order.setUser_id(user.getUser_id());
+		}		
+		orderService.addOrder(order);
+		
+		for(OrderDetail od:orderDetailList) {
+			od.setOrder_id(order.getOrder_id());
+			orderService.addOrderDetail(od);
+		}
 	}
 
 	// 주문완료 페이지

@@ -172,18 +172,19 @@
 			});
 		});
 
-		function deleteCart(className) {
-			var list = new Array();
+		function deleteCart(selector) {
+			var list = $(selector);
+			var carts = new Array();
 
-			$(className).each(function() {
-				list.push(parseInt($(this).val()));
-			})
-
+			for (var i = 0; i < list.length; i++) {
+				carts.push(parseInt(list[i].value));
+			}
+			
 			$.ajax({
 				url : "/cart/delete",
 				type : "post",
 				contentType : 'application/json;charset=UTF-8',
-				data : JSON.stringify(list),
+				data : JSON.stringify(carts),
 				success : function(data) {
 					window.location.href = "/carts";
 				}
@@ -207,7 +208,7 @@
 				}
 
 				window.location.href = "/order/?" + encodeURI(query);
-			}else{
+			} else {
 				alert("주문할 상품을 선택해주세요.");
 			}
 
