@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mju.ict.model.Cart;
@@ -109,9 +110,9 @@ public class ProductController {
 		User user = (User) session.getAttribute("user");
 		if(user !=null) {
 			cart.setUser_id(user.getUser_id());
-			cartService.addCart(cart);
+			cartService.registerCart(cart);
 		}else {
-			cartService.addCart(cart);
+			cartService.registerCart(cart);
 		}
 	}
 	
@@ -122,6 +123,12 @@ public class ProductController {
 		cartService.updateCart(cart);
 	}
 	
+	//회원 장바구니 상품 삭제
+	@ResponseBody
+	@RequestMapping(value = "/cart/delete", method = RequestMethod.POST)
+	public void deleteCart(@RequestBody int[] cartArr,HttpSession session) {
+		cartService.deleteCart(cartArr);
+	}
 	
 	
 	////미완성

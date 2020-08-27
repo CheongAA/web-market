@@ -12,4 +12,9 @@ public interface ICartDAO {
 
 	public abstract void updateCart(Cart cart);
 
+	public abstract void deleteCart(int cart_id);
+
+	public abstract Cart selectCartById(int id);
+
+	public abstract Cart selectCartsByProduct(int product_id);
 }

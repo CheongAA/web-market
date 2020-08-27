@@ -10,6 +10,9 @@
 <title>주문</title>
 </head>
 <body>
+	<c:set var="total_products" value="0" />
+	<c:set var="total_discounts" value="0" />
+
 	<div class="m-5">
 		<div class="row text-center mb-5">
 			<h2 class="w-100">주문/결제</h2>
@@ -26,27 +29,35 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><span class="product_name">${product.product_name}</span>/<c:choose>
-								<c:when test="${product.discount_id != 0}">
-									<c:set var="discount"
-										value="${(product.product_price * product.discount.discount_rate)/100}" />
-									<c:set var="price"
-										value="${product.product_price - (discount)}" />
-									<c:set var="total" value="${price * count}" />
-									<span style="text-decoration: line-through">${product.product_price}</span>
-									<span> <fmt:formatNumber pattern="0" value="${price}" />원
-									</span>
-								</c:when>
-								<c:otherwise>
-									<span>${product.product_price}</span>원									
-									<c:set var="total" value="${product.product_price * count}" />
-								</c:otherwise>
-							</c:choose>
-						</td>
-						<td id="product_count">${count}</td>
-						<td><span> <fmt:formatNumber pattern="0" value="${total}" /></span>원</td>
-					</tr>
+					<c:forEach var="cart" items="${carts}">
+						<tr>
+							<c:set var="total_products"
+								value="${total_products + (cart.product.product_price * cart.product_count)}" />
+							<td><span class="product_name">${cart.product.product_name}</span>/<c:choose>
+									<c:when test="${cart.product.discount_id != 0}">
+										<c:set var="discount"
+											value="${(cart.product.product_price * cart.product.discount.discount_rate)/100}" />
+										<c:set var="total_discounts"
+											value="${total_discounts + (discount * cart.product_count)}" />
+
+										<c:set var="price"
+											value="${cart.product.product_price - (discount)}" />
+										<c:set var="total" value="${price * cart.product_count}" />\
+										<span style="text-decoration: line-through">${cart.product.product_price}</span>
+										<span> <fmt:formatNumber pattern="0" value="${price}" />원
+										</span>
+									</c:when>
+									<c:otherwise>
+										<span>${cart.product.product_price}</span>원									
+									<c:set var="total"
+											value="${cart.product.product_price * cart.product_count}" />
+									</c:otherwise>
+								</c:choose></td>
+							<td id="product_count">${cart.product_count}</td>
+							<td><span> <fmt:formatNumber pattern="0"
+										value="${total}" /></span>원</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -132,24 +143,13 @@
 					</thead>
 					<tbody>
 						<tr class="text-center">
-							<c:choose>
-								<c:when test="${product.discount_id == 0}">
-									<td><h1 id="order_products_price">
-											<fmt:formatNumber pattern="0" value="${total}" />
-										</h1></td>
-									<td><h1>-</h1></td>
-									<td><h1 id="order_discount_price">0</h1></td>
-								</c:when>
-								<c:otherwise>
-									<td><h1 id="order_products_price">
-											<fmt:formatNumber pattern="0" value="${product.product_price * count}" />
-										</h1></td>
-									<td><h1>-</h1></td>
-									<td><h1 id="order_discount_price">
-											<fmt:formatNumber pattern="0" value="${discount * count}" />
-										</h1></td>
-								</c:otherwise>
-							</c:choose>
+							<td><h1 id="order_products_price">
+									<fmt:formatNumber pattern="0" value="${total_products}" />
+								</h1></td>
+							<td><h1>-</h1></td>
+							<td><h1 id="order_discount_price">
+									<fmt:formatNumber pattern="0" value="${total_discounts}" />
+								</h1></td>
 							<td><h1>+</h1></td>
 							<td><h1 id="order_delivery_price">
 									<c:choose>
@@ -165,7 +165,7 @@
 								</h1></td>
 							<td><h1>=</h1></td>
 							<td><h1 id="order_total_price">
-									<fmt:formatNumber pattern="0" value="${total + delivery}" />
+									<fmt:formatNumber pattern="0" value="${total_products-total_discounts + delivery}" />
 								</h1></td>
 						</tr>
 					</tbody>

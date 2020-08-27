@@ -263,9 +263,20 @@
 		}
 
 		function getOrderPage() {
-			location.href = "/order/" + $("#product_id").val() + "/"
-					+ $("#product_count").val();
+			var form = {
+					product_id : parseInt($("#product_id").val()),
+					product_count : parseInt($("#product_count").val())
+				}
+			$.ajax({
+				url : "/cart",
+				type : "POST",
+				data : form,
+				success : function(data) {
+					location.href = "/carts";
+				}
+			});
 		}
+				
 
 		function addCart() {
 			var form = {

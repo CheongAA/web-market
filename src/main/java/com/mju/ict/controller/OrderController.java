@@ -12,15 +12,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.mju.ict.model.Address;
+import com.mju.ict.model.Cart;
 import com.mju.ict.model.Order;
 import com.mju.ict.model.OrderDetail;
 import com.mju.ict.model.Product;
 import com.mju.ict.model.User;
 import com.mju.ict.service.IAddressService;
+import com.mju.ict.service.ICartService;
 import com.mju.ict.service.IOrderService;
 import com.mju.ict.service.IProductService;
 
@@ -36,26 +40,46 @@ public class OrderController {
 
 	@Autowired
 	IOrderService orderService;
-
+	
+	@Autowired
+	ICartService cartService;
+	
+//	// 주문 페이지
+//	@RequestMapping(value = "/", method = RequestMethod.GET)
+//	public String getOrderPage(Model model, HttpSession session) {
+//		User user = (User) session.getAttribute("user");
+//
+//		if (session.getAttribute("user") == null) {
+//			return "order_nonUser";
+//		} else {
+//			 List<Cart> carts = cartService.getCartsByUser(user.getUser_id());
+//			List<Address> addresses = addressService.getAddressByUser(user.getUser_id());
+//			
+//			model.addAttribute("carts", carts);
+//			model.addAttribute("addresses", addresses);
+//		}
+//
+//		return "order/direct";
+//	}
+	
 	// 주문 페이지
-	@RequestMapping(value = "/{id}/{count}", method = RequestMethod.GET)
-	public String getOrder(@PathVariable int id, @PathVariable int count, Model model, HttpSession session) {
-		Product product = productService.getProductById(id);
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String getOrderPage(@RequestParam("cart[]") int[] cartArr,Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
 
-		model.addAttribute("product", product);
-		model.addAttribute("count", count);
-
-		if (session.getAttribute("user") == null) {
+		if (user == null) {
 			return "order_nonUser";
 		} else {
-
-			User user = (User) session.getAttribute("user");
+			List<Cart> carts = cartService.getCartsById(cartArr);
 			List<Address> addresses = addressService.getAddressByUser(user.getUser_id());
+			
+			model.addAttribute("carts", carts);
 			model.addAttribute("addresses", addresses);
 		}
 
 		return "order/direct";
 	}
+	
 
 	// 주문
 	@ResponseBody

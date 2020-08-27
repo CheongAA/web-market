@@ -1,5 +1,6 @@
 package com.mju.ict.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,17 @@ public class CartService implements ICartService{
 	ICartDAO cartDAO;
 
 	@Override
-	public void addCart(Cart cart) {
-		cartDAO.insertCart(cart);
+	public void registerCart(Cart cart) {
+		Cart selectedCart = cartDAO.selectCartsByProduct(cart.getProduct_id());
+		if(selectedCart !=null) {
+			int count = cart.getProduct_count() + selectedCart.getProduct_count();
+			selectedCart.setProduct_count(count);
+			cartDAO.updateCart(selectedCart);
+		}else {
+			cartDAO.insertCart(cart);
+		}
+		
+		
 	}
 
 	@Override
@@ -27,6 +37,23 @@ public class CartService implements ICartService{
 	@Override
 	public void updateCart(Cart cart) {
 		cartDAO.updateCart(cart);
+	}
+
+	@Override
+	public void deleteCart(int[] cartArr) {
+		for(int cart:cartArr) {
+			cartDAO.deleteCart(cart);
+		}
+	}
+
+	@Override
+	public List<Cart> getCartsById(int[] cartArr) {
+		List<Cart> carts = new ArrayList<Cart>();
+		for(int id:cartArr) {
+			Cart cart = cartDAO.selectCartById(id);
+			carts.add(cart);
+		}
+		return carts;
 	}
 
 
