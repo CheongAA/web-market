@@ -27,12 +27,14 @@ import com.mju.ict.model.Brand;
 import com.mju.ict.model.Category;
 import com.mju.ict.model.Discount;
 import com.mju.ict.model.Notice;
+import com.mju.ict.model.Order;
 import com.mju.ict.model.Product;
 import com.mju.ict.model.User;
 import com.mju.ict.service.IBrandService;
 import com.mju.ict.service.ICategoryService;
 import com.mju.ict.service.IDiscountService;
 import com.mju.ict.service.INoticeService;
+import com.mju.ict.service.IOrderService;
 import com.mju.ict.service.IProductService;
 import com.mju.ict.service.IUserService;
 import com.mju.ict.util.UploadFileUtils;
@@ -57,6 +59,8 @@ public class AdminController {
 	IProductService productService;
 	@Autowired
 	IUserService userService;
+	@Autowired
+	IOrderService orderService;
 
 	private String uploadPath = "C:\\Users\\HP\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\market\\resources";
 
@@ -377,5 +381,21 @@ public class AdminController {
 	}
 	
 
+	///////////////////////////주문 관리////////////////////////////
+	// 주문 조회 페이지
+	@RequestMapping(value = "/order", method = RequestMethod.GET)
+	public String getOrders(Model model) {
+		List<Order> orders = orderService.getAllOrders();
+		model.addAttribute("orders", orders);
+		return "admin/order/list";
+	}
+	
+	//주문 상세조회 페이지
+	@RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
+	public String getOrderDetail(@PathVariable int id,Model model) {
+		Order order = orderService.getOrderById(id);
+		model.addAttribute("order", order);
+		return "admin/order/detail";
+	}
 
 }

@@ -22,19 +22,29 @@
 			<div class="row justify-content-center mt-5  p-5 border border-dark">
 				<h4 class="mt-3">주문상품</h4>
 				<c:forEach var="orderDetail" items="${order.orderDetail}">
-					<div class="row m-5 p-3 border-top border-bottom w-100">
+					<div class="row m-1 p-1 border-top border-bottom w-100">
 						<img alt="" src="${orderDetail.product.product_thumbnailImg}"
-							class="col-sm-3">
-						<div class="col-sm-5">
-
+							class="col-sm-3 w-25 h-100 mx-auto">
+						<div class=" col-sm-5 m-2">
 							<p>
 								<a
 									href="${pageContext.request.contextPath}/product/${orderDetail.product.product_id}"
 									class="text-dark">${orderDetail.product.product_name}</a>
 							</p>
 							<p>
-								<fmt:formatNumber pattern="###,###,###"
-									value="${orderDetail.product.product_price}" />
+								<c:choose>
+									<c:when test="${orderDetail.product.discount_id != 0}">
+										<c:set var="price"
+											value="${orderDetail.product.product_price - ((orderDetail.product.product_price * orderDetail.product.discount.discount_rate)/100)}" />
+										<span style="text-decoration: line-through">${orderDetail.product.product_price}</span>
+										<span> <fmt:formatNumber pattern="0" value="${price}" />
+										</span>
+									</c:when>
+									<c:otherwise>
+										<fmt:formatNumber pattern="###,###,###"
+											value="${orderDetail.product.product_price}" />
+									</c:otherwise>
+								</c:choose>
 								원 / ${orderDetail.product_count}개
 							</p>
 						</div>

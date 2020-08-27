@@ -14,7 +14,7 @@
 					<a class="p-2 text-muted border-right" href="/signup">회원가입</a>
 				</c:if>
 				<c:if test="${user.user_level == 1}">
-					<a class="p-2 text-muted border-right" href="/admin/">관리자 화면</a>
+					<a class="p-2 text-muted border-right" href="/admin/order">관리자 화면</a>
 					<a class="p-2 text-muted border-right" href="/logout">로그아웃</a>
 				</c:if>
 				<c:if test="${user.user_level == 0}">

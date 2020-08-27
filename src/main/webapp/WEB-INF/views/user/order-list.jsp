@@ -12,11 +12,11 @@
 	<div class="row">
 		<jsp:include page="mypage_header.jsp" flush="false" />
 		<div class="col py-5 ml-5">
-			<h3>주문목록 / 배송조회</h3>
+			<h3>주문조회</h3>
 			<div class="row justify-content-center mt-5">
 				<c:choose>
 					<c:when test="${empty orders}">
-						<h6 class="py-5 my-5 font-weight-bold">주문목록이 없습니다.</h6>
+						<h6 class="py-5 my-5 font-weight-bold">목록이 없습니다.</h6>
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="order" items="${orders}">
@@ -41,8 +41,20 @@
 														class="text-dark">${orderDetail.product.product_name}</a>
 												</h5>
 												<p>
-													<fmt:formatNumber pattern="###,###,###"
-														value="${orderDetail.product.product_price}" />
+													<c:choose>
+														<c:when test="${orderDetail.product.discount_id != 0}">
+															<c:set var="price"
+																value="${orderDetail.product.product_price - ((orderDetail.product.product_price * orderDetail.product.discount.discount_rate)/100)}" />
+															<span style="text-decoration: line-through">${orderDetail.product.product_price}</span>
+															<span> <fmt:formatNumber pattern="0"
+																	value="${price}" />
+															</span>
+														</c:when>
+														<c:otherwise>
+															<fmt:formatNumber pattern="###,###,###"
+																value="${orderDetail.product.product_price}" />
+														</c:otherwise>
+													</c:choose>
 													원 / ${orderDetail.product_count}개
 												</p>
 											</div>

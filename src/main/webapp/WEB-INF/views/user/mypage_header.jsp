@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 </head>
 <body>
-    <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse mt-5">
       <div class="sidebar-sticky pt-3">
         <h5 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
          	 나의 쇼핑
@@ -18,8 +18,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-           		  취소주문조회
+            <a class="nav-link" href="${pageContext.request.contextPath}/user/canceledOrder">
+           		  취소/반품/교환 주문조회
             </a>
           </li>      
         </ul>

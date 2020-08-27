@@ -21,7 +21,7 @@ public class Order {
 //	   order_discount_price INT NOT NULL,
 //	   order_delivery_price INT NOT NULL,
 //	   order_total_price INT NOT NULL,
-//	   order_state VARCHAR(255) NOT NULL
+//	   order_state VARCHAR(255) NOT NULL   취소신청,취소완료,반품신청,반품완료,교환신청,교환완료
 	
 	private int order_id;
 	private int user_id;

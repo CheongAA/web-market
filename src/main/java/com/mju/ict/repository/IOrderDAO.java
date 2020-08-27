@@ -11,4 +11,6 @@ public interface IOrderDAO {
 	public abstract List<Order> selectOrderByUser(int user_id);
 
 	public abstract Order selectOrderById(int id);
+
+	public abstract List<Order> selectAllOrders();
 }

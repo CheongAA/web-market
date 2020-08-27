@@ -11,6 +11,17 @@
 			<a type="button"
 				class="h5 text-white font-weight-bold align-self-center"
 				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				주문관리 </a>
+			<div class="dropdown-menu dropdown-menu-right">
+				<a
+					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
+					href="${pageContext.request.contextPath}/admin/order">주문조회</a>
+			</div>
+		</div>
+		<div class="col btn-group border-right justify-content-md-center">
+			<a type="button"
+				class="h5 text-white font-weight-bold align-self-center"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				입점관리 </a>
 			<div class="dropdown-menu dropdown-menu-right">
 				<a
@@ -54,7 +65,8 @@
 				<hr />
 				<a
 					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
-					href="${pageContext.request.contextPath}/admin/category">카테고리 관리</a>
+					href="${pageContext.request.contextPath}/admin/category">카테고리
+					관리</a>
 			</div>
 		</div>
 		<div class="col btn-group border-right justify-content-md-center">

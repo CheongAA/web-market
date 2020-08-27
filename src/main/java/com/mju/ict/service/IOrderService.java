@@ -14,6 +14,10 @@ public interface IOrderService {
 	public abstract List<Order> getOrderByUser(int user_id);
 
 	public abstract Order getOrderById(int id);
+
+	public abstract List<Order> getAllOrders();
+
+	public abstract List<Order> getCanceledOrderByUser(int user_id);
 	
 	
 

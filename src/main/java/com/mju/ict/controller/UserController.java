@@ -136,6 +136,15 @@ public class UserController {
 		model.addAttribute("orders", orders);
 		return "user/order-list";
 	}
+	
+	// 고객 취소 주문조회 페이지
+	@RequestMapping(value = "/user/canceledOrder", method = RequestMethod.GET)
+	public String getUserCanceledOrder(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		List<Order> orders = orderService.getCanceledOrderByUser(user.getUser_id());
+		model.addAttribute("orders", orders);
+		return "user/order-list";
+	}
 
 	
 	// 고객 주문 상세조회 페이지

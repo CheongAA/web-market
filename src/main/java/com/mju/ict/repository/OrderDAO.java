@@ -28,5 +28,10 @@ public class OrderDAO implements IOrderDAO{
 		return sqlSession.selectOne("selectOrderById",id);
 	}
 
+	@Override
+	public List<Order> selectAllOrders() {
+		return sqlSession.selectList("selectAllOrders");
+	}
+
 
 }
