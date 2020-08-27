@@ -25,4 +25,6 @@ public interface IProductDAO {
 	public abstract void updateProductSale(Map<String,Integer> map);
 
 	public abstract List<Product> selectNewProducts();
+
+	public abstract List<Product> selectBestProducts();
 }

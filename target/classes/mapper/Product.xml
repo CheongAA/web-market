@@ -12,6 +12,8 @@
 		<result column="product_name" property="product_name" />
 		<result column="product_price" property="product_price" />
 		<result column="product_quantity" property="product_quantity" />
+		<result column="product_sales_quantity"
+			property="product_sales_quantity" />
 		<result column="product_desc" property="product_desc" />
 		<result column="product_material" property="product_material" />
 		<result column="product_volume" property="product_volume" />
@@ -76,7 +78,8 @@
 		WHERE
 		tb_product.category_code = #{category}
 		OR
-		tb_category.category_code2 = #{category}
+		tb_category.category_code2 =
+		#{category}
 	</select>
 
 	<select id="selectProductById" parameterType="Integer"
@@ -115,7 +118,7 @@
 		LEFT JOIN
 		tb_discount
 		ON
-		tb_discount.discount_id= tb_product.discount_id		
+		tb_discount.discount_id= tb_product.discount_id
 		WHERE
 		tb_product.brand_id = #{id}
 	</select>
@@ -155,8 +158,8 @@
 	</select>
 
 	<select id="selectNewProducts" resultMap="product">
-		SELECT * FROM 
-		tb_product 
+		SELECT * FROM
+		tb_product
 		LEFT JOIN
 		tb_brand
 		ON
@@ -167,14 +170,40 @@
 		ON
 		tb_category.category_code=
 		tb_product.category_code
-		LEFT JOIN
+		LEFT
+		JOIN
 		tb_discount
 		ON
-		tb_discount.discount_id= tb_product.discount_id
-		where 
-		on_sale = 1 
-		order by 
+		tb_discount.discount_id=
+		tb_product.discount_id
+		where
+		on_sale = 1
+		order by
 		product_created desc
+		limit 10;
+	</select>
+
+	<select id="selectBestProducts" resultMap="product">
+		SELECT * FROM
+		tb_product
+		LEFT JOIN
+		tb_brand
+		ON
+		tb_brand.brand_id =
+		tb_product.brand_id
+		LEFT JOIN
+		tb_category
+		ON
+		tb_category.category_code=
+		tb_product.category_code
+		LEFT
+		JOIN
+		tb_discount
+		ON
+		tb_discount.discount_id=
+		tb_product.discount_id
+		order by
+		product_sales_quantity desc
 		limit 10;
 	</select>
 

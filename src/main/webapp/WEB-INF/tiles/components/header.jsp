@@ -55,13 +55,13 @@
 		</div>
 		<a
 			class="col text-muted font-weight-bold align-self-center border-right ${activeNew}"
-			href="/products/new">신상품</a> <a
+			href="${pageContext.request.contextPath}/products/new">신상품</a> <a
 			class="col text-muted font-weight-bold align-self-center border-right ${activeBest}"
-			href="/products/best">베스트</a> <a
+			href="${pageContext.request.contextPath}/products/best">베스트</a> <a
 			class="col text-muted font-weight-bold align-self-center border-right ${activeDiscount}"
-			href="/products/discount">알뜰쇼핑</a> <a
+			href="${pageContext.request.contextPath}/products/discount">알뜰쇼핑</a> <a
 			class="col text-muted font-weight-bold align-self-center ${activeEvent}"
-			href="/notice">이벤트</a>
+			href="${pageContext.request.contextPath}/notice">이벤트</a>
 		<form class="form-inline my-lg-0 main-header-input-box">
 			<input class="form-control mr-sm-2 main-header-input" type="search"
 				placeholder="" aria-label="Search">

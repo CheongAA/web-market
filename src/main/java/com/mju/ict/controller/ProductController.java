@@ -58,8 +58,8 @@ public class ProductController {
 	
 	//베스트 상품 페이지
 	@RequestMapping(value = "/products/best", method = RequestMethod.GET)
-	public String getProductsBest(@PathVariable int category,Model model) {
-		List<Product> products = productService.getProductsByCategory(category);
+	public String getProductsBest(Model model) {
+		List<Product> products = productService.getBestProducts();
 		model.addAttribute("products", products);
 		model.addAttribute("activeBest", "h2");
 		return "/products";

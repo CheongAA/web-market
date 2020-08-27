@@ -77,4 +77,9 @@ public class ProductService implements IProductService{
 		return productDAO.selectNewProducts();
 	}
 
+	@Override
+	public List<Product> getBestProducts() {
+		return productDAO.selectBestProducts();
+	}
+
 }

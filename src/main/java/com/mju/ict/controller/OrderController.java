@@ -76,7 +76,6 @@ public class OrderController {
 		Order order = gson.fromJson(new Gson().toJson(param.get("order")).toString(), Order.class);
 		
 		JsonElement orderDetail = jparser.parse(param.get("orderDetail").toString());
-		
 		List <OrderDetail> orderDetailList = gson.fromJson(orderDetail, (new TypeToken<List<OrderDetail>>() {  }).getType());
 		
 		if (user != null) {

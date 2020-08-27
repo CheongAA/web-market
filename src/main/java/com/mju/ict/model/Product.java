@@ -15,6 +15,7 @@ public class Product {
 //    product_name VARCHAR(255)NOT NULL,
 //    product_price INT NOT NULL,
 //    product_quantity INT NOT NULL,
+//    product_sales_quantity INT NOT NULL default 0,
 //    product_desc VARCHAR(300) NOT NULL,
 //    product_material VARCHAR(255)NOT NULL,
 //    product_volume INT NOT NULL,
@@ -30,6 +31,7 @@ public class Product {
 	private String product_name;
 	private int product_price;
 	private int product_quantity;
+	private int product_sales_quantity;
 	private String product_desc;
 	private String product_material;
 	private int product_volume;
@@ -83,6 +85,13 @@ public class Product {
 	}
 	public void setProduct_quantity(int product_quantity) {
 		this.product_quantity = product_quantity;
+	}	
+	
+	public int getProduct_sales_quantity() {
+		return product_sales_quantity;
+	}
+	public void setProduct_sales_quantity(int product_sales_quantity) {
+		this.product_sales_quantity = product_sales_quantity;
 	}
 	public String getProduct_desc() {
 		return product_desc;
