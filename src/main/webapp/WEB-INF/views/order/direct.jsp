@@ -19,7 +19,6 @@
 		</div>
 		<div class="row my-5">
 			<h4>상품 정보</h4>
-			<input type="hidden" value="${product.product_id}" id="product_id" />
 			<table class="table text-center">
 				<thead>
 					<tr>
@@ -30,6 +29,9 @@
 				</thead>
 				<tbody>
 					<c:forEach var="cart" items="${carts}">
+						<input type="hidden" value="${cart.product_id}" class="product_id" />
+						<input type="hidden" value="${cart.product_count}"
+							class="product_count" />
 						<tr>
 							<c:set var="total_products"
 								value="${total_products + (cart.product.product_price * cart.product_count)}" />
@@ -165,7 +167,8 @@
 								</h1></td>
 							<td><h1>=</h1></td>
 							<td><h1 id="order_total_price">
-									<fmt:formatNumber pattern="0" value="${total_products-total_discounts + delivery}" />
+									<fmt:formatNumber pattern="0"
+										value="${total_products-total_discounts + delivery}" />
 								</h1></td>
 						</tr>
 					</tbody>
@@ -202,6 +205,50 @@
 		src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 	<script>
+		var list = new Array();
+
+		var id = $(".product_id");
+		var count = $(".product_count");
+
+		for (var i = 0; i <id.length; i++) {
+			// 객체 생성
+			var data = new Object();
+
+			data.product_id = id[i].value;
+			data.product_count = count[i].value;
+
+			// 리스트에 생성된 객체 삽입
+			list.push(data);
+		}
+		var jsonData = JSON.stringify({
+			order : {
+				buyer_name : $("#buyer_name").val(),
+				buyer_email : $("#buyer_email").val(),
+				buyer_phone : $("#buyer_phone").val(),
+				recipient_name : $("#recipient_name").val(),
+				recipient_zip : $("#recipient_zip").val(),
+				recipient_address : $("#recipient_address")
+						.val(),
+				recipient_phone : $("#recipient_phone").val(),
+				order_request : $("#order_request").val(),
+				order_payment_method : $(
+						"#order_payment_method").val(),
+				order_state : "주문완료",
+				order_products_price : parseInt($(
+						"#order_products_price").text(), 10),
+				order_discount_price : parseInt($(
+						"#order_discount_price").text(), 10),
+				order_delivery_price : parseInt($(
+						"#order_delivery_price").text(), 10),
+				order_total_price : parseInt($(
+						"#order_total_price").text(), 10)
+			}, 
+			orderDetail:list
+
+		});
+		
+		console.log(jsonData);
+		
 		$("#address_btn").on('click', getAddressList);
 
 		function getAddressList() {
@@ -218,7 +265,7 @@
 				pay_method : $("#order_payment_method").text(),
 				merchant_uid : 'merchant_' + new Date().getTime(),
 				name : $(".product_name").text(),
-				amount : parseInt($("#order_total_price").text(), 10),
+				amount : 100,
 				buyer_email : $("#buyer_email").text(),
 				buyer_name : $("#buyer_name").text(),
 				buyer_tel : $("#recipient_phone").text(),
@@ -236,36 +283,7 @@
 						url : "/order/complete",
 						type : "post",
 						contentType : 'application/json;charset=UTF-8',
-						data : JSON.stringify({
-							order : {
-								buyer_name : $("#buyer_name").val(),
-								buyer_email : $("#buyer_email").val(),
-								buyer_phone : $("#buyer_phone").val(),
-								recipient_name : $("#recipient_name").val(),
-								recipient_zip : $("#recipient_zip").val(),
-								recipient_address : $("#recipient_address")
-										.val(),
-								recipient_phone : $("#recipient_phone").val(),
-								order_request : $("#order_request").val(),
-								order_payment_method : $(
-										"#order_payment_method").val(),
-								order_state : "주문완료",
-								order_products_price : parseInt($(
-										"#order_products_price").text(), 10),
-								order_discount_price : parseInt($(
-										"#order_discount_price").text(), 10),
-								order_delivery_price : parseInt($(
-										"#order_delivery_price").text(), 10),
-								order_total_price : parseInt($(
-										"#order_total_price").text(), 10)
-							},
-							orderDetail : {
-								product_id : parseInt($("#product_id").val()),
-								product_count : parseInt($("#product_count")
-										.text())
-							}
-
-						}),
+						data : jsonData,
 						success : function(data) {
 							window.location.href = "/order/complete";
 						}
