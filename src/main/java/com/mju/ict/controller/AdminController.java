@@ -166,6 +166,8 @@ public class AdminController {
 		productService.changeProductSale(id);
 		return "redirect:/admin/product/";
 	}
+
+	/////////////////////////////할인//////////////////////////////
 	
 	// 할인 목록 페이지
 	@RequestMapping(value = "/discounts", method = RequestMethod.GET)
@@ -173,16 +175,30 @@ public class AdminController {
 		List<Discount> discounts = discountService.getAllDiscounts();
 
 		model.addAttribute("discounts", discounts);
-		return "admin/product/discount-list";
+		return "admin/notice/discount-list";
 	}
 
+	
+	// 할인 상세 페이지
+	@RequestMapping(value = "/discount/{id}", method = RequestMethod.GET)
+	public String getDiscounts(@PathVariable int id,Model model) {
+		Discount discount = discountService.getDiscountById(id);
+
+		model.addAttribute("discount", discount);
+		return "admin/notice/discount-detail";
+	}
+	
 	// 할인 등록 페이지
 	@RequestMapping(value = "/discount", method = RequestMethod.GET)
 	public String getDiscountAdd(Model model) {
 		List<Product> products = productService.getAllProducts();
+		List<Brand> brands = brandService.getAllBrands();
+		List<Category> categories = categoryService.getAllCategories();
 		
 		model.addAttribute("products", products);
-		return "admin/product/discount-add";
+		model.addAttribute("brands", brands);
+		model.addAttribute("categories", categories);
+		return "admin/notice/discount-add";
 	}
 
 	// 할인 등록
@@ -194,6 +210,8 @@ public class AdminController {
 	}
 	
 	
+	
+	//////////////////////카테고리//////////////////////////////////
 	// 카테고리관리 페이지
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
 	public String getCategoryAdd(Model model) {

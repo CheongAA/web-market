@@ -17,16 +17,17 @@ public class CartService implements ICartService{
 
 	@Override
 	public void registerCart(Cart cart) {
-		Cart selectedCart = cartDAO.selectCartsByProduct(cart.getProduct_id());
-		if(selectedCart !=null) {
-			int count = cart.getProduct_count() + selectedCart.getProduct_count();
-			selectedCart.setProduct_count(count);
-			cartDAO.updateCart(selectedCart);
-		}else {
-			cartDAO.insertCart(cart);
+		List<Cart> userCarts = cartDAO.selectCartsByUser(cart.getUser_id());
+		
+		for(Cart uc:userCarts) {
+			if(uc.getProduct_id() == cart.getProduct_id()) {
+				int count = cart.getProduct_count() + uc.getProduct_count();
+				uc.setProduct_count(count);
+				cartDAO.updateCart(uc);
+				return;
+			}
 		}
-		
-		
+		cartDAO.insertCart(cart);
 	}
 
 	@Override

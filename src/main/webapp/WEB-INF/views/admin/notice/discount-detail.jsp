@@ -9,11 +9,11 @@
 <body>
 	<jsp:include page="../admin_header.jsp" flush="false" />
 	<div class="row mt-5">
-		<h3 class="w-100 mb-3">브랜드조회</h3>
+		<h3 class="w-100 mb-3">이벤트</h3>
 		<div class="jumbotron w-100 text-center">
-			<small>브랜드 코드 : ${brand.brand_id}</small>
-			<h1 class="display-4">${brand.brand_name}</h1>
-			<p class="lead">${brand.brand_desc}</p>
+			<small>이벤트 코드 : ${discount.discount_id}</small>
+			<h1 class="display-4">${discount.discount_name}</h1>
+			<p class="lead">${discount.discount_desc}</p>
 		</div>
 	</div>
 	<div class="row m-auto px-3">
@@ -64,11 +64,11 @@
 		</c:forEach>
 	</div>
 	<div class="w-100 my-5">
-		<a href="${pageContext.request.contextPath}/admin/brand"
+		<a href="${pageContext.request.contextPath}/admin/discounts"
 			class="btn btn-dark float-right mx-5">목록</a> <a
-			href="${pageContext.request.contextPath}/admin/brand/delete/${brand.brand_id}"
+			href="${pageContext.request.contextPath}/admin/discount/delete/${discount.discount_id}"
 			class="btn btn-danger float-right px-5">삭제</a> <a
-			href="${pageContext.request.contextPath}/admin/brand/update/${brand.brand_id}"
+			href="${pageContext.request.contextPath}/admin/discount/update/${discount.discount_id}"
 			class="btn btn-warning float-right px-5 mr-1">수정</a>
 	</div>
 </body>

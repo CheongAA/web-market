@@ -10,4 +10,6 @@ public interface IDiscountDAO {
 
 	public abstract List<Discount> selectAllDiscounts();
 
+	public abstract Discount selectDiscountById(int id);
+
 }

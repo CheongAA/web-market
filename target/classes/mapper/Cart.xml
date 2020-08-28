@@ -11,7 +11,7 @@
 		<result column="product_name" property="product_name" />
 		<result column="product_price" property="product_price" />
 		<result column="product_quantity" property="product_quantity" />
-		<result column="product_sales_quantity" property="product_quantity" />
+		<result column="product_sales_quantity" property="product_sales_quantity" />
 		<result column="product_desc" property="product_desc" />
 		<result column="product_material" property="product_material" />
 		<result column="product_volume" property="product_volume" />

@@ -157,6 +157,7 @@
 			const id = e.target.id;
 			const value = e.target.value;
 
+			console.log(value);
 			$.ajax({
 				url : "/cart/update",
 				type : "post",

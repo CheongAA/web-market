@@ -22,6 +22,26 @@
 			<a type="button"
 				class="h5 text-white font-weight-bold align-self-center"
 				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				상품관리 </a>
+			<div class="dropdown-menu dropdown-menu-right">
+
+				<a
+					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
+					href="${pageContext.request.contextPath}/admin/product/add">상품등록</a>
+				<a
+					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
+					href="${pageContext.request.contextPath}/admin/product/">상품조회/수정/삭제/판매</a>
+				<hr />
+				<a
+					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
+					href="${pageContext.request.contextPath}/admin/category">카테고리
+					관리</a>
+			</div>
+		</div>
+		<div class="col btn-group border-right justify-content-md-center">
+			<a type="button"
+				class="h5 text-white font-weight-bold align-self-center"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				입점관리 </a>
 			<div class="dropdown-menu dropdown-menu-right">
 				<a
@@ -37,36 +57,21 @@
 			<a type="button"
 				class="h5 text-white font-weight-bold align-self-center"
 				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				공지관리 </a>
+				공지/이벤트관리 </a>
 			<div class="dropdown-menu dropdown-menu-right">
-				<a
-					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
-					href="${pageContext.request.contextPath}/admin/notice/">공지조회/수정/삭제</a>
 				<a
 					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
 					href="${pageContext.request.contextPath}/admin/notice/add">공지등록</a>
-			</div>
-		</div>
-		<div class="col btn-group border-right justify-content-md-center">
-			<a type="button"
-				class="h5 text-white font-weight-bold align-self-center"
-				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				상품관리 </a>
-			<div class="dropdown-menu dropdown-menu-right">
 				<a
 					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
-					href="${pageContext.request.contextPath}/admin/product/">상품조회/수정/삭제/판매</a>
-				<a
-					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
-					href="${pageContext.request.contextPath}/admin/discounts">상품할인</a>
-				<a
-					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
-					href="${pageContext.request.contextPath}/admin/product/add">상품등록</a>
+					href="${pageContext.request.contextPath}/admin/notice/">공지조회/수정/삭제</a>
 				<hr />
 				<a
 					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
-					href="${pageContext.request.contextPath}/admin/category">카테고리
-					관리</a>
+					href="${pageContext.request.contextPath}/admin/discount">이벤트등록</a>
+				<a
+					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
+					href="${pageContext.request.contextPath}/admin/discounts">이벤트조회/수정/삭제</a>
 			</div>
 		</div>
 		<div class="col btn-group border-right justify-content-md-center">

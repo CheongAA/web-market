@@ -275,6 +275,7 @@
 					location.href = "/carts";
 				}
 			});
+			
 		}
 				
 

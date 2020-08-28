@@ -23,4 +23,9 @@ public class DiscountDAO implements IDiscountDAO{
 		return sqlSession.selectList("selectAllDiscounts");
 	}
 
+	@Override
+	public Discount selectDiscountById(int id) {
+		return sqlSession.selectOne("selectDiscountById", id);
+	}
+
 }

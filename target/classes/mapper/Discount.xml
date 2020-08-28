@@ -6,11 +6,23 @@
 	<insert id="insertDiscount"
 		parameterType="com.mju.ict.model.Discount">
 		INSERT INTO tb_discount
-		(discount_name,discount_rate,discount_start,discount_end)
-		VALUES(#{discount_name},#{discount_rate},#{discount_start},#{discount_end})
+		(discount_name,discount_desc,discount_explanation,
+		discount_thumbnailImg,discount_mainImg,
+		discount_rate,discount_start,discount_end)
+		VALUES(#{discount_name},#{discount_desc},#{discount_explanation}
+		,#{discount_thumbnailImg},#{discount_mainImg}
+		,#{discount_rate},#{discount_start},#{discount_end})
 	</insert>
-	
-	<select id="selectAllDiscounts" resultType="com.mju.ict.model.Discount">
+
+	<select id="selectAllDiscounts"
+		resultType="com.mju.ict.model.Discount">
 		SELECT * from tb_discount
+	</select>
+
+	<select id="selectDiscountById"
+		resultType="com.mju.ict.model.Discount">
+		SELECT * from tb_discount
+		WHERE
+		discount_id = #{discount_id}
 	</select>
 </mapper>

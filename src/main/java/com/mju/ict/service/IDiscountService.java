@@ -10,4 +10,6 @@ public interface IDiscountService {
 
 	public abstract List<Discount> getAllDiscounts();
 
+	public abstract Discount getDiscountById(int id);
+
 }

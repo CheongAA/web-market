@@ -27,4 +27,10 @@ public class DiscountService implements IDiscountService{
 	}
 
 
+	@Override
+	public Discount getDiscountById(int id) {
+		return discountDAO.selectDiscountById(id);
+	}
+
+
 }
