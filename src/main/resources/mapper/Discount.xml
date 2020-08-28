@@ -4,7 +4,7 @@
 <mapper namespace="com.mju.ict.repository.IDiscountDAO">
 
 	<insert id="insertDiscount"
-		parameterType="com.mju.ict.model.Discount">
+		parameterType="com.mju.ict.model.Discount" useGeneratedKeys="true" keyProperty="discount_id">
 		INSERT INTO tb_discount
 		(discount_name,discount_desc,discount_explanation,
 		discount_thumbnailImg,discount_mainImg,

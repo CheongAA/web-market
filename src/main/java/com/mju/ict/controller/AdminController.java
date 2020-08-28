@@ -10,7 +10,6 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mju.ict.model.Brand;
@@ -175,7 +175,7 @@ public class AdminController {
 		List<Discount> discounts = discountService.getAllDiscounts();
 
 		model.addAttribute("discounts", discounts);
-		return "admin/notice/discount-list";
+		return "admin/discount/list";
 	}
 
 	
@@ -183,29 +183,35 @@ public class AdminController {
 	@RequestMapping(value = "/discount/{id}", method = RequestMethod.GET)
 	public String getDiscounts(@PathVariable int id,Model model) {
 		Discount discount = discountService.getDiscountById(id);
+		List<Product> products = productService.getProductsByDiscount(id);
 
 		model.addAttribute("discount", discount);
-		return "admin/notice/discount-detail";
+		model.addAttribute("products", products);
+		return "admin/discount/detail";
 	}
 	
 	// 할인 등록 페이지
 	@RequestMapping(value = "/discount", method = RequestMethod.GET)
 	public String getDiscountAdd(Model model) {
 		List<Product> products = productService.getAllProducts();
-		List<Brand> brands = brandService.getAllBrands();
-		List<Category> categories = categoryService.getAllCategories();
 		
 		model.addAttribute("products", products);
-		model.addAttribute("brands", brands);
-		model.addAttribute("categories", categories);
-		return "admin/notice/discount-add";
+		return "admin/discount/add";
+	}
+	
+	// 할인 수정 페이지
+	@RequestMapping(value = "/discount/update/{id}", method = RequestMethod.GET)
+	public String getDiscountUpdate(@PathVariable int id, Model model) {
+		Discount discount = discountService.getDiscountById(id);
+		model.addAttribute("discount", discount);
+		return "admin/discount/update";
 	}
 
 	// 할인 등록
 	@RequestMapping(value = "/discount", method = RequestMethod.POST)
-	public String addProductDiscount(@ModelAttribute @Valid Discount discount, BindingResult result, Model model) {
-		discountService.registerDiscount(discount);
-
+	public String addProductDiscount(@RequestParam("product[]") int[] productArr,@ModelAttribute @Valid Discount discount, BindingResult result, Model model) {
+		discountService.registerDiscount(discount,productArr);
+		
 		return "redirect:/admin/discounts";
 	}
 	
@@ -218,7 +224,7 @@ public class AdminController {
 		List<Category> categories = categoryService.getAllCategories();
 		
 		model.addAttribute("categories", categories);
-		return "admin/product/category-add";
+		return "admin/category/add";
 	}
 	
 	// 카테고리 등록
@@ -249,15 +255,15 @@ public class AdminController {
 
 		model.addAttribute("category", category);
 		model.addAttribute("products", products);
-		return "admin/product/category-detail";
+		return "admin/category/detail";
 	}
 	
-	// 브랜드 수정 페이지
+	// 카테고리 수정 페이지
 	@RequestMapping(value = "/category/update/{category_code}", method = RequestMethod.GET)
 	public String getCategoryUpdate(@PathVariable int category_code, Model model) {
 		Category category = categoryService.getCategoryByCode(category_code);
 		model.addAttribute("category", category);
-		return "admin/product/category-update";
+		return "admin/category/update";
 	}
 	
 	// 카테고리 수정

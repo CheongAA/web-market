@@ -49,12 +49,12 @@
 		parameterType="com.mju.ict.model.Product">
 		INSERT INTO tb_product
 		(brand_id,category_code,product_name,product_price,
-		product_quantity,product_desc,
+		discount_id,product_quantity,product_desc,
 		product_material,product_volume,
 		product_thumbnailImg,product_img)
 		VALUES(
 		#{brand_id},#{category_code},#{product_name},#{product_price},
-		#{product_quantity},#{product_desc},#{product_material},#{product_volume},
+		#{discount_id},#{product_quantity},#{product_desc},#{product_material},#{product_volume},
 		#{product_thumbnailImg},#{product_img}
 		)
 
@@ -123,6 +123,27 @@
 		tb_product.brand_id = #{id}
 	</select>
 
+
+	<select id="selectProductsByDiscount" parameterType="Integer"
+		resultMap="product">
+		SELECT * FROM tb_product
+		LEFT JOIN
+		tb_brand
+		ON
+		tb_brand.brand_id =
+		tb_product.brand_id
+		LEFT JOIN
+		tb_category
+		ON
+		tb_category.category_code=
+		tb_product.category_code
+		LEFT JOIN
+		tb_discount
+		ON
+		tb_discount.discount_id= tb_product.discount_id
+		WHERE
+		tb_product.discount_id = #{id}
+	</select>
 	<select id="selectAllProducts" resultMap="product">
 		SELECT * FROM
 		tb_product
@@ -220,10 +241,13 @@
 		SET
 		brand_id = #{brand_id},
 		category_code = #{category_code},
+		discount_id = #{discount_id},
 		product_name =#{product_name},
 		product_price = #{product_price},
 		product_quantity =
 		#{product_quantity},
+		product_sales_quantity =
+		#{product_sales_quantity},
 		product_desc =#{product_desc},
 		product_material
 		=#{product_material},

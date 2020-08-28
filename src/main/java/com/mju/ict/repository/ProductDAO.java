@@ -69,6 +69,11 @@ public class ProductDAO implements IProductDAO{
 	public List<Product> selectBestProducts() {
 		return sqlSession.selectList("selectBestProducts");
 	}
+
+	@Override
+	public List<Product> selectProductsByDiscount(int id) {
+		return sqlSession.selectList("selectProductsByDiscount",id);
+	}
 	
 
 }

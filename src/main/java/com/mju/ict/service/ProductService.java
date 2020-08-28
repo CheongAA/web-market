@@ -82,4 +82,9 @@ public class ProductService implements IProductService{
 		return productDAO.selectBestProducts();
 	}
 
+	@Override
+	public List<Product> getProductsByDiscount(int id) {
+		return productDAO.selectProductsByDiscount(id);
+	}
+
 }

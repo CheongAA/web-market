@@ -27,4 +27,6 @@ public interface IProductDAO {
 	public abstract List<Product> selectNewProducts();
 
 	public abstract List<Product> selectBestProducts();
+
+	public abstract List<Product> selectProductsByDiscount(int id);
 }

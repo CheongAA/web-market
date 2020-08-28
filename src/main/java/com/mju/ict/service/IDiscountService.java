@@ -6,7 +6,7 @@ import com.mju.ict.model.Discount;
 
 public interface IDiscountService {
 
-	public abstract void registerDiscount(Discount discount);
+	public abstract void registerDiscount(Discount discount, int[] productArr);
 
 	public abstract List<Discount> getAllDiscounts();
 

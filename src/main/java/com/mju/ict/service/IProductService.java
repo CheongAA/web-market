@@ -26,4 +26,6 @@ public interface IProductService {
 	public abstract List<Product> getNewProducts();
 
 	public abstract List<Product> getBestProducts();
+
+	public abstract List<Product> getProductsByDiscount(int id);
 }
