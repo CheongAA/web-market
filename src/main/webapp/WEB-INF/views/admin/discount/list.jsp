@@ -56,7 +56,7 @@
 	</div>
 	<div class="w-100">
 		<a class="float-right btn btn-primary"
-			href="${pageContext.request.contextPath}/admin/discount">할인등록</a>
+			href="${pageContext.request.contextPath}/admin/discount/add">할인등록</a>
 	</div>
 </body>
 </html>

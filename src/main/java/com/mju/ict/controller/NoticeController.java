@@ -15,6 +15,7 @@ import com.mju.ict.model.Notice;
 import com.mju.ict.service.INoticeService;
 
 @Controller
+@RequestMapping("/notice")
 public class NoticeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
@@ -23,7 +24,7 @@ public class NoticeController {
 	INoticeService noticeService;
 
 	//공지사항 목록 페이지
-	@RequestMapping(value = "/notice", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String getNotice(Model model) {
 		List<Notice> notices = noticeService.getAllNotices();
 		
@@ -31,8 +32,8 @@ public class NoticeController {
 		return "notice/list";
 	}
 	
-	//공지사항 디테일 페이지
-	@RequestMapping(value = "/notice/{id}", method = RequestMethod.GET)
+	//공지사항 상세 페이지
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String getNoticeDetail(@PathVariable int id,Model model) {
 		noticeService.addNoticeView(id);
 		Notice notice = noticeService.getNoticeById(id);

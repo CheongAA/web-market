@@ -1,7 +1,5 @@
 package com.mju.ict.model;
 
-import java.util.ArrayList;
-
 public class Cart {
 //    cart_id INT PRIMARY KEY AUTO_INCREMENT,
 //    user_id INT,

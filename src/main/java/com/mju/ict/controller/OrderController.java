@@ -14,14 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 import com.mju.ict.model.Address;
 import com.mju.ict.model.Cart;
-import com.mju.ict.model.Order;
-import com.mju.ict.model.OrderDetail;
 import com.mju.ict.model.User;
 import com.mju.ict.service.IAddressService;
 import com.mju.ict.service.ICartService;
@@ -45,9 +39,9 @@ public class OrderController {
 	ICartService cartService;
 
 	
-	// 주문 페이지
+	// 주문 등록 페이지
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String getOrderPage(@RequestParam("cart[]") int[] cartArr,Model model, HttpSession session) {
+	public String getOrder(@RequestParam("cart[]") int[] cartArr,Model model, HttpSession session) {
 		User user = (User) session.getAttribute("user");
 
 		if (user == null) {
@@ -63,35 +57,19 @@ public class OrderController {
 		return "order/direct";
 	}
 	
+	// 주문완료 페이지
+	@RequestMapping(value = "/complete", method = RequestMethod.GET)
+	public String getOrderComplete() {
+		return "order/complete";
+	}
+	
 
-	// 주문
+	// 주문 등록
 	@ResponseBody
 	@RequestMapping(value = "/complete", method = RequestMethod.POST)
 	public void addOrder(@RequestBody Map<String, Object> param, HttpSession session) {
-		User user = (User) session.getAttribute("user");
-		
-		Gson gson = new Gson();
-		JsonParser jparser = new JsonParser();
-		
-		Order order = gson.fromJson(new Gson().toJson(param.get("order")).toString(), Order.class);
-		
-		JsonElement orderDetail = jparser.parse(param.get("orderDetail").toString());
-		List <OrderDetail> orderDetailList = gson.fromJson(orderDetail, (new TypeToken<List<OrderDetail>>() {  }).getType());
-		
-		if (user != null) {
-			order.setUser_id(user.getUser_id());
-		}		
-		orderService.addOrder(order);
-		
-		for(OrderDetail od:orderDetailList) {
-			od.setOrder_id(order.getOrder_id());
-			orderService.addOrderDetail(od);
-		}
+		orderService.addOrder(param,session);
 	}
 
-	// 주문완료 페이지
-	@RequestMapping(value = "/complete", method = RequestMethod.GET)
-	public String getComplete() {
-		return "order/complete";
-	}
+
 }

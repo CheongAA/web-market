@@ -21,19 +21,7 @@ public class Address {
 	private int address_default;
 
 	private User user;
-
-//	public Address(int user_id, String address_zip, String address_detail, 
-//			String address_detail2, String address_phone,
-//			String address_recipient,int address_default) {
-//		this.user_id = user_id;
-//		this.address_zip = address_zip;
-//		this.address_detail = address_detail;
-//		this.address_detail2 = address_detail2;
-//		this.address_phone = address_phone;
-//		this.address_recipient = address_recipient;
-//		this.address_default = address_default;
-//	}
-
+	
 	public int getAddress_id() {
 		return address_id;
 	}

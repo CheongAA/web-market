@@ -1,6 +1,7 @@
 package com.mju.ict.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -28,13 +29,22 @@ public class ProductController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
-	IProductService productService;
+	ICartService cartService;
 	
 	@Autowired
 	ICategoryService categoryService;
 	
 	@Autowired
-	ICartService cartService;
+	IProductService productService;
+
+	
+	//카테고리 조회
+	@ResponseBody
+	@RequestMapping(value = "/category", method = RequestMethod.GET)
+	public Map<String,String> getCategories() {
+		Map<String, String> result = categoryService.getLargeCategories();
+		return result;
+	}
 	
 	//카테고리별 상품 페이지
 	@RequestMapping(value = "/products/{category}", method = RequestMethod.GET)
@@ -47,7 +57,7 @@ public class ProductController {
 		return "/products";
 	}
 	
-	//신상품 페이지
+	//신상품  페이지
 	@RequestMapping(value = "/products/new", method = RequestMethod.GET)
 	public String getProductsNew(Model model) {
 		List<Product> products = productService.getNewProducts();
@@ -65,7 +75,7 @@ public class ProductController {
 		return "/products";
 	}
 	
-	//할인상품 페이지
+	//알뜰상품 페이지
 	@RequestMapping(value = "/products/discount", method = RequestMethod.GET)
 	public String getProductsDiscount(Model model) {
 		List<Product> products = productService.getDiscountProducts();
@@ -78,16 +88,15 @@ public class ProductController {
 	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
 	public String getProductDetail(@PathVariable int id,Model model) {
 		Product product = productService.getProductById(id);
-		if(product == null) {
-			return "redirect:/";
-		}
+		
 		model.addAttribute("product", product);
 		return "/product-detail";
 	}
 	
 	
-	//////장바구니
-	//장바구니 리스트 페이지
+	/////////////// 장바구니//////////////////
+	
+	//장바구니 목록 페이지
 	@RequestMapping(value = "/carts", method = RequestMethod.GET)
 	public String getCarts(HttpSession session,Model model) {
 		User user = (User) session.getAttribute("user");
@@ -95,7 +104,7 @@ public class ProductController {
 		if(user !=null) {
 			carts = cartService.getCartsByUser(user.getUser_id());
 		}else {
-			//비회원으로 고칠것
+			//비회원
 		}
 		model.addAttribute("carts", carts);
 		return "carts";
@@ -127,18 +136,6 @@ public class ProductController {
 	public void deleteCart(@RequestBody int[] cartArr,HttpSession session) {
 		cartService.deleteCart(cartArr);
 	}
+
 	
-	
-	////미완성
-	@RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
-	public String getOrder(@PathVariable int id,Model model) {
-		Product product = productService.getProductById(id);
-		model.addAttribute("product", product);
-		return "order";
-	}
-	
-	@RequestMapping(value = "/order/{id}", method = RequestMethod.POST)
-	public String postOrder(@PathVariable int id,Model model) {
-		return "order_ok";
-	}
 }

@@ -74,7 +74,7 @@
 		</c:forEach>
 	</div>
 	<div class="w-100 my-5">
-		<a href="${pageContext.request.contextPath}/admin/discounts"
+		<a href="${pageContext.request.contextPath}/admin/discount"
 			class="btn btn-dark float-right mx-5">목록</a> <a
 			href="${pageContext.request.contextPath}/admin/discount/delete/${discount.discount_id}"
 			class="btn btn-danger float-right px-5">삭제</a> <a

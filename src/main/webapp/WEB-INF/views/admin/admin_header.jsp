@@ -68,10 +68,10 @@
 				<hr />
 				<a
 					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
-					href="${pageContext.request.contextPath}/admin/discount">이벤트등록</a>
+					href="${pageContext.request.contextPath}/admin/discount/add">이벤트등록</a>
 				<a
 					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
-					href="${pageContext.request.contextPath}/admin/discounts">이벤트조회/수정/삭제</a>
+					href="${pageContext.request.contextPath}/admin/discount">이벤트조회/수정/삭제</a>
 			</div>
 		</div>
 		<div class="col btn-group border-right justify-content-md-center">

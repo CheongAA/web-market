@@ -6,10 +6,10 @@ import com.mju.ict.model.Discount;
 
 public interface IDiscountDAO {
 
-	public abstract void insertDiscount(Discount discount);
-
 	public abstract List<Discount> selectAllDiscounts();
 
 	public abstract Discount selectDiscountById(int id);
+
+	public abstract void insertDiscount(Discount discount);
 
 }

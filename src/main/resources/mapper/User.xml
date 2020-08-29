@@ -3,7 +3,8 @@
 
 <mapper namespace="com.mju.ict.repository.IUserDAO">
 
-	<insert id="insertUser" parameterType="com.mju.ict.model.User">
+	<insert id="insertUser" parameterType="com.mju.ict.model.User"
+	useGeneratedKeys="true" keyProperty="user_id">
 		INSERT INTO tb_user
 		(user_identification,user_name,user_password,
 		user_email,user_gender,

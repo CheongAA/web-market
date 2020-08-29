@@ -18,12 +18,24 @@ public class DiscountService implements IDiscountService{
 	
 	@Autowired
 	IProductDAO productDAO;
+	
+	//할인 전체 조회
+	@Override
+	public List<Discount> getAllDiscounts() {
+		return discountDAO.selectAllDiscounts();
+	}
 
 
+	//discount_id로 할인 조회
+	@Override
+	public Discount getDiscountById(int id) {
+		return discountDAO.selectDiscountById(id);
+	}
+
+	//할인 등록
 	@Override
 	public void registerDiscount(Discount discount,int[] productArr) {
 		discountDAO.insertDiscount(discount);
-		System.out.println(discount.getDiscount_id());
 		
 		List<Product> products = productDAO.selectAllProducts();
 		for(Product p:products) {
@@ -37,16 +49,7 @@ public class DiscountService implements IDiscountService{
 	}
 
 
-	@Override
-	public List<Discount> getAllDiscounts() {
-		return discountDAO.selectAllDiscounts();
-	}
 
-
-	@Override
-	public Discount getDiscountById(int id) {
-		return discountDAO.selectDiscountById(id);
-	}
 
 
 }
