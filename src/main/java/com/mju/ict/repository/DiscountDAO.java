@@ -18,6 +18,11 @@ public class DiscountDAO implements IDiscountDAO{
 	public List<Discount> selectAllDiscounts() {
 		return sqlSession.selectList("selectAllDiscounts");
 	}
+	
+	@Override
+	public List<Discount> selectRecentDiscounts() {
+		return sqlSession.selectList("selectRecentDiscounts");
+	}
 
 	@Override
 	public Discount selectDiscountById(int id) {
@@ -43,6 +48,7 @@ public class DiscountDAO implements IDiscountDAO{
 	public void updateDiscountState(Discount discount) {
 		sqlSession.update("updateDiscountState",discount);
 	}
+
 
 
 

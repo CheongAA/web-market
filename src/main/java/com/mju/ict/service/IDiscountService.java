@@ -9,11 +9,15 @@ import com.mju.ict.model.Discount;
 public interface IDiscountService {
 
 	public abstract List<Discount> getAllDiscounts();
+	
+	public abstract List<Discount> getRecentDiscounts();
 
 	public abstract Discount getDiscountById(int id);
 	
 	public abstract void registerDiscount(Discount discount, int[] productArr, MultipartFile file);
 
 	public abstract void changeDiscountApply(int id);
+
+
 
 }

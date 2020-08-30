@@ -8,6 +8,8 @@ public interface IDiscountDAO {
 
 	public abstract List<Discount> selectAllDiscounts();
 
+	public abstract List<Discount> selectRecentDiscounts();
+
 	public abstract Discount selectDiscountById(int id);
 
 	public abstract void insertDiscount(Discount discount);
@@ -17,4 +19,5 @@ public interface IDiscountDAO {
 	public abstract void updateDiscountApply(Discount discount);
 
 	public abstract void updateDiscountState(Discount discount);
+
 }

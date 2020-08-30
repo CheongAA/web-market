@@ -51,13 +51,11 @@
 	<insert id="insertProduct"
 		parameterType="com.mju.ict.model.Product">
 		INSERT INTO tb_product
-		(brand_id,category_code,product_name,product_price,
-		discount_id,product_quantity,product_desc,
+		(brand_id,category_code,product_name,product_price,product_quantity,product_desc,
 		product_material,product_volume,
 		product_thumbnailImg,product_img)
 		VALUES(
-		#{brand_id},#{category_code},#{product_name},#{product_price},
-		#{discount_id},#{product_quantity},#{product_desc},#{product_material},#{product_volume},
+		#{brand_id},#{category_code},#{product_name},#{product_price},#{product_quantity},#{product_desc},#{product_material},#{product_volume},
 		#{product_thumbnailImg},#{product_img}
 		)
 

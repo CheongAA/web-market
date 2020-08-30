@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,21 +12,71 @@
 </head>
 <body>
 
-	<!-- Main jumbotron for a primary marketing message or call to action -->
-	<div class="row jumbotron">
-		<div class="container">
-			<h1 class="display-3">Hello, world!</h1>
-			<p>This is a template for a simple marketing or informational
-				website. It includes a large callout called a jumbotron and three
-				supporting pieces of content. Use it as a starting point to create
-				something more unique.</p>
-			<p>
-				<a class="btn btn-dark btn-lg" href="#" role="button">Learn more
-					&raquo;</a>
-			</p>
-		</div>
-	</div>
+	<div id="carouselExampleControls" class="row carousel slide"
+		data-ride="carousel">
+		<div class="carousel-inner">
 
+			<c:forEach var="discount" items="${discounts}" varStatus="status">
+				<c:choose>
+					<c:when test="${status.count eq 1}">
+						<div class="carousel-item active">
+							<a
+								href="${pageContext.request.contextPath}/event/${discount.discount_id}">
+								<img
+								src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&w=1000&q=80"
+								class="d-block w-100" alt="${discount.discount_name}">
+							</a>
+							<div class="carousel-caption d-none d-md-block">
+								<h1 class="display-3 pb-5 font-weight-bold">${discount.discount_name}
+									${discount.discount_rate}%</h1>
+								<h3 class="pb-2">${discount.discount_desc}</h3>
+								<h4 class="pb-5 mb-5 font-weight-light">
+									<fmt:formatDate pattern="yyyy/MM/dd"
+										value="${discount.discount_start}" />
+									~
+									<fmt:formatDate pattern="yyyy/MM/dd"
+										value="${discount.discount_end}" />
+								</h4>
+							</div>
+
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="carousel-item">
+							<a
+								href="${pageContext.request.contextPath}/event/${discount.discount_id}">
+								<img
+								src="https://viralsweep.com/blog/wp-content/uploads/2015/02/furiouscamera.jpg"
+								class="d-block w-100" alt="${discount.discount_name}">
+							</a>
+							<div class="carousel-caption d-none d-md-block">
+								<h1 class="display-3 pb-5 font-weight-bold">${discount.discount_name}
+									${discount.discount_rate}%</h1>
+								<h3 class="pb-2">${discount.discount_desc}</h3>
+								<h4 class="pb-5 mb-5 font-weight-light">
+									<fmt:formatDate pattern="yyyy/MM/dd"
+										value="${discount.discount_start}" />
+									~
+									<fmt:formatDate pattern="yyyy/MM/dd"
+										value="${discount.discount_end}" />
+								</h4>
+							</div>
+						</div>
+					</c:otherwise>
+				</c:choose>
+
+			</c:forEach>
+		</div>
+		<a class="carousel-control-prev" href="#carouselExampleControls"
+			role="button" data-slide="prev"> <span
+			class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+			class="sr-only">Previous</span>
+		</a> <a class="carousel-control-next" href="#carouselExampleControls"
+			role="button" data-slide="next"> <span
+			class="carousel-control-next-icon" aria-hidden="true"></span> <span
+			class="sr-only">Next</span>
+		</a>
+	</div>
 	<div class="row p-5 mx-auto">
 		<div class="row mb-5">
 			<div class="col-md-9">

@@ -26,15 +26,17 @@ public class DiscountService implements IDiscountService{
 	@Autowired
 	IProductDAO productDAO;
 	
-	// Product 사진 업로드 경로
-	private String uploadPath = "C:\\Users\\HP\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\market\\resources";
-	
 	//할인 전체 조회
 	@Override
 	public List<Discount> getAllDiscounts() {
 		return discountDAO.selectAllDiscounts();
 	}
 
+	//메인에 노출될 3개의 할인 조회
+	@Override
+	public List<Discount> getRecentDiscounts() {
+		return discountDAO.selectRecentDiscounts();
+	}
 
 	//discount_id로 할인 조회
 	@Override
@@ -74,7 +76,7 @@ public class DiscountService implements IDiscountService{
 	}
 
 	//매일 밤 23시 59분 할인날짜를 확인하여 discount_state 변경
-	@Scheduled(cron="0 59 23 1/1 * ? *")
+	@Scheduled(cron="0 59 23 1/1 * ?")
 	public void changeDiscountState() {
 	    Date today = new Date();
 	    SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
@@ -100,5 +102,8 @@ public class DiscountService implements IDiscountService{
 			discountDAO.updateDiscountState(d);			
 		}
 	}
+
+
+
 
 }

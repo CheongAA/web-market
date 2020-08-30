@@ -1,8 +1,0 @@
-@charset "UTF-8";
-
-.jumbotron {
-  background-image: url("https://images.unsplash.com/photo-1579169326371-ccb4e63f7889?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80");
-  background-size: cover;
-  min-height:500px;
-  color:white;
-}

@@ -20,6 +20,18 @@
 		SELECT * from tb_discount
 	</select>
 
+	<select id="selectRecentDiscounts"
+		resultType="com.mju.ict.model.Discount">
+		SELECT * from tb_discount
+		WHERE
+		discount_apply = 1
+		and
+		discount_state = 1
+		order by discount_start asc
+		limit 3;
+
+	</select>
+
 	<select id="selectDiscountById"
 		resultType="com.mju.ict.model.Discount">
 		SELECT * from tb_discount
@@ -45,7 +57,8 @@
 		discount_id = #{discount_id}
 	</update>
 
-	<update id="updateDiscountApply" parameterType="com.mju.ict.model.Discount">
+	<update id="updateDiscountApply"
+		parameterType="com.mju.ict.model.Discount">
 		UPDATE
 		tb_discount
 		SET
@@ -55,7 +68,8 @@
 		#{discount_id}
 	</update>
 
-	<update id="updateDiscountState" parameterType="com.mju.ict.model.Discount">
+	<update id="updateDiscountState"
+		parameterType="com.mju.ict.model.Discount">
 		UPDATE
 		tb_discount
 		SET

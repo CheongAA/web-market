@@ -97,8 +97,6 @@
 				});
 
 		var jsonData = JSON.parse('${categories}');
-		console.log(jsonData);
-
 		var cate1Arr = new Array();
 		var cate1Obj = new Object();
 
