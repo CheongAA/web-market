@@ -11,5 +11,10 @@ public interface IDiscountDAO {
 	public abstract Discount selectDiscountById(int id);
 
 	public abstract void insertDiscount(Discount discount);
+	
+	public abstract void updateDiscount(Discount discount);
 
+	public abstract void updateDiscountApply(Discount discount);
+
+	public abstract void updateDiscountState(Discount discount);
 }

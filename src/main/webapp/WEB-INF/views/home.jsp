@@ -6,7 +6,7 @@
 <head>
 <!-- custom CSS -->
 <link href="resources/css/home.css" rel="stylesheet">
-<title>MARKET</title>
+<title>MARKET:: 오늘도 신선한 하루</title>
 </head>
 <body>
 

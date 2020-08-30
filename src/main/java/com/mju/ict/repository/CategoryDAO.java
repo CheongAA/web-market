@@ -28,6 +28,11 @@ public class CategoryDAO implements ICategoryDAO{
 	public List<Category> selectLargeCategories() {
 		return sqlSession.selectList("selectLargeCategories");
 	}
+	
+	@Override
+	public Category selectCategoryByCode(int category_code) {
+		return sqlSession.selectOne("selectCategoryByCode", category_code);
+	}
 
 	@Override
 	public void insertCategory(Category category) {
@@ -36,19 +41,13 @@ public class CategoryDAO implements ICategoryDAO{
 	}
 
 	@Override
-	public void deleteCategoryByCode(int category_code) {
-		sqlSession.delete("deleteCategoryByCode",category_code);
-	}
-
-	@Override
-	public Category selectCategoryByCode(int category_code) {
-		return sqlSession.selectOne("selectCategoryByCode", category_code);
-	}
-
-	@Override
 	public void updateCategory(Category category) {
 		sqlSession.update("updateCategory", category);
 	}
 	
 
+	@Override
+	public void deleteCategoryByCode(int category_code) {
+		sqlSession.delete("deleteCategoryByCode",category_code);
+	}
 }

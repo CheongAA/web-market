@@ -13,10 +13,6 @@ public class AddressDAO implements IAddressDAO{
     @Autowired
     private SqlSession sqlSession;
 
-	@Override
-	public void insertAddress(Address address) {
-		sqlSession.insert("insertAddress", address);
-	}
 
 	@Override
 	public List<Address> selectAddressByUser(int user_id) {
@@ -28,20 +24,28 @@ public class AddressDAO implements IAddressDAO{
 		return sqlSession.selectOne("selectAddressById",id);
 	}
 
+
+	@Override
+	public void insertAddress(Address address) {
+		sqlSession.insert("insertAddress", address);
+	}
+	
 	@Override
 	public void updateAddress(Address address) {
 		sqlSession.update("updateAddress",address);
 	}
 
 	@Override
+	public void updateAddressDefaultZero(int user_id) {
+		sqlSession.update("updateAddressDefaultZero",user_id);
+	}
+	
+	@Override
 	public void deleteAddress(int id) {
 		sqlSession.delete("deleteAddress", id);
 	}
 
-	@Override
-	public void updateAddressDefaultZero(int user_id) {
-		sqlSession.update("updateAddressDefaultZero",user_id);
-	}
+
 
 
 }

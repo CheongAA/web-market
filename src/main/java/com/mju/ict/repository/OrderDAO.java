@@ -13,9 +13,10 @@ public class OrderDAO implements IOrderDAO{
     @Autowired
     private SqlSession sqlSession;
 
+	
 	@Override
-	public void insertOrder(Order order) {
-		sqlSession.insert("insertOrder", order);
+	public List<Order> selectAllOrders() {
+		return sqlSession.selectList("selectAllOrders");
 	}
 
 	@Override
@@ -29,8 +30,8 @@ public class OrderDAO implements IOrderDAO{
 	}
 
 	@Override
-	public List<Order> selectAllOrders() {
-		return sqlSession.selectList("selectAllOrders");
+	public void insertOrder(Order order) {
+		sqlSession.insert("insertOrder", order);
 	}
 
 

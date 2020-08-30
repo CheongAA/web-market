@@ -42,7 +42,7 @@
 												</h5>
 												<p>
 													<c:choose>
-														<c:when test="${orderDetail.product.discount_id != 0}">
+														<c:when test="${orderDetail.product.discount_id != 0 and orderDetail.product.discount.discount_apply != 0 and orderDetail.product.discount.discount_state != 0}">
 															<c:set var="price"
 																value="${orderDetail.product.product_price - ((orderDetail.product.product_price * orderDetail.product.discount.discount_rate)/100)}" />
 															<span style="text-decoration: line-through">${orderDetail.product.product_price}</span>

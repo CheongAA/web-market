@@ -1,6 +1,5 @@
 package com.mju.ict.repository;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +15,11 @@ public class ProductDAO implements IProductDAO{
     private SqlSession sqlSession;
     
 	@Override
+	public List<Product> selectAllProducts() {
+		return sqlSession.selectList("selectAllProducts");
+	}
+    
+	@Override
 	public List<Product> selectProductsByCategory(int category) {
 		return sqlSession.selectList("selectProductsByCategory",category);
 	}
@@ -24,27 +28,7 @@ public class ProductDAO implements IProductDAO{
 	public Product selectProductById(int id) {
 		return sqlSession.selectOne("selectProductById",id);
 	}
-
-	@Override
-	public List<Product> selectAllProducts() {
-		return sqlSession.selectList("selectAllProducts");
-	}
-
-	@Override
-	public void insertProduct(Product product) {
-		sqlSession.insert("insertProduct",product);		
-	}
-
-	@Override
-	public void deleteProductById(int id) {
-		sqlSession.delete("deleteProductById", id);
-	}
-
-	@Override
-	public void updateProduct(Product product) {
-		sqlSession.update("updateProduct", product);
-	}
-
+	
 	@Override
 	public List<Product> selectProductByBrand(int id) {
 		return sqlSession.selectList("selectProductsByBrand", id);
@@ -53,11 +37,6 @@ public class ProductDAO implements IProductDAO{
 	@Override
 	public List<Product> selectDiscountProducts() {
 		return sqlSession.selectList("selectDiscountProducts");
-	}
-
-	@Override
-	public void updateProductSale(Map<String,Integer> map) {
-		sqlSession.update("updateProductSale",map);
 	}
 
 	@Override
@@ -75,5 +54,27 @@ public class ProductDAO implements IProductDAO{
 		return sqlSession.selectList("selectProductsByDiscount",id);
 	}
 	
+
+	@Override
+	public void insertProduct(Product product) {
+		sqlSession.insert("insertProduct",product);		
+	}
+
+
+	@Override
+	public void updateProduct(Product product) {
+		sqlSession.update("updateProduct", product);
+	}
+
+	@Override
+	public void updateProductSale(Map<String,Integer> map) {
+		sqlSession.update("updateProductSale",map);
+	}
+
+
+	@Override
+	public void deleteProductById(int id) {
+		sqlSession.delete("deleteProductById", id);
+	}
 
 }

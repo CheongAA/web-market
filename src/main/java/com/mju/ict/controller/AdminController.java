@@ -193,10 +193,17 @@ public class AdminController {
 	// 할인 등록
 	@RequestMapping(value = "/discount", method = RequestMethod.POST)
 	public String addDiscount(@RequestParam("product[]") int[] productArr, @ModelAttribute @Valid Discount discount,
-			BindingResult result, Model model) {
-		discountService.registerDiscount(discount, productArr);
+			BindingResult result, Model model, MultipartFile file) {
+		discountService.registerDiscount(discount, productArr,file);
 
 		return "redirect:/admin/discount";
+	}
+	
+	// 할인 discount_apply(상단노출) 변경
+	@RequestMapping(value = "/discountApply/{id}", method = RequestMethod.GET)
+	public String changeDiscountApply(@PathVariable int id, Model model) {
+		discountService.changeDiscountApply(id);
+		return "redirect:/admin/discount/";
 	}
 
 	/////////////// 카테고리//////////////////

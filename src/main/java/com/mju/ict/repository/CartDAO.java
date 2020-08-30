@@ -16,24 +16,8 @@ public class CartDAO implements ICartDAO{
     private SqlSession sqlSession;
 
 	@Override
-	public void insertCart(Cart cart) {
-		sqlSession.insert("insertCart", cart);
-		
-	}
-
-	@Override
 	public List<Cart> selectCartsByUser(int user_id) {
 		return sqlSession.selectList("selectCartsByUser", user_id);
-	}
-
-	@Override
-	public void updateCart(Cart cart) {
-		sqlSession.update("updateCart", cart);
-	}
-
-	@Override
-	public void deleteCart(int cart_id) {
-		sqlSession.delete("deleteCart", cart_id);
 	}
 
 	@Override
@@ -44,6 +28,22 @@ public class CartDAO implements ICartDAO{
 	@Override
 	public Cart selectCartsByProduct(int product_id) {
 		return sqlSession.selectOne("selectCartByProduct",product_id);
+	}
+	
+	@Override
+	public void insertCart(Cart cart) {
+		sqlSession.insert("insertCart", cart);
+		
+	}
+
+	@Override
+	public void updateCart(Cart cart) {
+		sqlSession.update("updateCart", cart);
+	}
+
+	@Override
+	public void deleteCart(int cart_id) {
+		sqlSession.delete("deleteCart", cart_id);
 	}
 
 }

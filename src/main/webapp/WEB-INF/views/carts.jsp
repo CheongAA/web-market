@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- custom CSS -->
-<title>장바구니</title>
+<title>MARKET:: 장바구니</title>
 </head>
 <body>
 	<div class="m-5">
@@ -63,7 +63,7 @@
 														class="text-dark">${cart.product.product_name}</a> /
 
 													<c:choose>
-														<c:when test="${cart.product.discount_id != 0}">
+														<c:when test="${cart.product.discount_id != 0 and cart.product.discount.discount_apply != 0 and cart.product.discount.discount_state != 0}">
 															<c:set var="discount"
 																value="${(cart.product.product_price * cart.product.discount.discount_rate)/100}" />
 															<c:set var="price"

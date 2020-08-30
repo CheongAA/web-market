@@ -19,13 +19,13 @@ public class NoticeDAO implements INoticeDAO{
 	}
 
 	@Override
-	public void insertNotice(Notice notice) {
-		sqlSession.insert("insertNotice", notice);
+	public Notice selectNoticeById(int id) {
+		return sqlSession.selectOne("selectNoticeById", id);
 	}
 
 	@Override
-	public Notice selectNoticeById(int id) {
-		return sqlSession.selectOne("selectNoticeById", id);
+	public void insertNotice(Notice notice) {
+		sqlSession.insert("insertNotice", notice);
 	}
 
 	@Override

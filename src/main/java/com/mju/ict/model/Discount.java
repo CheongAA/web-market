@@ -3,13 +3,6 @@ package com.mju.ict.model;
 import java.util.Date;
 
 public class Discount {
-//    discount_id INT PRIMARY KEY AUTO_INCREMENT,
-//	  discount_name varchar(255),
-//    discount_rate INT NOT NULL,
-//    discount_start datetime NOT NULL,
-//    discount_end datetime NOT NULL
-	
-	
 //	  discount_id INT PRIMARY KEY AUTO_INCREMENT,
 //	  discount_name varchar(255) NOT NULL,
 //	  discount_desc VARCHAR(255) NOT NULL,
@@ -17,8 +10,10 @@ public class Discount {
 //	  discount_thumbnailImg varchar(200) NOT NULL,
 //	  discount_mainImg varchar(200) NOT NULL,
 //	  discount_rate INT NOT NULL,
-//	  discount_start datetime NOT NULL,
-//	  discount_end datetime NOT NULL
+//	  discount_start date NOT NULL,
+//	  discount_end date NOT NULL,
+//	  discount_apply TINYINT(1) NOT NULL default 0,
+//	  discount_state TINYINT(1) NOT NULL default 0
 	
 	private int discount_id;
 	private String discount_name;
@@ -29,6 +24,8 @@ public class Discount {
 	private int discount_rate;
 	private Date discount_start;
 	private Date discount_end;
+	private int discount_apply;
+	private int discount_state;
 	
 	public int getDiscount_id() {
 		return discount_id;
@@ -84,7 +81,19 @@ public class Discount {
 	public void setDiscount_end(Date discount_end) {
 		this.discount_end = discount_end;
 	}
-	
+	public int getDiscount_apply() {
+		return discount_apply;
+	}
+	public void setDiscount_apply(int discount_apply) {
+		this.discount_apply = discount_apply;
+	}
+	public int getDiscount_state() {
+		return discount_state;
+	}
+	public void setDiscount_state(int discount_state) {
+		this.discount_state = discount_state;
+	}
+
 
 	
 }

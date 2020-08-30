@@ -38,7 +38,7 @@
 								</c:otherwise>
 							</c:choose> <a
 							href="${pageContext.request.contextPath}/admin/sale/${product.product_id}">
-								판매</a></td>
+								변경</a></td>
 						<td><c:choose>
 								<c:when test="${product.discount_id != 0}">
 									O

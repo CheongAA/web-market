@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품 디테일</title>
+<title>MARKET:: ${product.product_name}</title>
 </head>
 <body>
 	<div class="row m-4">
@@ -15,7 +15,7 @@
 				<div class="col-sm-5 pl-0 mr-5">
 					<img class="w-100 h-100 mb-3 product-img" alt=""
 						src="${product.product_thumbnailImg}">
-					<c:if test="${product.discount_id != 0}">
+					<c:if test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
 						<div class="product-img-text bg-warning text-center p-3">
 							<p class="h4 text-white font-weight-light">SAVE</p>
 							<p class="h3 text-white font-weight-bold">
@@ -26,11 +26,6 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="hidden" id="product_id" value="${product.product_id}" />
-					<input type="hidden" id="nomal_price"
-						value="${product.product_price}" /> <input type="hidden"
-						id="discount_rate" value="${product.discount.discount_rate}" /> <input
-						type="hidden" id="discount_id" value="${product.discount_id}" />
-
 					<h2>[${product.brand.brand_name}] ${product.product_name}</h2>
 					<p class="text-muted">${product.product_desc}</p>
 					<div class="row">
@@ -38,10 +33,19 @@
 							<tbody>
 								<tr>
 									<th style="width: 40%">가격(1팩)</th>
-									<td><c:if test="${product.discount_id != 0}">
-											<span class="text-muted h5 font-weight-light"
-												style="text-decoration: line-through">${product.product_price}</span>
-										</c:if> <span class="h5 font-weight-light" id="product_price"></span>원</td>
+									<td><c:choose>
+											<c:when test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
+												<c:set var="price"
+													value="${product.product_price - ((product.product_price * product.discount.discount_rate)/100)}" />
+												<span class="text-muted h5 font-weight-light"
+													style="text-decoration: line-through">${product.product_price}</span>
+												<span class="h5 font-weight-light" id="product_price"><fmt:formatNumber
+														pattern="0" value="${price}" /></span>원
+											</c:when>
+											<c:otherwise>
+												<span class="h5 font-weight-light" id="product_price">${product.product_price}</span>원
+											</c:otherwise>
+										</c:choose></td>
 								</tr>
 								<tr>
 									<th style="width: 40%">분류</th>
@@ -70,9 +74,33 @@
 					</div>
 					<div class="row justify-content-end">
 						<button type="button"
-							class="col-sm-3 btn btn-outline-dark py-3 mx-2" id="cart_btn">장바구니</button>
+							class="col-sm-3 btn btn-outline-dark py-3 mx-2" id="cart_btn" data-toggle="modal"
+							data-target="#cart_modal">장바구니</button>
 						<button type="button" class="col-sm-3 btn btn-dark py-3"
 							id="buy_btn">바로구매</button>
+							
+						<!-- Modal -->
+						<div class="modal fade" id="cart_modal" data-backdrop="static"
+							data-keyboard="false" tabindex="-1"
+							aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="staticBackdropLabel">장바구니</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">장바구니가 추가되었습니다.</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">계속 쇼핑하기</button>
+										<a type="button" class="btn btn-primary" href="${pageContext.request.contextPath}/carts">장바구니로 이동</a>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="row  mt-4">
 						<button class="col btn btn-light text-center">
@@ -239,21 +267,17 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		var isDiscount = $("#discount_id").val();
-		var rate = parseInt($("#discount_rate").val()) / 100;
-		var price = parseInt($("#nomal_price").val());
-
-		if (isDiscount == 1) {
-			$("#product_price").text(price - (rate * price));
-		} else {
-			$("#product_price").text(price);
-		}
-
 		$(document).ready(calTotalPrice);
 
 		$("#product_count").on("change", calTotalPrice);
-		$("#buy_btn").on("click", getOrderPage);
-		$("#cart_btn").on("click", addCart);
+
+		$("#cart_btn").click(function(){
+			addCart('cart');
+		});
+		
+		$("#buy_btn").click(function(){
+			addCart('buy');
+		});
 
 		function calTotalPrice() {
 			var price = parseInt($("#product_price").text());
@@ -262,24 +286,7 @@
 			$("#product_total_price").text(price * count + "원");
 		}
 
-		function getOrderPage() {
-			var form = {
-					product_id : parseInt($("#product_id").val()),
-					product_count : parseInt($("#product_count").val())
-				}
-			$.ajax({
-				url : "/cart",
-				type : "POST",
-				data : form,
-				success : function(data) {
-					location.href = "/carts";
-				}
-			});
-			
-		}
-				
-
-		function addCart() {
+		function addCart(btn) {
 			var form = {
 				product_id : parseInt($("#product_id").val()),
 				product_count : parseInt($("#product_count").val())
@@ -289,7 +296,9 @@
 				type : "POST",
 				data : form,
 				success : function(data) {
-					alert("장바구니 완료")
+					if(btn == 'buy'){
+						location.href = "/carts";
+					}
 				}
 			});
 		}

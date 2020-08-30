@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <!-- custom CSS -->
 <link href="/resources/css/login.css" rel="stylesheet">
-<title>로그인</title>
+<title>MARKET:: 로그인</title>
 </head>
 <body>
 	<form action="/login" method="post" class="form-signin pt-5 mt-5">

@@ -72,7 +72,7 @@
 		</form>
 		<a
 			class="col h3 text-muted font-weight-bold align-self-center text-decoration-none"
-			href="/carts"><i class="fas fa-shopping-cart"></i> <c:if
+			href="${pageContext.request.contextPath}/carts"><i class="fas fa-shopping-cart"></i> <c:if
 				test="${carts != null}">
 				<span class="badge badge-pill badge-secondary font-weight-light">${fn:length(carts)}</span>
 			</c:if> </a>

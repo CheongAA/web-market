@@ -15,18 +15,13 @@ public class UserDAO implements IUserDAO{
     private SqlSession sqlSession;
 
 	@Override
-	public void insertUser(User user) {
-		sqlSession.insert("insertUser",user);
+	public List<User> selectAllUsers() {
+		return sqlSession.selectList("selectAllUsers");
 	}
 
 	@Override
 	public User selectUserByIdentification(String user_identification) {
 		return sqlSession.selectOne("selectUserByIdentification",user_identification);
-	}
-
-	@Override
-	public List<User> selectAllUsers() {
-		return sqlSession.selectList("selectAllUsers");
 	}
 
 	@Override
@@ -37,6 +32,11 @@ public class UserDAO implements IUserDAO{
 	@Override
 	public int selectIdByIdentification(String user_identification) {
 		return sqlSession.selectOne("selectIdByIdentification",user_identification);
+	}
+	
+	@Override
+	public void insertUser(User user) {
+		sqlSession.insert("insertUser",user);
 	}
 
 	@Override

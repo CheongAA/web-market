@@ -27,6 +27,8 @@
 			<result column="discount_rate" property="discount_rate" />
 			<result column="discount_start" property="discount_start" />
 			<result column="discount_end" property="discount_end" />
+			<result column="discount_apply" property="discount_apply" />
+			<result column="discount_state" property="discount_state" />
 		</association>
 	</resultMap>
 

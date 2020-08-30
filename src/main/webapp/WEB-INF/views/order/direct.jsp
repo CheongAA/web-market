@@ -37,7 +37,7 @@
 							<c:set var="total_products"
 								value="${total_products + (cart.product.product_price * cart.product_count)}" />
 							<td><span class="product_name">${cart.product.product_name}</span>/<c:choose>
-									<c:when test="${cart.product.discount_id != 0}">
+									<c:when test="${cart.product.discount_id != 0 and cart.product.discount.discount_apply != 0  and cart.product.discount.discount_state != 0}">
 										<c:set var="discount"
 											value="${(cart.product.product_price * cart.product.discount.discount_rate)/100}" />
 										<c:set var="total_discounts"

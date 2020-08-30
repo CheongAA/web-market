@@ -30,7 +30,7 @@
 						class="text-decoration-none"> <img
 						class="w-100 h-75 mb-3 product-img" alt=""
 						src="${product.product_thumbnailImg}"> <c:if
-							test="${product.discount_id != 0}">
+							test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
 							<div class="product-img-text bg-warning text-center p-3">
 								<p class="h4 text-white font-weight-light">SAVE</p>
 								<p class="h3 text-white font-weight-bold">
@@ -41,7 +41,7 @@
 								value="${product.brand.brand_name}" />] <c:out
 								value="${product.product_name}" />
 					</span> <c:choose>
-							<c:when test="${product.discount_id != 0}">
+							<c:when test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
 								<span class="text-muted h5 font-weight-light" id="product_price"
 									style="text-decoration: line-through"><fmt:formatNumber
 										pattern="###,###,###" value="${product.product_price}" />원</span>
