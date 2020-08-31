@@ -100,7 +100,25 @@ public class ProductService implements IProductService{
 	
 	//상품 수정
 	@Override
-	public void updateProduct(Product product) {
+	public void updateProduct(Product product, MultipartFile file) {
+		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+
+		if (file != null) {
+			try {
+				fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		}
+
+		product.setProduct_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		product.setProduct_thumbnailImg(
+				File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+
 		productDAO.updateProduct(product);
 	}
 

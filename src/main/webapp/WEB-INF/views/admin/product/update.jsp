@@ -43,7 +43,7 @@
 			</div>
 			<div class="form-group">
 				<label for="product_image">상품설명이미지</label> <input type="file"
-					class="form-control-file" id="exampleFormControlFile1">
+					class="form-control-file" id="exampleFormControlFile1" name="product_img">
 			</div>
 			<div class="form-group">
 				<label for="product_image">상품이미지</label> <input type="file"

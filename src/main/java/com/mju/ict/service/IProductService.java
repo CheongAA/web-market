@@ -28,7 +28,7 @@ public interface IProductService {
 
 	public abstract void deleteProductById(int id);
 
-	public abstract void updateProduct(Product product);
+	public abstract void updateProduct(Product product, MultipartFile file);
 
 	public abstract void changeProductSale(int id);
 

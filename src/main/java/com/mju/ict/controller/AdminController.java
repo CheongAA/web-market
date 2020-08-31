@@ -129,8 +129,8 @@ public class AdminController {
 
 	// 상품수정
 	@RequestMapping(value = "/product/update", method = RequestMethod.POST)
-	public String updateProduct(@ModelAttribute @Valid Product product, BindingResult result, Model model) {
-		productService.updateProduct(product);
+	public String updateProduct(@ModelAttribute @Valid Product product, BindingResult result, Model model, MultipartFile file) {
+		productService.updateProduct(product,file);
 		return "redirect:/admin/product/" + product.getProduct_id();
 	}
 

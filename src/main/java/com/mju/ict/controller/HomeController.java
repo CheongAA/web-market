@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mju.ict.model.Discount;
+import com.mju.ict.model.Product;
 import com.mju.ict.service.IDiscountService;
+import com.mju.ict.service.IProductService;
 
 @Controller
 public class HomeController {
@@ -20,6 +22,9 @@ public class HomeController {
 
 	@Autowired
 	IDiscountService discountService;
+	
+	@Autowired
+	IProductService productService;
 	
 	//메인 페이지
 	@RequestMapping(value = "/", method = RequestMethod.GET)

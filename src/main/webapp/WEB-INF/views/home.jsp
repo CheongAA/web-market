@@ -21,34 +21,37 @@
 					<c:when test="${status.count eq 1}">
 						<div class="carousel-item active">
 							<a
-								href="${pageContext.request.contextPath}/event/${discount.discount_id}">
+								href="${pageContext.request.contextPath}/discount/${discount.discount_id}">
 								<img
 								src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&w=1000&q=80"
 								class="d-block w-100" alt="${discount.discount_name}">
+								<div class="carousel-caption d-none d-md-block">
+									<h1 class="display-3 pb-5 font-weight-bold">${discount.discount_name}
+										${discount.discount_rate}%</h1>
+									<h3 class="pb-2">${discount.discount_desc}</h3>
+									<h4 class="pb-5 mb-5 font-weight-light">
+										<fmt:formatDate pattern="yyyy/MM/dd"
+											value="${discount.discount_start}" />
+										(
+										<fmt:formatDate pattern="E" value="${discount.discount_start}" />
+										) ~
+										<fmt:formatDate pattern="yyyy/MM/dd"
+											value="${discount.discount_end}" />
+										(
+										<fmt:formatDate pattern="E" value="${discount.discount_end}" />
+										)
+									</h4>
+								</div>
 							</a>
-							<div class="carousel-caption d-none d-md-block">
-								<h1 class="display-3 pb-5 font-weight-bold">${discount.discount_name}
-									${discount.discount_rate}%</h1>
-								<h3 class="pb-2">${discount.discount_desc}</h3>
-								<h4 class="pb-5 mb-5 font-weight-light">
-									<fmt:formatDate pattern="yyyy/MM/dd"
-										value="${discount.discount_start}" />
-									~
-									<fmt:formatDate pattern="yyyy/MM/dd"
-										value="${discount.discount_end}" />
-								</h4>
-							</div>
-
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div class="carousel-item">
 							<a
-								href="${pageContext.request.contextPath}/event/${discount.discount_id}">
+								href="${pageContext.request.contextPath}/discount/${discount.discount_id}">
 								<img
 								src="https://viralsweep.com/blog/wp-content/uploads/2015/02/furiouscamera.jpg"
 								class="d-block w-100" alt="${discount.discount_name}">
-							</a>
 							<div class="carousel-caption d-none d-md-block">
 								<h1 class="display-3 pb-5 font-weight-bold">${discount.discount_name}
 									${discount.discount_rate}%</h1>
@@ -56,11 +59,18 @@
 								<h4 class="pb-5 mb-5 font-weight-light">
 									<fmt:formatDate pattern="yyyy/MM/dd"
 										value="${discount.discount_start}" />
-									~
+									(
+									<fmt:formatDate pattern="E" value="${discount.discount_start}" />
+									) ~
 									<fmt:formatDate pattern="yyyy/MM/dd"
 										value="${discount.discount_end}" />
+									(
+									<fmt:formatDate pattern="E" value="${discount.discount_end}" />
+									)
 								</h4>
 							</div>
+							
+							</a>
 						</div>
 					</c:otherwise>
 				</c:choose>
