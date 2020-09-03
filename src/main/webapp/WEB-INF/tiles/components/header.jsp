@@ -10,16 +10,16 @@
 		<div class="col-auto">
 			<nav class="nav d-flex">
 				<c:if test="${user == null}">
-					<a class="p-2 text-muted border-right" href="/login">로그인</a>
-					<a class="p-2 text-muted border-right" href="/signup">회원가입</a>
+					<a class="p-2 text-muted border-right" href="${pageContext.request.contextPath}/login">로그인</a>
+					<a class="p-2 text-muted border-right" href="${pageContext.request.contextPath}/signup">회원가입</a>
 				</c:if>
 				<c:if test="${user.user_level == 1}">
-					<a class="p-2 text-muted border-right" href="/admin/order">관리자 화면</a>
-					<a class="p-2 text-muted border-right" href="/logout">로그아웃</a>
+					<a class="p-2 text-muted border-right" href="${pageContext.request.contextPath}/admin/order">관리자 화면</a>
+					<a class="p-2 text-muted border-right" href="${pageContext.request.contextPath}/logout">로그아웃</a>
 				</c:if>
 				<c:if test="${user.user_level == 0}">
 					<a class="p-2 text-muted border-right" href="${pageContext.request.contextPath}/user/order">마이페이지</a>
-					<a class="p-2 text-muted border-right" href="/logout">로그아웃</a>
+					<a class="p-2 text-muted border-right" href="${pageContext.request.contextPath}/logout">로그아웃</a>
 				</c:if>
 
 				<div class="btn-group">
@@ -28,9 +28,9 @@
 						class="fas fa-caret-down"></i>
 					</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item p-3 text-muted" href="/notice">공지사항</a> <a
-							class="dropdown-item p-3 text-muted" href="/logout">자주하는 질문</a> <a
-							class="dropdown-item p-3 text-muted" href="/logout">1:1 문의</a>
+						<a class="dropdown-item p-3 text-muted" href="${pageContext.request.contextPath}/notice">공지사항</a> <a
+							class="dropdown-item p-3 text-muted" href="${pageContext.request.contextPath}/faq">자주하는 질문</a> <a
+							class="dropdown-item p-3 text-muted" href="${pageContext.request.contextPath}/user/myqna">1:1 문의</a>
 					</div>
 				</div>
 			</nav>

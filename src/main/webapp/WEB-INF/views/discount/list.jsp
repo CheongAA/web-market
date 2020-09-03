@@ -42,11 +42,24 @@
 							</div>
 						</c:when>
 						<c:otherwise>
-							<div class="row w-100 mx-5">
+							<div class="row mx-5 my-3">
 								<div class="jumbotron jumbotron-fluid w-100">
-									<div class="container">
-										<h1 class="display-4">${discount.discount_name} 종료</h1>
-										<p class="lead">${discount.discount_desc}</p>
+									<div class="container pl-5 ">
+										<h1 class="display-5 pb-2" >${discount.discount_name} - 종료</h1>
+										<p>${discount.discount_desc}</p>
+										<p>
+											<fmt:formatDate pattern="MM/dd"
+												value="${discount.discount_start}" />
+											(
+											<fmt:formatDate pattern="E"
+												value="${discount.discount_start}" />
+											) ~
+											<fmt:formatDate pattern="MM/dd"
+												value="${discount.discount_end}" />
+											(
+											<fmt:formatDate pattern="E" value="${discount.discount_end}" />
+											)
+										</p>
 									</div>
 								</div>
 							</div>

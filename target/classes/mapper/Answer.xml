@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mju.ict.repository.IAnswerDAO">
+	<select id="selectFaqAnswers" resultType="com.mju.ict.model.Answer">
+		SELECT * FROM tb_answer
+		WHERE
+		is_faq = 1
+	</select>
+</mapper>

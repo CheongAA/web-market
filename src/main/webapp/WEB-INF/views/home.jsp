@@ -6,12 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- custom CSS -->
-<link href="resources/css/home.css" rel="stylesheet">
 <title>MARKET:: 오늘도 신선한 하루</title>
 </head>
 <body>
-
 	<div id="carouselExampleControls" class="row carousel slide"
 		data-ride="carousel">
 		<div class="carousel-inner">
@@ -23,7 +20,7 @@
 							<a
 								href="${pageContext.request.contextPath}/discount/${discount.discount_id}">
 								<img
-								src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&w=1000&q=80"
+								src="https://viralsweep.com/blog/wp-content/uploads/2015/02/furiouscamera.jpg"
 								class="d-block w-100" alt="${discount.discount_name}">
 								<div class="carousel-caption d-none d-md-block">
 									<h1 class="display-3 pb-5 font-weight-bold">${discount.discount_name}
@@ -52,24 +49,24 @@
 								<img
 								src="https://viralsweep.com/blog/wp-content/uploads/2015/02/furiouscamera.jpg"
 								class="d-block w-100" alt="${discount.discount_name}">
-							<div class="carousel-caption d-none d-md-block">
-								<h1 class="display-3 pb-5 font-weight-bold">${discount.discount_name}
-									${discount.discount_rate}%</h1>
-								<h3 class="pb-2">${discount.discount_desc}</h3>
-								<h4 class="pb-5 mb-5 font-weight-light">
-									<fmt:formatDate pattern="yyyy/MM/dd"
-										value="${discount.discount_start}" />
-									(
-									<fmt:formatDate pattern="E" value="${discount.discount_start}" />
-									) ~
-									<fmt:formatDate pattern="yyyy/MM/dd"
-										value="${discount.discount_end}" />
-									(
-									<fmt:formatDate pattern="E" value="${discount.discount_end}" />
-									)
-								</h4>
-							</div>
-							
+								<div class="carousel-caption d-none d-md-block">
+									<h1 class="display-3 pb-5 font-weight-bold">${discount.discount_name}
+										${discount.discount_rate}%</h1>
+									<h3 class="pb-2">${discount.discount_desc}</h3>
+									<h4 class="pb-5 mb-5 font-weight-light">
+										<fmt:formatDate pattern="yyyy/MM/dd"
+											value="${discount.discount_start}" />
+										(
+										<fmt:formatDate pattern="E" value="${discount.discount_start}" />
+										) ~
+										<fmt:formatDate pattern="yyyy/MM/dd"
+											value="${discount.discount_end}" />
+										(
+										<fmt:formatDate pattern="E" value="${discount.discount_end}" />
+										)
+									</h4>
+								</div>
+
 							</a>
 						</div>
 					</c:otherwise>
@@ -88,72 +85,48 @@
 		</a>
 	</div>
 	<div class="row p-5 mx-auto">
-		<div class="row mb-5">
-			<div class="col-md-9">
-				<h2>
-					First featurette heading. <span class="text-muted">It’ll
-						blow your mind.</span>
-				</h2>
-				<p class="lead">Donec ullamcorper nulla non metus auctor
-					fringilla. Vestibulum id ligula porta felis euismod semper.
-					Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-					Fusce dapibus, tellus ac cursus commodo.</p>
-			</div>
-			<div class="col-md-3">
-				<svg
-					class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-					width="500" height="500" xmlns="http://www.w3.org/2000/svg"
-					preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
-					aria-label="Placeholder: 500x500">
-					<title>Placeholder</title><rect width="100%" height="100%"
-						fill="#eee" />
-					<text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-			</div>
-		</div>
+		<h1 class="mx-auto mb-5 font-weight-light">WHAT'S NEW?</h1>
+		<div class="row mx-auto">
+			<c:forEach var="product" items="${products}" end="2">
+				<c:if test="${product.on_sale == 1}">
+					<div class="col-sm-4">
+						<a
+							href="${pageContext.request.contextPath}/product/${product.product_id}"
+							class="text-decoration-none"> <img
+							class="w-100 h-50 mb-3 product-img" alt=""
+							src="${product.product_thumbnailImg}"> <c:if
+								test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
+								<div class="product-img-text bg-warning text-center p-3">
+									<p class="h4 text-white font-weight-light">SAVE</p>
+									<p class="h3 text-white font-weight-bold">
+										${product.discount.discount_rate}%</p>
 
-		<div class="row mb-5">
-			<div class="col-md-3">
-				<svg
-					class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-					width="500" height="500" xmlns="http://www.w3.org/2000/svg"
-					preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
-					aria-label="Placeholder: 500x500">
-					<title>Placeholder</title><rect width="100%" height="100%"
-						fill="#eee" />
-					<text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-			</div>
-			<div class="col-md-9">
-				<h2>
-					Oh yeah, it’s that good. <span class="text-muted">See for
-						yourself.</span>
-				</h2>
-				<p class="lead">Donec ullamcorper nulla non metus auctor
-					fringilla. Vestibulum id ligula porta felis euismod semper.
-					Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-					Fusce dapibus, tellus ac cursus commodo.</p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-9">
-				<h2>
-					And lastly, this one. <span class="text-muted">Checkmate.</span>
-				</h2>
-				<p class="lead">Donec ullamcorper nulla non metus auctor
-					fringilla. Vestibulum id ligula porta felis euismod semper.
-					Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-					Fusce dapibus, tellus ac cursus commodo.</p>
-			</div>
-			<div class="col-md-3">
-				<svg
-					class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-					width="500" height="500" xmlns="http://www.w3.org/2000/svg"
-					preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
-					aria-label="Placeholder: 500x500">
-					<title>Placeholder</title><rect width="100%" height="100%"
-						fill="#eee" />
-					<text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-			</div>
+								</div>
+							</c:if> <span class="d-block text-dark h3 mb-3">[<c:out
+									value="${product.brand.brand_name}" />] <c:out
+									value="${product.product_name}" />
+						</span> <c:choose>
+								<c:when
+									test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
+									<span class="text-muted h5 font-weight-light"
+										id="product_price" style="text-decoration: line-through"><fmt:formatNumber
+											pattern="###,###,###" value="${product.product_price}" />원</span>
+									<span class="market-color h5" id="discount_price"><i
+										class="fas fa-arrow-right"></i> <c:set var="price"
+											value="${product.product_price-(product.product_price * product.discount.discount_rate)/100}" />
+										<fmt:formatNumber pattern="###,###,###" value="${price}" />원
+									</span>
+								</c:when>
+								<c:otherwise>
+									<span class="d-block market-color h5"><fmt:formatNumber
+											pattern="###,###,###" value="${product.product_price}" />원</span>
+								</c:otherwise>
+							</c:choose> <span class="d-block text-dark font-weight-light mt-2"><c:out
+									value="${product.product_desc}" /></span>
+						</a>
+					</div>
+				</c:if>
+			</c:forEach>
 		</div>
 	</div>
 </body>

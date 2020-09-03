@@ -14,11 +14,10 @@
 		<h3 class="w-100 text-center border-bottom pb-5">상품추가</h3>
 		<form class="m-auto"
 			action="${pageContext.request.contextPath}/admin/product/update"
-			method="post">
+			method="post" enctype="multipart/form-data">
 			<div class="form-group">
-				<input type="hidden" name="product_id" value="${product.product_id}" /> 
-				<label
-					for="product_name">상품명</label> <input type="text"
+				<input type="hidden" name="product_id" value="${product.product_id}" />
+				<label for="product_name">상품명</label> <input type="text"
 					class="form-control" id="product_name" name="product_name"
 					placeholder="" required="required" value="${product.product_name}">
 			</div>
@@ -42,8 +41,12 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="product_image">상품설명이미지</label> <input type="file"
-					class="form-control-file" id="exampleFormControlFile1" name="product_img">
+				<label for="product_img">상품대표이미지</label> <input type="file"
+					class="form-control-file" id="product_img" name="file">
+				<div class="select_product_img mt-3">
+					<img src="">
+				</div>
+				<%=request.getRealPath("/")%>
 			</div>
 			<div class="form-group">
 				<label for="product_image">상품이미지</label> <input type="file"
@@ -85,6 +88,18 @@
 		</form>
 	</div>
 	<script>
+		$("#product_img").on(
+				'change',
+				function() {
+					if (this.files && this.files[0]) {
+						var reader = new FileReader;
+						reader.onload = function(data) {
+							$(".select_product_img img").attr("src",
+									data.target.result).width(200);
+						}
+						reader.readAsDataURL(this.files[0]);
+					}
+				});
 		var jsonData = JSON.parse('${categories}');
 		console.log(jsonData);
 

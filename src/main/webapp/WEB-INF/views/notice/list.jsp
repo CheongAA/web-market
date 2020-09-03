@@ -28,7 +28,6 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
 							<c:forEach var="notice" items="${notices}" varStatus="status">
 								<tr>
 									<td><c:out value="${status.count} " /></td>
