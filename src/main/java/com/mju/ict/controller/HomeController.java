@@ -68,7 +68,7 @@ public class HomeController {
 	///////////////////////////////공지사항//////////////////////////
 	//공지사항 목록 페이지
 	@RequestMapping(value = "/notice", method = RequestMethod.GET)
-	public String getNotice(Model model) {
+	public String getNotices(Model model) {
 		List<Notice> notices = noticeService.getAllNotices();
 		
 		model.addAttribute("notices", notices);
@@ -89,7 +89,7 @@ public class HomeController {
 	
 	//자주하는질문 목록 페이지
 	@RequestMapping(value = "/faq", method = RequestMethod.GET)
-	public String getFAQ(Model model) {
+	public String getFAQs(Model model) {
 		List<Answer> answers = answerService.getFaqAnswers();
 		
 		model.addAttribute("answers", answers);

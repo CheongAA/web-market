@@ -16,7 +16,8 @@
 					가장 자주하시는 질문을 모두 모았습니다.</span>
 			</div>
 			<div class="row">
-				<table class="table table-borderless text-center" style="table-layout: fixed">
+				<table class="table table-borderless text-center"
+					style="table-layout: fixed">
 					<thead>
 						<tr class="border-bottom">
 							<th>번호</th>
@@ -50,11 +51,12 @@
 				$(this).css('background-color', 'transparent');
 			});
 		});
-		
+
 		$("tr").click(function() {
 			var td = $("#content_" + $(this).children("td").html());
 
-			if (td.css("display") == "none") {
+			if (td.css("display") != "table-cell") {
+				$("[id^=content_]").css("display", "none");
 				td.css("display", "table-cell");
 			} else {
 				td.css("display", "none");

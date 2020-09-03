@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mju.ict.model.Answer;
 import com.mju.ict.model.Brand;
 import com.mju.ict.model.Category;
 import com.mju.ict.model.Discount;
@@ -29,6 +30,7 @@ import com.mju.ict.model.Notice;
 import com.mju.ict.model.Order;
 import com.mju.ict.model.Product;
 import com.mju.ict.model.User;
+import com.mju.ict.service.IAnswerService;
 import com.mju.ict.service.IBrandService;
 import com.mju.ict.service.ICategoryService;
 import com.mju.ict.service.IDiscountService;
@@ -45,6 +47,8 @@ public class AdminController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
+	@Autowired
+	IAnswerService answerService;
 	@Autowired
 	IBrandService brandService;
 	@Autowired
@@ -394,6 +398,17 @@ public class AdminController {
 		noticeService.deleteNoticeById(id);
 		return "redirect:/admin/notice";
 	}
+	
+	/////////////// 자주하는 질문 //////////////////
+
+	// 자주하는 질문 목록 페이지
+	@RequestMapping(value = "/faq", method = RequestMethod.GET)
+	public String getFAQs(Model model) {
+		List<Answer> answers = answerService.getFaqAnswers();
+		model.addAttribute("answers", answers);
+		return "admin/faq/list";
+	}
+	
 
 	/////////////// 주문//////////////////
 	
