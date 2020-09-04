@@ -7,5 +7,7 @@ import com.mju.ict.model.Answer;
 public interface IAnswerService {
 
 	public abstract List<Answer> getFaqAnswers();
+
+	public abstract void deleteAnswerById(int id);
 	
 }

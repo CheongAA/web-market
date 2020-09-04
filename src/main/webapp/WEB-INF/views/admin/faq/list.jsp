@@ -30,7 +30,7 @@
 						<td><c:out value="${status.count} " /></td>
 						<td>${answer.answer_category}</td>
 						<td class="answer_title font-weight-bold" id="${answer.answer_id}"
-							colspan="2">${answer.answer_title}</td>						
+							colspan="2">${answer.answer_title}</td>
 					</tr>
 					<tr>
 						<td colspan="5" class="p-5 text-left" style="display: none;"
@@ -40,15 +40,13 @@
 				</c:forEach>
 			</tbody>
 		</table>
-			<div class="w-100 my-5"> <a
-				href="${pageContext.request.contextPath}"
-				class="btn btn-danger float-right px-5">삭제</a> <a
-				href="${pageContext.request.contextPath}"
-				class="btn btn-warning float-right px-5 mr-1">수정</a>
-				 <a
+		<div class="w-100 my-5">
+			<button id="delete_btn" class="btn btn-danger float-right px-5">삭제</button>
+			<a href="${pageContext.request.contextPath}"
+				class="btn btn-warning float-right px-5 mr-1">수정</a> <a
 				href="${pageContext.request.contextPath}"
 				class="btn btn-primary float-right px-5 mr-1">등록</a>
-	</div>
+		</div>
 	</div>
 	<script type="text/javascript">
 		$(".answer_title").click(function() {
@@ -60,6 +58,18 @@
 			} else {
 				td.css("display", "none");
 			}
+		});
+		$("#delete_btn").click(function() {
+			var data = $("input[name='answer_id']:checked").val();
+			consoel.log(data);
+
+			$.ajax({
+				url : "/admin/faq/delete/" + data,
+				type : "get",
+				success : function(data) {
+					alert("삭제되었습니다.");
+				}
+			});
 		});
 	</script>
 </body>

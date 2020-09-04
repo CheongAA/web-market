@@ -19,6 +19,11 @@ public class AnswerService implements IAnswerService{
 		return answerDAO.selectFaqAnswers();
 	}
 
+	@Override
+	public void deleteAnswerById(int id) {
+		answerDAO.deleteAnswerById(id);
+	}
+
 
 
 }

@@ -6,24 +6,17 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.mju.ict.model.Answer;
+import com.mju.ict.model.QuestionCategory;
 
 @Repository
-public class AnswerDAO implements IAnswerDAO{
+public class QuestionCategoryDAO implements IQuestionCategoryDAO{
     @Autowired
     private SqlSession sqlSession;
 
 	@Override
-	public List<Answer> selectFaqAnswers() {
-		return sqlSession.selectList("selectFaqAnswers");
+	public List<QuestionCategory> selectAllQuestionCategories() {
+		return sqlSession.selectList("selectAllQuestionCategories");
 	}
-
-	@Override
-	public void deleteAnswerById(int id) {
-		sqlSession.delete("deleteAnswerById",id);
-	}
-
-
-
+	
 
 }

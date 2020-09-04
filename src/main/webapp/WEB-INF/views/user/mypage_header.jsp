@@ -58,12 +58,12 @@
         </h5>      
         <ul class="nav flex-column">     
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="${pageContext.request.contextPath}/user/question">
            		  문의조회
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="${pageContext.request.contextPath}/user/question/add">
            		  문의등록
             </a>
           </li>      

@@ -23,10 +23,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mju.ict.model.Address;
 import com.mju.ict.model.Order;
+import com.mju.ict.model.QuestionCategory;
 import com.mju.ict.model.User;
 import com.mju.ict.service.IAddressService;
 import com.mju.ict.service.ICartService;
 import com.mju.ict.service.IOrderService;
+import com.mju.ict.service.IQuestionService;
 import com.mju.ict.service.IUserService;
 
 @Controller
@@ -45,7 +47,12 @@ public class UserController {
 	IOrderService orderService;
 	
 	@Autowired
+	IQuestionService questionService;	
+	
+	@Autowired
 	IUserService userService;	
+	
+	
 
 
 	// 회원가입
@@ -209,4 +216,27 @@ public class UserController {
 		return "redirect:/user/address";
 	}
 
+	/////////////// 문의//////////////////
+	
+	// 문의 목록 페이지
+	@RequestMapping(value = "/user/question", method = RequestMethod.GET)
+	public String getUserQuestion(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+//		List<Question> questions = questionService.getQuestionByUser(user.getUser_id());
+		
+//		model.addAttribute("questions", questions);
+		return "user/question-list";
+	}
+
+	
+	// 문의 등록 페이지
+	@RequestMapping(value = "/user/question/add", method = RequestMethod.GET)
+	public String getUserQuestionAdd(Model model, HttpSession session) {
+		List<QuestionCategory> questionCategories = questionService.getAllQuestionCategories();
+		
+		model.addAttribute("questionCategories", questionCategories);
+		return "user/question-add";
+	}
+	
+	
 }

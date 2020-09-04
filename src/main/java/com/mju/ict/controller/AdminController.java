@@ -409,6 +409,13 @@ public class AdminController {
 		return "admin/faq/list";
 	}
 	
+	
+	// 답변 삭제
+	@RequestMapping(value = "/answer/delete/{id}", method = RequestMethod.GET)
+	public String deleteFAQ(@PathVariable int id, Model model) {
+		answerService.deleteAnswerById(id);
+		return "redirect:/admin/faq";
+	}
 
 	/////////////// 주문//////////////////
 	

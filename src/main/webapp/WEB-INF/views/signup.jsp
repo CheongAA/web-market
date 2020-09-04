@@ -173,8 +173,7 @@
 		// 아이디 유효성 검사
 		function checkId() {
 			var inputValue = $("#user_identification").val();
-			$
-					.ajax({
+			$.ajax({
 						url : "/idCheck",
 						type : "get",
 						data : {
