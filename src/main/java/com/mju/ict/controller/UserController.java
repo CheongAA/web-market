@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mju.ict.model.Address;
 import com.mju.ict.model.Order;
+import com.mju.ict.model.Question;
 import com.mju.ict.model.QuestionCategory;
 import com.mju.ict.model.User;
 import com.mju.ict.service.IAddressService;
@@ -222,9 +223,9 @@ public class UserController {
 	@RequestMapping(value = "/user/question", method = RequestMethod.GET)
 	public String getUserQuestion(Model model, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-//		List<Question> questions = questionService.getQuestionByUser(user.getUser_id());
+		List<Question> questions = questionService.getQuestionByUser(user.getUser_id());
 		
-//		model.addAttribute("questions", questions);
+		model.addAttribute("questions", questions);
 		return "user/question-list";
 	}
 
@@ -232,11 +233,20 @@ public class UserController {
 	// 문의 등록 페이지
 	@RequestMapping(value = "/user/question/add", method = RequestMethod.GET)
 	public String getUserQuestionAdd(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		
 		List<QuestionCategory> questionCategories = questionService.getAllQuestionCategories();
+		List<Order> orders = orderService.getOrderByUser(user.getUser_id());
 		
 		model.addAttribute("questionCategories", questionCategories);
+		model.addAttribute("orders", orders);
 		return "user/question-add";
 	}
 	
-	
+	// 문의 등록
+	@RequestMapping(value = "/user/question", method = RequestMethod.POST)
+	public String addUserQuestion(@ModelAttribute @Valid Question question, BindingResult result, HttpSession session) {
+		questionService.registerQuestion(question,session);
+		return "redirect:/user/question";
+	}
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mju.ict.repository.IQuestionDAO">
+
+	<select id="selectQuestionByUser" resultType="com.mju.ict.model.Question">
+		SELECT * FROM tb_question
+		WHERE user_id = #{user_id}
+	</select>
+
+	<insert id="insertQuestion"
+		parameterType="com.mju.ict.model.Question">
+		INSERT INTO tb_question
+		(user_id,question_category_id,order_id,
+		question_title,question_content,question_phone)
+		VALUES
+		(#{user_id},#{question_category_id},#{order_id},
+		#{question_title},#{question_content},#{question_phone})
+	</insert>
+</mapper>

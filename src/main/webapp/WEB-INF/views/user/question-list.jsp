@@ -38,7 +38,7 @@
 									<tr>
 										<td><c:out value="${status.count} " /></td>
 										<td></td>
-										<td>${question.question_title}</a></td>
+										<td><a>${question.question_title}</a></td>
 										<td><fmt:formatDate value="${question.question_created}"
 												pattern="yyyy-MM-dd" /></td>
 									</tr>
