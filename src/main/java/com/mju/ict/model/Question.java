@@ -3,14 +3,16 @@ package com.mju.ict.model;
 import java.util.Date;
 
 public class Question {
-//	question_id int primary key auto_increment,
-//	user_id INT not null,
-//	FOREIGN KEY(user_id) REFERENCES tb_user(user_id),
-//	question_category_id INT not null,
-//	FOREIGN KEY(question_category_id) REFERENCES tb_question_category(question_category_id),
+//	 question_id int primary key auto_increment,
+//	 user_id INT not null,
+//	 FOREIGN KEY(user_id) REFERENCES tb_user(user_id),
+//	 question_category_id INT not null,
+//	 FOREIGN KEY(question_category_id) REFERENCES tb_question_category(question_category_id),
 //    order_id int,
 //    FOREIGN KEY(order_id) REFERENCES tb_order(order_id),
 //    question_created datetime default current_timestamp,
+//	  product_id int,
+//    FOREIGN KEY(product_id) REFERENCES tb_product(product_id),
 //    question_title varchar(250) not null,
 //    question_content varchar(255) not null,
 //    question_phone varchar(250)
@@ -19,6 +21,7 @@ public class Question {
 	private int user_id;
 	private int question_category_id;
 	private int order_id;
+	private int product_id;
 	
 	private Date question_created;
 	private String question_title;
@@ -47,6 +50,12 @@ public class Question {
 	}
 	public void setOrder_id(int order_id) {
 		this.order_id = order_id;
+	}
+	public int getProduct_id() {
+		return product_id;
+	}
+	public void setProduct_id(int product_id) {
+		this.product_id = product_id;
 	}
 	public Date getQuestion_created() {
 		return question_created;

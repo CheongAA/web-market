@@ -28,7 +28,7 @@
 							<c:when test="${empty questions}">
 								<tr>
 									<td colspan="4" rowspan="4">
-										<h6 class="py-5 my-5 font-weight-bold">문의 내역이 존재하지 않습니다.</h6>
+										<h6 class="py-5 my-5 font-weight-bold text-center">문의 내역이 존재하지 않습니다.</h6>
 									</td>
 								</tr>
 							</c:when>

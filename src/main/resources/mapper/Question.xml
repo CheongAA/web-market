@@ -3,7 +3,8 @@
 
 <mapper namespace="com.mju.ict.repository.IQuestionDAO">
 
-	<select id="selectQuestionByUser" resultType="com.mju.ict.model.Question">
+	<select id="selectQuestionByUser"
+		resultType="com.mju.ict.model.Question">
 		SELECT * FROM tb_question
 		WHERE user_id = #{user_id}
 	</select>
@@ -11,10 +12,29 @@
 	<insert id="insertQuestion"
 		parameterType="com.mju.ict.model.Question">
 		INSERT INTO tb_question
-		(user_id,question_category_id,order_id,
+		(user_id,question_category_id,
+		order_id,product_id,
 		question_title,question_content,question_phone)
 		VALUES
-		(#{user_id},#{question_category_id},#{order_id},
-		#{question_title},#{question_content},#{question_phone})
+		(#{user_id},#{question_category_id},
+		<choose>
+			<when test="order_id == 0">
+				NULL
+			</when>
+			<otherwise>
+				#{order_id}
+			</otherwise>
+		</choose>
+		,
+		<choose>
+			<when test="product_id == 0">
+				NULL
+			</when>
+			<otherwise>
+				#{product_id}
+			</otherwise>
+		</choose>
+		,
+		#{question_title},#{question_content},#{question_phone,jdbcType=VARCHAR})
 	</insert>
 </mapper>

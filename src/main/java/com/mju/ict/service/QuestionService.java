@@ -36,6 +36,7 @@ public class QuestionService implements IQuestionService{
 	public void registerQuestion(Question question, HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		question.setUser_id(user.getUser_id());
+		
 		questionDAO.insertQuestion(question);
 	}
 
