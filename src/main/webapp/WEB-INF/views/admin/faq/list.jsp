@@ -28,7 +28,7 @@
 						<td><input type="radio" name="answer_id"
 							value="${answer.answer_id}" /></td>
 						<td><c:out value="${status.count} " /></td>
-						<td>${answer.answer_category}</td>
+						<td>${answer.questionCategory.question_category_title}</td>
 						<td class="answer_title font-weight-bold" id="${answer.answer_id}"
 							colspan="2">${answer.answer_title}</td>
 					</tr>

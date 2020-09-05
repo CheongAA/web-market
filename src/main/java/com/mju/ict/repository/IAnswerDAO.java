@@ -6,7 +6,7 @@ import com.mju.ict.model.Answer;
 
 public interface IAnswerDAO {
 
-	public abstract List<Answer> selectFaqAnswers();
+	public abstract List<Answer> selectAllAnswers();
 
 	public abstract void deleteAnswerById(int id);
 }

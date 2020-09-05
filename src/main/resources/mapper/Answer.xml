@@ -2,9 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mju.ict.repository.IAnswerDAO">
-	<select id="selectFaqAnswers" resultType="com.mju.ict.model.Answer">
+	<resultMap type="com.mju.ict.model.Answer" id="answer">
+		<result column="answer_id" property="answer_id" />
+		<result column="question_id" property="question_id" />
+		<result column="question_category_id" property="question_category_id" />
+		<result column="answer_created" property="answer_created" />
+		<result column="answer_title" property="answer_title" />
+		<result column="answer_content" property="answer_content" />
+
+		<association javaType="com.mju.ict.model.QuestionCategory"
+			property="questionCategory">
+			<id column="question_category_id" property="question_category_id" />
+			<result column="question_category_title" property="question_category_title" />
+		</association>
+	</resultMap>
+
+	<select id="selectAllAnswers" resultMap="answer">
 		SELECT * FROM tb_answer
-		WHERE
-		is_faq = 1
+		LEFT JOIN
+		tb_question_category
+		ON
+		tb_answer.question_category_id =
+		tb_question_category.question_category_id
 	</select>
 </mapper>

@@ -66,7 +66,6 @@
 										)
 									</h4>
 								</div>
-
 							</a>
 						</div>
 					</c:otherwise>

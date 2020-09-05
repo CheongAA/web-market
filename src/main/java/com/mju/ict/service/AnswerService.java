@@ -1,5 +1,6 @@
 package com.mju.ict.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,15 @@ public class AnswerService implements IAnswerService{
 
 	@Override
 	public List<Answer> getFaqAnswers() {
-		return answerDAO.selectFaqAnswers();
+		List<Answer> answers = answerDAO.selectAllAnswers();
+		List<Answer> result = new ArrayList<Answer>();
+		
+		for(Answer a:answers) {
+			if((Integer)a.getQuestion_id() == 0) {
+				result.add(a);
+			}
+		}
+		return result;
 	}
 
 	@Override

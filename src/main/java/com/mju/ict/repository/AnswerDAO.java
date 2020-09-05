@@ -14,8 +14,8 @@ public class AnswerDAO implements IAnswerDAO{
     private SqlSession sqlSession;
 
 	@Override
-	public List<Answer> selectFaqAnswers() {
-		return sqlSession.selectList("selectFaqAnswers");
+	public List<Answer> selectAllAnswers() {
+		return sqlSession.selectList("selectAllAnswers");
 	}
 
 	@Override

@@ -24,15 +24,27 @@
 						</tr>
 					</thead>
 					<tbody>
-							<c:forEach var="question" items="${questions}" varStatus="status">
+						<c:choose>
+							<c:when test="${empty questions}">
 								<tr>
-									<td><c:out value="${status.count} " /></td>
-									<td></td>
-									<td>${question.question_title}</a></td>	
-									<td><fmt:formatDate value="${question.question_created}"
-											pattern="yyyy-MM-dd" /></td>	
+									<td colspan="4" rowspan="4">
+										<h6 class="py-5 my-5 font-weight-bold">문의 내역이 존재하지 않습니다.</h6>
+									</td>
 								</tr>
-							</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="question" items="${questions}"
+									varStatus="status">
+									<tr>
+										<td><c:out value="${status.count} " /></td>
+										<td></td>
+										<td>${question.question_title}</a></td>
+										<td><fmt:formatDate value="${question.question_created}"
+												pattern="yyyy-MM-dd" /></td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
 			</div>

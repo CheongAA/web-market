@@ -29,7 +29,7 @@
 						<c:forEach var="answer" items="${answers}" varStatus="status">
 							<tr class="answer_tr border-bottom">
 								<td><c:out value="${status.count} " /></td>
-								<td>${answer.answer_category}</td>
+								<td>${answer.questionCategory.question_category_title}</td>
 								<td colspan="2">${answer.answer_title}</td>
 							</tr>
 							<tr>
