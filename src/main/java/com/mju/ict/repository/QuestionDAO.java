@@ -26,5 +26,11 @@ public class QuestionDAO implements IQuestionDAO{
 	}
 
 
+	@Override
+	public Question selectQuestionById(int id) {
+		return sqlSession.selectOne("selectQuestionById", id);
+	}
+
+
 
 }

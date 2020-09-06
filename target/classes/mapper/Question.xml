@@ -2,18 +2,76 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mju.ict.repository.IQuestionDAO">
+	<resultMap type="com.mju.ict.model.Question" id="question">
+		<result column="question_id" property="question_id" />
+		<result column="user_id" property="user_id" />
+		<result column="question_category_id"
+			property="question_category_id" />
+		<result column="order_id" property="order_id" />
+		<result column="product_id" property="product_id" />
+		<result column="answer_id" property="answer_id" />
+		<result column="question_created" property="question_created" />
+		<result column="question_title" property="question_title" />
+		<result column="question_content" property="question_content" />
+		<result column="question_phone" property="question_phone" />
 
-	<select id="selectQuestionByUser"
-		resultType="com.mju.ict.model.Question">
-		SELECT * FROM tb_question
+		<association javaType="com.mju.ict.model.QuestionCategory"
+			property="questionCategory">
+			<id column="question_category_id" property="question_category_id" />
+			<result column="question_category_title"
+				property="question_category_title" />
+		</association>
+
+		<association javaType="com.mju.ict.model.Answer"
+			property="answer">
+			<id column="answer_id" property="answer_id" />
+			<result column="question_category_id"
+				property="question_category_id" />
+			<result column="answer_created" property="answer_created" />
+			<result column="answer_title" property="answer_title" />
+			<result column="answer_content" property="answer_content" />
+		</association>
+	</resultMap>
+
+
+	<select id="selectQuestionByUser" resultMap="question">
+		SELECT * FROM
+		tb_question
+		LEFT JOIN
+		tb_question_category
+		ON
+		tb_question.question_category_id =
+		tb_question_category.question_category_id
+		LEFT JOIN
+		tb_answer
+		ON
+		tb_question.answer_id =
+		tb_answer.answer_id
 		WHERE user_id = #{user_id}
 	</select>
+
+	<select id="selectQuestionById" resultMap="question">
+		SELECT * FROM
+		tb_question
+		LEFT JOIN
+		tb_question_category
+		ON
+		tb_question.question_category_id =
+		tb_question_category.question_category_id
+		LEFT JOIN
+		tb_answer
+		ON
+		tb_question.answer_id =
+		tb_answer.answer_id
+		WHERE question_id = #{id}
+	</select>
+
 
 	<insert id="insertQuestion"
 		parameterType="com.mju.ict.model.Question">
 		INSERT INTO tb_question
 		(user_id,question_category_id,
-		order_id,product_id,
+		order_id,product_id,answer_id,
 		question_title,question_content,question_phone)
 		VALUES
 		(#{user_id},#{question_category_id},
@@ -34,7 +92,7 @@
 				#{product_id}
 			</otherwise>
 		</choose>
-		,
+		,NULL,
 		#{question_title},#{question_content},#{question_phone,jdbcType=VARCHAR})
 	</insert>
 </mapper>

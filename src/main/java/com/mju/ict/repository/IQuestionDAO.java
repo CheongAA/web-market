@@ -10,4 +10,6 @@ public interface IQuestionDAO {
 
 	public abstract void insertQuestion(Question question);
 
+	public abstract Question selectQuestionById(int id);
+
 }

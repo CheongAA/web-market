@@ -3,30 +3,38 @@ package com.mju.ict.model;
 import java.util.Date;
 
 public class Question {
-//	 question_id int primary key auto_increment,
-//	 user_id INT not null,
-//	 FOREIGN KEY(user_id) REFERENCES tb_user(user_id),
-//	 question_category_id INT not null,
-//	 FOREIGN KEY(question_category_id) REFERENCES tb_question_category(question_category_id),
-//    order_id int,
+//	question_id int primary key auto_increment,
+//	user_id INT not null,
+//	FOREIGN KEY(user_id) REFERENCES tb_user(user_id),
+//	question_category_id INT not null,
+//	FOREIGN KEY(question_category_id) REFERENCES tb_question_category(question_category_id),
+//    order_id int default null,
 //    FOREIGN KEY(order_id) REFERENCES tb_order(order_id),
-//    question_created datetime default current_timestamp,
-//	  product_id int,
+//	product_id int default null,
 //    FOREIGN KEY(product_id) REFERENCES tb_product(product_id),
+//	answer_id int default null,
+//    FOREIGN KEY(answer_id) REFERENCES tb_answer(answer_id),
+//    question_created datetime default current_timestamp,
 //    question_title varchar(250) not null,
 //    question_content varchar(255) not null,
-//    question_phone varchar(250)
+//    question_phone varchar(250) default null
 	
 	private int question_id;
 	private int user_id;
 	private int question_category_id;
 	private int order_id;
 	private int product_id;
+	private int answer_id;
 	
 	private Date question_created;
 	private String question_title;
 	private String question_content;
 	private String question_phone;
+	
+	private QuestionCategory questionCategory;
+	private Order order;
+	private Product product;
+	private Answer answer;
 	public int getQuestion_id() {
 		return question_id;
 	}
@@ -57,6 +65,12 @@ public class Question {
 	public void setProduct_id(int product_id) {
 		this.product_id = product_id;
 	}
+	public int getAnswer_id() {
+		return answer_id;
+	}
+	public void setAnswer_id(int answer_id) {
+		this.answer_id = answer_id;
+	}
 	public Date getQuestion_created() {
 		return question_created;
 	}
@@ -81,6 +95,31 @@ public class Question {
 	public void setQuestion_phone(String question_phone) {
 		this.question_phone = question_phone;
 	}
+	public QuestionCategory getQuestionCategory() {
+		return questionCategory;
+	}
+	public void setQuestionCategory(QuestionCategory questionCategory) {
+		this.questionCategory = questionCategory;
+	}
+	public Order getOrder() {
+		return order;
+	}
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	public Answer getAnswer() {
+		return answer;
+	}
+	public void setAnswer(Answer answer) {
+		this.answer = answer;
+	}
 	
+
 	
 }

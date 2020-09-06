@@ -14,13 +14,14 @@
 		<div class="col py-5 ml-5">
 			<h3>문의조회</h3>
 			<div class="row mt-5">
-				<table class="table">
+				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th scope="col">번호</th>
 							<th scope="col">분류</th>
 							<th scope="col">제목</th>
 							<th scope="col">작성일</th>
+							<th scope="col">답변</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -35,12 +36,20 @@
 							<c:otherwise>
 								<c:forEach var="question" items="${questions}"
 									varStatus="status">
-									<tr>
-										<td><c:out value="${status.count} " /></td>
-										<td></td>
+									<tr class="questions" id="${question.question_id}">
+										<td>${status.count}</td>
+										<td>${question.questionCategory.question_category_title}</td>
 										<td><a>${question.question_title}</a></td>
 										<td><fmt:formatDate value="${question.question_created}"
 												pattern="yyyy-MM-dd" /></td>
+										<td><c:choose>
+											<c:when test="${question.answer_id eq 0}">
+												X
+											</c:when>
+											<c:otherwise>
+												O
+											</c:otherwise>
+										</c:choose></td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
@@ -49,7 +58,11 @@
 				</table>
 			</div>
 		</div>
-
 	</div>
+	<script type="text/javascript">
+	$(".questions").click(function() {
+		   location.href = "/user/question/"+$(this).attr('id');
+		});
+	</script>
 </body>
 </html>

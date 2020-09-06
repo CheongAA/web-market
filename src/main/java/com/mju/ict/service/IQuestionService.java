@@ -15,6 +15,8 @@ public interface IQuestionService {
 
 	public abstract void registerQuestion(Question question, HttpSession session);
 
+	public abstract Question getQuestionById(int id);
+
 
 
 }

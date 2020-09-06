@@ -40,6 +40,11 @@ public class QuestionService implements IQuestionService{
 		questionDAO.insertQuestion(question);
 	}
 
+	@Override
+	public Question getQuestionById(int id) {
+		return questionDAO.selectQuestionById(id);
+	}
+
 
 
 

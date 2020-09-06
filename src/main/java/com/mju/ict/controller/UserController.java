@@ -229,6 +229,14 @@ public class UserController {
 		return "user/question-list";
 	}
 
+	// 문의 상세 페이지
+	@RequestMapping(value = "/user/question/{id}", method = RequestMethod.GET)
+	public String getQuestionDetail(@PathVariable int id,Model model) {
+		Question question = questionService.getQuestionById(id);
+
+		model.addAttribute("question", question);
+		return "user/question-detail";
+	}
 	
 	// 문의 등록 페이지
 	@RequestMapping(value = "/user/question/add", method = RequestMethod.GET)
