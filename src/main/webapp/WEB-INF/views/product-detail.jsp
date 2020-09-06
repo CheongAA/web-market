@@ -11,7 +11,7 @@
 <body>
 	<div class="row m-4">
 		<div class="col">
-			<div class="row mb-5">
+			<div class="row mb-5 pb-5">
 				<div class="col-sm-5 pl-0 mr-5">
 					<img class="w-100 h-100 mb-3 product-img" alt=""
 						src="${product.product_thumbnailImg}">
@@ -106,174 +106,125 @@
 						</div>
 					</div>
 					<div class="row  mt-4">
-						<button class="col btn btn-light text-center">
-							<p class="float-left">
-								앱에서 첫 구매 시 15% 할인 <br> 그리고 다양한 추가 할인 혜택들
-							</p>
-							<i class="fas fa-arrow-right float-right pt-3"></i>
-						</button>
+						<a class="col btn btn-light text-center py-4"
+							href="${pageContext.request.contextPath}/discount/"> <span
+							class="text-center"> 진행중인 이벤트를 확인해보세요 </span> <i
+							class="fas fa-seedling"></i>
+						</a>
 					</div>
 				</div>
 			</div>
-			<div class="row pt-5">
-				<ul class="col nav nav-tabs">
-					<li class="nav-item"><a class="nav-link active h4 px-5"
-						href="#desc">상품설명</a></li>
-					<li class="nav-item"><a class="nav-link h4 px-5" href="#image">상품이미지</a></li>
-					<li class="nav-item"><a class="nav-link h4 px-5"
-						href="#desc_detail">상세정보</a></li>
-					<li class="nav-item"><a class="nav-link h4 px-5"
-						href="#review">고객후기</a></li>
-					<li class="nav-item"><a class="nav-link h4 px-5" href="#qna">상품문의</a></li>
-				</ul>
+			<div class="row mt-5">
+				<a
+					class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#desc">상품설명</a> <a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#image">상품이미지</a> <a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#review">고객후기</a> <a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#qna">상품문의</a>
 			</div>
 			<div class="row pt-5" id="desc">
 				<img alt="" src=""> 상품설명이미지
 			</div>
-			<div class="row pt-5">
-				<ul class="col nav nav-tabs">
-					<li class="nav-item"><a class="nav-link h4 px-5" href="#desc">상품설명</a>
-					</li>
-					<li class="nav-item"><a class="nav-link active h4 px-5"
-						href="#image">상품이미지</a></li>
-					<li class="nav-item"><a class="nav-link h4 px-5"
-						href="#desc_detail">상세정보</a></li>
-					<li class="nav-item"><a class="nav-link h4 px-5"
-						href="#review">고객후기</a></li>
-					<li class="nav-item"><a class="nav-link h4 px-5" href="#qna">상품문의</a></li>
-				</ul>
+			<div class="row mt-5">
+				<a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#desc">상품설명</a> <a
+					class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#image">상품이미지</a><a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#review">고객후기</a> <a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#qna">상품문의</a>
 			</div>
 			<div class="row pt-5" id="image">
 				<img alt="" src=""> 상품이미지
 			</div>
-			<div class="row pt-5">
-				<ul class="col nav nav-tabs">
-					<li class="nav-item"><a class="nav-link h4 px-5" href="#desc">상품설명</a>
-					</li>
-					<li class="nav-item"><a class="nav-link  h4 px-5"
-						href="#image">상품이미지</a></li>
-					<li class="nav-item"><a class="nav-link active h4 px-5"
-						href="#desc_detail">상세정보</a></li>
-					<li class="nav-item"><a class="nav-link h4 px-5"
-						href="#review">고객후기</a></li>
-					<li class="nav-item"><a class="nav-link h4 px-5" href="#qna">상품문의</a></li>
-				</ul>
-			</div>
-			<div class="row pt-5" id="esc_detail">
-				<table class="col table table-borderless mt-3">
-					<thead>
-						<tr>
-							<th style="width: 40%">판매단위</th>
-							<td>1팩</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">중량/용량</th>
-							<td>옵션별 상이</td>
-						</tr>
-						<tr>
-							<th scope="row">원산지</th>
-							<td>Larry</td>
-						</tr>
-						<tr>
-							<th scope="row">유통기한</th>
-							<td>Larry</td>
-						</tr>
-						<tr>
-							<th scope="row">안내사항</th>
-							<td>Larry</td>
-						</tr>
-					</tbody>
-				</table>
-				<table class="col table table-borderless mt-3">
-					<thead>
-						<tr>
-							<th style="width: 40%">판매단위</th>
-							<td>1팩</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">중량/용량</th>
-							<td>옵션별 상이</td>
-						</tr>
-						<tr>
-							<th scope="row">원산지</th>
-							<td>Larry</td>
-						</tr>
-						<tr>
-							<th scope="row">유통기한</th>
-							<td>Larry</td>
-						</tr>
-						<tr>
-							<th scope="row">안내사항</th>
-							<td>Larry</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="row pt-5">
-				<ul class="col nav nav-tabs">
-					<li class="nav-item"><a class="nav-link h4 px-5" href="#desc">상품설명</a>
-					</li>
-					<li class="nav-item"><a class="nav-link h4 px-5" href="#image">상품이미지</a></li>
-					<li class="nav-item"><a class="nav-link h4 px-5"
-						href="#desc_detail">상세정보</a></li>
-					<li class="nav-item"><a class="nav-link active h4 px-5"
-						href="#review">고객후기</a></li>
-					<li class="nav-item"><a class="nav-link h4 px-5" href="#qna">상품문의</a></li>
-				</ul>
+			<div class="row mt-5">
+				<a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#desc">상품설명</a> <a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#image">상품이미지</a><a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#review">고객후기</a> <a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#qna">상품문의</a>
 			</div>
 			<div class="row pt-5" id="review">
-				<h6>후기</h6>
-				<table class="table mt-3">
+				<div class="m-3">
+					<h5>PRODUCT REVIEW</h5>
+					<ul>
+						<li><small>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로
+							이동될 수 있습니다.</small></li>
+					</ul>
+				</div>
+				<table class="table table-hover text-center border-bottom">
 					<thead>
 						<tr>
 							<th scope="col">번호</th>
-							<th scope="col">제목</th>
+							<th scope="col" style="width: 40%">제목</th>
 							<th scope="col">작성자</th>
 							<th scope="col">작성일</th>
-							<th scope="col">조회</th>
+							<th scope="col">조회수</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="review" items="${reviews}" varStatus="status">
-							<tr>
-								<td><c:out value="${status.count} " /></td>
-								<td>${review.review_title}</td>
-								<td>${review.user_identification}</td>
-								<td><fmt:formatDate value="${review.review_created}"
-										pattern="yyyy-MM-dd" /></td>
-								<td>${review.review_view}</td>
-							</tr>
-						</c:forEach>
+						<c:choose>
+							<c:when test="${empty reviews}">
+								<tr>
+									<td colspan="5" rowspan="5">
+										<h6 class="py-5 my-5 font-weight-bold text-center">후기가
+											존재하지 않습니다.</h6>
+									</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
+				<div class="w-100">
+					<a class="btn btn-secondary m-5 float-right "
+						href="${pageContext.request.contextPath}/user/productQuestionAdd/${product.product_id}">후기작성</a>
+				</div>
+				<nav aria-label="Page navigation example" class="d-block mx-auto">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						</a></li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						</a></li>
+					</ul>
+				</nav>
 			</div>
-			<div class="row pt-5">
-				<ul class="col nav nav-tabs">
-					<li class="nav-item"><a class="nav-link h4 px-5" href="#desc">상품설명</a>
-					</li>
-					<li class="nav-item"><a class="nav-link h4 px-5" href="#image">상품이미지</a></li>
-					<li class="nav-item"><a class="nav-link h4 px-5"
-						href="#desc_detail">상세정보</a></li>
-					<li class="nav-item"><a class="nav-link h4 px-5"
-						href="#review">고객후기</a></li>
-					<li class="nav-item"><a class="nav-link active h4 px-5"
-						href="#qna">상품문의</a></li>
-				</ul>
+			<div class="row mt-5">
+				<a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#desc">상품설명</a> <a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#image">상품이미지</a>  <a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#review">고객후기</a> <a
+					class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-3"
+					href="#qna">상품문의</a>
 			</div>
 			<div class="row pt-5" id="qna">
-				<div>
+				<div class="m-3">
 					<h5>PRODUCT Q&A</h5>
 					<ul>
-						<li>상품에 대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로
-							이동될 수 있습니다.</li>
-						<li>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 마이페이지 내 1:1 문의에 남겨주세요.</li>
+						<li><small>상품에 대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로
+							이동될 수 있습니다.</small></li>
+						<li><small>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 마이페이지 내 1:1 문의에 남겨주세요.</small></li>
 					</ul>
 				</div>
-				<table class="table table-hover text-center">
+				<table class="table table-hover text-center border-bottom">
 					<thead>
 						<tr>
 							<th scope="col">번호</th>
@@ -303,21 +254,37 @@
 												pattern="yyyy-MM-dd" /></td>
 									</tr>
 									<c:if test="${question.answer_id != 0 }">
-									<tr>
-										<td><span class="badge badge-warning">Re</span></td>
-										<td>${question.answer.answer_title }</td>
-										<td>MARKET</td>
-										<td><fmt:formatDate value="${question.answer.answer_created}"
-												pattern="yyyy-MM-dd" /></td>
-									</tr>
+										<tr>
+											<td><span class="badge badge-warning">Re</span></td>
+											<td>${question.answer.answer_title }</td>
+											<td>MARKET</td>
+											<td><fmt:formatDate
+													value="${question.answer.answer_created}"
+													pattern="yyyy-MM-dd" /></td>
+										</tr>
 									</c:if>
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
 					</tbody>
 				</table>
-				<a class="btn btn-secondary m-5 ml-auto"
-					href="${pageContext.request.contextPath}/user/productQuestionAdd/${product.product_id}">상품문의</a>
+				<div class="w-100">
+					<a class="btn btn-secondary m-5 float-right "
+						href="${pageContext.request.contextPath}/user/productQuestionAdd/${product.product_id}">상품문의</a>
+				</div>
+				<nav aria-label="Page navigation example" class="d-block mx-auto">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						</a></li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						</a></li>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</div>
@@ -357,6 +324,16 @@
 				}
 			});
 		}
+
+		$(".questions").click(function() {
+			var user = $("#user_id").val();
+			var question_user = $("#question_user_id").val();
+			if (user == question_user) {
+
+			} else {
+				alert("작성자만 확인할 수 있습니다.");
+			}
+		});
 	</script>
 </body>
 </html>
