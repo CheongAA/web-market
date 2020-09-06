@@ -64,7 +64,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="${pageContext.request.contextPath}/user/question/add">
-           		  문의등록
+           		  1:1 문의등록
             </a>
           </li>      
         </ul>                        

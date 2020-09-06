@@ -30,8 +30,8 @@
 							<td></td>
 						</tr>
 						<tr>
-							<th scope="row" class="table-secondary">상품번호</th>
-							<td style="width: 10%"></td>
+							<th scope="row" class="table-secondary">상품명</th>
+							<td style="width: 10%">${question.product.product_name}</td>
 							<th style="width: 10%" class="table-secondary">핸드폰</th>
 							<td>${question.question_phone}</td>
 						</tr>

@@ -32,5 +32,11 @@ public class QuestionDAO implements IQuestionDAO{
 	}
 
 
+	@Override
+	public List<Question> selectQuestionByProduct(int product_id) {
+		return sqlSession.selectList("selectQuestionByProduct",product_id);
+	}
+
+
 
 }

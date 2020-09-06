@@ -35,6 +35,8 @@ public class Question {
 	private Order order;
 	private Product product;
 	private Answer answer;
+	private User user;
+	
 	public int getQuestion_id() {
 		return question_id;
 	}
@@ -118,6 +120,12 @@ public class Question {
 	}
 	public void setAnswer(Answer answer) {
 		this.answer = answer;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 

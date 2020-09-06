@@ -30,7 +30,7 @@
 					<div class="dropdown-menu">
 						<a class="dropdown-item p-3 text-muted" href="${pageContext.request.contextPath}/notice">공지사항</a> <a
 							class="dropdown-item p-3 text-muted" href="${pageContext.request.contextPath}/faq">자주하는 질문</a> <a
-							class="dropdown-item p-3 text-muted" href="${pageContext.request.contextPath}/user/myqna">1:1 문의</a>
+							class="dropdown-item p-3 text-muted" href="${pageContext.request.contextPath}/user/question">1:1 문의</a>
 					</div>
 				</div>
 			</nav>

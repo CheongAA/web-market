@@ -15,7 +15,8 @@
 				<div class="col-sm-5 pl-0 mr-5">
 					<img class="w-100 h-100 mb-3 product-img" alt=""
 						src="${product.product_thumbnailImg}">
-					<c:if test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
+					<c:if
+						test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
 						<div class="product-img-text bg-warning text-center p-3">
 							<p class="h4 text-white font-weight-light">SAVE</p>
 							<p class="h3 text-white font-weight-bold">
@@ -34,7 +35,8 @@
 								<tr>
 									<th style="width: 40%">가격(1팩)</th>
 									<td><c:choose>
-											<c:when test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
+											<c:when
+												test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
 												<c:set var="price"
 													value="${product.product_price - ((product.product_price * product.discount.discount_rate)/100)}" />
 												<span class="text-muted h5 font-weight-light"
@@ -74,11 +76,11 @@
 					</div>
 					<div class="row justify-content-end">
 						<button type="button"
-							class="col-sm-3 btn btn-outline-dark py-3 mx-2" id="cart_btn" data-toggle="modal"
-							data-target="#cart_modal">장바구니</button>
+							class="col-sm-3 btn btn-outline-dark py-3 mx-2" id="cart_btn"
+							data-toggle="modal" data-target="#cart_modal">장바구니</button>
 						<button type="button" class="col-sm-3 btn btn-dark py-3"
 							id="buy_btn">바로구매</button>
-							
+
 						<!-- Modal -->
 						<div class="modal fade" id="cart_modal" data-backdrop="static"
 							data-keyboard="false" tabindex="-1"
@@ -96,7 +98,8 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">계속 쇼핑하기</button>
-										<a type="button" class="btn btn-primary" href="${pageContext.request.contextPath}/carts">장바구니로 이동</a>
+										<a type="button" class="btn btn-primary"
+											href="${pageContext.request.contextPath}/carts">장바구니로 이동</a>
 									</div>
 								</div>
 							</div>
@@ -262,7 +265,59 @@
 				</ul>
 			</div>
 			<div class="row pt-5" id="qna">
-				<img alt="" src=""> 상품문의
+				<div>
+					<h5>PRODUCT Q&A</h5>
+					<ul>
+						<li>상품에 대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로
+							이동될 수 있습니다.</li>
+						<li>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 마이페이지 내 1:1 문의에 남겨주세요.</li>
+					</ul>
+				</div>
+				<table class="table table-hover text-center">
+					<thead>
+						<tr>
+							<th scope="col">번호</th>
+							<th scope="col" style="width: 40%">제목</th>
+							<th scope="col">작성자</th>
+							<th scope="col">작성일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:choose>
+							<c:when test="${empty questions}">
+								<tr>
+									<td colspan="4" rowspan="4">
+										<h6 class="py-5 my-5 font-weight-bold text-center">문의 내역이
+											존재하지 않습니다.</h6>
+									</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="question" items="${questions}"
+									varStatus="status">
+									<tr class="questions" id="${question.question_id}">
+										<td>${status.count}</td>
+										<td>${question.question_title}</td>
+										<td><a>${question.user.user_name}</a></td>
+										<td><fmt:formatDate value="${question.question_created}"
+												pattern="yyyy-MM-dd" /></td>
+									</tr>
+									<c:if test="${question.answer_id != 0 }">
+									<tr>
+										<td><span class="badge badge-warning">Re</span></td>
+										<td>${question.answer.answer_title }</td>
+										<td>MARKET</td>
+										<td><fmt:formatDate value="${question.answer.answer_created}"
+												pattern="yyyy-MM-dd" /></td>
+									</tr>
+									</c:if>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
+				<a class="btn btn-secondary m-5 ml-auto"
+					href="${pageContext.request.contextPath}/user/productQuestionAdd/${product.product_id}">상품문의</a>
 			</div>
 		</div>
 	</div>
@@ -271,11 +326,11 @@
 
 		$("#product_count").on("change", calTotalPrice);
 
-		$("#cart_btn").click(function(){
+		$("#cart_btn").click(function() {
 			addCart('cart');
 		});
-		
-		$("#buy_btn").click(function(){
+
+		$("#buy_btn").click(function() {
 			addCart('buy');
 		});
 
@@ -296,7 +351,7 @@
 				type : "POST",
 				data : form,
 				success : function(data) {
-					if(btn == 'buy'){
+					if (btn == 'buy') {
 						location.href = "/carts";
 					}
 				}

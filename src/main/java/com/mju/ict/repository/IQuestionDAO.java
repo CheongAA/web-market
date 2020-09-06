@@ -12,4 +12,6 @@ public interface IQuestionDAO {
 
 	public abstract Question selectQuestionById(int id);
 
+	public abstract List<Question> selectQuestionByProduct(int product_id);
+
 }

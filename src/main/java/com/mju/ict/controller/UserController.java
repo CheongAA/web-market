@@ -23,12 +23,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mju.ict.model.Address;
 import com.mju.ict.model.Order;
+import com.mju.ict.model.Product;
 import com.mju.ict.model.Question;
 import com.mju.ict.model.QuestionCategory;
 import com.mju.ict.model.User;
 import com.mju.ict.service.IAddressService;
 import com.mju.ict.service.ICartService;
 import com.mju.ict.service.IOrderService;
+import com.mju.ict.service.IProductService;
 import com.mju.ict.service.IQuestionService;
 import com.mju.ict.service.IUserService;
 
@@ -48,7 +50,10 @@ public class UserController {
 	IOrderService orderService;
 	
 	@Autowired
-	IQuestionService questionService;	
+	IProductService productService;
+	
+	@Autowired
+	IQuestionService questionService;
 	
 	@Autowired
 	IUserService userService;	
@@ -238,7 +243,7 @@ public class UserController {
 		return "user/question-detail";
 	}
 	
-	// 문의 등록 페이지
+	// 1:1 문의 등록 페이지
 	@RequestMapping(value = "/user/question/add", method = RequestMethod.GET)
 	public String getUserQuestionAdd(Model model, HttpSession session) {
 		User user = (User) session.getAttribute("user");
@@ -251,7 +256,18 @@ public class UserController {
 		return "user/question-add";
 	}
 	
-	// 문의 등록
+	// 상품 문의 등록 페이지
+	@RequestMapping(value = "/user/productQuestionAdd/{id}", method = RequestMethod.GET)
+	public String getUserProductQuestionAdd(@PathVariable int id,Model model, HttpSession session) {
+		QuestionCategory category = questionService.getProductQuestionCategory();
+		Product product = productService.getProductById(id);
+		
+		model.addAttribute("category", category);
+		model.addAttribute("product", product);
+		return "user/product-question-add";
+	}
+	
+	// 1:1 문의 등록 / 상품 문의 등록
 	@RequestMapping(value = "/user/question", method = RequestMethod.POST)
 	public String addUserQuestion(@ModelAttribute @Valid Question question, BindingResult result, HttpSession session) {
 		questionService.registerQuestion(question,session);

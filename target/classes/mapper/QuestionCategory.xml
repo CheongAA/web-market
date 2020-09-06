@@ -5,4 +5,10 @@
 	<select id="selectAllQuestionCategories" resultType="com.mju.ict.model.QuestionCategory">
 		SELECT * FROM tb_question_category
 	</select>
+	
+	<select id="selectProductQuestionCategory" resultType="com.mju.ict.model.QuestionCategory">
+		SELECT * FROM tb_question_category
+		WHERE
+		question_category_title = "상품정보문의"
+	</select>
 </mapper>

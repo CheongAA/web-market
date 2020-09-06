@@ -31,6 +31,19 @@
 			<result column="answer_title" property="answer_title" />
 			<result column="answer_content" property="answer_content" />
 		</association>
+
+		<association javaType="com.mju.ict.model.Product"
+			property="product">
+			<id column="product_id" property="product_id" />
+			<result column="product_id" property="product_id" />
+			<result column="product_name" property="product_name" />
+		</association>
+
+		<association javaType="com.mju.ict.model.User"
+			property="user">
+			<id column="user_id" property="user_id" />
+			<result column="user_name" property="user_name" />
+		</association>
 	</resultMap>
 
 
@@ -47,7 +60,30 @@
 		ON
 		tb_question.answer_id =
 		tb_answer.answer_id
-		WHERE user_id = #{user_id}
+		LEFT JOIN
+		tb_product
+		ON
+		tb_question.product_id =
+		tb_product.product_id
+		WHERE user_id =
+		#{user_id}
+	</select>
+
+	<select id="selectQuestionByProduct" resultMap="question">
+		SELECT * FROM
+		tb_question
+		LEFT JOIN
+		tb_answer
+		ON
+		tb_question.answer_id =
+		tb_answer.answer_id
+		LEFT JOIN
+		tb_user
+		ON
+		tb_question.user_id =
+		tb_user.user_id
+		WHERE tb_question.product_id = #{product_id}
+		order by question_created desc
 	</select>
 
 	<select id="selectQuestionById" resultMap="question">
@@ -63,6 +99,11 @@
 		ON
 		tb_question.answer_id =
 		tb_answer.answer_id
+		LEFT JOIN
+		tb_product
+		ON
+		tb_question.product_id =
+		tb_product.product_id
 		WHERE question_id = #{id}
 	</select>
 

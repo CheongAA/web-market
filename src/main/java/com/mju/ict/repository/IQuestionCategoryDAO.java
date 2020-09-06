@@ -7,4 +7,6 @@ import com.mju.ict.model.QuestionCategory;
 public interface IQuestionCategoryDAO {
 
 	public abstract List<QuestionCategory> selectAllQuestionCategories();
+
+	public abstract QuestionCategory selectProductQuestionCategory();
 }

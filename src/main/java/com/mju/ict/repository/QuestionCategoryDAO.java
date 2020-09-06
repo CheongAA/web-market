@@ -17,6 +17,10 @@ public class QuestionCategoryDAO implements IQuestionCategoryDAO{
 	public List<QuestionCategory> selectAllQuestionCategories() {
 		return sqlSession.selectList("selectAllQuestionCategories");
 	}
-	
 
+	@Override
+	public QuestionCategory selectProductQuestionCategory() {
+		return sqlSession.selectOne("selectProductQuestionCategory");
+	
+	}
 }

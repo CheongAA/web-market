@@ -27,16 +27,18 @@
 					</thead>
 					<tbody>
 						<c:forEach var="answer" items="${answers}" varStatus="status">
-							<tr class="answer_tr border-bottom">
-								<td><c:out value="${status.count} " /></td>
-								<td>${answer.questionCategory.question_category_title}</td>
-								<td colspan="2">${answer.answer_title}</td>
-							</tr>
-							<tr>
-								<td colspan="4" class="p-5 text-left" style="display: none;"
-									id="content_${status.count}"><i
-									class="fas fa-font market-color"> ></i><span class="ml-2">${answer.answer_content}</span></td>
-							</tr>
+							<c:if test="${answer.question_category_id != 0}">
+								<tr class="answer_tr border-bottom">
+									<td><c:out value="${status.count} " /></td>
+									<td>${answer.questionCategory.question_category_title}</td>
+									<td colspan="2">${answer.answer_title}</td>
+								</tr>
+								<tr>
+									<td colspan="4" class="p-5 text-left" style="display: none;"
+										id="content_${status.count}"><i
+										class="fas fa-font market-color"> ></i><span class="ml-2">${answer.answer_content}</span></td>
+								</tr>
+							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>

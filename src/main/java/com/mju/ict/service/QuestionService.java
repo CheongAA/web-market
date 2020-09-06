@@ -28,9 +28,25 @@ public class QuestionService implements IQuestionService{
 	}
 	
 	@Override
+	public QuestionCategory getProductQuestionCategory() {
+		return questionCategoryDAO.selectProductQuestionCategory();
+	}
+	
+	@Override
 	public List<Question> getQuestionByUser(int user_id) {
 		return questionDAO.selectQuestionByUser(user_id);
 	}
+	
+	@Override
+	public List<Question> getQuestionByProduct(int id) {
+		return questionDAO.selectQuestionByProduct(id);
+	}
+	
+	@Override
+	public Question getQuestionById(int id) {
+		return questionDAO.selectQuestionById(id);
+	}
+
 
 	@Override
 	public void registerQuestion(Question question, HttpSession session) {
@@ -40,10 +56,8 @@ public class QuestionService implements IQuestionService{
 		questionDAO.insertQuestion(question);
 	}
 
-	@Override
-	public Question getQuestionById(int id) {
-		return questionDAO.selectQuestionById(id);
-	}
+
+
 
 
 

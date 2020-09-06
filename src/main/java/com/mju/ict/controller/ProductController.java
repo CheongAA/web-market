@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mju.ict.model.Cart;
 import com.mju.ict.model.Category;
 import com.mju.ict.model.Product;
+import com.mju.ict.model.Question;
 import com.mju.ict.model.User;
 import com.mju.ict.service.ICartService;
 import com.mju.ict.service.ICategoryService;
 import com.mju.ict.service.IProductService;
+import com.mju.ict.service.IQuestionService;
 
 @Controller
 public class ProductController {
@@ -36,6 +38,9 @@ public class ProductController {
 	
 	@Autowired
 	IProductService productService;
+	
+	@Autowired
+	IQuestionService questionService;	
 
 	
 	//카테고리 조회
@@ -88,8 +93,10 @@ public class ProductController {
 	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
 	public String getProductDetail(@PathVariable int id,Model model) {
 		Product product = productService.getProductById(id);
+		List<Question> questions = questionService.getQuestionByProduct(id);
 		
 		model.addAttribute("product", product);
+		model.addAttribute("questions", questions);
 		return "/product-detail";
 	}
 	

@@ -14,7 +14,7 @@
 						공지사항 </a></li>
 				<li class="list-group-item list-group-item-light"><a class="nav-link" href="${pageContext.request.contextPath}/faq"> 자주하는 질문
 				</a></li>
-				<li class="list-group-item list-group-item-light"><a class="nav-link" href="#"> 1:1 문의 </a>
+				<li class="list-group-item list-group-item-light"><a class="nav-link" href="${pageContext.request.contextPath}/user/question"> 1:1 문의 </a>
 				</li>
 			</ul>
 		</div>
