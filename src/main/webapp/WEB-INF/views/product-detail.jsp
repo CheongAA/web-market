@@ -148,7 +148,7 @@
 					href="#desc">상품설명</a> <a
 					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
 					href="#image">상품이미지</a><a
-					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-3"
 					href="#review">고객후기</a> <a
 					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
 					href="#qna">상품문의</a>
@@ -157,8 +157,8 @@
 				<div class="m-3">
 					<h5>PRODUCT REVIEW</h5>
 					<ul>
-						<li><small>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로
-							이동될 수 있습니다.</small></li>
+						<li><small>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은
+								사전동의 없이 담당 게시판으로 이동될 수 있습니다.</small></li>
 					</ul>
 				</div>
 				<table class="table table-hover text-center border-bottom">
@@ -209,7 +209,7 @@
 					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
 					href="#desc">상품설명</a> <a
 					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
-					href="#image">상품이미지</a>  <a
+					href="#image">상품이미지</a> <a
 					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
 					href="#review">고객후기</a> <a
 					class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-3"
@@ -219,9 +219,10 @@
 				<div class="m-3">
 					<h5>PRODUCT Q&A</h5>
 					<ul>
-						<li><small>상품에 대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로
-							이동될 수 있습니다.</small></li>
-						<li><small>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 마이페이지 내 1:1 문의에 남겨주세요.</small></li>
+						<li><small>상품에 대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은
+								사전동의 없이 담당 게시판으로 이동될 수 있습니다.</small></li>
+						<li><small>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 마이페이지 내
+								1:1 문의에 남겨주세요.</small></li>
 					</ul>
 				</div>
 				<table class="table table-hover text-center border-bottom">
@@ -249,18 +250,27 @@
 									<tr class="questions" id="${question.question_id}">
 										<td>${status.count}</td>
 										<td>${question.question_title}</td>
-										<td><a>${question.user.user_name}</a></td>
+										<td>${question.user.user_name}</td>
 										<td><fmt:formatDate value="${question.question_created}"
 												pattern="yyyy-MM-dd" /></td>
 									</tr>
+									<tr>
+										<td colspan="4" class="p-5 text-left" style="display: none;"
+											id="question_content_${status.count}"><span class="ml-2">${question.question_content}</span></td>
+									</tr>
 									<c:if test="${question.answer_id != 0 }">
-										<tr>
+										<tr class="answers" id="${question.answer_id}">
 											<td><span class="badge badge-warning">Re</span></td>
 											<td>${question.answer.answer_title }</td>
 											<td>MARKET</td>
 											<td><fmt:formatDate
 													value="${question.answer.answer_created}"
 													pattern="yyyy-MM-dd" /></td>
+										</tr>
+										<tr>
+											<td colspan="4" class="p-5 text-left" style="display: none;"
+												id="answer_content_${question.answer_id}"><i
+												class="fas fa-font market-color"> ></i><span class="ml-2">${question.answer.answer_content}</span></td>
 										</tr>
 									</c:if>
 								</c:forEach>
@@ -324,16 +334,29 @@
 				}
 			});
 		}
-
+		
 		$(".questions").click(function() {
-			var user = $("#user_id").val();
-			var question_user = $("#question_user_id").val();
-			if (user == question_user) {
+			var td = $("#question_content_" + $(this).children("td").html());
 
+			if (td.css("display") != "table-cell") {
+				$("[id^=content_]").css("display", "none");
+				td.css("display", "table-cell");
 			} else {
-				alert("작성자만 확인할 수 있습니다.");
+				td.css("display", "none");
 			}
 		});
+		
+		$(".answers").click(function() {
+			var td = $("#answer_content_" + $(this).attr("id"));
+
+			if (td.css("display") != "table-cell") {
+				$("[id^=content_]").css("display", "none");
+				td.css("display", "table-cell");
+			} else {
+				td.css("display", "none");
+			}
+		});
+
 	</script>
 </body>
 </html>

@@ -17,11 +17,18 @@ public class AnswerDAO implements IAnswerDAO{
 	public List<Answer> selectAllAnswers() {
 		return sqlSession.selectList("selectAllAnswers");
 	}
+	
+	@Override
+	public void insertAnswer(Answer answer) {
+		sqlSession.insert("insertAnswer",answer);
+	}
 
 	@Override
 	public void deleteAnswerById(int id) {
 		sqlSession.delete("deleteAnswerById",id);
 	}
+
+
 
 
 

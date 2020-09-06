@@ -29,6 +29,8 @@ import com.mju.ict.model.Discount;
 import com.mju.ict.model.Notice;
 import com.mju.ict.model.Order;
 import com.mju.ict.model.Product;
+import com.mju.ict.model.Question;
+import com.mju.ict.model.QuestionCategory;
 import com.mju.ict.model.User;
 import com.mju.ict.service.IAnswerService;
 import com.mju.ict.service.IBrandService;
@@ -37,6 +39,7 @@ import com.mju.ict.service.IDiscountService;
 import com.mju.ict.service.INoticeService;
 import com.mju.ict.service.IOrderService;
 import com.mju.ict.service.IProductService;
+import com.mju.ict.service.IQuestionService;
 import com.mju.ict.service.IUserService;
 
 import net.sf.json.JSONArray;
@@ -61,6 +64,8 @@ public class AdminController {
 	IOrderService orderService;
 	@Autowired
 	IProductService productService;
+	@Autowired
+	IQuestionService questionService;
 	@Autowired
 	IUserService userService;
 
@@ -398,25 +403,6 @@ public class AdminController {
 		noticeService.deleteNoticeById(id);
 		return "redirect:/admin/notice";
 	}
-	
-	/////////////// 자주하는 질문 //////////////////
-
-	// 자주하는 질문 목록 페이지
-	@RequestMapping(value = "/faq", method = RequestMethod.GET)
-	public String getFAQs(Model model) {
-		List<Answer> answers = answerService.getFaqAnswers();
-		model.addAttribute("answers", answers);
-		return "admin/faq/list";
-	}
-	
-	
-	// 답변 삭제
-	@RequestMapping(value = "/answer/delete/{id}", method = RequestMethod.GET)
-	public String deleteFAQ(@PathVariable int id, Model model) {
-		answerService.deleteAnswerById(id);
-		return "redirect:/admin/faq";
-	}
-
 	/////////////// 주문//////////////////
 	
 	// 주문 조회 페이지
@@ -434,5 +420,57 @@ public class AdminController {
 		model.addAttribute("order", order);
 		return "admin/order/detail";
 	}
+	
+	/////////////// 문의 및 답변//////////////////
+	
+	// 문의 목록 페이지
+	@RequestMapping(value = "/question", method = RequestMethod.GET)
+	public String getQuestions(Model model) {
+		List<Question> questions = questionService.getAllQuestion();
+		model.addAttribute("questions", questions);
+		return "admin/question/list";
+	}
+	
+	// 자주하는 질문 목록 페이지
+	@RequestMapping(value = "/faq", method = RequestMethod.GET)
+	public String getFAQs(Model model) {
+		List<Answer> answers = answerService.getFaqAnswers();
+		model.addAttribute("answers", answers);
+		return "admin/question/faq-list";
+	}
+	
+	// 문의 상세 페이지
+	@RequestMapping(value = "/question/{id}", method = RequestMethod.GET)
+	public String getQuestionDetail(@PathVariable int id, Model model) {
+		Question question = questionService.getQuestionById(id);
+		model.addAttribute("question", question);
+		return "admin/question/detail";
+	}
 
+	// 답변 등록 페이지
+	@RequestMapping(value = "/answer/add/{id}", method = RequestMethod.GET)
+	public String getAnswerAdd(@PathVariable int id,Model model) {
+		Question question = questionService.getQuestionById(id);
+		
+		if(question == null) {
+			List<QuestionCategory> questionCategories = questionService.getAllQuestionCategories();
+			model.addAttribute("questionCategories", questionCategories);
+		}
+		model.addAttribute("question", question);
+		return "admin/question/answer-add";
+	}
+	
+	// 답변 등록
+	@RequestMapping(value = "/answer", method = RequestMethod.POST)
+	public String addAnswer(@ModelAttribute @Valid Answer answer,@RequestParam int question_id, BindingResult result) {
+		answerService.registerAnswer(answer,question_id);
+		return "redirect:/admin/question/"+question_id;
+	}
+	
+	// 답변 삭제
+	@RequestMapping(value = "/answer/delete/{id}", method = RequestMethod.GET)
+	public String deleteFAQ(@PathVariable int id, Model model) {
+		answerService.deleteAnswerById(id);
+		return "redirect:/admin/faq";
+	}
 }

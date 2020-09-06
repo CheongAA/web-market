@@ -12,6 +12,8 @@ public interface IQuestionService {
 	public abstract List<QuestionCategory> getAllQuestionCategories();
 	
 	public abstract QuestionCategory getProductQuestionCategory();
+	
+	public abstract List<Question> getAllQuestion();
 
 	public abstract List<Question> getQuestionByUser(int user_id);
 	
@@ -20,5 +22,7 @@ public interface IQuestionService {
 	public abstract Question getQuestionById(int id);
 
 	public abstract void registerQuestion(Question question, HttpSession session);
+
+
 
 }

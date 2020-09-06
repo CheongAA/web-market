@@ -4,8 +4,8 @@
 <mapper namespace="com.mju.ict.repository.IAnswerDAO">
 	<resultMap type="com.mju.ict.model.Answer" id="answer">
 		<result column="answer_id" property="answer_id" />
-		<result column="question_id" property="question_id" />
-		<result column="question_category_id" property="question_category_id" />
+		<result column="question_category_id"
+			property="question_category_id" />
 		<result column="answer_created" property="answer_created" />
 		<result column="answer_title" property="answer_title" />
 		<result column="answer_content" property="answer_content" />
@@ -13,7 +13,8 @@
 		<association javaType="com.mju.ict.model.QuestionCategory"
 			property="questionCategory">
 			<id column="question_category_id" property="question_category_id" />
-			<result column="question_category_title" property="question_category_title" />
+			<result column="question_category_title"
+				property="question_category_title" />
 		</association>
 	</resultMap>
 
@@ -25,4 +26,21 @@
 		tb_answer.question_category_id =
 		tb_question_category.question_category_id
 	</select>
+
+	<insert id="insertAnswer"
+		parameterType="com.mju.ict.model.Answer" useGeneratedKeys="true"
+		keyProperty="answer_id">
+		INSERT INTO tb_answer
+		(question_category_id,answer_title,answer_content)
+		VALUES(
+			<choose>
+			<when test="question_category_id == 0">
+				NULL
+			</when>
+			<otherwise>
+				#{question_category_id}
+			</otherwise>
+		</choose>
+		,#{answer_title},#{answer_content})
+	</insert>
 </mapper>

@@ -24,19 +24,21 @@
 			</thead>
 			<tbody>
 				<c:forEach var="answer" items="${answers}" varStatus="status">
-					<tr class="border-bottom">
-						<td><input type="radio" name="answer_id"
-							value="${answer.answer_id}" /></td>
-						<td><c:out value="${status.count} " /></td>
-						<td>${answer.questionCategory.question_category_title}</td>
-						<td class="answer_title font-weight-bold" id="${answer.answer_id}"
-							colspan="2">${answer.answer_title}</td>
-					</tr>
-					<tr>
-						<td colspan="5" class="p-5 text-left" style="display: none;"
-							id="content_${status.count}"><i
-							class="fas fa-font market-color"> ></i><span class="ml-2">${answer.answer_content}</span></td>
-					</tr>
+					<c:if test="${answer.question_category_id != 0}">
+						<tr class="border-bottom">
+							<td><input type="radio" name="answer_id"
+								value="${answer.answer_id}" /></td>
+							<td><c:out value="${status.count} " /></td>
+							<td>${answer.questionCategory.question_category_title}</td>
+							<td class="answer_title font-weight-bold"
+								id="${answer.answer_id}" colspan="2">${answer.answer_title}</td>
+						</tr>
+						<tr>
+							<td colspan="5" class="p-5 text-left" style="display: none;"
+								id="content_${status.count}"><i
+								class="fas fa-font market-color"> ></i><span class="ml-2">${answer.answer_content}</span></td>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</tbody>
 		</table>

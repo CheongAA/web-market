@@ -1,6 +1,7 @@
 package com.mju.ict.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,16 @@ public class QuestionDAO implements IQuestionDAO{
     private SqlSession sqlSession;
 
     
+    
+	@Override
+	public List<Question> selectAllQuestions() {
+		return sqlSession.selectList("selectAllQuestions");
+	}
+	
+	
 	@Override
 	public List<Question> selectQuestionByUser(int user_id) {
 		return sqlSession.selectList("selectQuestionByUser",user_id);
-	}
-
-	
-	@Override
-	public void insertQuestion(Question question) {
-		sqlSession.insert("insertQuestion", question);
 	}
 
 
@@ -37,6 +39,15 @@ public class QuestionDAO implements IQuestionDAO{
 		return sqlSession.selectList("selectQuestionByProduct",product_id);
 	}
 
+	@Override
+	public void insertQuestion(Question question) {
+		sqlSession.insert("insertQuestion", question);
+	}
 
+
+	@Override
+	public void updateQuestionAnswerId(Map<String, Integer> map) {
+		sqlSession.update("updateQuestionAnswerId", map);
+	}
 
 }

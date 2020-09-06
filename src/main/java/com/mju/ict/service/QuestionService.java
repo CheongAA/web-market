@@ -33,6 +33,11 @@ public class QuestionService implements IQuestionService{
 	}
 	
 	@Override
+	public List<Question> getAllQuestion() {
+		return questionDAO.selectAllQuestions();
+	}
+	
+	@Override
 	public List<Question> getQuestionByUser(int user_id) {
 		return questionDAO.selectQuestionByUser(user_id);
 	}
@@ -55,6 +60,7 @@ public class QuestionService implements IQuestionService{
 		
 		questionDAO.insertQuestion(question);
 	}
+
 
 
 
