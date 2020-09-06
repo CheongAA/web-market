@@ -13,7 +13,7 @@
 <body>
 	<jsp:include page="../admin_header.jsp" flush="false" />
 	<div class="row mt-5">
-		<h3 class="w-100 text-center border-bottom pb-5">문의답변</h3>
+		<h3 class="w-100 text-center border-bottom pb-5">답변 등록하기</h3>
 		<c:if test="${question != null }">
 			<div class="col-12 bg-light p-5">
 				<h3>Q 문의</h3>
@@ -64,10 +64,6 @@
 
 		<div class="col-12 mt-5">
 			<form action="/admin/answer" method="post">
-				<c:if test="${question !=null}">
-					<input type="hidden" name="question_id"
-						value="${question.question_id}">
-				</c:if>
 				<table class="table table-bordered">
 					<tbody>
 						<tr>
@@ -85,10 +81,15 @@
 									<c:when test="${question eq null }">
 										<input type="text" name="answer_title"
 											class="form-control col-sm-5" required>
+										<input type="hidden" name="question_id"
+											value="0">
 									</c:when>
 									<c:otherwise>
+										<input type="hidden" name="question_id"
+											value="${question.question_id}">
 										<input type="text" name="answer_title"
-											class="form-control col-sm-5" value="Re: ${question.question_title} " readonly required>
+											class="form-control col-sm-5"
+											value="Re: ${question.question_title} " readonly required>
 									</c:otherwise>
 								</c:choose></td>
 						</tr>

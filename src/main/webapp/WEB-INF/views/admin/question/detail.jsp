@@ -87,7 +87,7 @@
 						</tbody>
 					</table>
 					<a class="btn btn-danger float-right"
-						href="${pageContext.request.contextPath}/admin/answer/delete">삭제</a>
+						href="${pageContext.request.contextPath}/admin/answer/delete/${question.answer_id}">삭제</a>
 					<a class="btn btn-warning float-right mr-1"
 						href="${pageContext.request.contextPath}/admin/answer/update">수정</a>
 				</c:otherwise>

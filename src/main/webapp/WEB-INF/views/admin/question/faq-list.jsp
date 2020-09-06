@@ -46,7 +46,7 @@
 			<button id="delete_btn" class="btn btn-danger float-right px-5">삭제</button>
 			<a href="${pageContext.request.contextPath}"
 				class="btn btn-warning float-right px-5 mr-1">수정</a> <a
-				href="${pageContext.request.contextPath}"
+				href="${pageContext.request.contextPath}/admin/answer/add/0"
 				class="btn btn-primary float-right px-5 mr-1">등록</a>
 		</div>
 	</div>
@@ -63,13 +63,12 @@
 		});
 		$("#delete_btn").click(function() {
 			var data = $("input[name='answer_id']:checked").val();
-			consoel.log(data);
-
 			$.ajax({
-				url : "/admin/faq/delete/" + data,
+				url : "/admin/answer/delete/" + data,
 				type : "get",
 				success : function(data) {
 					alert("삭제되었습니다.");
+					window.location.reload(true);
 				}
 			});
 		});

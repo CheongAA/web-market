@@ -460,14 +460,18 @@ public class AdminController {
 		return "admin/question/answer-add";
 	}
 	
-	// 답변 등록
+	// 답변 , 자주하는질문 등록
 	@RequestMapping(value = "/answer", method = RequestMethod.POST)
 	public String addAnswer(@ModelAttribute @Valid Answer answer,@RequestParam int question_id, BindingResult result) {
 		answerService.registerAnswer(answer,question_id);
+		//자주하는 질문
+		if(question_id == 0) {
+			return "redirect:/admin/faq";
+		}
 		return "redirect:/admin/question/"+question_id;
 	}
 	
-	// 답변 삭제
+	// 자주하는 질문 삭제
 	@RequestMapping(value = "/answer/delete/{id}", method = RequestMethod.GET)
 	public String deleteFAQ(@PathVariable int id, Model model) {
 		answerService.deleteAnswerById(id);

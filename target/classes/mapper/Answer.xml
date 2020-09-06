@@ -43,4 +43,11 @@
 		</choose>
 		,#{answer_title},#{answer_content})
 	</insert>
+	
+	<delete id="deleteAnswerById" parameterType="Integer">
+		DELETE FROM
+		tb_answer
+		WHERE
+		answer_id = #{answer_id}
+	</delete>
 </mapper>
