@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mju.ict.model.Answer;
@@ -28,6 +30,7 @@ import com.mju.ict.model.Category;
 import com.mju.ict.model.Discount;
 import com.mju.ict.model.Notice;
 import com.mju.ict.model.Order;
+import com.mju.ict.model.OrderState;
 import com.mju.ict.model.Product;
 import com.mju.ict.model.Question;
 import com.mju.ict.model.QuestionCategory;
@@ -417,8 +420,24 @@ public class AdminController {
 	@RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
 	public String getOrderDetail(@PathVariable int id, Model model) {
 		Order order = orderService.getOrderById(id);
+		List<OrderState> orderStates= orderService.getAllOrderStates();
 		model.addAttribute("order", order);
+		model.addAttribute("orderStates", orderStates);
 		return "admin/order/detail";
+	}
+	
+	// 주문 운송장번호 변경
+	@ResponseBody
+	@RequestMapping(value = "/order/updateTracking", method = RequestMethod.GET)
+	public void updateOrderTracking(HttpServletRequest req, Model model) {
+		orderService.updateOrderTracking(req.getParameter("orderId"),req.getParameter("orderTrackingNumber"));
+	}
+	
+	// 주문 상태 변경
+	@ResponseBody
+	@RequestMapping(value = "/order/updateState", method = RequestMethod.GET)
+	public void updateOrderState(HttpServletRequest req, Model model) {
+		orderService.updateOrderState(req.getParameter("orderId"),req.getParameter("orderStateId"));
 	}
 	
 	/////////////// 문의 및 답변//////////////////

@@ -154,5 +154,24 @@
 		#{order_id}
 	</select>
 
+	<update id="updateOrderTracking" parameterType="hashMap">
+		UPDATE tb_order
+		SET
+		order_tracking_number = #{order_tracking_number}
+		WHERE
+		order_id =
+		#{order_id}
+	</update>
+
+	<update id="updateOrderState" parameterType="hashMap">
+		UPDATE tb_order
+		SET
+		order_state_id = #{order_state_id}
+		WHERE
+		order_id =
+		#{order_id}
+	</update>
+
+
 
 </mapper>

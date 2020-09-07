@@ -1,6 +1,7 @@
 package com.mju.ict.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,9 +16,11 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.mju.ict.model.Order;
 import com.mju.ict.model.OrderDetail;
+import com.mju.ict.model.OrderState;
 import com.mju.ict.model.User;
 import com.mju.ict.repository.IOrderDAO;
 import com.mju.ict.repository.IOrderDetailDAO;
+import com.mju.ict.repository.IOrderStateDAO;
 
 @Service
 public class OrderService implements IOrderService{
@@ -27,6 +30,15 @@ public class OrderService implements IOrderService{
 	
 	@Autowired
 	IOrderDetailDAO orderDetailDAO;
+	
+	@Autowired
+	IOrderStateDAO orderStateDAO;
+	
+	
+	@Override
+	public List<OrderState> getAllOrderStates() {
+		return orderStateDAO.selectAllOrderStates();
+	}
 	
 	
 	//주문 전체 조회
@@ -87,6 +99,28 @@ public class OrderService implements IOrderService{
 		}
 		
 	}
+
+
+	@Override
+	public void updateOrderTracking(String order_id, String order_tracking_number) {
+		Map<String,String> map = new HashMap<String,String>();				   
+		map.put("order_id", order_id);
+		map.put("order_tracking_number", order_tracking_number);
+		
+		orderDAO.updateOrderTracking(map);
+	}
+
+
+	@Override
+	public void updateOrderState(String order_id, String order_state_id) {
+		Map<String,String> map = new HashMap<String,String>();				   
+		map.put("order_id", order_id);
+		map.put("order_state_id", order_state_id);
+		
+		orderDAO.updateOrderState(map);
+	}
+
+
 
 
 

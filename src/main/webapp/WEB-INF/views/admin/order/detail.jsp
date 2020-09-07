@@ -15,7 +15,7 @@
 		<p class="ml-auto">
 			주문일:
 			<fmt:formatDate value="${order.order_created}" pattern="yyyy/M/dd" />
-			- 주문번호: ${order.order_id}
+			- 주문번호: <span id="orderId">${order.order_id}</span>
 		</p>
 		<div class="row justify-content-center">
 			<div class="row m-1 p-1 border-top border-bottom w-100">
@@ -93,21 +93,33 @@
 				<table class="table table-borderless text-center">
 					<tbody>
 						<tr>
+							<th scope="col">등록된 운송장</th>
+							<td scope="col"><c:choose>
+									<c:when test="${order.order_tracking_number == null}">
+									등록된 운송장 번호가 없습니다.
+									</c:when>
+									<c:otherwise>
+										${order.order_tracking_number}
+									</c:otherwise>
+								</c:choose></td>
+
+							<th scope="col">주문상태</th>
+							<td scope="col">${order.orderState.order_state_title }</td>
+						</tr>
+						<tr>
 							<th scope="col">운송장번호</th>
-							<td scope="col"><input value="" type="number"
+							<td scope="col"><input id="tracking" type="text"
 								placeholder="운송장 번호" />
-								<button class="btn btn-outline-primary btn-sm">등록</button></td>
+								<button class="btn btn-outline-primary btn-sm" id="tracking_btn">등록</button></td>
 
 							<th scope="col">주문상태변경</th>
-							<td scope="col"><select name="job">
-									<option value="취소신청">취소신청</option>
-									<option value="취소완료">취소완료</option>
-									<option value="반품신청">반품신청</option>
-									<option value="반품완료">반품완료</option>
-									<option value="배송중">배송중</option>
-									<option value="배송완료">배송완료</option>
+							<td scope="col"><select id="orderState">
+									<c:forEach var="orderState" items="${orderStates }">
+										<option value="${orderState.order_state_id }">${orderState.order_state_title }</option>
+									</c:forEach>
 							</select>
-								<button class="btn btn-outline-primary btn-sm">등록</button></td>
+								<button class="btn btn-outline-primary btn-sm"
+									id="updateOrder_btn">등록</button></td>
 						</tr>
 						<tr>
 
@@ -119,5 +131,46 @@
 				href="${pageContext.request.contextPath}/admin/order">주문목록</a>
 		</div>
 	</div>
+	<script type="text/javascript">
+	
+	
+		$("#tracking_btn").click(function(){
+			var orderId = $("#orderId").text();
+			var trackingNum = $("#tracking").val();
+			
+			$.ajax({
+				url : "/admin/order/updateTracking",
+				type : "get",
+				data : {
+					orderId : orderId,
+					orderTrackingNumber:trackingNum
+					
+				},
+				success : function(data) {
+					alert("운송장 번호가 등록되었습니다.");
+					window.location.reload(true);
+				}
+			});
+		});
+		
+		$("#updateOrder_btn").click(function(){
+			var orderId = $("#orderId").text();
+			var orderStateId = $("#orderState option:selected").val();
+			
+			$.ajax({
+				url : "/admin/order/updateState",
+				type : "get",
+				data : {
+					orderId : orderId,
+					orderStateId:orderStateId
+					
+				},
+				success : function(data) {
+					alert("주문 상태가 변경되었습니다.");
+					window.location.reload(true);
+				}
+			});
+		});
+	</script>
 </body>
 </html>
