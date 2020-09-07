@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mju.ict.model.OrderDetail;
 import com.mju.ict.model.OrderState;
 
 @Repository
@@ -17,4 +18,5 @@ public class OrderStateDAO implements IOrderStateDAO{
 	public List<OrderState> selectAllOrderStates() {
 		return sqlSession.selectList("selectAllOrderStates");
 	}
+
 }

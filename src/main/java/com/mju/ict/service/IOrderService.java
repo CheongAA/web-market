@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import com.mju.ict.model.Order;
+import com.mju.ict.model.OrderDetail;
 import com.mju.ict.model.OrderState;
 
 public interface IOrderService {

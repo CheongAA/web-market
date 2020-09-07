@@ -6,12 +6,16 @@ public class OrderDetail {
 //    FOREIGN KEY(order_id) REFERENCES tb_order(order_id),
 //    product_id int not null,
 //    FOREIGN KEY(product_id) REFERENCES tb_product(product_id),
+//	  review_id int,
+//    FOREIGN KEY(review_id) REFERENCES tb_review(review_id),
 //    product_count int not null,
 //    product_price int not null
 	
 	private int order_detail_id;
 	private int order_id;
 	private int product_id;
+	private int review_id;
+	
 	private int product_count;
 	private int product_price;
 	
@@ -31,6 +35,13 @@ public class OrderDetail {
 	}
 	public int getProduct_id() {
 		return product_id;
+	}
+	
+	public int getReview_id() {
+		return review_id;
+	}
+	public void setReview_id(int review_id) {
+		this.review_id = review_id;
 	}
 	public void setProduct_id(int product_id) {
 		this.product_id = product_id;

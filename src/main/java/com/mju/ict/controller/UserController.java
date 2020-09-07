@@ -26,12 +26,14 @@ import com.mju.ict.model.Order;
 import com.mju.ict.model.Product;
 import com.mju.ict.model.Question;
 import com.mju.ict.model.QuestionCategory;
+import com.mju.ict.model.Review;
 import com.mju.ict.model.User;
 import com.mju.ict.service.IAddressService;
 import com.mju.ict.service.ICartService;
 import com.mju.ict.service.IOrderService;
 import com.mju.ict.service.IProductService;
 import com.mju.ict.service.IQuestionService;
+import com.mju.ict.service.IReviewService;
 import com.mju.ict.service.IUserService;
 
 @Controller
@@ -54,6 +56,9 @@ public class UserController {
 	
 	@Autowired
 	IQuestionService questionService;
+	
+	@Autowired
+	IReviewService reviewService;
 	
 	@Autowired
 	IUserService userService;	
@@ -273,4 +278,37 @@ public class UserController {
 		questionService.registerQuestion(question,session);
 		return "redirect:/user/question";
 	}
+	
+	
+	/////////////// 후기//////////////////
+	
+	// 후기 작성 가능한 주문 목록 페이지
+	@RequestMapping(value = "/user/reviewable", method = RequestMethod.GET)
+	public String getUserReviewable(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		List<Order> orders = orderService.getOrderByUser(user.getUser_id());
+		
+		model.addAttribute("orders", orders);
+		return "user/reviewable-list";
+	}
+	
+	// 후기 목록 페이지
+	@RequestMapping(value = "/user/review", method = RequestMethod.GET)
+	public String getUserReview(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		List<Review> reviews = reviewService.getReviewByUser(user.getUser_id());
+		
+		model.addAttribute("reviews", reviews);
+		return "user/review-list";
+	}
+	
+	// 후기 등록 페이지
+	@RequestMapping(value = "/user/review/add/{id}", method = RequestMethod.GET)
+	public String getUserReviewAdd(@PathVariable int id,Model model, HttpSession session) {
+		Product product = productService.getProductById(id);
+		
+		model.addAttribute("product", product);
+		return "user/review-add";
+	}
+
 }

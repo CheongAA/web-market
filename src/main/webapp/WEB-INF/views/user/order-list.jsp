@@ -52,9 +52,12 @@
 										<h5>${order.orderState.order_state_title}</h5>
 										<a class="btn btn-sm btn-outline-primary btn-block"
 											href="${pageContext.request.contextPath}/user/order/${order.order_id}">주문조회</a>
-										<a class="btn btn-sm btn-outline-primary btn-block">교환신청</a> <a
-											class="btn btn-sm btn-outline-primary btn-block">반품신청</a> <a
-											class="btn btn-sm btn-outline-primary btn-block">후기쓰기</a>
+										<c:if
+											test="${order.order_state_id == 3 or order.order_state_id == 9}">
+											<a class="btn btn-sm btn-outline-primary btn-block">교환신청</a>
+											<a class="btn btn-sm btn-outline-primary btn-block">반품신청</a>
+											<a class="btn btn-sm btn-outline-primary btn-block" href="${pageContext.request.contextPath}/user/reviewable">후기쓰기</a>
+										</c:if>
 									</div>
 								</div>
 							</div>

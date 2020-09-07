@@ -40,6 +40,7 @@
 		<result column="order_detail_id" property="order_detail_id" />
 		<result column="order_id" property="order_id" />
 		<result column="product_id" property="product_id" />
+		<result column="review_id" property="review_id" />
 		<result column="product_count" property="product_count" />
 		<result column="product_price" property="product_price" />
 
