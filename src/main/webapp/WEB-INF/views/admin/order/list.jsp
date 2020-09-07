@@ -33,7 +33,7 @@
 						<td><fmt:formatNumber value="${order.order_total_price}"
 								pattern="###,###,###" /></td>
 						<td>${order.order_payment_method}</td>
-						<td>${order.order_state}</td>
+						<td>${order.orderState.order_state_title}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

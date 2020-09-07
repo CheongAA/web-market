@@ -84,11 +84,14 @@
 		</a>
 	</div>
 	<div class="row p-5 mx-auto">
-		<h1 class="mx-auto mb-5 font-weight-light">WHAT'S NEW?</h1>
-		<div class="row mx-auto">
+
+		<div class="row">
+			<div class="col-sm-3 ">
+				<h1 class=" font-weight-light text-center mt-5 pt-5">WHAT'S NEW?</h1>
+			</div>
 			<c:forEach var="product" items="${products}" end="2">
 				<c:if test="${product.on_sale == 1}">
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<a
 							href="${pageContext.request.contextPath}/product/${product.product_id}"
 							class="text-decoration-none"> <img

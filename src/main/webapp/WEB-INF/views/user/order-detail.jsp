@@ -32,19 +32,8 @@
 									class="text-dark">${orderDetail.product.product_name}</a>
 							</p>
 							<p>
-								<c:choose>
-									<c:when test="${orderDetail.product.discount_id != 0 and orderDetail.product.discount.discount_apply != 0 and orderDetail.product.discount.discount_state != 0}">
-										<c:set var="price"
-											value="${orderDetail.product.product_price - ((orderDetail.product.product_price * orderDetail.product.discount.discount_rate)/100)}" />
-										<span style="text-decoration: line-through">${orderDetail.product.product_price}</span>
-										<span> <fmt:formatNumber pattern="0" value="${price}" />
-										</span>
-									</c:when>
-									<c:otherwise>
-										<fmt:formatNumber pattern="###,###,###"
-											value="${orderDetail.product.product_price}" />
-									</c:otherwise>
-								</c:choose>
+								<fmt:formatNumber pattern="###,###,###"
+									value="${orderDetail.product_price}" />
 								원 / ${orderDetail.product_count}개
 							</p>
 						</div>

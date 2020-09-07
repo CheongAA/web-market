@@ -4,27 +4,30 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
-//	   order_id INT PRIMARY KEY AUTO_INCREMENT,
-//	   user_id INT,
-//	   FOREIGN KEY(user_id) REFERENCES tb_user(user_id),
-//	   buyer_name varchar(255) NOT NULL,
-//	   buyer_email varchar(255) NOT NULL,
-//	   buyer_phone varchar(255) NOT NULL,
-//	   recipient_name varchar(255) NOT NULL,
-//	   recipient_zip VARCHAR(255) NOT NULL,
-//	   recipient_address VARCHAR(255) NOT NULL,
-//	   recipient_phone VARCHAR(255) NOT NULL,
-//	   order_request VARCHAR(255),
-//	   order_created DATETIME DEFAULT CURRENT_TIMESTAMP,
-//	   order_payment_method varchar(255) NOT NULL,
-//	   order_products_price INT NOT NULL,
-//	   order_discount_price INT NOT NULL,
-//	   order_delivery_price INT NOT NULL,
-//	   order_total_price INT NOT NULL,
-//	   order_state VARCHAR(255) NOT NULL   취소신청,취소완료,반품신청,반품완료,교환신청,교환완료
+//	  order_id INT PRIMARY KEY AUTO_INCREMENT,
+//	  user_id INT,
+//	  FOREIGN KEY(user_id) REFERENCES tb_user(user_id),
+//	  order_state_id int NOT NULL,
+//	  FOREIGN KEY(order_state_id) REFERENCES tb_order_state(order_state_id),
+//	  buyer_name varchar(255) NOT NULL,
+//	  buyer_email varchar(255) NOT NULL,
+//	  buyer_phone varchar(255) NOT NULL,
+//	  recipient_name varchar(255) NOT NULL,
+//	  recipient_zip VARCHAR(255) NOT NULL,
+//	  recipient_address VARCHAR(255) NOT NULL,
+//	  recipient_phone VARCHAR(255) NOT NULL,
+//	  order_request VARCHAR(255),
+//	  order_created DATETIME DEFAULT CURRENT_TIMESTAMP,
+//	  order_payment_method varchar(255) NOT NULL,
+//	  order_products_price INT NOT NULL,
+//	  order_discount_price INT NOT NULL,
+//	  order_delivery_price INT NOT NULL,
+//	  order_total_price INT NOT NULL,
+//	  order_tracking_number varchar(255)
 	
 	private int order_id;
 	private int user_id;
+	private int order_state_id;
 	private String buyer_name;
 	private String buyer_email;
 	private String buyer_phone;
@@ -40,9 +43,10 @@ public class Order {
 	private int order_discount_price;
 	private int order_delivery_price;
 	private int order_total_price;
-	private String order_state;
+	private String order_tracking_number;
 	
 	private ArrayList<OrderDetail> orderDetail;
+	private OrderState orderState;
 
 	public int getOrder_id() {
 		return order_id;
@@ -172,14 +176,6 @@ public class Order {
 		this.order_total_price = order_total_price;
 	}
 
-	public String getOrder_state() {
-		return order_state;
-	}
-
-	public void setOrder_state(String order_state) {
-		this.order_state = order_state;
-	}
-
 	public ArrayList<OrderDetail> getOrderDetail() {
 		return orderDetail;
 	}
@@ -187,7 +183,30 @@ public class Order {
 	public void setOrderDetail(ArrayList<OrderDetail> orderDetail) {
 		this.orderDetail = orderDetail;
 	}
-	
+
+	public int getOrder_state_id() {
+		return order_state_id;
+	}
+
+	public void setOrder_state_id(int order_state_id) {
+		this.order_state_id = order_state_id;
+	}
+
+	public String getOrder_tracking_number() {
+		return order_tracking_number;
+	}
+
+	public void setOrder_tracking_number(String order_tracking_number) {
+		this.order_tracking_number = order_tracking_number;
+	}
+
+	public OrderState getOrderState() {
+		return orderState;
+	}
+
+	public void setOrderState(OrderState orderState) {
+		this.orderState = orderState;
+	}
 
 	
 	

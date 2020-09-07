@@ -47,11 +47,10 @@
 											value="${cart.product.product_price - (discount)}" />
 										<c:set var="total" value="${price * cart.product_count}" />\
 										<span style="text-decoration: line-through">${cart.product.product_price}</span>
-										<span> <fmt:formatNumber pattern="0" value="${price}" />원
-										</span>
+										<span class="product_price"><fmt:formatNumber pattern="0" value="${price}" /></span>원
 									</c:when>
 									<c:otherwise>
-										<span>${cart.product.product_price}</span>원									
+										<span class="product_price">${cart.product.product_price}</span>원									
 									<c:set var="total"
 											value="${cart.product.product_price * cart.product_count}" />
 									</c:otherwise>
@@ -218,14 +217,17 @@
 
 			var id = $(".product_id");
 			var count = $(".product_count");
+			var price = $(".product_price");
+			
 
 			for (var i = 0; i < id.length; i++) {
 				var data = new Object();
 				data.product_id = id[i].value;
 				data.product_count = count[i].value;
-				
+				data.product_price = price[i].innerHTML;
 				orderDetailList.push(data);
 			}
+			
 
 			return JSON.stringify({
 				order : {
@@ -238,7 +240,7 @@
 					recipient_phone : $("#recipient_phone").val(),
 					order_request : $("#order_request").val(),
 					order_payment_method : $("#order_payment_method").val(),
-					order_state : "주문완료",
+					order_state_id : 1,
 					order_products_price : parseInt($("#order_products_price")
 							.text(), 10),
 					order_discount_price : parseInt($("#order_discount_price")
@@ -253,7 +255,7 @@
 			});
 		}
 
-
+		
 		function deleteCart() {
 			var list = $(".cart_id");
 			var carts = new Array();

@@ -53,9 +53,7 @@ public class OrderService implements IOrderService{
 		List<Order> orders = orderDAO.selectOrderByUser(user_id);
 		List<Order> canceledOrders = new ArrayList<Order>();
 		for(Order order:orders) {
-			if(order.getOrder_state().equals("취소신청") || order.getOrder_state().equals("취소완료")
-					|| order.getOrder_state().equals("반품신청")|| order.getOrder_state().equals("반품완료")
-					|| order.getOrder_state().equals("교환신청")|| order.getOrder_state().equals("교환완료")) {
+			if(order.getOrder_state_id()>3) {
 				canceledOrders.add(order);
 			}
 		}
