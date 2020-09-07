@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mju.ict.model.Address;
 import com.mju.ict.model.Order;
+import com.mju.ict.model.OrderDetail;
 import com.mju.ict.model.Product;
 import com.mju.ict.model.Question;
 import com.mju.ict.model.QuestionCategory;
@@ -304,11 +305,18 @@ public class UserController {
 	
 	// 후기 등록 페이지
 	@RequestMapping(value = "/user/review/add/{id}", method = RequestMethod.GET)
-	public String getUserReviewAdd(@PathVariable int id,Model model, HttpSession session) {
-		Product product = productService.getProductById(id);
+	public String getUserReviewAdd(@PathVariable int id,Model model) {
+		OrderDetail orderDetail = orderService.getOrderDetailById(id);
 		
-		model.addAttribute("product", product);
+		model.addAttribute("orderDetail", orderDetail);
 		return "user/review-add";
 	}
+	
+//	// 1:1 문의 등록 / 상품 문의 등록
+//	@RequestMapping(value = "/user/review/add", method = RequestMethod.POST)
+//	public String addUserReview(@ModelAttribute @Valid Review review, BindingResult result, HttpSession session) {
+//		questionService.registerQuestion(question,session);
+//		return "redirect:/user/question";
+//	}
 
 }

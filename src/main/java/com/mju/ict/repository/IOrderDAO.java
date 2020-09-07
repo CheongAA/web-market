@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.mju.ict.model.Order;
+import com.mju.ict.model.OrderDetail;
 
 public interface IOrderDAO {
 	
@@ -18,4 +19,6 @@ public interface IOrderDAO {
 	public abstract void updateOrderTracking(Map<String, String> map);
 
 	public abstract void updateOrderState(Map<String, String> map);
+
+	public abstract OrderDetail selectOrderDetailById(int id);
 }

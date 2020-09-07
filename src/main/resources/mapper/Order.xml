@@ -155,6 +155,26 @@
 		#{order_id}
 	</select>
 
+
+	<select id="selectOrderDetailById" parameterType="Integer"
+		resultMap="orderDetail">
+		SELECT *
+		FROM tb_order_detail
+		LEFT JOIN
+		tb_product
+		ON
+		tb_order_detail.product_id = tb_product.product_id
+		LEFT
+		JOIN
+		tb_discount
+		ON
+		tb_discount.discount_id=
+		tb_product.discount_id
+		WHERE
+		order_detail_id =
+		#{order_detail_id}
+	</select>
+	
 	<update id="updateOrderTracking" parameterType="hashMap">
 		UPDATE tb_order
 		SET

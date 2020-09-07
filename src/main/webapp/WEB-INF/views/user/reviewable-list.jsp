@@ -60,7 +60,7 @@
 												</div>
 												<div class="col-sm-3 text-center my-auto p-2">
 													<a class="btn btn-sm btn-outline-primary btn-block"
-														href="${pageContext.request.contextPath}/user/review/add/${orderDetail.product.product_id}">후기쓰기</a>
+														href="${pageContext.request.contextPath}/user/review/add/${orderDetail.order_detail_id}">후기쓰기</a>
 												</div>
 											</div>
 										</c:if>

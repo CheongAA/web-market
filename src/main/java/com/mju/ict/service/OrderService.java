@@ -41,6 +41,11 @@ public class OrderService implements IOrderService{
 	}
 
 	
+	@Override
+	public OrderDetail getOrderDetailById(int id) {
+		return orderDAO.selectOrderDetailById(id);
+	}
+	
 	//주문 전체 조회
 	@Override
 	public List<Order> getAllOrders() {
@@ -119,6 +124,9 @@ public class OrderService implements IOrderService{
 		
 		orderDAO.updateOrderState(map);
 	}
+
+
+
 
 
 

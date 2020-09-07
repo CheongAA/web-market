@@ -8,12 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mju.ict.model.Order;
+import com.mju.ict.model.OrderDetail;
 
 @Repository
 public class OrderDAO implements IOrderDAO{
     @Autowired
     private SqlSession sqlSession;
 
+	@Override
+	public OrderDetail selectOrderDetailById(int id) {
+		return sqlSession.selectOne("selectOrderDetailById", id);
+	}
+	
 	
 	@Override
 	public List<Order> selectAllOrders() {
@@ -44,6 +50,8 @@ public class OrderDAO implements IOrderDAO{
 	public void updateOrderState(Map<String, String> map) {
 		sqlSession.update("updateOrderState", map);
 	}
+
+
 
 
 }
