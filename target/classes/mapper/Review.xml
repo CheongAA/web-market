@@ -24,8 +24,7 @@
 		<association javaType="com.mju.ict.model.User"
 			property="user">
 			<id column="user_id" property="user_id" />
-			<result column="user_name"
-				property="user_name" />
+			<result column="user_name" property="user_name" />
 		</association>
 	</resultMap>
 
@@ -62,4 +61,11 @@
 		WHERE
 		product_id = #{product_id}
 	</select>
+	<update id="addReviewView" parameterType="Integer">
+		UPDATE tb_review
+		SET
+		review_view = review_view + 1
+		WHERE
+		review_id = #{id}
+	</update>
 </mapper>

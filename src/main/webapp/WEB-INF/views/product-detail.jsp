@@ -193,8 +193,8 @@
 									</tr>
 									<tr>
 										<td colspan="5" class="p-5 text-left" style="display: none;"
-											id="review_content_${review.review_id}">
-											<span class="ml-2">${review.review_content}</span></td>
+											id="review_content_${review.review_id}"><span
+											class="ml-2">${review.review_content}</span></td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
@@ -349,13 +349,19 @@
 				}
 			});
 		}
-		
+
 		$(".reviews").click(function() {
-			var td = $("#review_content_" + $(this).attr("id"));
+			var review_id = $(this).attr("id");
+			var td = $("#review_content_" + review_id);
 
 			if (td.css("display") != "table-cell") {
 				$("[id^=review_content_]").css("display", "none");
 				td.css("display", "table-cell");
+				
+				$.ajax({
+					url : "/review/addView/" + review_id,
+					type : "get"
+				});
 			} else {
 				td.css("display", "none");
 			}

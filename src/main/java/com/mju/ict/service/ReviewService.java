@@ -71,8 +71,7 @@ public class ReviewService implements IReviewService{
 
 	@Override
 	public void addReviewView(int id) {
-		// TODO Auto-generated method stub
-		
+		reviewDAO.addReviewView(id);
 	}
 
 

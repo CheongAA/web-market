@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mju.ict.model.Answer;
 import com.mju.ict.model.Discount;
@@ -19,6 +20,7 @@ import com.mju.ict.service.IAnswerService;
 import com.mju.ict.service.IDiscountService;
 import com.mju.ict.service.INoticeService;
 import com.mju.ict.service.IProductService;
+import com.mju.ict.service.IReviewService;
 
 @Controller
 public class HomeController {
@@ -37,9 +39,8 @@ public class HomeController {
 	@Autowired
 	IProductService productService;
 	
-//	@Autowired
-//	IQuestionService questionService;
-
+	@Autowired
+	IReviewService reviewService;
 	
 	//메인 페이지
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -95,4 +96,16 @@ public class HomeController {
 		model.addAttribute("answers", answers);
 		return "notice/faq/list";
 	}
+	
+	///////////////////////////////  리뷰  //////////////////////////
+	
+	//자주하는질문 목록 페이지
+	@ResponseBody
+	@RequestMapping(value = "/review/addView/{review_id}", method = RequestMethod.GET)
+	public void addReviewView(@PathVariable int review_id) {
+		reviewService.addReviewView(review_id);
+	}
+	
+	
+	
 }
