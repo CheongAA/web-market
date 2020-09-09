@@ -26,6 +26,7 @@ public class Review {
 	private String review_img;
 	
 	private Product product;
+	private User user;
 	
 	public int getReview_id() {
 		return review_id;
@@ -86,6 +87,12 @@ public class Review {
 	}
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

@@ -8,9 +8,12 @@ public interface IReviewService {
 
 	public abstract List<Review> getAllReviews();
 
-	public abstract Review getReviewById(int id);
-	
 	public abstract List<Review> getReviewByUser(int user_id);
+	
+	public abstract List<Review> getReviewByProduct(int product_id);
+
+	public abstract Review getReviewById(int id);
+
 
 	public abstract void registerReview(Review review, int order_detail_id);
 	

@@ -38,6 +38,11 @@ public class ReviewService implements IReviewService{
 		return reviewDAO.selectReviewByUser(user_id);
 	}
 	
+	@Override
+	public List<Review> getReviewByProduct(int product_id) {
+		return reviewDAO.selectReviewByProduct(product_id);
+	}
+	
 	
 	@Override
 	public void registerReview(Review review, int order_detail_id) {
@@ -69,6 +74,8 @@ public class ReviewService implements IReviewService{
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 
 

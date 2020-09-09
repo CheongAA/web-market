@@ -11,18 +11,27 @@
 		<result column="review_star" property="review_star" />
 		<result column="review_content" property="review_content" />
 		<result column="review_img" property="review_img" />
-		<result column="review_view"
-			property="review_view" />
+		<result column="review_view" property="review_view" />
 
 		<association javaType="com.mju.ict.model.Product"
 			property="product">
 			<id column="product_id" property="product_id" />
-			<result column="product_thumbnailImg" property="product_thumbnailImg" />
+			<result column="product_thumbnailImg"
+				property="product_thumbnailImg" />
 			<result column="product_name" property="product_name" />
 		</association>
+
+		<association javaType="com.mju.ict.model.User"
+			property="user">
+			<id column="user_id" property="user_id" />
+			<result column="user_name"
+				property="user_name" />
+		</association>
 	</resultMap>
-	
-	<insert id="insertReview" parameterType="com.mju.ict.model.Review" useGeneratedKeys="true" keyProperty="review_id">
+
+	<insert id="insertReview"
+		parameterType="com.mju.ict.model.Review" useGeneratedKeys="true"
+		keyProperty="review_id">
 		INSERT INTO tb_review
 		(user_id,product_id,review_title,
 		review_star,review_content,review_img)
@@ -31,12 +40,26 @@
 		#{review_star},#{review_content},#{review_img})
 	</insert>
 	<select id="selectReviewByUser" resultMap="review">
-		SELECT * FROM tb_review
+		SELECT * FROM
+		tb_review
 		LEFT JOIN
 		tb_product
 		ON
-		tb_product.product_id = tb_review.product_id
+		tb_product.product_id =
+		tb_review.product_id
 		WHERE
 		user_id = #{user_id}
+	</select>
+
+	<select id="selectReviewByProduct" resultMap="review">
+		SELECT * FROM
+		tb_review
+		LEFT JOIN
+		tb_user
+		ON
+		tb_user.user_id =
+		tb_review.user_id
+		WHERE
+		product_id = #{product_id}
 	</select>
 </mapper>

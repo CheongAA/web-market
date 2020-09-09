@@ -29,6 +29,12 @@ public class ReviewDAO implements IReviewDAO{
 	public List<Review> selectReviewByUser(int user_id) {
 		return sqlSession.selectList("selectReviewByUser", user_id);
 	}
+	
+	@Override
+	public List<Review> selectReviewByProduct(int product_id) {
+		return sqlSession.selectList("selectReviewByProduct",product_id);
+	}
+
 
 
 	@Override
@@ -53,6 +59,7 @@ public class ReviewDAO implements IReviewDAO{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 
 }

@@ -182,13 +182,28 @@
 								</tr>
 							</c:when>
 							<c:otherwise>
+								<c:forEach var="review" items="${reviews }" varStatus="status">
+									<tr class="reviews" id="${review.review_id}">
+										<td>${status.count}</td>
+										<td>${review.review_title}</td>
+										<td>${review.user.user_name }</td>
+										<td><fmt:formatDate value="${review.review_created}"
+												pattern="yyyy-MM-dd" /></td>
+										<td>${review.review_view }</td>
+									</tr>
+									<tr>
+										<td colspan="5" class="p-5 text-left" style="display: none;"
+											id="review_content_${review.review_id}">
+											<span class="ml-2">${review.review_content}</span></td>
+									</tr>
+								</c:forEach>
 							</c:otherwise>
 						</c:choose>
 					</tbody>
 				</table>
 				<div class="w-100">
 					<a class="btn btn-secondary m-5 float-right "
-						href="${pageContext.request.contextPath}/user/productQuestionAdd/${product.product_id}">후기작성</a>
+						href="${pageContext.request.contextPath}/user/reviewable">후기작성</a>
 				</div>
 				<nav aria-label="Page navigation example" class="d-block mx-auto">
 					<ul class="pagination">
@@ -335,28 +350,40 @@
 			});
 		}
 		
+		$(".reviews").click(function() {
+			var td = $("#review_content_" + $(this).attr("id"));
+
+			if (td.css("display") != "table-cell") {
+				$("[id^=review_content_]").css("display", "none");
+				td.css("display", "table-cell");
+			} else {
+				td.css("display", "none");
+			}
+		});
+
 		$(".questions").click(function() {
 			var td = $("#question_content_" + $(this).children("td").html());
 
 			if (td.css("display") != "table-cell") {
-				$("[id^=content_]").css("display", "none");
+				$("[id^=question_content_]").css("display", "none");
+				$("[id^=answer_content_]").css("display", "none");
 				td.css("display", "table-cell");
 			} else {
 				td.css("display", "none");
 			}
 		});
-		
+
 		$(".answers").click(function() {
 			var td = $("#answer_content_" + $(this).attr("id"));
 
 			if (td.css("display") != "table-cell") {
-				$("[id^=content_]").css("display", "none");
+				$("[id^=answer_content_]").css("display", "none");
+				$("[id^=question_content_]").css("display", "none");
 				td.css("display", "table-cell");
 			} else {
 				td.css("display", "none");
 			}
 		});
-
 	</script>
 </body>
 </html>

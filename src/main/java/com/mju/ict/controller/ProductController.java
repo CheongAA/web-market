@@ -20,11 +20,13 @@ import com.mju.ict.model.Cart;
 import com.mju.ict.model.Category;
 import com.mju.ict.model.Product;
 import com.mju.ict.model.Question;
+import com.mju.ict.model.Review;
 import com.mju.ict.model.User;
 import com.mju.ict.service.ICartService;
 import com.mju.ict.service.ICategoryService;
 import com.mju.ict.service.IProductService;
 import com.mju.ict.service.IQuestionService;
+import com.mju.ict.service.IReviewService;
 
 @Controller
 public class ProductController {
@@ -41,6 +43,9 @@ public class ProductController {
 	
 	@Autowired
 	IQuestionService questionService;	
+	
+	@Autowired
+	IReviewService reviewService;	
 
 	
 	//카테고리 조회
@@ -94,9 +99,11 @@ public class ProductController {
 	public String getProductDetail(@PathVariable int id,Model model) {
 		Product product = productService.getProductById(id);
 		List<Question> questions = questionService.getQuestionByProduct(id);
+		List<Review> reviews = reviewService.getReviewByProduct(id);
 		
 		model.addAttribute("product", product);
 		model.addAttribute("questions", questions);
+		model.addAttribute("reviews", reviews);
 		return "/product-detail";
 	}
 	

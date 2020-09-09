@@ -62,9 +62,9 @@
 
 	</div>
 	<script type="text/javascript">
-	$(".reviews").hover(function() {
-		$(this).css("background-color","#F2F2F2");
-		$(this).css("cursor", "Pointer");
+		$(".reviews").hover(function() {
+			$(this).css("background-color", "#F2F2F2");
+			$(this).css("cursor", "Pointer");
 		}, function() {
 			$(this).css("background-color", "transparent");
 			$(this).css("cursor", "Default");
