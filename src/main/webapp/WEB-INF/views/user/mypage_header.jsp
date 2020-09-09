@@ -32,7 +32,7 @@
 				나의 후기</h5>
 			<ul class="nav flex-column">
 				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/user/reviewable"> 후기조회
+					href="${pageContext.request.contextPath}/user/reviewable"> 후기등록 및 조회
 				</a></li>
 			</ul>
 			<h5

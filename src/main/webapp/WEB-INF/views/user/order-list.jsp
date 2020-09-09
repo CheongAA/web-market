@@ -34,17 +34,26 @@
 											<div class="row m-3">
 												<img alt=""
 													src="${orderDetail.product.product_thumbnailImg}"
-													class="w-25 h-75 mr-3">
-												<h5>
-													<a
-														href="${pageContext.request.contextPath}/product/${orderDetail.product.product_id}"
-														class="text-dark">${orderDetail.product.product_name}</a>
-												</h5>
-												<p>
-													<fmt:formatNumber pattern="###,###,###"
-														value="${orderDetail.product_price}" />
-													원 / ${orderDetail.product_count}개
-												</p>
+													class="col-3 w-100 h-75 mr-3">
+												<div class="col-8">
+													<h5>
+														<a
+															href="${pageContext.request.contextPath}/product/${orderDetail.product.product_id}"
+															class="text-dark">${orderDetail.product.product_name}</a>
+													</h5>
+													<p>
+														<fmt:formatNumber pattern="###,###,###"
+															value="${orderDetail.product_price}" />
+														원 / ${orderDetail.product_count}개
+													</p>
+													<c:if
+														test="${order.order_state_id == 3 or order.order_state_id == 9}">
+														<c:if test="${orderDetail.review_id == 0 }">
+															<a class="btn btn-sm btn-outline-secondary"
+																href="${pageContext.request.contextPath}/user/review/add/${orderDetail.order_detail_id}">후기쓰기</a>
+														</c:if>
+													</c:if>
+												</div>
 											</div>
 										</c:forEach>
 									</div>
@@ -56,7 +65,6 @@
 											test="${order.order_state_id == 3 or order.order_state_id == 9}">
 											<a class="btn btn-sm btn-outline-primary btn-block">교환신청</a>
 											<a class="btn btn-sm btn-outline-primary btn-block">반품신청</a>
-											<a class="btn btn-sm btn-outline-primary btn-block" href="${pageContext.request.contextPath}/user/reviewable">후기쓰기</a>
 										</c:if>
 									</div>
 								</div>

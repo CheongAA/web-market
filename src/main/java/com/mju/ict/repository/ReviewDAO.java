@@ -33,8 +33,7 @@ public class ReviewDAO implements IReviewDAO{
 
 	@Override
 	public void insertReview(Review review) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert("insertReview", review);
 	}
 
 	@Override

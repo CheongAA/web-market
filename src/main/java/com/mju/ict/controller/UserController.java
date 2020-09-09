@@ -312,11 +312,11 @@ public class UserController {
 		return "user/review-add";
 	}
 	
-//	// 1:1 문의 등록 / 상품 문의 등록
-//	@RequestMapping(value = "/user/review/add", method = RequestMethod.POST)
-//	public String addUserReview(@ModelAttribute @Valid Review review, BindingResult result, HttpSession session) {
-//		questionService.registerQuestion(question,session);
-//		return "redirect:/user/question";
-//	}
+	// 1:1 문의 등록 / 상품 문의 등록
+	@RequestMapping(value = "/user/review", method = RequestMethod.POST)
+	public String addUserReview(@ModelAttribute @Valid Review review, BindingResult result,@RequestParam("order_detail_id") int order_detail_id, HttpSession session) {
+		reviewService.registerReview(review,order_detail_id);
+		return "redirect:/user/review";
+	}
 
 }

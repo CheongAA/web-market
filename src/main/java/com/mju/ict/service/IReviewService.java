@@ -12,12 +12,14 @@ public interface IReviewService {
 	
 	public abstract List<Review> getReviewByUser(int user_id);
 
-	public abstract void registerReview(Review review);
-
+	public abstract void registerReview(Review review, int order_detail_id);
+	
 	public abstract void updateReview(Review review);
 
 	public abstract void deleteReviewById(int id);
 
 	public abstract void addReviewView(int id);
+
+
 
 }

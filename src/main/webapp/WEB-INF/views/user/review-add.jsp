@@ -14,7 +14,7 @@
 		<div class="col py-5 ml-5">
 			<h3>구매후기 쓰기</h3>
 			<div class="row justify-content-center mt-5">
-				<form action="/user/review/add" method="post">
+				<form action="/user/review" method="post">
 					<div class="col-12 border mb-5">
 						<div class="col-sm-12 p-3 m-2">
 							<div class="row m-3">
@@ -38,9 +38,10 @@
 								</div>
 							</div>
 						</div>
-						<input type="hidden" name="product_id" value="${user.user_id}">
+						<input type="hidden" name="order_detail_id" value="${orderDetail.order_detail_id}">
+						<input type="hidden" name="user_id" value="${user.user_id}">
 						<input type="hidden" name="product_id"
-							value="${product.product_id}">
+							value="${orderDetail.product.product_id}">
 						<table class="table">
 							<tbody>
 								<tr>

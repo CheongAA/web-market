@@ -1,11 +1,14 @@
 package com.mju.ict.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mju.ict.model.Review;
+import com.mju.ict.repository.IOrderDetailDAO;
 import com.mju.ict.repository.IReviewDAO;
 
 @Service
@@ -13,6 +16,9 @@ public class ReviewService implements IReviewService{
 
 	@Autowired
 	IReviewDAO reviewDAO;
+	
+	@Autowired
+	IOrderDetailDAO orderDetailDAO;
 
 	@Override
 	public List<Review> getAllReviews() {
@@ -34,8 +40,15 @@ public class ReviewService implements IReviewService{
 	
 	
 	@Override
-	public void registerReview(Review review) {
-		// TODO Auto-generated method stub
+	public void registerReview(Review review, int order_detail_id) {
+		reviewDAO.insertReview(review);
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();				   
+		map.put("order_detail_id", order_detail_id);
+		map.put("review_id", review.getReview_id());
+		
+		orderDetailDAO.updateReview(map);
+		
 		
 	}
 
@@ -56,6 +69,8 @@ public class ReviewService implements IReviewService{
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 
 

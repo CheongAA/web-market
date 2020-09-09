@@ -24,6 +24,9 @@ public class Review {
 	private String review_content;
 	private int review_view;
 	private String review_img;
+	
+	private Product product;
+	
 	public int getReview_id() {
 		return review_id;
 	}
@@ -77,6 +80,12 @@ public class Review {
 	}
 	public void setReview_img(String review_img) {
 		this.review_img = review_img;
+	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 	
 	
