@@ -1,5 +1,7 @@
 package com.mju.ict.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -160,12 +162,33 @@ public class UserController {
 	}
 	
 	/////////////// 정보수정//////////////////
+	
+	// 정보 수정 회원 확인 페이지
+	@RequestMapping(value = "/user/check", method = RequestMethod.GET)
+	public String getUserCheck(Model model, HttpSession session) {
+		return "user/user-check";
+	}
 
 	
 	// 정보 수정 페이지
 	@RequestMapping(value = "/user/update", method = RequestMethod.GET)
 	public String getUserUpdate(Model model, HttpSession session) {
 		return "user/user-update";
+	}
+	
+	// 회원 확인
+	@RequestMapping(value = "/user/check", method = RequestMethod.POST)
+	public String checkUser(@RequestParam("user_identification") String identification,
+			@RequestParam("user_password") String password,Model model) {
+		User user = userService.checkUser(identification,password);
+		
+		if(user == null) {
+			model.addAttribute("msg", 1);
+			return "user/user-check";
+		}
+
+		return "redirect:/user/update";
+
 	}
 	
 	// 고객 정보수정

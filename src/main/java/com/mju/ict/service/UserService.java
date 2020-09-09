@@ -87,4 +87,16 @@ public class UserService implements IUserService {
 		return null;
 	}
 
+	@Override
+	public User checkUser(String identification, String password) {
+		User user = userDAO.selectUserByIdentification(identification);
+		
+		if (user != null) {			
+			if (passwordEncoder.matches(password, user.getUser_password())) {	
+				return user;
+			}
+		}
+		return null;
+	}
+
 }

@@ -78,8 +78,9 @@
 									</div>
 								</div>
 								<div class="form-group my-4">
-									<button type="submit" class="btn btn-dark btn-block"
-										id="signup_btn">OK</button>
+									<a class="btn btn-outline-dark" href="">탈퇴하기</a>
+									<button type="submit" class="btn btn-dark"
+										id="signup_btn">회원정보수정</button>
 								</div>
 							</form:form>
 						</article>

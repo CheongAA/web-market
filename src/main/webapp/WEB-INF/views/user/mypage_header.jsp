@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<nav
+	<div
 		class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse mt-5">
 		<div class="sidebar-sticky pt-3">
 			<h5
@@ -24,8 +24,7 @@
 				나의 정보</h5>
 			<ul class="nav flex-column">
 				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/user/update"> 정보수정 </a></li>
-				<li class="nav-item"><a class="nav-link" href="#"> 회원탈퇴 </a></li>
+					href="${pageContext.request.contextPath}/user/check"> 정보수정 </a></li>
 			</ul>
 			<h5
 				class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -47,7 +46,7 @@
 						1:1 문의등록 </a></li>
 			</ul>
 		</div>
-	</nav>
+	</div>
 
 </body>
 </html>

@@ -12,20 +12,18 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.mju.ict.model.User;
 
 @Component
-public class LoginCheckInterceptor extends HandlerInterceptorAdapter{
+public class UserCheckInterceptor extends HandlerInterceptorAdapter{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,HttpServletResponse response, Object handler) throws IOException {
 		HttpSession session = request.getSession();
 		User userSession = (User) session.getAttribute("user");
 		
-		System.out.println("login interceptor");
-		
-		if(userSession == null) {
+		if(userSession == null ) {
 			response.sendRedirect(request.getContextPath()+"/login");
 			return false;
 		}
-		
+
 		return true;
 		
 	}

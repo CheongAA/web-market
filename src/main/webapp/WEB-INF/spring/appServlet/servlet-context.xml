@@ -59,15 +59,19 @@
 	<mybatis-spring:scan base-package="com.mju.ict.dao" />
 
 	<!-- 인터셉터 선언 -->
-	<beans:bean id="loginCheckInterceptor"
-		class="com.mju.ict.util.LoginCheckInterceptor" />
+	<beans:bean id="UserCheckInterceptor"
+		class="com.mju.ict.util.UserCheckInterceptor" />
 	<beans:bean id="AdminCheckInterceptor"
 		class="com.mju.ict.util.AdminCheckInterceptor" />
+		
+		
 	<!-- 인터셉터와 url맵핑 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/mypage/*" />
-			<beans:ref bean="loginCheckInterceptor" />
+			<mvc:mapping path="/user/*" />
+			<mvc:mapping path="/user/**/*" />
+			<mvc:mapping path="/user/**/**/*" />
+			<beans:ref bean="UserCheckInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/admin/*" />

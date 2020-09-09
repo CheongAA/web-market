@@ -83,9 +83,7 @@
 			class="sr-only">Next</span>
 		</a>
 	</div>
-	<div class="row p-5 mx-auto">
-
-		<div class="row">
+	<div class="row mt-5 pt-5">
 			<div class="col-sm-3 ">
 				<h1 class=" font-weight-light text-center mt-5 pt-5">WHAT'S NEW?</h1>
 			</div>
@@ -129,7 +127,6 @@
 					</div>
 				</c:if>
 			</c:forEach>
-		</div>
 	</div>
 </body>
 </html>
