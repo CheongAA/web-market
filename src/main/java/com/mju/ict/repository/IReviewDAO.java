@@ -16,7 +16,7 @@ public interface IReviewDAO {
 	
 	public abstract void insertReview(Review review);
 
-	public abstract void updateReview(Review review);
+	public abstract void updateReviewById(Review review);
 
 	public abstract void deleteReviewById(int id);
 

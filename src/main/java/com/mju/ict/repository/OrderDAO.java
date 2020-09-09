@@ -20,6 +20,10 @@ public class OrderDAO implements IOrderDAO{
 		return sqlSession.selectOne("selectOrderDetailById", id);
 	}
 	
+	@Override
+	public OrderDetail selectOrderDetailByReview(int id) {
+		return sqlSession.selectOne("selectOrderDetailByReview",id);
+	}
 	
 	@Override
 	public List<Order> selectAllOrders() {
@@ -50,6 +54,9 @@ public class OrderDAO implements IOrderDAO{
 	public void updateOrderState(Map<String, String> map) {
 		sqlSession.update("updateOrderState", map);
 	}
+
+
+
 
 
 

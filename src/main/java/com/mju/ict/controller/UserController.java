@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mju.ict.model.Address;
+import com.mju.ict.model.Notice;
 import com.mju.ict.model.Order;
 import com.mju.ict.model.OrderDetail;
 import com.mju.ict.model.Product;
@@ -312,10 +313,37 @@ public class UserController {
 		return "user/review-add";
 	}
 	
-	// 1:1 문의 등록 / 상품 문의 등록
+	// 후기 수정 페이지
+	@RequestMapping(value = "/user/review/update/{id}", method = RequestMethod.GET)
+	public String getReviewUpdate(@PathVariable int id, Model model) {
+		Review review = reviewService.getReviewById(id);
+		OrderDetail orderDetail = orderService.getOrderDetailByReview(id);
+
+		model.addAttribute("review", review);
+		model.addAttribute("orderDetail", orderDetail);
+		return "user/review-update";
+	}
+	
+	
+	// 후기 등록
 	@RequestMapping(value = "/user/review", method = RequestMethod.POST)
 	public String addUserReview(@ModelAttribute @Valid Review review, BindingResult result,@RequestParam("order_detail_id") int order_detail_id, HttpSession session) {
 		reviewService.registerReview(review,order_detail_id);
+		return "redirect:/user/review";
+	}
+	
+	// 후기 수정
+	@RequestMapping(value = "/user/review/update", method = RequestMethod.POST)
+	public String updateUserReview(@ModelAttribute @Valid Review review, BindingResult result, Model model) {
+		reviewService.updateReview(review);
+		return "redirect:/user/review";
+	}
+
+
+	// 후기 삭제
+	@RequestMapping(value = "/user/review/delete/{id}", method = RequestMethod.GET)
+	public String deleteUserReview(@PathVariable int id, Model model) {
+		reviewService.deleteReviewById(id);
 		return "redirect:/user/review";
 	}
 

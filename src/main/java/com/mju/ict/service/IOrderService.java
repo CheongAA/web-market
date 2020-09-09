@@ -14,6 +14,8 @@ public interface IOrderService {
 	public abstract List<OrderState> getAllOrderStates();
 	
 	public abstract OrderDetail getOrderDetailById(int id);
+	
+	public abstract OrderDetail getOrderDetailByReview(int id);
 
 	public abstract List<Order> getAllOrders();
 	
@@ -28,6 +30,8 @@ public interface IOrderService {
 	public abstract void updateOrderTracking(String order_id, String order_tracking_number);
 
 	public abstract void updateOrderState(String order_id, String order_state_id);
+
+
 
 
 

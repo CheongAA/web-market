@@ -35,6 +35,7 @@ public class OrderService implements IOrderService{
 	IOrderStateDAO orderStateDAO;
 	
 	
+	
 	@Override
 	public List<OrderState> getAllOrderStates() {
 		return orderStateDAO.selectAllOrderStates();
@@ -44,6 +45,11 @@ public class OrderService implements IOrderService{
 	@Override
 	public OrderDetail getOrderDetailById(int id) {
 		return orderDAO.selectOrderDetailById(id);
+	}
+	
+	@Override
+	public OrderDetail getOrderDetailByReview(int id) {
+		return orderDAO.selectOrderDetailByReview(id);
 	}
 	
 	//주문 전체 조회
@@ -124,6 +130,9 @@ public class OrderService implements IOrderService{
 		
 		orderDAO.updateOrderState(map);
 	}
+
+
+
 
 
 

@@ -13,8 +13,7 @@
 	<div class="row">
 		<jsp:include page="mypage_header.jsp" flush="false" />
 		<div class="col py-5 ml-5">
-			<h3>문의</h3>
-			<div class="row justify-content-center mt-5">
+			<h3 class="mb-5">문의</h3>
 				<form action="/user/question" method="post">
 					<table class="table table-bordered">
 						<tbody>
@@ -108,8 +107,6 @@
 					<button type="submit" class="btn btn-primary float-right">저장</button>
 				</form>
 			</div>
-		</div>
-
 	</div>
 	<script type="text/javascript">
 		$("input[name='checkOrder']").click(

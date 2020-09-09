@@ -48,10 +48,16 @@
 													</p>
 													<c:if
 														test="${order.order_state_id == 3 or order.order_state_id == 9}">
-														<c:if test="${orderDetail.review_id == 0 }">
-															<a class="btn btn-sm btn-outline-secondary"
-																href="${pageContext.request.contextPath}/user/review/add/${orderDetail.order_detail_id}">후기쓰기</a>
-														</c:if>
+														<c:choose>
+															<c:when test="${orderDetail.review_id == 0 }">
+																<a class="btn btn-sm btn-outline-secondary"
+																	href="${pageContext.request.contextPath}/user/review/add/${orderDetail.order_detail_id}">후기쓰기</a>
+															</c:when>
+															<c:otherwise>
+																<a class="btn btn-sm btn-outline-secondary"
+																	href="${pageContext.request.contextPath}/user/review">내가 쓴 후기</a>
+															</c:otherwise>
+														</c:choose>
 													</c:if>
 												</div>
 											</div>

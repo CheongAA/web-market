@@ -21,8 +21,7 @@ public class ReviewDAO implements IReviewDAO{
 
 	@Override
 	public Review selectReviewById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("selectReviewById", id);
 	}
 	
 	@Override
@@ -43,15 +42,13 @@ public class ReviewDAO implements IReviewDAO{
 	}
 
 	@Override
-	public void updateReview(Review review) {
-		// TODO Auto-generated method stub
-		
+	public void updateReviewById(Review review) {
+		sqlSession.update("updateReviewById",review);
 	}
 
 	@Override
 	public void deleteReviewById(int id) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.delete("deleteReview",id);
 	}
 
 	@Override

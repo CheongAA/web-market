@@ -1,6 +1,27 @@
-### Market
+# MARKET
+> 여러 음식 브랜드가 입점하여 자신들의 상품을 판매할 수 있는 온라인 식품 쇼핑몰입니다.
 
-market은 여러 브랜드가 입점해있는 식품 쇼핑몰입니다.
+
+![](../header.png)
+
+## Tech/framework 
+
+* Language: JDK 1.8
+* Application Framework: Spring MVC 4.3.9
+* Database: MySQL 8.0.21 + MyBatis 3.4.1
+* Deployement: 
+* Front-End: JSP , Javascript
+* IDE: Eclipse
+* Build Automation Tool: Maven
+
+
+## 사용 예제
+
+
+
+
+
+
 
 공통
 - [x] 로그인,로그아웃

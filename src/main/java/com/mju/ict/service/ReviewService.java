@@ -28,8 +28,7 @@ public class ReviewService implements IReviewService{
 
 	@Override
 	public Review getReviewById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return reviewDAO.selectReviewById(id);
 	}
 
 	
@@ -59,14 +58,12 @@ public class ReviewService implements IReviewService{
 
 	@Override
 	public void updateReview(Review review) {
-		// TODO Auto-generated method stub
-		
+		reviewDAO.updateReviewById(review);
 	}
 
 	@Override
 	public void deleteReviewById(int id) {
-		// TODO Auto-generated method stub
-		
+		reviewDAO.deleteReviewById(id);
 	}
 
 	@Override

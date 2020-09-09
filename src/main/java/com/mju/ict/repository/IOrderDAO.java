@@ -13,6 +13,10 @@ public interface IOrderDAO {
 	public abstract List<Order> selectOrderByUser(int user_id);
 
 	public abstract Order selectOrderById(int id);
+	
+	public abstract OrderDetail selectOrderDetailById(int id);
+
+	public abstract OrderDetail selectOrderDetailByReview(int id);
 
 	public abstract void insertOrder(Order order);
 
@@ -20,5 +24,5 @@ public interface IOrderDAO {
 
 	public abstract void updateOrderState(Map<String, String> map);
 
-	public abstract OrderDetail selectOrderDetailById(int id);
+
 }

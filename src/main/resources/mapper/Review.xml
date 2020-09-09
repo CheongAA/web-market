@@ -61,6 +61,34 @@
 		WHERE
 		product_id = #{product_id}
 	</select>
+
+	<select id="selectReviewById" parameterType="Integer"
+		resultMap="review">
+		SELECT * FROM
+		tb_review
+		WHERE
+		review_id = #{id}
+	</select>
+
+	<update id="updateReviewById"
+		parameterType="com.mju.ict.model.Review">
+		UPDATE tb_review
+		SET
+		review_title = #{review_title},
+		review_star= #{review_star},
+		review_content= #{review_content},
+		review_img= #{review_img}
+		WHERE
+		review_id =
+		#{review_id}
+	</update>
+	<delete id="deleteReview" parameterType="Integer">
+		DELETE FROM
+		tb_review
+		WHERE
+		review_id = #{review_id}
+	</delete>
+
 	<update id="addReviewView" parameterType="Integer">
 		UPDATE tb_review
 		SET
