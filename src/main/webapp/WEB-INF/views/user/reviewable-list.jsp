@@ -38,7 +38,7 @@
 
 													<div class="row m-3">
 														<img alt=""
-															src="${orderDetail.product.product_thumbnailImg}"
+															src="${orderDetail.product.product_img}"
 															class="col-4 w-25 h-75 mr-3">
 														<div class="col-5 mt-5">
 															<h5>

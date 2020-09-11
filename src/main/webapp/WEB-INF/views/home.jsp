@@ -20,7 +20,7 @@
 							<a
 								href="${pageContext.request.contextPath}/discount/${discount.discount_id}">
 								<img
-								src="https://viralsweep.com/blog/wp-content/uploads/2015/02/furiouscamera.jpg"
+								src="https://blog.dineout-cdn.co.in/blog/wp-content/uploads/2018/05/BANNER-1-845x321.png"
 								class="d-block w-100" alt="${discount.discount_name}">
 								<div class="carousel-caption d-none d-md-block">
 									<h1 class="display-3 pb-5 font-weight-bold">${discount.discount_name}
@@ -47,7 +47,7 @@
 							<a
 								href="${pageContext.request.contextPath}/discount/${discount.discount_id}">
 								<img
-								src="https://viralsweep.com/blog/wp-content/uploads/2015/02/furiouscamera.jpg"
+								src="https://blog.dineout-cdn.co.in/blog/wp-content/uploads/2018/05/BANNER-1-845x321.png"
 								class="d-block w-100" alt="${discount.discount_name}">
 								<div class="carousel-caption d-none d-md-block">
 									<h1 class="display-3 pb-5 font-weight-bold">${discount.discount_name}

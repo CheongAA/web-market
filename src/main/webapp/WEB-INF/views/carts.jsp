@@ -45,7 +45,7 @@
 											</td>
 											<td>
 												<div class="col-sm-12">
-													<img alt="" src="${cart.product.product_thumbnailImg}"
+													<img alt="" src="${cart.product.product_img}"
 														class="w-25">${cart.product.product_name} / <span>${cart.product.product_price}</span>원
 												</div>
 											</td>
@@ -57,7 +57,7 @@
 												class="product_check_input" value="${cart.cart_id}" /></td>
 											<td>
 												<div class="col-sm-12">
-													<img alt="" src="${cart.product.product_thumbnailImg}"
+													<img alt="" src="${cart.product.product_img}"
 														class="w-25"> <a
 														href="${pageContext.request.contextPath}/product/${cart.product.product_id}"
 														class="text-dark">${cart.product.product_name}</a> /

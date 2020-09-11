@@ -23,7 +23,7 @@
 				<h4 class="mt-3">주문상품</h4>
 				<c:forEach var="orderDetail" items="${order.orderDetail}">
 					<div class="row m-1 p-1 border-top border-bottom w-100">
-						<img alt="" src="${orderDetail.product.product_thumbnailImg}"
+						<img alt="" src="${orderDetail.product.product_img}"
 							class="col-sm-3 w-25 h-100 mx-auto">
 						<div class=" col-sm-5 m-2">
 							<p>

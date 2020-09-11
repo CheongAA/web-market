@@ -33,7 +33,7 @@
 										<c:forEach var="orderDetail" items="${order.orderDetail}">
 											<div class="row m-3">
 												<img alt=""
-													src="${orderDetail.product.product_thumbnailImg}"
+													src="${orderDetail.product.product_img}"
 													class="col-3 w-100 h-75 mr-3">
 												<div class="col-8">
 													<h5>
