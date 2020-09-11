@@ -5,45 +5,34 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.UUID;
 
-import org.springframework.util.FileCopyUtils;
-import net.coobird.thumbnailator.Thumbnails;
 
 public class UploadFileUtils {
 
-	static final int THUMB_WIDTH = 300;
-	static final int THUMB_HEIGHT = 300;
-
-	public static String fileUpload(String uploadPath, String fileName, byte[] fileData, String ymdPath)
-			throws Exception {
-
+	public static String uploadFile(String uploadPath, String originalName) throws Exception {
+		// 랜덤의 uid 를 만들어준다.
 		UUID uid = UUID.randomUUID();
 
-		String newFileName = uid + "_" + fileName;
-		String imgPath = uploadPath + ymdPath;
+		// savedName : 570d570a-7af1-4afe-8ed5-391d660084b7_g.JPG 같은 형식으로 만들어준다.
+		String savedName = "/" + uid.toString() + "_" + originalName;
 
-		File target = new File(imgPath, newFileName);
-		FileCopyUtils.copy(fileData, target);
+		// \2017\12\27 같은 형태로 저장해준다.
+		String savedPath = calcPath(uploadPath);
 
-		String thumbFileName = "s_" + newFileName;
-		File image = new File(imgPath + File.separator + newFileName);
+		String uploadedFileName = (savedPath + savedName).replace(File.separatorChar, '/');
+		
+		return uploadedFileName;
 
-		File thumbnail = new File(imgPath + File.separator + "s" + File.separator + thumbFileName);
-
-		if (image.exists()) {
-			thumbnail.getParentFile().mkdirs();
-			Thumbnails.of(image).size(THUMB_WIDTH, THUMB_HEIGHT).toFile(thumbnail);
-		}
-		return newFileName;
 	}
 
-	public static String calcPath(String uploadPath) {
+	private static String calcPath(String uploadPath) {
+
 		Calendar cal = Calendar.getInstance();
+
 		String yearPath = File.separator + cal.get(Calendar.YEAR);
 		String monthPath = yearPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
 		String datePath = monthPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.DATE));
 
 		makeDir(uploadPath, yearPath, monthPath, datePath);
-		makeDir(uploadPath, yearPath, monthPath, datePath + "\\s");
 
 		return datePath;
 	}
@@ -55,6 +44,7 @@ public class UploadFileUtils {
 		}
 
 		for (String path : paths) {
+
 			File dirPath = new File(uploadPath + path);
 
 			if (!dirPath.exists()) {

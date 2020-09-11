@@ -14,7 +14,7 @@
 			<div class="row mb-5 pb-5">
 				<div class="col-sm-5 pl-0 mr-5">
 					<img class="w-100 h-100 mb-3 product-img" alt=""
-						src="${product.product_thumbnailImg}">
+						src="${product.product_img}">
 					<c:if
 						test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
 						<div class="product-img-text bg-warning text-center p-3">

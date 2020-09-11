@@ -36,7 +36,7 @@
 					<a href="${pageContext.request.contextPath}/product/${product.product_id}"
 						class="text-decoration-none"> <img
 						class="w-100 h-75 mb-3 product-img" alt=""
-						src="${product.product_thumbnailImg}"> <c:if
+						src="${product.product_img}"> <c:if
 							test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
 							<div class="product-img-text bg-warning text-center p-3">
 								<p class="h4 text-white font-weight-light">SAVE</p>

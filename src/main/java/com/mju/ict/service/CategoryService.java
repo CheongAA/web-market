@@ -27,7 +27,7 @@ public class CategoryService implements ICategoryService{
 	@Override
 	public Map<String, String> getLargeCategories() {
 		List<Category> categories = categoryDAO.selectLargeCategories();
-		Map<String, String> result = new HashMap<>();
+		Map<String, String> result = new HashMap<String,String>();
 		for(Category c:categories) {
 			result.put( Integer.toString(c.getCategory_code()), c.getCategory_name());
 		}

@@ -18,8 +18,6 @@
 		<result column="product_material" property="product_material" />
 		<result column="product_volume" property="product_volume" />
 		<result column="on_sale" property="on_sale" />
-		<result column="product_thumbnailImg"
-			property="product_thumbnailImg" />
 		<result column="product_img" property="product_img" />
 
 		<association javaType="com.mju.ict.model.Brand"
@@ -52,11 +50,10 @@
 		parameterType="com.mju.ict.model.Product">
 		INSERT INTO tb_product
 		(brand_id,category_code,product_name,product_price,product_quantity,product_desc,
-		product_material,product_volume,
-		product_thumbnailImg,product_img)
+		product_material,product_volume,product_img)
 		VALUES(
-		#{brand_id},#{category_code},#{product_name},#{product_price},#{product_quantity},#{product_desc},#{product_material},#{product_volume},
-		#{product_thumbnailImg},#{product_img}
+		#{brand_id},#{category_code},#{product_name},#{product_price},
+		#{product_quantity},#{product_desc},#{product_material},#{product_volume},#{product_img}
 		)
 
 	</insert>
@@ -253,8 +250,6 @@
 		=#{product_material},
 		product_volume =
 		#{product_volume},
-		product_thumbnailImg =
-		#{product_thumbnailImg},
 		product_img =
 		#{product_img}
 		WHERE

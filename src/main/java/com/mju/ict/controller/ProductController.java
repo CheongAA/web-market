@@ -119,6 +119,7 @@ public class ProductController {
 			carts = cartService.getCartsByUser(user.getUser_id());
 		}else {
 			//비회원
+			return "login";
 		}
 		model.addAttribute("carts", carts);
 		return "carts";
@@ -133,7 +134,7 @@ public class ProductController {
 			cart.setUser_id(user.getUser_id());
 			cartService.registerCart(cart);
 		}else {
-			cartService.registerCart(cart);
+			//cartService.registerCart(cart);
 		}
 	}
 	

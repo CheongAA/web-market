@@ -45,7 +45,7 @@ public class OrderController {
 		User user = (User) session.getAttribute("user");
 
 		if (user == null) {
-			return "order_nonUser";
+			return "login";
 		} else {
 			List<Cart> carts = cartService.getCartsById(cartArr);
 			List<Address> addresses = addressService.getAddressByUser(user.getUser_id());

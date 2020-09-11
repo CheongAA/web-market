@@ -1,16 +1,18 @@
 package com.mju.ict.service;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mju.ict.model.Product;
 import com.mju.ict.repository.IProductDAO;
+import com.mju.ict.util.S3Util;
 import com.mju.ict.util.UploadFileUtils;
 
 @Service
@@ -19,10 +21,9 @@ public class ProductService implements IProductService{
 	@Autowired
 	IProductDAO productDAO;
 	
-	// Product 사진 업로드 경로
-	private String uploadPath = "C:\\Users\\HP\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\market\\resources";
+	@Autowired
+	private S3Util s3;
 
-	
 	//상품 전체 조회
 	@Override
 	public List<Product> getAllProducts() {
@@ -76,48 +77,42 @@ public class ProductService implements IProductService{
 	//상품 등록
 	@Override
 	public void registerProduct(Product product, MultipartFile file) {
-		String imgUploadPath = uploadPath + File.separator + "imgUpload";
-		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-		String fileName = null;
-
-		if (file != null) {
-			try {
-				fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
-		}
-
-		product.setProduct_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-		product.setProduct_thumbnailImg(
-				File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
-
-		productDAO.insertProduct(product);
+		String uploadPath = "product/img/main";
 		
+		ResponseEntity<String> img_path = null;
+		try {
+			img_path = new ResponseEntity<String>(
+					UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename()),
+					HttpStatus.CREATED);
+			s3.fileUpload(s3.getBucketName(), uploadPath + img_path.getBody(), file.getBytes());
+			product.setProduct_img(s3.getFileURL(s3.getBucketName(), uploadPath+img_path.getBody()));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
+		productDAO.insertProduct(product);
 	}
 	
 	//상품 수정
 	@Override
 	public void updateProduct(Product product, MultipartFile file) {
-		String imgUploadPath = uploadPath + File.separator + "imgUpload";
-		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-		String fileName = null;
-
-		if (file != null) {
-			try {
-				fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
-		}
-
-		product.setProduct_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-		product.setProduct_thumbnailImg(
-				File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+//		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+//		String ymdPath = U.calcPath(imgUploadPath);
+//		String fileName = null;
+//
+//		if (file != null) {
+//			try {
+//				fileName = U.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+//			}catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		} else {
+//			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+//		}
+//
+//		product.setProduct_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+//		product.setProduct_thumbnailImg(
+//				File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 
 		productDAO.updateProduct(product);
 	}

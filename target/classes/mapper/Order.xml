@@ -18,8 +18,6 @@
 		<result column="product_material" property="product_material" />
 		<result column="product_volume" property="product_volume" />
 		<result column="on_sale" property="on_sale" />
-		<result column="product_thumbnailImg"
-			property="product_thumbnailImg" />
 		<result column="product_img" property="product_img" />
 
 		<association javaType="com.mju.ict.model.Discount"

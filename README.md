@@ -2,7 +2,6 @@
 > 여러 음식 브랜드가 입점하여 자신들의 상품을 판매할 수 있는 온라인 식품 쇼핑몰입니다.
 
 
-![](../header.png)
 
 ## Tech/framework 
 
@@ -10,6 +9,7 @@
 * Application Framework: Spring MVC 4.3.9
 * Database: MySQL 8.0.21 + MyBatis 3.4.1
 * Deployement: 
+* Storage: AWS S3
 * Front-End: JSP , Javascript
 * IDE: Eclipse
 * Build Automation Tool: Maven
