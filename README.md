@@ -10,6 +10,10 @@
 <img src="https://user-images.githubusercontent.com/45962780/92887773-b127f100-f44f-11ea-8bbd-1af5737d0922.png" width="20%"></img>
 <img src="https://user-images.githubusercontent.com/45962780/92887782-b38a4b00-f44f-11ea-8a89-ed543684f547.png" width="20%"></img>
 
+## 기간
+
+* 2020.07.22 ~ 진행중
+
 ## Tech/framework 
 
 * Language: JDK 1.8
