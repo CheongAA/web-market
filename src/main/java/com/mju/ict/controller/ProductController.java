@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mju.ict.model.Cart;
@@ -55,6 +56,16 @@ public class ProductController {
 		Map<String, String> result = categoryService.getLargeCategories();
 		return result;
 	}
+	
+	//상품 검색 결과 페이지
+	@RequestMapping(value = "/product/search", method = RequestMethod.GET)
+	public String getSearchProducts(@RequestParam String term,Model model) {
+		List<Product> products = productService.searchProductByTerm(term);
+		
+		model.addAttribute("products", products);
+		return "/products";
+	}
+	
 	
 	//카테고리별 상품 페이지
 	@RequestMapping(value = "/products/{category}", method = RequestMethod.GET)

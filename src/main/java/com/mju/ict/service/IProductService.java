@@ -23,6 +23,8 @@ public interface IProductService {
 	public abstract List<Product> getProductsByBrand(int id);
 
 	public abstract List<Product> getDiscountProducts();
+	
+	public abstract List<Product> searchProductByTerm(String term);
 
 	public abstract void registerProduct(Product product, MultipartFile file);
 
@@ -31,6 +33,8 @@ public interface IProductService {
 	public abstract void updateProduct(Product product, MultipartFile file);
 
 	public abstract void changeProductSale(int id);
+
+
 
 
 }

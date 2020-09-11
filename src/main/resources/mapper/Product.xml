@@ -46,6 +46,26 @@
 		</association>
 	</resultMap>
 
+	<select id="selectProductByTerm" parameterType="String"
+		resultMap="product">
+		SELECT * FROM tb_product
+		LEFT JOIN
+		tb_brand
+		ON
+		tb_brand.brand_id = tb_product.brand_id
+		LEFT JOIN
+		tb_discount
+		ON
+		tb_discount.discount_id= tb_product.discount_id
+		WHERE
+		product_name like CONCAT('%', #{term}, '%')
+		or
+		product_desc like
+		CONCAT('%', #{term}, '%')
+		and
+		on_sale = 1
+	</select>
+
 	<insert id="insertProduct"
 		parameterType="com.mju.ict.model.Product">
 		INSERT INTO tb_product

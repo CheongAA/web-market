@@ -22,6 +22,8 @@ public interface IProductDAO {
 	public abstract List<Product> selectBestProducts();
 
 	public abstract List<Product> selectProductsByDiscount(int id);
+	
+	public abstract List<Product> selectProductByTerm(String term);
 
 	public abstract void insertProduct(Product product);
 
@@ -30,5 +32,7 @@ public interface IProductDAO {
 	public abstract void updateProductSale(Map<String,Integer> map);
 	
 	public abstract void deleteProductById(int id);
+
+
 
 }

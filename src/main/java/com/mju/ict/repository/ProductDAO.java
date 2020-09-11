@@ -53,7 +53,11 @@ public class ProductDAO implements IProductDAO{
 	public List<Product> selectProductsByDiscount(int id) {
 		return sqlSession.selectList("selectProductsByDiscount",id);
 	}
-	
+
+	@Override
+	public List<Product> selectProductByTerm(String term) {
+		return sqlSession.selectList("selectProductByTerm", term);
+	}
 
 	@Override
 	public void insertProduct(Product product) {
@@ -76,5 +80,7 @@ public class ProductDAO implements IProductDAO{
 	public void deleteProductById(int id) {
 		sqlSession.delete("deleteProductById", id);
 	}
+
+
 
 }

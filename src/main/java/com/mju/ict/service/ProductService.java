@@ -73,6 +73,10 @@ public class ProductService implements IProductService{
 	}
 	
 	
+	@Override
+	public List<Product> searchProductByTerm(String term) {
+		return productDAO.selectProductByTerm(term);
+	}
 
 	//상품 등록
 	@Override
@@ -138,6 +142,8 @@ public class ProductService implements IProductService{
 		
 		productDAO.updateProductSale(map);
 	}
+
+
 
 
 

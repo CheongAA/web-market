@@ -62,9 +62,8 @@
 			href="${pageContext.request.contextPath}/products/discount">알뜰쇼핑</a> <a
 			class="col text-muted font-weight-bold align-self-center ${activeEvent}"
 			href="${pageContext.request.contextPath}/discount/">이벤트</a>
-		<form class="form-inline my-lg-0 main-header-input-box">
-			<input class="form-control mr-sm-2 main-header-input" type="search"
-				placeholder="" aria-label="Search">
+		<form class="form-inline my-lg-0 main-header-input-box" action="${pageContext.request.contextPath}/product/search" method="get">
+			<input class="form-control mr-sm-2 main-header-input" type="text" name="term">
 			<button class="btn my-2 my-sm-0" type="submit">
 				<i class="fa fa-search h5 text-muted font-weight-bold"
 					aria-hidden="true"></i>
