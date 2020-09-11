@@ -16,6 +16,16 @@ local.properties
 .recommenders
 .target/
 
+*.DS_Store
+bin
+target
+.classpath
+.project
+.settings
+src/main/webapp/META-INF
+.idea
+*.iml
+.springBeans
 
 # sbteclipse plugin
 .target

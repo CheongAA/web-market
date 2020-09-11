@@ -128,7 +128,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.11</version>
+			<version>8.0.16</version>
 		</dependency>
 
 		<!-- MyBatis 3.4.1 -->
@@ -197,7 +197,7 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>4.1.0.RELEASE</version>
+			<version>4.2.17.RELEASE</version>
 		</dependency>
 		<!--스프링시큐리티 config 라이브러리 -->
 		<dependency>
