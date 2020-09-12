@@ -452,7 +452,7 @@ public class AdminController {
 	
 	// 자주하는 질문 목록 페이지
 	@RequestMapping(value = "/faq", method = RequestMethod.GET)
-	public String getFAQs(Model model) {
+	public String getFaqs(Model model) {
 		List<Answer> answers = answerService.getFaqAnswers();
 		model.addAttribute("answers", answers);
 		return "admin/question/faq-list";
@@ -464,6 +464,14 @@ public class AdminController {
 		Question question = questionService.getQuestionById(id);
 		model.addAttribute("question", question);
 		return "admin/question/detail";
+	}
+	
+	// 자주하는 질문 상세 페이지
+	@RequestMapping(value = "/faq/{id}", method = RequestMethod.GET)
+	public String getFaqDetail(@PathVariable int id, Model model) {
+		Answer answer = answerService.getFaqAnswerById(id);
+		model.addAttribute("answer", answer);
+		return "admin/question/faq-detail";
 	}
 
 	// 답변 등록 페이지

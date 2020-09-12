@@ -27,6 +27,19 @@
 		tb_question_category.question_category_id
 	</select>
 
+
+	<select id="selectFaqAnswerById" parameterType="Integer" resultMap="answer">
+		SELECT * FROM tb_answer
+		LEFT JOIN
+		tb_question_category
+		ON
+		tb_answer.question_category_id =
+		tb_question_category.question_category_id
+		WHERE
+		tb_answer.question_category_id is not null
+		AND
+		answer_id = #{id}
+	</select>
 	<insert id="insertAnswer"
 		parameterType="com.mju.ict.model.Answer" useGeneratedKeys="true"
 		keyProperty="answer_id">

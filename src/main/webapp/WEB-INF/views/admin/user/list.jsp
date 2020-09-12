@@ -12,22 +12,20 @@
 	<jsp:include page="../admin_header.jsp" flush="false" />
 	<div class="row mt-5">
 		<h3 class="w-100">고객조회</h3>
-		<table class="table mt-3">
+		<table class="table table-hover text-center mt-3">
 			<thead>
 				<tr>
-					<th scope="col"></th>
-					<th scope="col">고객ID</th>
-					<th scope="col">고객명</th>
-					<th scope="col">가입일</th>
+					<th></th>
+					<th>고객ID</th>
+					<th>고객명</th>
+					<th>가입일</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="user" items="${users}" varStatus="status">
-					<tr>
-						<td><c:out value="${status.count} " /></td>
-						<td><a
-							href="${pageContext.request.contextPath}/admin/user/${user.user_id}">
-								${user.user_identification}</a></td>
+					<tr class="rows" id="${user.user_id }">
+						<td>${status.count}</td>
+						<td>${user.user_identification}</td>
 						<td>${user.user_name }</td>
 						<td><fmt:formatDate value="${user.user_created}"
 								pattern="yyyy-MM-dd" /></td>
@@ -35,7 +33,11 @@
 				</c:forEach>
 			</tbody>
 		</table>
-
 	</div>
+	<script type="text/javascript">
+		$(".rows").click(function() {
+			location.href = "/admin/user/" + $(this).attr('id');
+		});
+	</script>
 </body>
 </html>

@@ -11,76 +11,87 @@
 <body>
 	<jsp:include page="../admin_header.jsp" flush="false" />
 	<div class="row mt-5">
-		<h3 class="w-100 text-center border-bottom pb-5">상품추가</h3>
-		<form class="m-auto"
-			action="${pageContext.request.contextPath}/admin/product/add"
-			method="post" enctype="multipart/form-data">
-			<div class="form-group">
-				<label for="product_name">상품명</label> <input type="text"
-					class="form-control" id="product_name" name="product_name"
-					placeholder="" required="required">
-			</div>
-			<div class="form-group">
-				<label for="category1">대분류</label> <select class="form-control"
-					id="category1" onchange="changeCategory1(this.value)">
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="category2">중분류</label> <select class="form-control"
-					id="category2" name="category_code">
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="exampleFormControlSelect1">브랜드명</label> <select
-					class="form-control" id="exampleFormControlSelect1" name="brand_id">
-					<c:forEach var="brand" items="${brands}">
-						<option value="${brand.brand_id}"><c:out
-								value="${brand.brand_name}" /></option>
-					</c:forEach>
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="product_img">상품대표이미지</label> <input type="file"
-					class="form-control-file" id="product_img" name="file">
-				<div class="select_product_img mt-3">
-					<img src="">
+		<h3 class="col-sm-12 border-bottom p-5">상품추가</h3>
+		<div class="col-sm-12 p-5">
+			<form action="${pageContext.request.contextPath}/admin/product/add"
+				method="post" enctype="multipart/form-data">
+				<div class="col-12 border mb-5">
+					<table class="table">
+						<tbody>
+							<tr>
+								<th scope="row" style="width: 20%">대분류</th>
+								<td><select class="form-control" id="category1"
+									onchange="changeCategory1(this.value)">
+								</select></td>
+
+							</tr>
+							<tr>
+								<th scope="row">중분류</th>
+								<td><select class="form-control" id="category2"
+									name="category_code">
+								</select></td>
+							</tr>
+							<tr>
+								<th scope="row">브랜드명</th>
+								<td class="form-inline"><select class="form-control"
+									id="exampleFormControlSelect1" name="brand_id">
+										<c:forEach var="brand" items="${brands}">
+											<option value="${brand.brand_id}"><c:out
+													value="${brand.brand_name}" /></option>
+										</c:forEach>
+								</select></td>
+							</tr>
+							<tr>
+								<th scope="row">상품명</th>
+								<td class="form-inline"><input type="text"
+									class="form-control" id="product_name" name="product_name"
+									placeholder="" required="required"></td>
+							</tr>
+
+							<tr>
+								<th scope="row">상품대표이미지</th>
+								<td><input type="file" class="form-control-file"
+									id="product_img" name="file">
+									<div class="select_product_img mt-3">
+										<img src="">
+									</div></td>
+							</tr>
+							<tr>
+								<th scope="row">상품설명이미지</th>
+								<td><input type="file" class="form-control-file"
+									id="product_descImage" name="product_descImage"></td>
+							</tr>
+							<tr>
+								<th scope="row">가격</th>
+								<td><input type="text" class="form-control"
+									id="product_price" name="product_price" placeholder=""
+									required="required"></td>
+							</tr>
+							<tr>
+								<th scope="row">재고</th>
+								<td><input type="text" class="form-control" id="product_q"
+									name="product_quantity" placeholder="" required="required">
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">용량</th>
+								<td><input type="text" class="form-control"
+									id="product_name" name="product_volume" placeholder=""
+									required="required"></td>
+							</tr>
+							<tr>
+								<th scope="row">간단설명</th>
+								<td><textarea class="form-control" id="product_desc"
+										name="product_desc" rows="3" required="required"></textarea></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<%=request.getRealPath("/")%>
-			</div>
-			<div class="form-group">
-				<label for="product_descImage">상품 설명이미지</label> <input type="file"
-					class="form-control-file" id="product_descImage"
-					name="product_descImage">
-			</div>
-			<div class="form-group">
-				<label for="product_name">가격</label> <input type="text"
-					class="form-control" id="product_price" name="product_price"
-					placeholder="" required="required">
-			</div>
-			<div class="form-group">
-				<label for="product_name">상품수량</label> <input type="text"
-					class="form-control" id="product_q" name="product_quantity"
-					placeholder="" required="required">
-			</div>
-			<div class="form-group">
-				<label for="product_name">재료</label> <input type="text"
-					class="form-control" id="product_name" name="product_material"
-					placeholder="" required="required">
-			</div>
-			<div class="form-group">
-				<label for="product_name">용량</label> <input type="text"
-					class="form-control" id="product_name" name="product_volume"
-					placeholder="" required="required">
-			</div>
-			<div class="form-group">
-				<label for="product_desc">상품설명</label>
-				<textarea class="form-control" id="product_desc" name="product_desc"
-					rows="3" required="required"></textarea>
-			</div>
-			<div class="form-group">
-				<button type="submit" class="btn btn-dark btn-block">등록</button>
-			</div>
-		</form>
+				<div class="col-12 text-center">
+					<button type="submit" class="btn btn-dark btn-lg col-4">등록</button>
+				</div>
+			</form>
+		</div>
 	</div>
 	<script>
 		$("#product_img").on(

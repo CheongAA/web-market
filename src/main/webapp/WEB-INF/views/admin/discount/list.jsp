@@ -12,7 +12,7 @@
 	<jsp:include page="../admin_header.jsp" flush="false" />
 	<div class="row mt-5">
 		<h3 class="w-100">이벤트</h3>
-		<table class="table mt-3">
+		<table class="table table-hover text-center mt-3">
 			<thead>
 				<tr>
 					<th scope="col"></th>
@@ -20,16 +20,16 @@
 					<th scope="col">할인율</th>
 					<th scope="col">시작일</th>
 					<th scope="col">종료일</th>
-					<th scope="col">사이트 노출</th>
-					<th scope="col">진행중</th>
+					<th scope="col">진행중 날짜</th>
+					<th scope="col">할인적용(사이트 노출)</th>
+					<th scope="col">할인적용 변경</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="discount" items="${discounts}" varStatus="status">
-					<tr>
+					<tr class="rows" id="${discount.discount_id}">
 						<td>${status.count}</td>
-						<td><a
-							href="${pageContext.request.contextPath}/admin/discount/${discount.discount_id}">${discount.discount_name}</a></td>
+						<td>${discount.discount_name}</td>
 						<td>${discount.discount_rate}%</td>
 						<td><c:set var="start">
 								<fmt:formatDate pattern="yyyy/MM/dd"
@@ -44,31 +44,33 @@
 								pattern="yyyy/MM/dd" />
 						</c:set>
 						<td><c:choose>
-								<c:when test="${discount.discount_apply !=0}">
-									<span class="text-primary">O</span>
-								</c:when>
-								<c:otherwise>
-									<span class="text-danger">X</span>
-								</c:otherwise>
-							</c:choose> <span><a
-							href="${pageContext.request.contextPath}/admin/discountApply/${discount.discount_id}">
-								변경</a></span></td>
-						<td><c:choose>
 								<c:when test="${discount.discount_state !=0}">
-									<p class="text-primary">O</p>
+									<h5 class="text-primary">O</h5>
 								</c:when>
 								<c:otherwise>
-									<p class="text-danger">X</p>
+									<h5 class="text-danger">X</h5>
 								</c:otherwise>
 							</c:choose></td>
+						<td><c:choose>
+								<c:when test="${discount.discount_apply !=0}">
+									<h5 class="text-primary">O</h5>
+								</c:when>
+								<c:otherwise>
+									<h5 class="text-danger">X</h5>
+								</c:otherwise>
+							</c:choose></td>
+						<td><a class="btn btn-sm btn-outline-success"
+							href="${pageContext.request.contextPath}/admin/discountApply/${discount.discount_id}">
+								변경</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	<div class="w-100">
-		<a class="float-right btn btn-primary"
-			href="${pageContext.request.contextPath}/admin/discount/add">할인등록</a>
-	</div>
+	<script type="text/javascript">
+		$(".rows").click(function() {
+			location.href = "/admin/discount/" + $(this).attr('id');
+		});
+	</script>
 </body>
 </html>

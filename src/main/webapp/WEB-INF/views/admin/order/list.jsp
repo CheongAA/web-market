@@ -12,9 +12,10 @@
 	<jsp:include page="../admin_header.jsp" flush="false" />
 	<div class="row mt-5">
 		<h3 class="w-100">주문조회</h3>
-		<table class="table mt-3">
+		<table class="table table-hover mt-3">
 			<thead>
 				<tr>
+					<th scope="col"></th>
 					<th scope="col">주문번호</th>
 					<th scope="col">주문날짜</th>
 					<th scope="col">결제금액</th>
@@ -23,11 +24,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="order" items="${orders}">
-					<tr>
-
-						<td><a
-							href="${pageContext.request.contextPath}/admin/order/${order.order_id}">${order.order_id}</a></td>
+				<c:forEach var="order" items="${orders}" varStatus="status">
+					<tr class="rows" id="${order.order_id}">
+						<td class="h5">${status.count }</td>
+						<td>${order.order_id}</td>
 						<td><fmt:formatDate value="${order.order_created}"
 								pattern="yyyy-MM-dd" /></td>
 						<td><fmt:formatNumber value="${order.order_total_price}"
@@ -38,7 +38,24 @@
 				</c:forEach>
 			</tbody>
 		</table>
-
+		<nav aria-label="Page navigation example" class="d-block mx-auto">
+			<ul class="pagination">
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				</a></li>
+			</ul>
+		</nav>
 	</div>
+	<script type="text/javascript">
+		$(".rows").click(function() {
+			location.href = "/admin/order/" + $(this).attr('id');
+		});
+	</script>
 </body>
 </html>

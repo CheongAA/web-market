@@ -33,10 +33,10 @@
 											pattern="yyyy-MM-dd" /></td>
 									<td><c:choose>
 											<c:when test="${question.answer_id eq 0}">
-												X
+												<h5 class="text-danger">X</h5>
 											</c:when>
 											<c:otherwise>
-												O
+												<h5 class="text-primary">O</h5>
 											</c:otherwise>
 										</c:choose></td>		
 								</tr>

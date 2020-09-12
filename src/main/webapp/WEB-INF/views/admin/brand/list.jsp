@@ -6,13 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자:: 입점 조회 /수정/삭제</title>
+<title>관리자:: 입점관리</title>
 </head>
 <body>
 	<jsp:include page="../admin_header.jsp" flush="false" />
 	<div class="row mt-5">
-		<h3 class="w-100">입점조회 / 수정 / 삭제</h3>
-		<table class="table mt-3">
+		<h3 class="w-100">입점관리</h3>
+		<table class="table table-hover mt-3">
 			<thead>
 				<tr>
 					<th scope="col"></th>
@@ -22,18 +22,21 @@
 			</thead>
 			<tbody>
 				<c:forEach var="brand" items="${brands}" varStatus="status">
-					<tr>
-						<td><c:out value="${status.count} " /></td>
-						<td><a href="${pageContext.request.contextPath}/admin/brand/${brand.brand_id}">
-								${brand.brand_name}</a>
-						</td>
+					<tr class="rows" id="${brand.brand_id}">
+						<td>${status.count}</td>
+						<td>${brand.brand_name}</td>
 						<td><fmt:formatDate value="${brand.brand_created}"
-									pattern="yyyy-MM-dd" /></td>
+								pattern="yyyy-MM-dd" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 
 	</div>
+	<script type="text/javascript">
+		$(".rows").click(function() {
+			location.href = "/admin/brand/" + $(this).attr('id');
+		});
+	</script>
 </body>
 </html>

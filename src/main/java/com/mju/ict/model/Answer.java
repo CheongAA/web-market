@@ -4,8 +4,6 @@ import java.util.Date;
 
 public class Answer {
 //	answer_id int primary key auto_increment,
-//	question_id INT,
-//	FOREIGN KEY(question_id) REFERENCES tb_question(question_id),
 //	question_category_id INT not null,
 //	FOREIGN KEY(question_category_id) REFERENCES tb_question_category(question_category_id),
 //    answer_created datetime default current_timestamp,
@@ -13,7 +11,6 @@ public class Answer {
 //    answer_content varchar(255) not null
 	
 	private int answer_id;
-	private int question_id;
 	private int question_category_id;
 	private String answer_title;
 	private Date answer_created;
@@ -26,12 +23,6 @@ public class Answer {
 	}
 	public void setAnswer_id(int answer_id) {
 		this.answer_id = answer_id;
-	}
-	public int getQuestion_id() {
-		return question_id;
-	}
-	public void setQuestion_id(int question_id) {
-		this.question_id = question_id;
 	}
 	public int getQuestion_category_id() {
 		return question_category_id;

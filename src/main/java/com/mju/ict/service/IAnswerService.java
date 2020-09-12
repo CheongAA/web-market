@@ -8,8 +8,12 @@ public interface IAnswerService {
 
 	public abstract List<Answer> getFaqAnswers();
 	
+	public abstract Answer getFaqAnswerById(int id);
+	
 	public abstract void registerAnswer(Answer answer, int question_id);
 
 	public abstract void deleteAnswerById(int id);
+
+
 
 }

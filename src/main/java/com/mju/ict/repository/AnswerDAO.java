@@ -19,6 +19,11 @@ public class AnswerDAO implements IAnswerDAO{
 	}
 	
 	@Override
+	public Answer selectFaqAnswerById(int id) {
+		return sqlSession.selectOne("selectFaqAnswerById",id);
+	}
+	
+	@Override
 	public void insertAnswer(Answer answer) {
 		sqlSession.insert("insertAnswer",answer);
 	}
@@ -27,6 +32,8 @@ public class AnswerDAO implements IAnswerDAO{
 	public void deleteAnswerById(int id) {
 		sqlSession.delete("deleteAnswerById",id);
 	}
+
+
 
 
 

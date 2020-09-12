@@ -27,11 +27,16 @@ public class AnswerService implements IAnswerService{
 		List<Answer> result = new ArrayList<Answer>();
 		
 		for(Answer a:answers) {
-			if((Integer)a.getQuestion_id() == 0) {
+			if((Integer)a.getQuestion_category_id()!= 0) {
 				result.add(a);
 			}
 		}
 		return result;
+	}
+	
+	@Override
+	public Answer getFaqAnswerById(int id) {
+		return answerDAO.selectFaqAnswerById(id);
 	}
 	
 	@Override
@@ -52,6 +57,8 @@ public class AnswerService implements IAnswerService{
 	public void deleteAnswerById(int id) {
 		answerDAO.deleteAnswerById(id);
 	}
+
+
 
 
 

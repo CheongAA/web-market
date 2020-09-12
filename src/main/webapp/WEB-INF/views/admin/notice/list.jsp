@@ -6,38 +6,41 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자:: 공지 조회 /수정/삭제</title>
+<title>관리자:: 공지 관리</title>
 </head>
 <body>
 	<jsp:include page="../admin_header.jsp" flush="false" />
 	<div class="row mt-5">
-		<h3 class="w-100">공지조회 / 수정 / 삭제</h3>
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">번호</th>
-							<th scope="col">제목</th>
-							<th scope="col">작성자</th>
-							<th scope="col">작성일</th>
-							<th scope="col">조회수</th>
+		<h3 class="w-100">공지관리</h3>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">번호</th>
+					<th scope="col">제목</th>
+					<th scope="col">작성자</th>
+					<th scope="col">작성일</th>
+					<th scope="col">조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<c:forEach var="notice" items="${notices}" varStatus="status">
+						<tr class="rows" id="${notice.notice_id}">
+							<td><c:out value="${status.count} " /></td>
+							<td>${notice.notice_title}</td>
+							<td>${notice.notice_writer}</td>
+							<td><fmt:formatDate value="${notice.notice_created}"
+									pattern="yyyy-MM-dd" /></td>
+							<td>${notice.notice_view}</td>
 						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<c:forEach var="notice" items="${notices}" varStatus="status">
-								<tr>
-									<td><c:out value="${status.count} " /></td>
-									<td><a
-										href="${pageContext.request.contextPath}/admin/notice/${notice.notice_id}">
-											${notice.notice_title}</a></td>
-									<td>${notice.notice_writer}</td>		
-									<td><fmt:formatDate value="${notice.notice_created}"
-											pattern="yyyy-MM-dd" /></td>
-									<td>${notice.notice_view}</td>		
-								</tr>
-							</c:forEach>
-					</tbody>
-				</table>
+					</c:forEach>
+			</tbody>
+		</table>
 	</div>
+	<script type="text/javascript">
+		$(".rows").click(function() {
+			location.href = "/admin/notice/" + $(this).attr('id');
+		});
+	</script>
 </body>
 </html>

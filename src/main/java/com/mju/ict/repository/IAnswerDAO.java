@@ -8,9 +8,13 @@ public interface IAnswerDAO {
 
 	public abstract List<Answer> selectAllAnswers();
 	
+	public abstract Answer selectFaqAnswerById(int id);
+	
 	public abstract void insertAnswer(Answer answer);
 
 	public abstract void deleteAnswerById(int id);
+
+
 
 
 }

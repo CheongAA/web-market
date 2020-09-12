@@ -19,8 +19,7 @@ public class Product {
 //    product_desc VARCHAR(300) NOT NULL,
 //    product_material VARCHAR(255)NOT NULL,
 //    product_volume INT NOT NULL,
-//    on_sale TINYINT(1) NOT NULL
-//    product_thumbnailImg varchar(200) NOT NULL,
+//    on_sale TINYINT(1) NOT NULL,
 //    product_img varchar(200) NOT NULL
 	
 	private int product_id;
@@ -36,7 +35,6 @@ public class Product {
 	private String product_material;
 	private int product_volume;
 	private int on_sale;
-	private String product_thumbnailImg;
 	private String product_img;
 	
 	private Brand brand;
@@ -128,12 +126,6 @@ public class Product {
 	}
 	public void setCategory(Category category) {
 		this.category = category;
-	}
-	public String getProduct_thumbnailImg() {
-		return product_thumbnailImg;
-	}
-	public void setProduct_thumbnailImg(String product_thumbnailImg) {
-		this.product_thumbnailImg = product_thumbnailImg;
 	}
 	public String getProduct_img() {
 		return product_img;

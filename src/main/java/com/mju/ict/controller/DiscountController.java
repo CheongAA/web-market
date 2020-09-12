@@ -31,6 +31,7 @@ public class DiscountController {
 		List<Discount> discounts = discountService.getAllDiscounts();
 		
 		model.addAttribute("discounts", discounts);
+		model.addAttribute("activeEvent", "h2");
 		return "discount/list";
 	}
 	

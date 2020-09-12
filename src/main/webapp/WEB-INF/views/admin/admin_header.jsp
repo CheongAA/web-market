@@ -30,7 +30,7 @@
 					href="${pageContext.request.contextPath}/admin/product/add">상품등록</a>
 				<a
 					class=" dropdown-item p-2 text-center text-muted text-decoration-none"
-					href="${pageContext.request.contextPath}/admin/product/">상품조회/수정/삭제/판매</a>
+					href="${pageContext.request.contextPath}/admin/product/">상품관리</a>
 				<hr />
 				<a
 					class=" dropdown-item p-2 text-center text-muted text-decoration-none"

@@ -11,7 +11,7 @@
 <body>
 	<div class="row">
 		<jsp:include page="mypage_header.jsp" flush="false" />
-		<div class="col py-5 ml-5">
+		<div class="col-sm-8 py-5 ml-5">
 			<h3>주문상세</h3>
 			<p>
 				주문일:
