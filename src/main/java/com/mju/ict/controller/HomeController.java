@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mju.ict.model.Answer;
@@ -91,6 +92,16 @@ public class HomeController {
 		model.addAttribute("brand", brand);
 		model.addAttribute("products", products);
 		return "brand-detail";
+	}
+	
+	//브랜드 검색 결과 페이지
+	@RequestMapping(value = "/brand/search", method = RequestMethod.GET)
+	public String getSearchBrand(@RequestParam String term,Model model) {
+		List<Brand> brands = brandService.searchBrandByTerm(term);
+		
+		model.addAttribute("brands", brands);
+		model.addAttribute("term", term);
+		return "/brand";
 	}
 
 	

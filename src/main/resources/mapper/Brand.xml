@@ -7,6 +7,14 @@
 		resultType="com.mju.ict.model.Brand">
 		SELECT * FROM tb_brand
 	</select>
+
+	<select id="selectBrandByTerm" parameterType="String"
+		resultType="com.mju.ict.model.Brand">
+		SELECT * FROM tb_brand
+		WHERE
+		brand_name like CONCAT('%', #{term}, '%')
+	</select>
+
 	<select id="selectBrandById" parameterType="Integer"
 		resultType="com.mju.ict.model.Brand">
 		SELECT * FROM tb_brand
@@ -28,14 +36,14 @@
 		brand_id = #{id}
 	</delete>
 
-	<update id="updateBrand"
-		parameterType="com.mju.ict.model.Brand">
+	<update id="updateBrand" parameterType="com.mju.ict.model.Brand">
 		UPDATE tb_brand
 		SET
 		brand_name =#{brand_name},
 		brand_desc =#{brand_desc}
 		WHERE
-		brand_id = #{brand_id}
+		brand_id =
+		#{brand_id}
 	</update>
 
 </mapper>

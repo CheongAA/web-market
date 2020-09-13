@@ -20,6 +20,11 @@ public class BrandDAO implements IBrandDAO{
 	}
 
 	@Override
+	public List<Brand> selectBrandByTerm(String term) {
+		return sqlSession.selectList("selectBrandByTerm", term);
+	}
+
+	@Override
 	public Brand selectBrandById(int id) {
 		return sqlSession.selectOne("selectBrandById",id);
 	}
@@ -39,6 +44,7 @@ public class BrandDAO implements IBrandDAO{
 	public void deleteBrandById(int id) {
 		sqlSession.delete("deleteBrandById", id);
 	}
+
 	
 
 }

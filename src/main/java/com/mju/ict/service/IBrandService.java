@@ -8,6 +8,8 @@ public interface IBrandService {
 
 	public abstract List<Brand> getAllBrands();
 
+	public abstract List<Brand> searchBrandByTerm(String term);
+
 	public abstract Brand getBrandById(int id);
 
 	public abstract void registerBrand(Brand brand);

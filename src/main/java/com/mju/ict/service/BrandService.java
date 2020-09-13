@@ -19,6 +19,12 @@ public class BrandService implements IBrandService{
 	public List<Brand> getAllBrands() {
 		return brandDAO.selectAllBrands();
 	}
+	
+	//검색어로 브랜드 조회
+	@Override
+	public List<Brand> searchBrandByTerm(String term) {
+		return brandDAO.selectBrandByTerm(term);
+	}
 
 	//brand_id로 브랜드 조회
 	@Override
@@ -44,6 +50,8 @@ public class BrandService implements IBrandService{
 		brandDAO.deleteBrandById(id);
 		
 	}
+
+
 
 
 }
