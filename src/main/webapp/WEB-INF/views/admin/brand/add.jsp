@@ -22,7 +22,7 @@
 							<tr>
 								<th scope="row">브랜드명</th>
 								<td class="form-inline"><input type="text"
-									class="form-control" id="product_name" name="brand_name"
+									class="form-control" id="brand_name" name="brand_name"
 									placeholder="" required="required"></td>
 							</tr>
 							<tr>
@@ -36,7 +36,7 @@
 							<tr>
 								<th scope="row">간단설명</th>
 								<td><textarea class="form-control" id="brand_desc"
-										name="product_desc" rows="3" required="required"></textarea></td>
+										name="brand_desc" rows="3" required="required"></textarea></td>
 							</tr>
 						</tbody>
 					</table>

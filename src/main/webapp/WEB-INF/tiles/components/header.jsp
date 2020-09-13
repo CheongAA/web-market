@@ -5,7 +5,7 @@
 <header class="py-3">
 	<div class="row justify-content-between">
 		<div class="col-auto mr-auto">
-			<a class="p-2 text-muted" href="#">택배배송</a>
+			<a class="p-2 text-muted" href="${pageContext.request.contextPath}/brand">입점 브랜드</a>
 		</div>
 		<div class="col-auto">
 			<nav class="nav d-flex">

@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mju.ict.model.Answer;
+import com.mju.ict.model.Brand;
 import com.mju.ict.model.Discount;
 import com.mju.ict.model.Notice;
 import com.mju.ict.model.Product;
 import com.mju.ict.service.IAnswerService;
+import com.mju.ict.service.IBrandService;
 import com.mju.ict.service.IDiscountService;
 import com.mju.ict.service.INoticeService;
 import com.mju.ict.service.IProductService;
@@ -30,6 +32,9 @@ public class HomeController {
 
 	@Autowired
 	IAnswerService answerService;
+	
+	@Autowired
+	IBrandService brandService;
 
 	@Autowired
 	IDiscountService discountService;
@@ -64,6 +69,28 @@ public class HomeController {
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup() {
 		return "signup";
+	}
+	
+	///////////////////////////////브랜드//////////////////////////
+	
+	//브랜드 목록 페이지
+	@RequestMapping(value = "/brand", method = RequestMethod.GET)
+	public String getBrand(Model model) {
+		List<Brand> brands = brandService.getAllBrands();
+		
+		model.addAttribute("brands", brands);
+		return "brand";
+	}
+	
+	//브랜드 상세 페이지
+	@RequestMapping(value = "/brand/{id}", method = RequestMethod.GET)
+	public String getBrandDetail(@PathVariable int id,Model model) {
+		Brand brand = brandService.getBrandById(id);
+		List<Product> products = productService.getProductsByBrand(id);
+
+		model.addAttribute("brand", brand);
+		model.addAttribute("products", products);
+		return "brand-detail";
 	}
 
 	
