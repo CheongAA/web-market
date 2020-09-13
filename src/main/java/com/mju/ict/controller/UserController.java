@@ -176,6 +176,13 @@ public class UserController {
 		return "user/user-update";
 	}
 	
+	// 정보 수정  완료 페이지
+	@RequestMapping(value = "/user/update/ok", method = RequestMethod.GET)
+	public String getUserUpdateOK(Model model, HttpSession session) {
+		return "user/user-update-ok";
+	}
+	
+	
 	// 회원 확인
 	@RequestMapping(value = "/user/check", method = RequestMethod.POST)
 	public String checkUser(@RequestParam("user_identification") String identification,
@@ -198,7 +205,7 @@ public class UserController {
 		
 		session.removeAttribute("user");
 		session.setAttribute("user", updatedUser);
-		return "redirect:/user/update";
+		return "redirect:/user/update/ok";
 	}
 	
 	/////////////// 배송지//////////////////
