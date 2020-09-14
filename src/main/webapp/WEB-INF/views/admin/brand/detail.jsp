@@ -9,12 +9,15 @@
 </head>
 <body>
 	<jsp:include page="../admin_header.jsp" flush="false" />
-	<div class="row mt-5">
-		<h3 class="w-100 mb-3">브랜드조회</h3>
-		<div class="jumbotron w-100 text-center">
-			<small>브랜드 코드 : ${brand.brand_id}</small>
-			<h1 class="display-4">${brand.brand_name}</h1>
-			<p class="lead">${brand.brand_desc}</p>
+	<div class="row my-5">
+		<h3>브랜드 코드 : ${brand.brand_id }</h3>
+		<div class="jumbotron col-sm-12 text-center py-5" style="background: url(${brand.brand_img }) no-repeat; background-size: cover;">
+			<h1 class="display-4 font-weight-bold text-white">${brand.brand_name}</h1>
+		</div>
+		<div class="col-sm-12 bg-light p-5">
+			<p class="lead">${brand.brand_desc }<p>
+			<p class="lead float-right">입점: <fmt:formatDate value="${brand.brand_created}"
+								pattern="yyyy-MM-dd" /><p>
 		</div>
 	</div>
 	<div class="row m-auto px-3">

@@ -78,7 +78,37 @@
 									</div>
 								</div>
 								<div class="form-group my-4">
-									<a class="btn btn-outline-dark" href="">탈퇴하기</a>
+									<button type="button" class="btn btn-dark " id="cancel_btn"
+										data-toggle="modal" data-target="#cart_modal">탈퇴하기</button>
+
+									<!-- Modal -->
+									<div class="modal fade" id="cart_modal" data-backdrop="static"
+										data-keyboard="false" tabindex="-1"
+										aria-labelledby="staticBackdropLabel" aria-hidden="true">
+										<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="staticBackdropLabel">회원탈퇴</h5>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<ul class="text-danger">
+														<li>회원탈퇴 시 개인정보 및 MARKET에서 만들어진 모든 데이터는 즉시 삭제됩니다.</li>
+														<li>탈퇴 후에는 회원님의 개인정보를 복원할 수 없으니 이 점 유의바랍니다.</li>
+													</ul>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">취소</button>
+													<a type="button" class="btn btn-danger"
+														href="${pageContext.request.contextPath}/user/cancel/${user.user_id}">탈퇴하기</a>
+												</div>
+											</div>
+										</div>
+									</div>
 									<button type="submit" class="btn btn-dark" id="update_btn">회원정보수정</button>
 								</div>
 							</form:form>
@@ -90,8 +120,6 @@
 
 	</div>
 	<script type="text/javascript">
-		
-		
 		// 이벤트 할당
 		$("#user_password").on('blur', checkPwd);
 		$("#user_password2").on('blur', checkPwd);
@@ -112,13 +140,12 @@
 		var emailFlag = false;
 		var phoneFlag = false;
 
-		
 		//init
 		checkPwd();
 		checkEmail();
 		checkPhone();
 		update();
-		
+
 		// 회원가입 버튼 활성화
 		function update() {
 			if (pwdFlag && emailFlag && phoneFlag) {
@@ -207,16 +234,18 @@
 			}
 
 		}
-
+		
 		//주소찾기버튼
-		$("#address_btn").on('click', getAddressList);
+		$("#address_btn")
+				.on(
+						'click',
+						function() {
+							window
+									.open(this.href, '_blank',
+											'width=400px,height=600px,toolbars=no,scrollbars=no,resizable=no');
+							return false;
+						});
 
-		function getAddressList() {
-			window
-					.open(this.href, '_blank',
-							'width=400px,height=600px,toolbars=no,scrollbars=no,resizable=no');
-			return false;
-		}
 	</script>
 </body>
 </html>

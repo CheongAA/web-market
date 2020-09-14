@@ -59,4 +59,6 @@ hs_err_pid*
 # ignore properties file
 *.properties
 
+### JRebel ###
+rebel.xml
 # End of https://www.toptal.com/developers/gitignore/api/java

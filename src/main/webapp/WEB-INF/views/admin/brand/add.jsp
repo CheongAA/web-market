@@ -26,10 +26,10 @@
 									placeholder="" required="required"></td>
 							</tr>
 							<tr>
-								<th scope="row">브랜드 대표이미지</th>
+								<th scope="row">브랜드 대표이미지(2000px * 400px)</th>
 								<td><input type="file" class="form-control-file"
-									id="product_img" name="file">
-									<div class="select_product_img mt-3">
+									id="brand_img" name="file" accept="image/*">
+									<div class="select_brand_img mt-3">
 										<img src="">
 									</div></td>
 							</tr>
@@ -47,5 +47,54 @@
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$("#brand_img")
+				.on(
+						'change',
+						function() {
+							if (this.files && this.files[0]) {
+
+								var ext = $(this).val().split(".").pop()
+										.toLowerCase();
+
+								var fileSize = this.files[0].size;
+								var maxSize = 2000 * 2000;
+
+								var _URL = window.URL || window.webkitURL;
+								var img = new Image();
+								img.src = _URL.createObjectURL(this.files[0]);
+
+								var reader = new FileReader;
+								reader.onload = function(data) {
+									//확장자 체크
+									if ($.inArray(ext, [ "gif", "jpg", "jpeg",
+											"png", "bmp" ]) == -1) {
+										alert("gif, jpg, jpeg, png, bmp 파일만 업로드 해주세요.");
+										hideImg();
+									} else if (fileSize > maxSize) {
+										alert("파일용량을 초과하였습니다.");
+										hideImg();
+									} else if (img.width != 2000
+											|| img.height != 400) {
+										alert("이미지 가로 2000px, 세로 400px로 맞춰서 올려주세요.");
+										hideImg();
+									} else {
+										$(".select_brand_img img").css(
+												"display", "block");
+										$(".select_brand_img img").attr("src",
+												data.target.result).width(200);
+									}
+
+								}
+								reader.readAsDataURL(this.files[0]);
+							}
+						});
+		
+		function hideImg(){
+			$("#brand_img").val("");
+			$(".select_brand_img img").css(
+					"display", "none");
+		}
+	</script>
 </body>
 </html>

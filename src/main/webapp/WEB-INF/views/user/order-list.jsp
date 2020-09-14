@@ -16,7 +16,9 @@
 			<div class="row justify-content-center mt-5">
 				<c:choose>
 					<c:when test="${empty orders}">
-						<h6 class="py-5 my-5 font-weight-bold">목록이 없습니다.</h6>
+						<div class="col-sm-12 border text-center">
+							<h6 class="py-5 my-5 font-weight-bold">목록이 없습니다.</h6>
+						</div>
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="order" items="${orders}">
@@ -32,8 +34,7 @@
 									<div class="col-sm-8 p-3 m-2">
 										<c:forEach var="orderDetail" items="${order.orderDetail}">
 											<div class="row m-3">
-												<img alt=""
-													src="${orderDetail.product.product_img}"
+												<img alt="" src="${orderDetail.product.product_img}"
 													class="col-3 w-100 h-75 mr-3">
 												<div class="col-8">
 													<h5>
@@ -55,7 +56,8 @@
 															</c:when>
 															<c:otherwise>
 																<a class="btn btn-sm btn-outline-secondary"
-																	href="${pageContext.request.contextPath}/user/review">내가 쓴 후기</a>
+																	href="${pageContext.request.contextPath}/user/review">내가
+																	쓴 후기</a>
 															</c:otherwise>
 														</c:choose>
 													</c:if>

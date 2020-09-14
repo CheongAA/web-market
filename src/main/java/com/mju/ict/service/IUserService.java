@@ -23,4 +23,6 @@ public interface IUserService {
 	public abstract User loginUser(String identification, String password, int rememberId, HttpServletResponse response);
 
 	public abstract User checkUser(String identification, String password);
+
+	public abstract void deleteUserById(int id);
 }

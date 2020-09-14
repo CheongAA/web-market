@@ -142,9 +142,6 @@
 		$("#address2").on('blur', checkAddress);
 		$("#search_zip_btn").on('click', execDaumPostcode);
 
-		// 회원가입 버튼 비활성화
-		$("#signup_btn").attr("disabled", true);
-
 		// 정규식
 		var idE = /^[a-zA-Z0-9]{4,12}$/;
 		var pwdE = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
@@ -159,6 +156,15 @@
 		var emailFlag = false;
 		var phoneFlag = false;
 		var addressFlag = false;
+		
+		//init
+		checkId();
+		checkPwd();
+		checkName();
+		checkEmail();
+		checkPhone();
+		checkAddress();
+		signup();
 
 		// 회원가입 버튼 활성화
 		function signup() {

@@ -331,8 +331,8 @@ public class AdminController {
 
 	// 브랜드 등록
 	@RequestMapping(value = "/brand/add", method = RequestMethod.POST)
-	public String addBrand(@ModelAttribute @Valid Brand brand, BindingResult result) {
-		brandService.registerBrand(brand);
+	public String addBrand(@ModelAttribute @Valid Brand brand, BindingResult result, MultipartFile file) {
+		brandService.registerBrand(brand,file);
 		return "redirect:/admin/brand";
 	}
 

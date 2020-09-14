@@ -44,4 +44,9 @@ public class UserDAO implements IUserDAO{
 		sqlSession.update("updateUser", user);
 	}
 
+	@Override
+	public void deleteUserById(int id) {
+		sqlSession.delete("deleteUserById", id);
+	}
+
 }

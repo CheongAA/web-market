@@ -99,4 +99,9 @@ public class UserService implements IUserService {
 		return null;
 	}
 
+	@Override
+	public void deleteUserById(int id) {
+		userDAO.deleteUserById(id);
+	}
+
 }

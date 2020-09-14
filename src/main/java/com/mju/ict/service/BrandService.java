@@ -3,17 +3,25 @@ package com.mju.ict.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mju.ict.model.Brand;
 import com.mju.ict.repository.IBrandDAO;
+import com.mju.ict.util.S3Util;
+import com.mju.ict.util.UploadFileUtils;
 
 @Service
 public class BrandService implements IBrandService{
 
 	@Autowired
 	IBrandDAO brandDAO;
-
+	
+	@Autowired
+	private S3Util s3;
+	
 	//브랜드 전체 조회
 	@Override
 	public List<Brand> getAllBrands() {
@@ -34,7 +42,21 @@ public class BrandService implements IBrandService{
 
 	//브랜드 등록
 	@Override
-	public void registerBrand(Brand brand) {
+	public void registerBrand(Brand brand, MultipartFile file) {
+		
+		String uploadPath = "brand/img";
+		
+		ResponseEntity<String> img_path = null;
+		try {
+			img_path = new ResponseEntity<String>(
+					UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename()),
+					HttpStatus.CREATED);
+			s3.fileUpload(s3.getBucketName(), uploadPath + img_path.getBody(), file.getBytes());
+			brand.setBrand_img(s3.getFileURL(s3.getBucketName(), uploadPath+img_path.getBody()));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
 		brandDAO.insertBrand(brand);
 	}
 

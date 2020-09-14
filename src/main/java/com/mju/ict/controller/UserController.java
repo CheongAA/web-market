@@ -182,7 +182,6 @@ public class UserController {
 		return "user/user-update-ok";
 	}
 	
-	
 	// 회원 확인
 	@RequestMapping(value = "/user/check", method = RequestMethod.POST)
 	public String checkUser(@RequestParam("user_identification") String identification,
@@ -206,6 +205,13 @@ public class UserController {
 		session.removeAttribute("user");
 		session.setAttribute("user", updatedUser);
 		return "redirect:/user/update/ok";
+	}
+	
+	// 배송지 탈퇴
+	@RequestMapping(value = "/user/cancel/{id}", method = RequestMethod.GET)
+	public String deleteUser(@PathVariable int id, Model model) {
+		userService.deleteUserById(id);
+		return "redirect:/";
 	}
 	
 	/////////////// 배송지//////////////////

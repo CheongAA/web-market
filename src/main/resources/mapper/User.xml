@@ -4,7 +4,7 @@
 <mapper namespace="com.mju.ict.repository.IUserDAO">
 
 	<insert id="insertUser" parameterType="com.mju.ict.model.User"
-	useGeneratedKeys="true" keyProperty="user_id">
+		useGeneratedKeys="true" keyProperty="user_id">
 		INSERT INTO tb_user
 		(user_identification,user_name,user_password,
 		user_email,user_gender,
@@ -31,7 +31,8 @@
 	<select id="selectIdByIdentification" parameterType="String"
 		resultType="Integer">
 		SELECT user_id FROM tb_user WHERE
-		user_identification = #{user_identification}
+		user_identification =
+		#{user_identification}
 	</select>
 
 	<select id="selectAllUsers" resultType="com.mju.ict.model.User">
@@ -42,9 +43,16 @@
 		SET
 		user_email =#{user_email},
 		user_birth =#{user_birth},
-		user_password =#{user_password},
+		user_password
+		=#{user_password},
 		user_phone =#{user_phone}
 		WHERE
 		user_id = #{user_id}
 	</update>
+	<delete id="deleteUserById" parameterType="Integer">
+		DELETE FROM
+		tb_user
+		WHERE
+		user_id = #{id}
+	</delete>
 </mapper>

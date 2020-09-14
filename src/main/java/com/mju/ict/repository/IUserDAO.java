@@ -18,4 +18,6 @@ public interface IUserDAO {
 	
 	public abstract void updateUser(User user);
 
+	public abstract void deleteUserById(int id);
+
 }

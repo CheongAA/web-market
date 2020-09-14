@@ -22,7 +22,7 @@
 					href="${pageContext.request.contextPath}/user/reviewlist">내가 쓴
 					구매후기</a>
 			</div>
-			<div class="row justify-content-center">
+			<div class="row justify-content-center mt-5">
 				<c:choose>
 					<c:when test="${empty reviews}">
 						<h6 class="py-5 my-5 font-weight-bold">목록이 없습니다.</h6>

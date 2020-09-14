@@ -8,15 +8,18 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<div class="row mt-5">
-		<div class="jumbotron w-100 text-center">
-			<h1 class="display-4">${brand.brand_name}</h1>
-			<p class="lead">${brand.brand_desc}</p>
+	<div class="row my-5">
+		<div class="jumbotron col-sm-12 text-center py-5" style="background: url(${brand.brand_img }) no-repeat; background-size: cover;">
+			<h1 class="display-4 font-weight-bold text-white">${brand.brand_name}</h1>
+		</div>
+		<div class="col-sm-12 bg-light p-5">
+			<p class="lead">${brand.brand_desc }<p>
 		</div>
 	</div>
+	<hr/>
 	<div class="row m-auto px-3">
 		<c:choose>
-			<c:when test="${products eq null }">
+			<c:when test="${empty products}">
 				<h5 class="col-sm-12 text-center my-5 ">더 나은 구성을 위한 상품 준비 중입니다.<br>조금만 기다려주세요!</h5>
 			</c:when>
 			<c:otherwise>

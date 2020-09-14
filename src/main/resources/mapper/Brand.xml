@@ -24,9 +24,9 @@
 
 	<insert id="insertBrand" parameterType="com.mju.ict.model.Brand">
 		INSERT INTO tb_brand
-		(brand_name,brand_desc)
+		(brand_name,brand_desc,brand_img)
 		VALUES
-		(#{brand_name},#{brand_desc})
+		(#{brand_name},#{brand_desc},#{brand_img})
 	</insert>
 
 	<delete id="deleteBrandById" parameterType="Integer">
@@ -40,7 +40,8 @@
 		UPDATE tb_brand
 		SET
 		brand_name =#{brand_name},
-		brand_desc =#{brand_desc}
+		brand_desc =#{brand_desc},
+		brand_img =#{brand_img}
 		WHERE
 		brand_id =
 		#{brand_id}
