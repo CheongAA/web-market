@@ -35,9 +35,10 @@ public class AnswerService implements IAnswerService{
 	}
 	
 	@Override
-	public Answer getFaqAnswerById(int id) {
-		return answerDAO.selectFaqAnswerById(id);
+	public Answer getAnswerById(int id) {
+		return answerDAO.selectAnswerById(id);
 	}
+
 	
 	@Override
 	public void registerAnswer(Answer answer, int question_id) {
@@ -52,15 +53,16 @@ public class AnswerService implements IAnswerService{
 		}
 		
 	}
+	
+	@Override
+	public void updateAnswer(Answer answer) {
+		answerDAO.updateAnswer(answer);
+	}
 
 	@Override
 	public void deleteAnswerById(int id) {
 		answerDAO.deleteAnswerById(id);
 	}
-
-
-
-
 
 
 

@@ -11,41 +11,54 @@
 </head>
 <body>
 	<jsp:include page="../admin_header.jsp" flush="false" />
-	<div class="row pt-5">
-		<div class="pb-4 mb-2">
-			<span class="h2">공지사항</span>
-		</div>
-		<form class="w-100" action="${pageContext.request.contextPath}/admin/notice/update/${notice.notice_id}" method="post">
-			<input type="hidden" name="notice_id" value="${notice.notice_id}" />
+	<div class="col-12 mt-5">
+		<h3 class="col-sm-12 border-bottom pb-5">답변 수정하기</h3>
+		<form action="/admin/answer/update" method="post">
+			<input type="hidden" name="answer_id" value="${answer.answer_id}">
 			<table class="table table-bordered">
 				<tbody>
 					<tr>
-						<th scope="row" style="width: 10%" class="table-secondary">제목</th>
-						<td colspan="3"><input name="notice_title" type="text"
-							value="${notice.notice_title}" /></td>
+						<th scope="row" style="width: 10%" class="table-secondary">제목
+							*</th>
+						<td><c:choose>
+								<c:when test="${questionCategories != null}">
+									<select class="mb-2" name="question_category_id"
+										class="form-control">
+										<c:forEach var="questionCategory"
+											items="${questionCategories}">
+											<c:choose>
+												<c:when
+													test="${questionCategory.question_category_title eq answer.questionCategory.question_category_title}">
+													<option value="${questionCategory.question_category_id}"
+														selected>${questionCategory.question_category_title}</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${questionCategory.question_category_id}">${questionCategory.question_category_title}</option>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</select>
+									<input type="text" name="answer_title"
+										class="form-control col-sm-5" value="${answer.answer_title}"
+										required>
+								</c:when>
+								<c:otherwise>
+									<input type="hidden" name="question_category_id"
+										value="${answer.question_category_id}">
+									<input type="text" name="answer_title"
+										class="form-control col-sm-5" value="${answer.answer_title}"
+										readonly required>
+								</c:otherwise>
+							</c:choose></td>
 					</tr>
 					<tr>
-						<th scope="row" class="table-secondary">작성자</th>
-						<td colspan="3"><input name="notice_writer" type="text"
-							value="${notice.notice_writer}" /></td>
-					</tr>
-					<tr>
-						<th scope="row" class="table-secondary">작성일</th>
-						<td style="width: 20%"><fmt:formatDate
-								value="${notice.notice_created}" pattern="yyyy-MM-dd" /></td>
-						<th style="width: 10%" class="table-secondary">조회수</th>
-						<td>${notice.notice_view}</td>
-					</tr>
-					<tr>
-						<td colspan="4"><textarea rows="30" name="notice_content">
-						${notice.notice_content}
-					</textarea></td>
+						<th scope="row" class="table-secondary">내용 *</th>
+						<td colspan="3" rowspan="10"><textarea class="form-control"
+								rows="20" cols="100" name="answer_content" required>${answer.answer_content }</textarea></td>
 					</tr>
 				</tbody>
 			</table>
-			<div class="w-100">
-				<button type="submit" class="btn btn-secondary">수정</button>
-			</div>
+			<button type="submit" class="btn btn-primary float-right">저장</button>
 		</form>
 	</div>
 </body>

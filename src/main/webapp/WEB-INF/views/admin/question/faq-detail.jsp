@@ -34,9 +34,9 @@
 				</tbody>
 			</table>
 			<a class="btn btn-danger float-right"
-				href="${pageContext.request.contextPath}/admin/answer/delete/${question.answer_id}">삭제</a>
+				href="${pageContext.request.contextPath}/admin/answer/delete/${answer.answer_id}">삭제</a>
 			<a class="btn btn-warning float-right mr-1"
-				href="${pageContext.request.contextPath}/admin/answer/update">수정</a>
+				href="${pageContext.request.contextPath}/admin/answer/update/${answer.answer_id}">수정</a>
 		</div>
 		<a class="btn btn-primary m-5 ml-auto"
 			href="${pageContext.request.contextPath}/admin/faq">목록</a>

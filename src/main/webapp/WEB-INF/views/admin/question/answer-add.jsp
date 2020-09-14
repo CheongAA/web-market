@@ -72,9 +72,9 @@
 							<td><c:if test="${questionCategories != null}">
 									<select class="mb-2" name="question_category_id"
 										class="form-control">
-										<c:forEach var="questionCategorie"
+										<c:forEach var="questionCategory"
 											items="${questionCategories}">
-											<option value="${questionCategorie.question_category_id}">${questionCategorie.question_category_title}</option>
+											<option value="${questionCategory.question_category_id}">${questionCategory.question_category_title}</option>
 										</c:forEach>
 									</select>
 								</c:if> <c:choose>

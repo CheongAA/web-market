@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mju.ict.model.Answer;
 import com.mju.ict.model.Brand;
@@ -141,8 +142,9 @@ public class AdminController {
 
 	// 상품수정
 	@RequestMapping(value = "/product/update", method = RequestMethod.POST)
-	public String updateProduct(@ModelAttribute @Valid Product product, BindingResult result, Model model, MultipartFile file) {
-		productService.updateProduct(product,file);
+	public String updateProduct(@ModelAttribute @Valid Product product, BindingResult result, Model model,
+			MultipartFile file) {
+		productService.updateProduct(product, file);
 		return "redirect:/admin/product/" + product.getProduct_id();
 	}
 
@@ -160,8 +162,6 @@ public class AdminController {
 		return "redirect:/admin/product/";
 	}
 
-	
-	
 	/////////////// 할인//////////////////
 
 	// 할인 목록 페이지
@@ -206,11 +206,11 @@ public class AdminController {
 	@RequestMapping(value = "/discount", method = RequestMethod.POST)
 	public String addDiscount(@RequestParam("product[]") int[] productArr, @ModelAttribute @Valid Discount discount,
 			BindingResult result, Model model, MultipartFile file) {
-		discountService.registerDiscount(discount, productArr,file);
+		discountService.registerDiscount(discount, productArr, file);
 
 		return "redirect:/admin/discount";
 	}
-	
+
 	// 할인 discount_apply(상단노출) 변경
 	@RequestMapping(value = "/discountApply/{id}", method = RequestMethod.GET)
 	public String changeDiscountApply(@PathVariable int id, Model model) {
@@ -219,7 +219,7 @@ public class AdminController {
 	}
 
 	/////////////// 카테고리//////////////////
-	
+
 	// 카테고리 목록,등록 페이지
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
 	public String getCategoryAdd(Model model) {
@@ -228,7 +228,7 @@ public class AdminController {
 		model.addAttribute("categories", categories);
 		return "admin/category/add";
 	}
-	
+
 	// 카테고리 상세 페이지
 	@RequestMapping(value = "/category/{category_code}", method = RequestMethod.GET)
 	public String getCategoryDetail(@PathVariable int category_code, Model model) {
@@ -258,7 +258,7 @@ public class AdminController {
 
 		return "redirect:/admin/category";
 	}
-	
+
 	// 카테고리 수정
 	@RequestMapping(value = "/category/update", method = RequestMethod.POST)
 	public String updateCategory(@ModelAttribute @Valid Category category, BindingResult result, Model model) {
@@ -273,10 +273,8 @@ public class AdminController {
 		return "redirect:/admin/category";
 	}
 
-
-
 	/////////////// 고객//////////////////
-	
+
 	/// 고객 목록 페이지
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String getUsers(Model model) {
@@ -294,7 +292,7 @@ public class AdminController {
 	}
 
 	/////////////// 브랜드//////////////////
-	
+
 	/// 브랜드 목록 페이지
 	@RequestMapping(value = "/brand", method = RequestMethod.GET)
 	public String getBrands(Model model) {
@@ -313,13 +311,13 @@ public class AdminController {
 		model.addAttribute("products", products);
 		return "admin/brand/detail";
 	}
-	
+
 	// 브랜드등록 페이지
 	@RequestMapping(value = "/brand/add", method = RequestMethod.GET)
 	public String getBrandAdd(Model model) {
 		return "admin/brand/add";
 	}
-	
+
 	// 브랜드 수정 페이지
 	@RequestMapping(value = "/brand/update/{id}", method = RequestMethod.GET)
 	public String getBrandUpdate(@PathVariable int id, Model model) {
@@ -327,22 +325,22 @@ public class AdminController {
 		model.addAttribute("brand", brand);
 		return "admin/brand/update";
 	}
-	
 
 	// 브랜드 등록
 	@RequestMapping(value = "/brand/add", method = RequestMethod.POST)
 	public String addBrand(@ModelAttribute @Valid Brand brand, BindingResult result, MultipartFile file) {
-		brandService.registerBrand(brand,file);
+		brandService.registerBrand(brand, file);
 		return "redirect:/admin/brand";
 	}
 
 	// 브랜드 수정
 	@RequestMapping(value = "/brand/update", method = RequestMethod.POST)
-	public String updateBrand(@ModelAttribute @Valid Brand brand, BindingResult result, MultipartFile file, Model model) {
+	public String updateBrand(@ModelAttribute @Valid Brand brand, BindingResult result, MultipartFile file,
+			Model model) {
 		brandService.updateBrand(brand, file);
 		return "redirect:/admin/brand/" + brand.getBrand_id();
 	}
-	
+
 	// 브랜드 삭제
 	@RequestMapping(value = "/brand/delete/{id}", method = RequestMethod.GET)
 	public String deleteBrand(@PathVariable int id, Model model) {
@@ -350,10 +348,8 @@ public class AdminController {
 		return "redirect:/admin/brand";
 	}
 
-
-
 	/////////////// 공지사항//////////////////
-	
+
 	// 공지사항 목록 페이지
 	@RequestMapping(value = "/notice", method = RequestMethod.GET)
 	public String getNotices(Model model) {
@@ -370,7 +366,7 @@ public class AdminController {
 		model.addAttribute("notice", notice);
 		return "admin/notice/detail";
 	}
-	
+
 	// 공지사항 등록 페이지
 	@RequestMapping(value = "/notice/add", method = RequestMethod.GET)
 	public String getNoticeAdd(Model model) {
@@ -385,7 +381,7 @@ public class AdminController {
 		model.addAttribute("notice", notice);
 		return "admin/notice/update";
 	}
-	
+
 	// 공지사항 등록
 	@RequestMapping(value = "/notice/add", method = RequestMethod.POST)
 	public String addNotice(@ModelAttribute @Valid Notice notice, BindingResult result) {
@@ -407,7 +403,7 @@ public class AdminController {
 		return "redirect:/admin/notice";
 	}
 	/////////////// 주문//////////////////
-	
+
 	// 주문 조회 페이지
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public String getOrders(Model model) {
@@ -420,28 +416,28 @@ public class AdminController {
 	@RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
 	public String getOrderDetail(@PathVariable int id, Model model) {
 		Order order = orderService.getOrderById(id);
-		List<OrderState> orderStates= orderService.getAllOrderStates();
+		List<OrderState> orderStates = orderService.getAllOrderStates();
 		model.addAttribute("order", order);
 		model.addAttribute("orderStates", orderStates);
 		return "admin/order/detail";
 	}
-	
+
 	// 주문 운송장번호 변경
 	@ResponseBody
 	@RequestMapping(value = "/order/updateTracking", method = RequestMethod.GET)
 	public void updateOrderTracking(HttpServletRequest req, Model model) {
-		orderService.updateOrderTracking(req.getParameter("orderId"),req.getParameter("orderTrackingNumber"));
+		orderService.updateOrderTracking(req.getParameter("orderId"), req.getParameter("orderTrackingNumber"));
 	}
-	
+
 	// 주문 상태 변경
 	@ResponseBody
 	@RequestMapping(value = "/order/updateState", method = RequestMethod.GET)
 	public void updateOrderState(HttpServletRequest req, Model model) {
-		orderService.updateOrderState(req.getParameter("orderId"),req.getParameter("orderStateId"));
+		orderService.updateOrderState(req.getParameter("orderId"), req.getParameter("orderStateId"));
 	}
-	
+
 	/////////////// 문의 및 답변//////////////////
-	
+
 	// 문의 목록 페이지
 	@RequestMapping(value = "/question", method = RequestMethod.GET)
 	public String getQuestions(Model model) {
@@ -449,15 +445,7 @@ public class AdminController {
 		model.addAttribute("questions", questions);
 		return "admin/question/list";
 	}
-	
-	// 자주하는 질문 목록 페이지
-	@RequestMapping(value = "/faq", method = RequestMethod.GET)
-	public String getFaqs(Model model) {
-		List<Answer> answers = answerService.getFaqAnswers();
-		model.addAttribute("answers", answers);
-		return "admin/question/faq-list";
-	}
-	
+
 	// 문의 상세 페이지
 	@RequestMapping(value = "/question/{id}", method = RequestMethod.GET)
 	public String getQuestionDetail(@PathVariable int id, Model model) {
@@ -465,42 +453,76 @@ public class AdminController {
 		model.addAttribute("question", question);
 		return "admin/question/detail";
 	}
-	
+
+	// 자주하는 질문 목록 페이지
+	@RequestMapping(value = "/faq", method = RequestMethod.GET)
+	public String getFaqs(Model model) {
+		List<Answer> answers = answerService.getFaqAnswers();
+		model.addAttribute("answers", answers);
+		return "admin/question/faq-list";
+	}
+
 	// 자주하는 질문 상세 페이지
 	@RequestMapping(value = "/faq/{id}", method = RequestMethod.GET)
 	public String getFaqDetail(@PathVariable int id, Model model) {
-		Answer answer = answerService.getFaqAnswerById(id);
+		Answer answer = answerService.getAnswerById(id);
 		model.addAttribute("answer", answer);
 		return "admin/question/faq-detail";
 	}
 
-	// 답변 등록 페이지
+	// 답변, 자주하는 질문 등록 페이지
 	@RequestMapping(value = "/answer/add/{id}", method = RequestMethod.GET)
-	public String getAnswerAdd(@PathVariable int id,Model model) {
+	public String getAnswerAdd(@PathVariable int id, Model model) {
 		Question question = questionService.getQuestionById(id);
-		
-		if(question == null) {
+
+		if (question == null) {
 			List<QuestionCategory> questionCategories = questionService.getAllQuestionCategories();
 			model.addAttribute("questionCategories", questionCategories);
 		}
 		model.addAttribute("question", question);
 		return "admin/question/answer-add";
 	}
-	
+
+	// 답변 , 자주하는 질문 수정 페이지
+	@RequestMapping(value = "/answer/update/{id}", method = RequestMethod.GET)
+	public String getAnswerUpdate(@PathVariable int id, Model model) {
+		Answer answer = answerService.getAnswerById(id);
+
+		if (answer.getQuestion_category_id() != 0) {
+			List<QuestionCategory> questionCategories = questionService.getAllQuestionCategories();
+			model.addAttribute("questionCategories", questionCategories);
+		}
+
+		model.addAttribute("answer", answer);
+		return "admin/question/answer-update";
+	}
+
 	// 답변 , 자주하는질문 등록
 	@RequestMapping(value = "/answer", method = RequestMethod.POST)
-	public String addAnswer(@ModelAttribute @Valid Answer answer,@RequestParam int question_id, BindingResult result) {
-		answerService.registerAnswer(answer,question_id);
-		//자주하는 질문
-		if(question_id == 0) {
+	public String addAnswer(@ModelAttribute @Valid Answer answer, @RequestParam int question_id, BindingResult result) {
+		answerService.registerAnswer(answer, question_id);
+		// 자주하는 질문
+		if (question_id == 0) {
 			return "redirect:/admin/faq";
 		}
-		return "redirect:/admin/question/"+question_id;
+		return "redirect:/admin/question/" + question_id;
 	}
-	
-	// 자주하는 질문 삭제
+
+	// 답변, 자주하는 질문 수정
+	@RequestMapping(value = "/answer/update", method = RequestMethod.POST)
+	public String updateAnswer(@ModelAttribute @Valid Answer answer, BindingResult result, Model model) {
+		answerService.updateAnswer(answer);
+		
+		if(answer.getQuestion_category_id() == 0) {
+			return "redirect:/admin/question/"+answer.getAnswer_id();
+		}
+		
+		return "redirect:/admin/faq/" + answer.getAnswer_id();
+	}
+
+	// 답변, 자주하는 질문 삭제
 	@RequestMapping(value = "/answer/delete/{id}", method = RequestMethod.GET)
-	public String deleteFAQ(@PathVariable int id, Model model) {
+	public String deleteAnswer(@PathVariable int id, Model model) {
 		answerService.deleteAnswerById(id);
 		return "redirect:/admin/faq";
 	}

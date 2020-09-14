@@ -19,19 +19,28 @@ public class AnswerDAO implements IAnswerDAO{
 	}
 	
 	@Override
-	public Answer selectFaqAnswerById(int id) {
-		return sqlSession.selectOne("selectFaqAnswerById",id);
+	public Answer selectAnswerById(int id) {
+		return sqlSession.selectOne("selectAnswerById",id);
 	}
+
 	
 	@Override
 	public void insertAnswer(Answer answer) {
 		sqlSession.insert("insertAnswer",answer);
+	}
+	
+	@Override
+	public void updateAnswer(Answer answer) {
+		sqlSession.update("updateAnswer", answer);
 	}
 
 	@Override
 	public void deleteAnswerById(int id) {
 		sqlSession.delete("deleteAnswerById",id);
 	}
+
+
+
 
 
 
