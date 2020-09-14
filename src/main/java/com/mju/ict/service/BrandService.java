@@ -78,6 +78,7 @@ public class BrandService implements IBrandService{
 	//브랜드 삭제
 	@Override
 	public void deleteBrandById(int id) {
+		s3.fileDelete(brandDAO.selectBrandById(id).getBrand_img());
 		brandDAO.deleteBrandById(id);
 		
 	}
