@@ -89,7 +89,7 @@ public class ProductService implements IProductService{
 					UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename()),
 					HttpStatus.CREATED);
 			s3.fileUpload(s3.getBucketName(), uploadPath + img_path.getBody(), file.getBytes());
-			product.setProduct_img(s3.getFileURL(s3.getBucketName(), uploadPath+img_path.getBody()));
+			product.setProduct_img(s3.getFileURL(uploadPath+img_path.getBody()));
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

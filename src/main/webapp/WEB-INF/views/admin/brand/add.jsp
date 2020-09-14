@@ -20,7 +20,7 @@
 					<table class="table">
 						<tbody>
 							<tr>
-								<th scope="row">브랜드명</th>
+								<th class="w-25" scope="row">브랜드명</th>
 								<td class="form-inline"><input type="text"
 									class="form-control" id="brand_name" name="brand_name"
 									placeholder="" required="required"></td>
@@ -30,7 +30,7 @@
 								<td><input type="file" class="form-control-file"
 									id="brand_img" name="file" accept="image/*">
 									<div class="select_brand_img mt-3">
-										<img src="">
+										<img class="w-75">
 									</div></td>
 							</tr>
 							<tr>

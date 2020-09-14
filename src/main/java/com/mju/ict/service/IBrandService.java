@@ -16,8 +16,10 @@ public interface IBrandService {
 
 	public abstract void registerBrand(Brand brand, MultipartFile file);
 
-	public abstract void updateBrand(Brand brand);
+	public abstract void updateBrand(Brand brand, MultipartFile file);
 
 	public abstract void deleteBrandById(int id);
+
+	public abstract String uploadS3Image(MultipartFile file);
 
 }

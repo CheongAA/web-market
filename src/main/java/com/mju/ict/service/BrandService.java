@@ -43,7 +43,24 @@ public class BrandService implements IBrandService{
 	//브랜드 등록
 	@Override
 	public void registerBrand(Brand brand, MultipartFile file) {
-		
+		brand.setBrand_img(uploadS3Image(file));
+		brandDAO.insertBrand(brand);
+	}
+
+	//브랜드 수정
+	@Override
+	public void updateBrand(Brand brand, MultipartFile file) {
+		if(file !=null) {
+			s3.fileDelete(brand.getBrand_img());
+			brand.setBrand_img(uploadS3Image(file));
+		}
+		brandDAO.updateBrand(brand);
+	}
+	
+	
+	//s3 이미지 파일 업로드
+	@Override
+	public String uploadS3Image(MultipartFile file) {
 		String uploadPath = "brand/img";
 		
 		ResponseEntity<String> img_path = null;
@@ -52,18 +69,10 @@ public class BrandService implements IBrandService{
 					UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename()),
 					HttpStatus.CREATED);
 			s3.fileUpload(s3.getBucketName(), uploadPath + img_path.getBody(), file.getBytes());
-			brand.setBrand_img(s3.getFileURL(s3.getBucketName(), uploadPath+img_path.getBody()));
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		
-		brandDAO.insertBrand(brand);
-	}
-
-	//브랜드 수정
-	@Override
-	public void updateBrand(Brand brand) {
-		brandDAO.updateBrand(brand);
+		return s3.getFileURL(uploadPath+img_path.getBody());
 	}
 
 	//브랜드 삭제

@@ -338,8 +338,8 @@ public class AdminController {
 
 	// 브랜드 수정
 	@RequestMapping(value = "/brand/update", method = RequestMethod.POST)
-	public String updateBrand(@ModelAttribute @Valid Brand brand, BindingResult result, Model model) {
-		brandService.updateBrand(brand);
+	public String updateBrand(@ModelAttribute @Valid Brand brand, BindingResult result, MultipartFile file, Model model) {
+		brandService.updateBrand(brand, file);
 		return "redirect:/admin/brand/" + brand.getBrand_id();
 	}
 	
