@@ -26,7 +26,7 @@ public interface IProductService {
 	
 	public abstract List<Product> searchProductByTerm(String term);
 
-	public abstract void registerProduct(Product product, MultipartFile file);
+	public abstract void registerProduct(Product product, MultipartFile img, MultipartFile descImg);
 
 	public abstract void deleteProductById(int id);
 

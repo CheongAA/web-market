@@ -19,6 +19,7 @@
 		<result column="product_volume" property="product_volume" />
 		<result column="on_sale" property="on_sale" />
 		<result column="product_img" property="product_img" />
+		<result column="product_descImg" property="product_descImg" />
 
 		<association javaType="com.mju.ict.model.Brand"
 			property="brand">
@@ -58,7 +59,8 @@
 		ON
 		tb_discount.discount_id= tb_product.discount_id
 		WHERE
-		product_name like CONCAT('%', #{term}, '%')
+		product_name like
+		CONCAT('%', #{term}, '%')
 		or
 		product_desc like
 		CONCAT('%', #{term}, '%')
@@ -70,10 +72,10 @@
 		parameterType="com.mju.ict.model.Product">
 		INSERT INTO tb_product
 		(brand_id,category_code,product_name,product_price,product_quantity,product_desc,
-		product_material,product_volume,product_img)
+		product_material,product_volume,product_img,product_descImg)
 		VALUES(
 		#{brand_id},#{category_code},#{product_name},#{product_price},
-		#{product_quantity},#{product_desc},#{product_material},#{product_volume},#{product_img}
+		#{product_quantity},#{product_desc},#{product_material},#{product_volume},#{product_img},#{product_descImg}
 		)
 
 	</insert>
@@ -271,7 +273,9 @@
 		product_volume =
 		#{product_volume},
 		product_img =
-		#{product_img}
+		#{product_img},
+		product_descImg =
+		#{product_descImg}
 		WHERE
 		product_id =
 		${product_id}

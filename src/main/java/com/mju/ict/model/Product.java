@@ -4,24 +4,25 @@ import java.util.Date;
 
 
 public class Product {
-//    product_id INT PRIMARY KEY AUTO_INCREMENT,
-//    brand_id INT NOT NULL,
-//    FOREIGN KEY(brand_id) REFERENCES tb_brand(brand_id),
-//    category_code INT NOT NULL,
-//    FOREIGN KEY(category_code) REFERENCES tb_category(category_code),
-//	  discount_id INT default null,
-//    FOREIGN KEY(discount_id) REFERENCES tb_discount(discount_id),	
-//    product_created DATETIME DEFAULT CURRENT_TIMESTAMP,
-//    product_name VARCHAR(255)NOT NULL,
-//    product_price INT NOT NULL,
-//    product_quantity INT NOT NULL,
-//    product_sales_quantity INT NOT NULL default 0,
-//    product_desc VARCHAR(300) NOT NULL,
-//    product_material VARCHAR(255)NOT NULL,
-//    product_volume INT NOT NULL,
-//    on_sale TINYINT(1) NOT NULL,
-//    product_img varchar(200) NOT NULL
-	
+//	   product_id INT PRIMARY KEY AUTO_INCREMENT,
+//	   brand_id INT NOT NULL,
+//	   FOREIGN KEY(brand_id) REFERENCES tb_brand(brand_id)  on delete cascade,
+//	   category_code INT NOT NULL,
+//	   FOREIGN KEY(category_code) REFERENCES tb_category(category_code)  on delete cascade,
+//	   discount_id INT default null,
+//	   FOREIGN KEY(discount_id) REFERENCES tb_discount(discount_id)  on delete set null,	
+//	   product_created DATETIME DEFAULT CURRENT_TIMESTAMP,
+//	   product_name VARCHAR(255)NOT NULL,
+//	   product_price INT NOT NULL,
+//	   product_quantity INT NOT NULL,
+//	   product_sales_quantity INT NOT NULL default 0,
+//	   product_desc VARCHAR(300) NOT NULL,
+//	   product_material VARCHAR(255)NOT NULL,
+//	   product_volume INT NOT NULL,
+//	   on_sale TINYINT(1) NOT NULL default 0,
+//	   product_descImg varchar(200) NOT NULL,
+//	   product_img varchar(200) NOT NULL
+//	
 	private int product_id;
 	private int brand_id;
 	private int category_code;
@@ -36,6 +37,7 @@ public class Product {
 	private int product_volume;
 	private int on_sale;
 	private String product_img;
+	private String product_descImg;
 	
 	private Brand brand;
 	private Category category;
@@ -132,6 +134,13 @@ public class Product {
 	}
 	public void setProduct_img(String product_img) {
 		this.product_img = product_img;
+	}
+	
+	public String getProduct_descImg() {
+		return product_descImg;
+	}
+	public void setProduct_descImg(String product_descImg) {
+		this.product_descImg = product_descImg;
 	}
 	public int getDiscount_id() {
 		return discount_id;

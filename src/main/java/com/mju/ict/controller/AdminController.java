@@ -134,8 +134,9 @@ public class AdminController {
 
 	// 상품등록
 	@RequestMapping(value = "/product/add", method = RequestMethod.POST)
-	public String addProduct(@ModelAttribute @Valid Product product, BindingResult result, MultipartFile file) {
-		productService.registerProduct(product, file);
+	public String addProduct(@ModelAttribute @Valid Product product, BindingResult result,@RequestParam("product_img") MultipartFile img,
+			@RequestParam("product_descImg") MultipartFile descImg) {
+		productService.registerProduct(product, img,descImg);
 
 		return "redirect:/admin/product/";
 	}

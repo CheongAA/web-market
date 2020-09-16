@@ -80,16 +80,26 @@ public class ProductService implements IProductService{
 
 	//상품 등록
 	@Override
-	public void registerProduct(Product product, MultipartFile file) {
-		String uploadPath = "product/img/main";
+	public void registerProduct(Product product, MultipartFile img, MultipartFile descImg) {
+		String imgUploadPath = "product/img/";
+		String descImgUploadPath = "product/img/desc";
 		
 		ResponseEntity<String> img_path = null;
+		ResponseEntity<String> descImg_path = null;
 		try {
 			img_path = new ResponseEntity<String>(
-					UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename()),
+					UploadFileUtils.uploadFile(imgUploadPath, img.getOriginalFilename()),
 					HttpStatus.CREATED);
-			s3.fileUpload(s3.getBucketName(), uploadPath + img_path.getBody(), file.getBytes());
-			product.setProduct_img(s3.getFileURL(uploadPath+img_path.getBody()));
+			s3.fileUpload(s3.getBucketName(), imgUploadPath + img_path.getBody(), img.getBytes());
+			
+			descImg_path = new ResponseEntity<String>(
+					UploadFileUtils.uploadFile(descImgUploadPath, descImg.getOriginalFilename()),
+					HttpStatus.CREATED);
+			s3.fileUpload(s3.getBucketName(), descImgUploadPath + descImg_path.getBody(), descImg.getBytes());
+			
+
+			product.setProduct_img(s3.getFileURL(imgUploadPath+img_path.getBody()));
+			product.setProduct_descImg(s3.getFileURL(descImgUploadPath+descImg_path.getBody()));
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -97,6 +107,7 @@ public class ProductService implements IProductService{
 		productDAO.insertProduct(product);
 	}
 	
+
 	//상품 수정
 	@Override
 	public void updateProduct(Product product, MultipartFile file) {
@@ -142,6 +153,8 @@ public class ProductService implements IProductService{
 		
 		productDAO.updateProductSale(map);
 	}
+
+
 
 
 
