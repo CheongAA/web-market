@@ -134,9 +134,9 @@ public class AdminController {
 
 	// 상품등록
 	@RequestMapping(value = "/product/add", method = RequestMethod.POST)
-	public String addProduct(@ModelAttribute @Valid Product product, BindingResult result,@RequestParam("product_img") MultipartFile img,
-			@RequestParam("product_descImg") MultipartFile descImg) {
-		productService.registerProduct(product, img,descImg);
+	public String addProduct(@ModelAttribute @Valid Product product, BindingResult result,
+			@RequestParam("product_img") MultipartFile img, @RequestParam("product_descImg") MultipartFile descImg) {
+		productService.registerProduct(product, img, descImg);
 
 		return "redirect:/admin/product/";
 	}
@@ -144,8 +144,8 @@ public class AdminController {
 	// 상품수정
 	@RequestMapping(value = "/product/update", method = RequestMethod.POST)
 	public String updateProduct(@ModelAttribute @Valid Product product, BindingResult result, Model model,
-			MultipartFile file) {
-		productService.updateProduct(product, file);
+			@RequestParam("img") MultipartFile img, @RequestParam("descImg") MultipartFile descImg) {
+		productService.updateProduct(product, img,descImg);
 		return "redirect:/admin/product/" + product.getProduct_id();
 	}
 
@@ -513,11 +513,11 @@ public class AdminController {
 	@RequestMapping(value = "/answer/update", method = RequestMethod.POST)
 	public String updateAnswer(@ModelAttribute @Valid Answer answer, BindingResult result, Model model) {
 		answerService.updateAnswer(answer);
-		
-		if(answer.getQuestion_category_id() == 0) {
-			return "redirect:/admin/question/"+answer.getAnswer_id();
+
+		if (answer.getQuestion_category_id() == 0) {
+			return "redirect:/admin/question/" + answer.getAnswer_id();
 		}
-		
+
 		return "redirect:/admin/faq/" + answer.getAnswer_id();
 	}
 

@@ -44,12 +44,12 @@
 							<tr>
 								<th scope="row">상품명</th>
 								<td class="form-inline"><input type="text"
-									class="form-control" name="product_name"
-									placeholder="" required="required"></td>
+									class="form-control" name="product_name" placeholder=""
+									required="required"></td>
 							</tr>
 
 							<tr>
-								<th scope="row">상품대표이미지</th>
+								<th scope="row">상품대표이미지(700px * 800px)</th>
 								<td><input type="file" class="form-control-file"
 									id="product_img" name="product_img" accept="image/*">
 									<div class="mt-3">
@@ -57,7 +57,7 @@
 									</div></td>
 							</tr>
 							<tr>
-								<th scope="row">상품설명이미지</th>
+								<th scope="row">상품설명이미지(800px * 2000px)</th>
 								<td><input type="file" class="form-control-file"
 									id="product_descImage" name="product_descImg" accept="image/*">
 									<div class="mt-3">
@@ -67,8 +67,7 @@
 							<tr>
 								<th scope="row">가격</th>
 								<td><input type="text" class="form-control"
-									name="product_price" placeholder=""
-									required="required"></td>
+									name="product_price" placeholder="" required="required"></td>
 							</tr>
 							<tr>
 								<th scope="row">재고</th>
@@ -78,20 +77,19 @@
 							</tr>
 							<tr>
 								<th scope="row">재료</th>
-								<td><input type="text" class="form-control" 
+								<td><input type="text" class="form-control"
 									name="product_material" placeholder="" required="required">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">용량</th>
 								<td><input type="text" class="form-control"
-									 name="product_volume" placeholder=""
-									required="required"></td>
+									name="product_volume" placeholder="" required="required"></td>
 							</tr>
 							<tr>
 								<th scope="row">간단설명</th>
-								<td><textarea class="form-control"
-										name="product_desc" rows="3" required="required"></textarea></td>
+								<td><textarea class="form-control" name="product_desc"
+										rows="3" required="required"></textarea></td>
 							</tr>
 						</tbody>
 					</table>
@@ -125,11 +123,20 @@
 									if ($.inArray(ext, [ "gif", "jpg", "jpeg",
 											"png", "bmp" ]) == -1) {
 										alert("gif, jpg, jpeg, png, bmp 파일만 업로드 해주세요.");
+										$("#product_img").val("");
+										$("#select_product_img").css(
+												"display", "none");
 									} else if (fileSize > maxSize) {
 										alert("파일용량을 초과하였습니다.");
+										$("#product_img").val("");
+										$("#select_product_img").css(
+												"display", "none");
 									} else if (img.width != 700
 											|| img.height != 800) {
 										alert("이미지 가로 700px, 세로 800px로 맞춰서 올려주세요.");
+										$("#product_img").val("");
+										$("#select_product_img").css(
+												"display", "none");
 									} else {
 										$("#select_product_img").css("display",
 												"block");
@@ -164,11 +171,20 @@
 									if ($.inArray(ext, [ "gif", "jpg", "jpeg",
 											"png", "bmp" ]) == -1) {
 										alert("gif, jpg, jpeg, png, bmp 파일만 업로드 해주세요.");
+										$("#product_descImage").val("");
+										$("#select_product_descImg").css(
+												"display", "none");
 									} else if (fileSize > maxSize) {
 										alert("파일용량을 초과하였습니다.");
+										$("#product_descImage").val("");
+										$("#select_product_descImg").css(
+												"display", "none");
 									} else if (img.width != 800
 											|| img.height != 2000) {
 										alert("이미지 가로 800px, 세로 2000px로 맞춰서 올려주세요.");
+										$("#product_descImage").val("");
+										$("#select_product_descImg").css(
+												"display", "none");
 									} else {
 										$("#select_product_descImg").css(
 												"display", "block");
@@ -181,12 +197,7 @@
 								reader.readAsDataURL(this.files[0]);
 							}
 						});
-
-		function hideImg(input, img) {
-			input.val("");
-			img.css("display", "none");
-		}
-
+		
 		var jsonData = JSON.parse('${categories}');
 		var cate1Arr = new Array();
 		var cate1Obj = new Object();

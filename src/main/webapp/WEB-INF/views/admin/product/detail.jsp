@@ -110,7 +110,9 @@
 		</div>
 	</div>
 	<div class="row mt-5">
-		설명이미지
+		<div class="col-sm-12 text-center">
+			<img src=${product.product_descImg } />
+		</div>
 	</div>
 	<div class="row mt-5">
 		<h3 class="col-sm-12">상품 할인</h3>
@@ -126,30 +128,32 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>${product.discount.discount_name}</td>
-					<td>${product.discount.discount_rate}%</td>
-					<td><fmt:formatDate value="${product.discount.discount_start}"
-							pattern="yyyy-MM-dd" /></td>
-					<td><fmt:formatDate value="${product.discount.discount_end}"
-							pattern="yyyy-MM-dd" /></td>
-					<td><c:choose>
-							<c:when test="${product.discount.discount_state == 1}">
-								<p class="text-primary">O</p>
-							</c:when>
-							<c:otherwise>
-								<p class="text-danger">X</p>
-							</c:otherwise>
-						</c:choose></td>
-					<td><c:choose>
-							<c:when test="${product.discount.discount_apply == 1}">
-								<p class="text-primary">O</p>
-							</c:when>
-							<c:otherwise>
-								<p class="text-danger">X</p>
-							</c:otherwise>
-						</c:choose></td>
-				</tr>
+				<c:if test="${product.discount_id != 0 }">
+					<tr>
+						<td>${product.discount.discount_name}</td>
+						<td>${product.discount.discount_rate}%</td>
+						<td><fmt:formatDate
+								value="${product.discount.discount_start}" pattern="yyyy-MM-dd" /></td>
+						<td><fmt:formatDate value="${product.discount.discount_end}"
+								pattern="yyyy-MM-dd" /></td>
+						<td><c:choose>
+								<c:when test="${product.discount.discount_state == 1}">
+									<p class="text-primary">O</p>
+								</c:when>
+								<c:otherwise>
+									<p class="text-danger">X</p>
+								</c:otherwise>
+							</c:choose></td>
+						<td><c:choose>
+								<c:when test="${product.discount.discount_apply == 1}">
+									<p class="text-primary">O</p>
+								</c:when>
+								<c:otherwise>
+									<p class="text-danger">X</p>
+								</c:otherwise>
+							</c:choose></td>
+					</tr>
+				</c:if>
 			</tbody>
 		</table>
 	</div>

@@ -50,7 +50,7 @@ public class BrandService implements IBrandService{
 	//브랜드 수정
 	@Override
 	public void updateBrand(Brand brand, MultipartFile file) {
-		if(file !=null) {
+		if(!file.isEmpty()) {
 			s3.fileDelete(brand.getBrand_img());
 			brand.setBrand_img(uploadS3Image(file));
 		}

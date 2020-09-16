@@ -116,41 +116,25 @@
 			</div>
 			<div class="row mt-5">
 				<a
-					class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-3"
-					href="#desc">상품설명</a> <a
-					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
-					href="#image">상품이미지</a> <a
-					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-4"
+					href="#desc">상품설명</a><a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4"
 					href="#review">고객후기</a> <a
-					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4"
 					href="#qna">상품문의</a>
 			</div>
 			<div class="row pt-5" id="desc">
-				<img alt="" src=""> 상품설명이미지
+				<div class="col-sm-12 text-center">
+					<img alt="상품설명" src="${product.product_descImg }">
+				</div>
 			</div>
 			<div class="row mt-5">
 				<a
-					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
-					href="#desc">상품설명</a> <a
-					class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-3"
-					href="#image">상품이미지</a><a
-					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4"
+					href="#desc">상품설명</a><a
+					class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-4"
 					href="#review">고객후기</a> <a
-					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
-					href="#qna">상품문의</a>
-			</div>
-			<div class="row pt-5" id="image">
-				<img alt="" src=""> 상품이미지
-			</div>
-			<div class="row mt-5">
-				<a
-					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
-					href="#desc">상품설명</a> <a
-					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
-					href="#image">상품이미지</a><a
-					class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-3"
-					href="#review">고객후기</a> <a
-					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4"
 					href="#qna">상품문의</a>
 			</div>
 			<div class="row pt-5" id="review">
@@ -221,13 +205,11 @@
 			</div>
 			<div class="row mt-5">
 				<a
-					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
-					href="#desc">상품설명</a> <a
-					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
-					href="#image">상품이미지</a> <a
-					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-3"
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4"
+					href="#desc">상품설명</a><a
+					class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4"
 					href="#review">고객후기</a> <a
-					class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-3"
+					class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-4"
 					href="#qna">상품문의</a>
 			</div>
 			<div class="row pt-5" id="qna">
@@ -357,7 +339,7 @@
 			if (td.css("display") != "table-cell") {
 				$("[id^=review_content_]").css("display", "none");
 				td.css("display", "table-cell");
-				
+
 				$.ajax({
 					url : "/review/addView/" + review_id,
 					type : "get"

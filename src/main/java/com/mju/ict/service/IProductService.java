@@ -30,9 +30,11 @@ public interface IProductService {
 
 	public abstract void deleteProductById(int id);
 
-	public abstract void updateProduct(Product product, MultipartFile file);
+	public abstract void updateProduct(Product product, MultipartFile img, MultipartFile descImg);
 
 	public abstract void changeProductSale(int id);
+
+	public abstract String uploadS3Image(String uploadPath, MultipartFile file);
 
 
 

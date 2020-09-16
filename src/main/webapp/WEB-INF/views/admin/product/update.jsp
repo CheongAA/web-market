@@ -11,97 +11,233 @@
 <body>
 	<jsp:include page="../admin_header.jsp" flush="false" />
 	<div class="row mt-5">
-		<h3 class="w-100 text-center border-bottom pb-5">상품추가</h3>
-		<form class="m-auto"
-			action="${pageContext.request.contextPath}/admin/product/update"
-			method="post" enctype="multipart/form-data">
-			<div class="form-group">
-				<input type="hidden" name="product_id" value="${product.product_id}" />
-				<label for="product_name">상품명</label> <input type="text"
-					class="form-control" id="product_name" name="product_name"
-					placeholder="" required="required" value="${product.product_name}">
-			</div>
-			<div class="form-group">
-				<label for="category1">대분류</label> <select class="form-control"
-					id="category1" onchange="changeCategory1(this.value)">
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="category2">중분류</label> <select class="form-control"
-					id="category2" name="category_code">
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="exampleFormControlSelect1">브랜드명</label> <select
-					class="form-control" id="exampleFormControlSelect1" name="brand_id">
-					<c:forEach var="brand" items="${brands}">
-						<option value="${brand.brand_id}"><c:out
-								value="${brand.brand_name}" /></option>
-					</c:forEach>
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="product_img">상품대표이미지</label> <input type="file"
-					class="form-control-file" id="product_img" name="file">
-				<div class="select_product_img mt-3">
-					<img src="">
-				</div>
-				<%=request.getRealPath("/")%>
-			</div>
-			<div class="form-group">
-				<label for="product_image">상품이미지</label> <input type="file"
-					class="form-control-file" id="exampleFormControlFile1">
-			</div>
-			<div class="form-group">
-				<label for="product_name">가격</label> <input type="text"
-					class="form-control" id="product_price" name="product_price"
-					placeholder="" required="required" value="${product.product_price}">
-			</div>
-			<div class="form-group">
-				<label for="product_name">상품수량</label> <input type="text"
-					class="form-control" id="product_q" name="product_quantity"
-					placeholder="" required="required"
-					value="${product.product_quantity}">
-			</div>
-			<div class="form-group">
-				<label for="product_name">재료</label> <input type="text"
-					class="form-control" id="product_name" name="product_material"
-					placeholder="" required="required"
-					value="${product.product_material}">
-			</div>
-			<div class="form-group">
-				<label for="product_name">용량</label> <input type="text"
-					class="form-control" id="product_name" name="product_volume"
-					placeholder="" required="required"
-					value="${product.product_volume}">
-			</div>
+		<h3 class="col-sm-12 border-bottom p-5">상품수정</h3>
+		<div class="col-sm-12 p-5">
+			<form
+				action="${pageContext.request.contextPath}/admin/product/update"
+				method="post" enctype="multipart/form-data">
+				<input type="hidden" name="product_id"
+					value="${product.product_id }"> 
+				<input type="hidden" value="${product.category.category_code2}" id="category_code">
+				<input type="hidden"value="${product.category.category_code }" id="category_code2">
+				<div class="col-12 border mb-5">
+					<table class="table">
+						<tbody>
+							<tr>
+								<th scope="row" style="width: 20%">대분류</th>
+								<td><select class="form-control" id="category1"
+									onchange="changeCategory1(this.value)">
+								</select></td>
 
-			<div class="form-group">
-				<label for="product_desc">상품설명</label>
-				<textarea class="form-control" id="product_desc" name="product_desc"
-					rows="3" required="required"><c:out
-						value="${product.product_desc}" /></textarea>
-			</div>
-			<div class="form-group">
-				<button type="submit" class="btn btn-dark btn-block">등록</button>
-			</div>
-		</form>
+							</tr>
+							<tr>
+								<th scope="row">중분류</th>
+								<td><select class="form-control" id="category2"
+									name="category_code">
+								</select></td>
+							</tr>
+							<tr>
+								<th scope="row">브랜드명</th>
+								<td class="form-inline"><select class="form-control"
+									id="exampleFormControlSelect1" name="brand_id">
+										<c:forEach var="brand" items="${brands}">
+											<c:choose>
+												<c:when
+													test="${brand.brand_name eq product.brand.brand_name }">
+													<option value="${brand.brand_id}" selected>${brand.brand_name}</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${brand.brand_id}">${brand.brand_name}</option>
+												</c:otherwise>
+											</c:choose>
+
+										</c:forEach>
+								</select></td>
+							</tr>
+							<tr>
+								<th scope="row">상품명</th>
+								<td class="form-inline"><input type="text"
+									class="form-control" name="product_name"
+									value="${product.product_name }" required="required"></td>
+							</tr>
+
+							<tr>
+								<th scope="row">상품대표이미지(700px * 800px)</th>
+								<td><input type="file" class="form-control-file"
+									id="product_img" name="img" accept="image/*">
+									<div class="mt-3">
+										<input type="hidden" name="product_img"
+											value="${product.product_img}" /> <img class="w-25 mb-2"
+											src="${product.product_img}" id="origin_product_img"> <img
+											class="w-25" id="select_product_img">
+									</div>
+
+									<div class="mt-3">
+										<img src="" id="select_product_img">
+									</div></td>
+							</tr>
+							<tr>
+								<th scope="row">상품설명이미지(800px * 2000px)</th>
+								<td><input type="file" class="form-control-file"
+									id="product_descImage" name="descImg" accept="image/*">
+									<div class="mt-3">
+										<input type="hidden" name="product_descImg"
+											value="${product.product_descImg}" /> <img
+											class="w-25 h-25 mb-2" src="${product.product_descImg}"
+											id="origin_product_descImg"> <img class="w-25 h-25"
+											id="select_product_descImg">
+									</div></td>
+							</tr>
+							<tr>
+								<th scope="row">가격</th>
+								<td><input type="text" class="form-control"
+									name="product_price" value="${product.product_price }"
+									required="required"></td>
+							</tr>
+							<tr>
+								<th scope="row">재고</th>
+								<td><input type="text" class="form-control"
+									name="product_quantity" value="${product.product_quantity }"
+									required="required"></td>
+							</tr>
+							<tr>
+								<th scope="row">재료</th>
+								<td><input type="text" class="form-control"
+									name="product_material" value="${product.product_material }"
+									required="required"></td>
+							</tr>
+							<tr>
+								<th scope="row">용량</th>
+								<td><input type="text" class="form-control"
+									name="product_volume" value="${product.product_volume }"
+									required="required"></td>
+							</tr>
+							<tr>
+								<th scope="row">간단설명</th>
+								<td><textarea class="form-control" name="product_desc"
+										rows="3" required="required">${product.product_desc }</textarea></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-12 text-center">
+					<button type="submit" class="btn btn-dark btn-lg col-4">등록</button>
+				</div>
+			</form>
+		</div>
 	</div>
 	<script>
-		$("#product_img").on(
-				'change',
-				function() {
-					if (this.files && this.files[0]) {
-						var reader = new FileReader;
-						reader.onload = function(data) {
-							$(".select_product_img img").attr("src",
-									data.target.result).width(200);
-						}
-						reader.readAsDataURL(this.files[0]);
-					}
-				});
+		$("#product_img")
+				.on(
+						'change',
+						function() {
+							if (this.files && this.files[0]) {
+
+								var ext = $(this).val().split(".").pop()
+										.toLowerCase();
+
+								var fileSize = this.files[0].size;
+								var maxSize = 2000 * 2000;
+
+								var _URL = window.URL || window.webkitURL;
+								var img = new Image();
+								img.src = _URL.createObjectURL(this.files[0]);
+
+								var reader = new FileReader;
+								reader.onload = function(data) {
+									//확장자 체크
+									if ($.inArray(ext, [ "gif", "jpg", "jpeg",
+											"png", "bmp" ]) == -1) {
+										alert("gif, jpg, jpeg, png, bmp 파일만 업로드 해주세요.");
+										$("#product_img").val("");
+
+										$("#origin_product_img").css("display",
+												"block");
+										$("#select_product_img").css("display",
+												"none");
+									} else if (fileSize > maxSize) {
+										alert("파일용량을 초과하였습니다.");
+										$("#product_img").val("");
+										$("#origin_product_img").css("display",
+												"block");
+										$("#select_product_img").css("display",
+												"none");
+									} else if (img.width != 700
+											|| img.height != 800) {
+										alert("이미지 가로 700px, 세로 800px로 맞춰서 올려주세요.");
+										$("#product_img").val("");
+										$("#origin_product_img").css("display",
+												"block");
+										$("#select_product_img").css("display",
+												"none");
+									} else {
+										$("#select_product_img").css("display",
+												"block");
+										$("#select_product_img").attr("src",
+												data.target.result).width(200);
+									}
+
+								}
+								reader.readAsDataURL(this.files[0]);
+							}
+						});
+
+		$("#product_descImage")
+				.on(
+						'change',
+						function() {
+							if (this.files && this.files[0]) {
+
+								var ext = $(this).val().split(".").pop()
+										.toLowerCase();
+
+								var fileSize = this.files[0].size;
+								var maxSize = 2000 * 2000;
+
+								var _URL = window.URL || window.webkitURL;
+								var img = new Image();
+								img.src = _URL.createObjectURL(this.files[0]);
+
+								var reader = new FileReader;
+								reader.onload = function(data) {
+									//확장자 체크
+									if ($.inArray(ext, [ "gif", "jpg", "jpeg",
+											"png", "bmp" ]) == -1) {
+										alert("gif, jpg, jpeg, png, bmp 파일만 업로드 해주세요.");
+										$("#product_descImage").val("");
+										$("#origin_product_descImg").css(
+												"display", "block");
+										$("#select_product_descImg").css(
+												"display", "none");
+									} else if (fileSize > maxSize) {
+										alert("파일용량을 초과하였습니다.");
+										$("#product_descImage").val("");
+										$("#origin_product_descImg").css(
+												"display", "block");
+										$("#select_product_descImg").css(
+												"display", "none");
+									} else if (img.width != 800
+											|| img.height != 2000) {
+										alert("이미지 가로 800px, 세로 2000px로 맞춰서 올려주세요.");
+										$("#product_descImage").val("");
+										$("#origin_product_descImg").css(
+												"display", "block");
+										$("#select_product_descImg").css(
+												"display", "none");
+									} else {
+										$("#select_product_descImg").css(
+												"display", "block");
+										$("#select_product_descImg").attr(
+												"src", data.target.result)
+												.width(200);
+									}
+
+								}
+								reader.readAsDataURL(this.files[0]);
+							}
+						});
+
 		var jsonData = JSON.parse('${categories}');
-		console.log(jsonData);
 
 		var cate1Arr = new Array();
 		var cate1Obj = new Object();
@@ -126,15 +262,21 @@
 		}
 		// 1차 분류 셀렉트 박스에 데이터 삽입
 		var cate1Select = document.getElementById("category1");
-
+		
+		//기존 카테고리 값
+		var category_code = $("#category_code").val();
+		
 		for (var i = 0; i < cate1Arr.length; i++) {
 			var newNode = document.createElement("option");
 			newNode.value = cate1Arr[i].categoryCode;
 			newNode.innerHTML = cate1Arr[i].categoryName;
+			if(category_code == cate1Arr[i].categoryCode ){
+				newNode.selected = "true";
+			}
 			cate1Select.appendChild(newNode);
 		}
 
-		changeCategory1(cate1Arr[0].categoryCode);
+		changeCategory1(category_code);
 
 		function changeCategory1(category1) {
 			//기존 카테고리 중분류 삭제
@@ -150,10 +292,12 @@
 
 			for (var i = 0; i < cate2Arr.length; i++) {
 				if (cate2Arr[i].categoryCode2 == category1) {
-
 					var newNode = document.createElement("option");
 					newNode.value = cate2Arr[i].categoryCode;
 					newNode.innerHTML = cate2Arr[i].categoryName;
+					if(category_code2 == cate2Arr[i].categoryCode ){
+						newNode.selected = "true";
+					}
 					cate2Select.appendChild(newNode);
 				}
 			}
