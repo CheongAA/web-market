@@ -278,7 +278,7 @@
 		#{product_descImg}
 		WHERE
 		product_id =
-		${product_id}
+		#{product_id}
 	</update>
 
 	<update id="updateProductDiscount"
@@ -288,7 +288,16 @@
 		discount_id = #{discount_id}
 		WHERE
 		product_id =
-		${product_id}
+		#{product_id}
+	</update>
+
+	<update id="updateProductDiscountNull" parameterType="Integer">
+		UPDATE tb_product
+		SET
+		discount_id = NULL
+		WHERE
+		product_id =
+		#{product_id}
 	</update>
 
 	<update id="updateProductSale" parameterType="hashMap">

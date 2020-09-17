@@ -28,12 +28,16 @@ public interface IProductDAO {
 	public abstract void insertProduct(Product product);
 
 	public abstract void updateProduct(Product product);
+	
+	public abstract void updateProductDiscountNull(int product_id);
 
 	public abstract void updateProductSale(Map<String,Integer> map);
 	
 	public abstract void updateProductDiscount(Product product);
 	
 	public abstract void deleteProductById(int id);
+
+	
 
 
 

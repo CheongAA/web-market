@@ -42,7 +42,6 @@ public class Product {
 	private Brand brand;
 	private Category category;
 	private Discount discount;
-	
 	public int getProduct_id() {
 		return product_id;
 	}
@@ -55,12 +54,17 @@ public class Product {
 	public void setBrand_id(int brand_id) {
 		this.brand_id = brand_id;
 	}
-
 	public int getCategory_code() {
 		return category_code;
 	}
 	public void setCategory_code(int category_code) {
 		this.category_code = category_code;
+	}
+	public int getDiscount_id() {
+		return discount_id;
+	}
+	public void setDiscount_id(int discount_id) {
+		this.discount_id = discount_id;
 	}
 	public Date getProduct_created() {
 		return product_created;
@@ -85,8 +89,7 @@ public class Product {
 	}
 	public void setProduct_quantity(int product_quantity) {
 		this.product_quantity = product_quantity;
-	}	
-	
+	}
 	public int getProduct_sales_quantity() {
 		return product_sales_quantity;
 	}
@@ -117,6 +120,18 @@ public class Product {
 	public void setOn_sale(int on_sale) {
 		this.on_sale = on_sale;
 	}
+	public String getProduct_img() {
+		return product_img;
+	}
+	public void setProduct_img(String product_img) {
+		this.product_img = product_img;
+	}
+	public String getProduct_descImg() {
+		return product_descImg;
+	}
+	public void setProduct_descImg(String product_descImg) {
+		this.product_descImg = product_descImg;
+	}
 	public Brand getBrand() {
 		return brand;
 	}
@@ -129,25 +144,6 @@ public class Product {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	public String getProduct_img() {
-		return product_img;
-	}
-	public void setProduct_img(String product_img) {
-		this.product_img = product_img;
-	}
-	
-	public String getProduct_descImg() {
-		return product_descImg;
-	}
-	public void setProduct_descImg(String product_descImg) {
-		this.product_descImg = product_descImg;
-	}
-	public int getDiscount_id() {
-		return discount_id;
-	}
-	public void setDiscount_id(int discount_id) {
-		this.discount_id = discount_id;
-	}
 	public Discount getDiscount() {
 		return discount;
 	}
@@ -155,5 +151,5 @@ public class Product {
 		this.discount = discount;
 	}
 	
-	
+
 }

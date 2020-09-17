@@ -35,7 +35,7 @@
 									required="required"></td>
 							</tr>
 							<tr>
-								<th scope="row">이벤트 이미지</th>
+								<th scope="row">이벤트 이미지 (2000px * 400px)</th>
 								<td><input type="file" class="form-control-file"
 									id="discount_thumbnailImg" name="file" accept="image/*">
 									<div class="mt-3">

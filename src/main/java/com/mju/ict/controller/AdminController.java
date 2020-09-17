@@ -145,7 +145,7 @@ public class AdminController {
 	@RequestMapping(value = "/product/update", method = RequestMethod.POST)
 	public String updateProduct(@ModelAttribute @Valid Product product, BindingResult result, Model model,
 			@RequestParam("img") MultipartFile img, @RequestParam("descImg") MultipartFile descImg) {
-		productService.updateProduct(product, img,descImg);
+		productService.updateProduct(product, img, descImg);
 		return "redirect:/admin/product/" + product.getProduct_id();
 	}
 
@@ -198,8 +198,10 @@ public class AdminController {
 	@RequestMapping(value = "/discount/update/{id}", method = RequestMethod.GET)
 	public String getDiscountUpdate(@PathVariable int id, Model model) {
 		Discount discount = discountService.getDiscountById(id);
+		List<Product> products = productService.getAllProducts();
 
 		model.addAttribute("discount", discount);
+		model.addAttribute("products", products);
 		return "admin/discount/update";
 	}
 
@@ -211,21 +213,21 @@ public class AdminController {
 
 		return "redirect:/admin/discount";
 	}
-	
+
 	// 할인 수정
 	@RequestMapping(value = "/discount/update", method = RequestMethod.POST)
-	public String updateDiscount(@ModelAttribute @Valid Discount discount, BindingResult result, MultipartFile file,
-			Model model) {
-//		brandService.updateBrand(brand, file);
-		return "redirect:/admin/brand/";
-		//+ brand.getBrand_id();
+	public String updateDiscount(@RequestParam("product[]") int[] productArr, @ModelAttribute @Valid Discount discount,
+			BindingResult result, MultipartFile file) {
+		discountService.updateDiscount(discount,productArr, file);
+ 	
+		return "redirect:/admin/discount/" + discount.getDiscount_id();
 	}
-	
+
 	// 할인 삭제
 	@RequestMapping(value = "/discount/delete/{id}", method = RequestMethod.GET)
 	public String deleteDiscount(@PathVariable int id, Model model) {
 		discountService.deleteDiscountById(id);
-		
+
 		return "redirect:/admin/discount";
 	}
 

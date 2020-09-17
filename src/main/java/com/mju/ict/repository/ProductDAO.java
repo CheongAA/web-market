@@ -70,6 +70,12 @@ public class ProductDAO implements IProductDAO{
 		sqlSession.update("updateProduct", product);
 	}
 
+	
+	@Override
+	public void updateProductDiscountNull(int product_id) {
+		sqlSession.update("updateProductDiscountNull", product_id);
+	}
+	
 	@Override
 	public void updateProductSale(Map<String,Integer> map) {
 		sqlSession.update("updateProductSale",map);
@@ -85,6 +91,8 @@ public class ProductDAO implements IProductDAO{
 	public void deleteProductById(int id) {
 		sqlSession.delete("deleteProductById", id);
 	}
+
+
 
 
 
