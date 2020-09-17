@@ -21,7 +21,7 @@
 * Deployement: 
 * Storage: AWS S3
 * Front-End: JSP , Javascript
-* IDE: Eclipse
+* IDE: Eclipse, JRebel
 * Build Automation Tool: Maven
 
 

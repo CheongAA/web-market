@@ -8,10 +8,10 @@
 		keyProperty="discount_id">
 		INSERT INTO tb_discount
 		(discount_name,discount_desc,discount_explanation,
-		discount_thumbnailImg,discount_mainImg,
+		discount_thumbnailImg,
 		discount_rate,discount_start,discount_end)
 		VALUES(#{discount_name},#{discount_desc},#{discount_explanation}
-		,#{discount_thumbnailImg},#{discount_mainImg}
+		,#{discount_thumbnailImg}
 		,#{discount_rate},#{discount_start},#{discount_end})
 	</insert>
 
@@ -49,7 +49,6 @@
 		#{discount_explanation},
 		discount_thumbnailImg =
 		#{discount_thumbnailImg},
-		discount_mainImg = #{discount_mainImg},
 		discount_rate = #{discount_rate},
 		discount_start = #{discount_start},
 		discount_end = #{discount_end}

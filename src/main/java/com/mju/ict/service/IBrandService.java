@@ -20,6 +20,5 @@ public interface IBrandService {
 
 	public abstract void deleteBrandById(int id);
 
-	public abstract String uploadS3Image(MultipartFile file);
 
 }

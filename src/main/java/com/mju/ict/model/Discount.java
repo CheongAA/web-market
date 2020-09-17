@@ -8,7 +8,6 @@ public class Discount {
 //	  discount_desc VARCHAR(255) NOT NULL,
 //	  discount_explanation VARCHAR(255) NOT NULL,
 //	  discount_thumbnailImg varchar(200) NOT NULL,
-//	  discount_mainImg varchar(200) NOT NULL,
 //	  discount_rate INT NOT NULL,
 //	  discount_start date NOT NULL,
 //	  discount_end date NOT NULL,
@@ -20,7 +19,6 @@ public class Discount {
 	private String discount_desc;
 	private String discount_explanation;
 	private String discount_thumbnailImg;
-	private String discount_mainImg;
 	private int discount_rate;
 	private Date discount_start;
 	private Date discount_end;
@@ -56,12 +54,6 @@ public class Discount {
 	}
 	public void setDiscount_thumbnailImg(String discount_thumbnailImg) {
 		this.discount_thumbnailImg = discount_thumbnailImg;
-	}
-	public String getDiscount_mainImg() {
-		return discount_mainImg;
-	}
-	public void setDiscount_mainImg(String discount_mainImg) {
-		this.discount_mainImg = discount_mainImg;
 	}
 	public int getDiscount_rate() {
 		return discount_rate;

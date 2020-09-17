@@ -34,9 +34,5 @@ public interface IProductService {
 
 	public abstract void changeProductSale(int id);
 
-	public abstract String uploadS3Image(String uploadPath, MultipartFile file);
-
-
-
 
 }

@@ -16,6 +16,7 @@ import com.mju.ict.model.Discount;
 import com.mju.ict.model.Product;
 import com.mju.ict.repository.IDiscountDAO;
 import com.mju.ict.repository.IProductDAO;
+import com.mju.ict.util.S3Util;
 
 @Service
 public class DiscountService implements IDiscountService{
@@ -25,6 +26,9 @@ public class DiscountService implements IDiscountService{
 	
 	@Autowired
 	IProductDAO productDAO;
+	
+	@Autowired
+	private S3Util s3;
 	
 	//할인 전체 조회
 	@Override
@@ -47,6 +51,8 @@ public class DiscountService implements IDiscountService{
 	//할인 등록
 	@Override
 	public void registerDiscount(Discount discount,int[] productArr, MultipartFile file) {
+		discount.setDiscount_thumbnailImg(s3.uploadS3Image("discount/img",file));
+		
 		discountDAO.insertDiscount(discount);
 		
 		List<Product> products = productDAO.selectAllProducts();

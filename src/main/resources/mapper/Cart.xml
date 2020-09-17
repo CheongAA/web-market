@@ -17,6 +17,7 @@
 		<result column="product_volume" property="product_volume" />
 		<result column="on_sale" property="on_sale" />
 		<result column="product_img" property="product_img" />
+		<result column="product_descImg" property="product_descImg" />
 
 		<association javaType="com.mju.ict.model.Discount"
 			property="discount">

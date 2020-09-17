@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.Protocol;
@@ -96,6 +99,22 @@ public class S3Util {
 		System.out.println("넘어오는 파일명 : " + fileName);
 		String imgName = (fileName).replace(File.separatorChar, '/');
 		return conn.getResourceUrl(bucketName, imgName);
+	}
+	
+	
+	//s3 업로드 후 url 리턴
+ 	public String uploadS3Image(String uploadPath,MultipartFile file) {
+		
+		ResponseEntity<String> img_path = null;
+		try {
+			img_path = new ResponseEntity<String>(
+					UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename()),
+					HttpStatus.CREATED);
+			fileUpload(bucketName, uploadPath + img_path.getBody(), file.getBytes());
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		return getFileURL(uploadPath+img_path.getBody());
 	}
 
 }

@@ -84,8 +84,8 @@ public class ProductService implements IProductService{
 		String imgUploadPath = "product/img/";
 		String descImgUploadPath = "product/img/desc";
 		
-		product.setProduct_img(uploadS3Image(imgUploadPath,img));
-		product.setProduct_descImg(uploadS3Image(descImgUploadPath,descImg));
+		product.setProduct_img(s3.uploadS3Image(imgUploadPath,img));
+		product.setProduct_descImg(s3.uploadS3Image(descImgUploadPath,descImg));
 		
 		productDAO.insertProduct(product);
 	}
@@ -99,32 +99,17 @@ public class ProductService implements IProductService{
 		
 		if(!img.isEmpty()) {
 			s3.fileDelete(product.getProduct_img());
-			product.setProduct_img(uploadS3Image(imgUploadPath,img));
+			product.setProduct_img(s3.uploadS3Image(imgUploadPath,img));
 		}
 		
 		if(!descImg.isEmpty()) {
 			s3.fileDelete(product.getProduct_descImg());
-			product.setProduct_descImg(uploadS3Image(descImgUploadPath,descImg));
+			product.setProduct_descImg(s3.uploadS3Image(descImgUploadPath,descImg));
 		}
 		
 		productDAO.updateProduct(product);
 	}
 
-	
-	//s3 이미지 파일 업로드
-	@Override
-	public String uploadS3Image(String uploadPath,MultipartFile file) {
-		ResponseEntity<String> img_path = null;
-		try {
-			img_path = new ResponseEntity<String>(
-					UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename()),
-					HttpStatus.CREATED);
-			s3.fileUpload(s3.getBucketName(), uploadPath + img_path.getBody(), file.getBytes());
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		return s3.getFileURL(uploadPath+img_path.getBody());
-	}
 	
 	//상품 삭제
 	@Override
