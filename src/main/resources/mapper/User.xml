@@ -43,11 +43,21 @@
 		SET
 		user_email =#{user_email},
 		user_birth =#{user_birth},
-		user_password
-		=#{user_password},
-		user_phone =#{user_phone}
+		user_phone
+		=#{user_phone}
 		WHERE
 		user_id = #{user_id}
+	</update>
+	<update id="updateUserPassword"
+		parameterType="com.mju.ict.model.User">
+		UPDATE tb_user
+		SET
+		user_password
+		=#{user_password}
+		WHERE
+		user_id =
+		#{user_id}
+
 	</update>
 	<delete id="deleteUserById" parameterType="Integer">
 		DELETE FROM

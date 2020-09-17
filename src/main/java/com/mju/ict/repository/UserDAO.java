@@ -43,10 +43,17 @@ public class UserDAO implements IUserDAO{
 	public void updateUser(User user) {
 		sqlSession.update("updateUser", user);
 	}
+	
+	@Override
+	public void updateUserPassword(User user) {
+		sqlSession.update("updateUserPassword", user);
+	}
+
 
 	@Override
 	public void deleteUserById(int id) {
 		sqlSession.delete("deleteUserById", id);
 	}
+
 
 }

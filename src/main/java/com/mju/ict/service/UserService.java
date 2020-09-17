@@ -57,13 +57,22 @@ public class UserService implements IUserService {
 	//고객 수정
 	@Override
 	public User updateUser(User user) {
-		String encPassword = passwordEncoder.encode(user.getUser_password());
-		user.setUser_password(encPassword);
 		userDAO.updateUser(user);
 		User updatedUser = userDAO.selectUserById(user.getUser_id());
 		return updatedUser;
 		
 	}
+	
+	@Override
+	public User updateUserPassword(User user) {
+		String encPassword = passwordEncoder.encode(user.getUser_password());
+		user.setUser_password(encPassword);
+		
+		userDAO.updateUserPassword(user);
+		User updatedUser = userDAO.selectUserById(user.getUser_id());
+		return updatedUser;
+	}
+
 
 	//고객 로그인
 	@Override
@@ -103,5 +112,6 @@ public class UserService implements IUserService {
 	public void deleteUserById(int id) {
 		userDAO.deleteUserById(id);
 	}
+
 
 }

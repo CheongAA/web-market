@@ -17,7 +17,11 @@ public interface IUserDAO {
 	public abstract void insertUser(User user); 
 	
 	public abstract void updateUser(User user);
+	
+	public abstract void updateUserPassword(User user);
 
 	public abstract void deleteUserById(int id);
+
+
 
 }

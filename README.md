@@ -18,7 +18,7 @@
 * Language: JDK 1.8
 * Application Framework: Spring MVC 4.3.9
 * Database: MySQL 8.0.21 + MyBatis 3.4.1
-* Deployement: 
+* Deployement: AWS EC2 , AWS RDS
 * Storage: AWS S3
 * Front-End: JSP , Javascript
 * IDE: Eclipse, JRebel
@@ -42,9 +42,9 @@
 
 
 * 회원
-- [ ] 회원수정
+- [x] 회원수정
 - [x] 배송지관리
-- [ ] 회원탈퇴
+- [x] 회원탈퇴
 
 
 - [X] 장바구니
@@ -102,8 +102,8 @@
 
 - [x] 이벤트등록
 - [x] 이벤트조회
-- [ ] 이벤트수정
-- [ ] 이벤트삭제
+- [x] 이벤트수정
+- [x] 이벤트삭제
 
 
 - [x] 자주하는 질문 등록
@@ -118,7 +118,8 @@
 - [X] 답변삭제
 
 
-- [ ] 후기
+- [ ] 후기조회
+- [ ] 후기삭제
 
 
 

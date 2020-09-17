@@ -168,12 +168,23 @@ public class UserController {
 	public String getUserCheck(Model model, HttpSession session) {
 		return "user/user-check";
 	}
-
 	
+	// 정보 수정  메뉴 페이지 (정보수정,비밀번호수정,탈퇴)
+	@RequestMapping(value = "/user/check/nav", method = RequestMethod.GET)
+	public String getUserUpdateNav(Model model, HttpSession session) {
+		return "user/user-update-nav";
+	}
+
 	// 정보 수정 페이지
 	@RequestMapping(value = "/user/update", method = RequestMethod.GET)
 	public String getUserUpdate(Model model, HttpSession session) {
 		return "user/user-update";
+	}
+	
+	// 비밀번호 수정 페이지
+	@RequestMapping(value = "/user/update/password", method = RequestMethod.GET)
+	public String getUserUpdatePassword(Model model, HttpSession session) {
+		return "user/user-update-password";
 	}
 	
 	// 정보 수정  완료 페이지
@@ -193,7 +204,7 @@ public class UserController {
 			return "user/user-check";
 		}
 
-		return "redirect:/user/update";
+		return "redirect:/user/check/nav";
 
 	}
 	
@@ -207,10 +218,24 @@ public class UserController {
 		return "redirect:/user/update/ok";
 	}
 	
-	// 배송지 탈퇴
+	// 고객 비밀번호 정보수정
+	@RequestMapping(value = "/user/update/password", method = RequestMethod.POST)
+	public String updateUserPassword(@ModelAttribute @Valid User user, BindingResult result, Model model, HttpSession session) {
+		User updatedUser = userService.updateUserPassword(user);
+		
+		session.removeAttribute("user");
+		session.setAttribute("user", updatedUser);
+		return "redirect:/user/update/ok";
+	}
+	
+	// 회원 탈퇴
 	@RequestMapping(value = "/user/cancel/{id}", method = RequestMethod.GET)
-	public String deleteUser(@PathVariable int id, Model model) {
+	public String deleteUser(@PathVariable int id, Model model, HttpSession session) {
+		
 		userService.deleteUserById(id);
+		
+		session.removeAttribute("user");
+		
 		return "redirect:/";
 	}
 	

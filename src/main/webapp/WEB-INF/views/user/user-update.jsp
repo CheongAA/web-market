@@ -25,21 +25,6 @@
 										class="form-control" required="required" readonly="readonly"
 										value="${user.user_identification}">
 								</div>
-								<div class="form-row">
-									<div class="col form-group">
-										<label>새비밀번호 </label> <input type="password"
-											name="user_password" id="user_password" class="form-control"
-											required="required"> <small
-											class="form-text text-danger" id="validation_password"></small>
-									</div>
-									<div class="col form-group">
-										<label>새비밀번호 확인</label> <input type="password"
-											name="user_password2" id="user_password2"
-											class="form-control" required="required"> <small
-											class="form-text text-danger" id="validation_password2"></small>
-									</div>
-								</div>
-
 								<div class="form-group">
 									<label>이름</label> <input type="text" name="user_name"
 										id="user_name" class="form-control" required="required"
@@ -78,37 +63,6 @@
 									</div>
 								</div>
 								<div class="form-group my-4">
-									<button type="button" class="btn btn-dark " id="cancel_btn"
-										data-toggle="modal" data-target="#cart_modal">탈퇴하기</button>
-
-									<!-- Modal -->
-									<div class="modal fade" id="cart_modal" data-backdrop="static"
-										data-keyboard="false" tabindex="-1"
-										aria-labelledby="staticBackdropLabel" aria-hidden="true">
-										<div class="modal-dialog modal-lg">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="staticBackdropLabel">회원탈퇴</h5>
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="modal-body">
-													<ul class="text-danger">
-														<li>회원탈퇴 시 개인정보 및 MARKET에서 만들어진 모든 데이터는 즉시 삭제됩니다.</li>
-														<li>탈퇴 후에는 회원님의 개인정보를 복원할 수 없으니 이 점 유의바랍니다.</li>
-													</ul>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-dismiss="modal">취소</button>
-													<a type="button" class="btn btn-danger"
-														href="${pageContext.request.contextPath}/user/cancel/${user.user_id}">탈퇴하기</a>
-												</div>
-											</div>
-										</div>
-									</div>
 									<button type="submit" class="btn btn-dark" id="update_btn">회원정보수정</button>
 								</div>
 							</form:form>
@@ -121,77 +75,28 @@
 	</div>
 	<script type="text/javascript">
 		// 이벤트 할당
-		$("#user_password").on('blur', checkPwd);
-		$("#user_password2").on('blur', checkPwd);
 		$("#user_email").on('blur', checkEmail);
 		$("#user_phone").on('blur', checkPhone);
-
-		// 회원가입 버튼 비활성화
-		$("#signup_btn").attr("disabled", true);
-
 		// 정규식
-		var pwdE = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 		var nameE = /^[가-힣a-zA-Z]{2,10}$/;
 		var emailE = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 		var phoneE = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
 
 		// 가입 플래그
-		var pwdFlag = false;
 		var emailFlag = false;
 		var phoneFlag = false;
 
 		//init
-		checkPwd();
 		checkEmail();
 		checkPhone();
 		update();
 
 		// 회원가입 버튼 활성화
 		function update() {
-			if (pwdFlag && emailFlag && phoneFlag) {
+			if (emailFlag && phoneFlag) {
 				$("#update_btn").attr("disabled", false);
 			} else {
 				$("#update_btn").attr("disabled", true);
-			}
-		}
-
-		// 비밀번호 유효성 검사
-		function checkPwd() {
-			var inputValue = $("#user_password").val();
-			var inputValue2 = $("#user_password2").val();
-
-			if (!pwdE.test(inputValue)) {
-				pwdFlag = false;
-				$("#validation_password").text(
-						"특수문자 /문자/숫자 포함 형태의 8~15자리 이내의 비밀번호를 입력해주세요.");
-				$("#validation_password2").text("");
-				$("#user_password2").val('');
-
-				$("#user_password").removeClass('is-valid');
-				$("#user_password").addClass('is-invalid');
-				$("#user_password2").removeClass('is-valid');
-				$("#user_password2").removeClass('is-invalid');
-				update();
-			} else {
-				$("#validation_password").text("");
-				$("#user_password").removeClass('is-invalid');
-				$("#user_password").addClass('is-valid');
-
-				if (inputValue != inputValue2) {
-					pwdFlag = false;
-					$("#validation_password2").text("비밀번호가 같지 않습니다.");
-					$("#user_password2").removeClass('is-valid');
-					$("#user_password2").addClass('is-invalid');
-					update();
-				} else {
-					pwdFlag = true;
-					$("#validation_password2").text("");
-					$("#user_password").removeClass('is-invalid');
-					$("#user_password").addClass('is-valid');
-					$("#user_password2").removeClass('is-invalid');
-					$("#user_password2").addClass('is-valid');
-					update();
-				}
 			}
 		}
 
