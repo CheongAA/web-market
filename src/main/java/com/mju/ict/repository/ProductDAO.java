@@ -74,12 +74,19 @@ public class ProductDAO implements IProductDAO{
 	public void updateProductSale(Map<String,Integer> map) {
 		sqlSession.update("updateProductSale",map);
 	}
+	
+	@Override
+	public void updateProductDiscount(Product product) {
+		sqlSession.update("updateProductDiscount", product);
+	}
 
 
 	@Override
 	public void deleteProductById(int id) {
 		sqlSession.delete("deleteProductById", id);
 	}
+
+
 
 
 

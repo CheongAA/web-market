@@ -60,7 +60,7 @@ public class DiscountService implements IDiscountService{
 			for(int id:productArr) {
 				if(p.getProduct_id() == id) {
 					p.setDiscount_id(discount.getDiscount_id());
-					productDAO.updateProduct(p);
+					productDAO.updateProductDiscount(p);
 				}
 			}
 		}
@@ -79,6 +79,13 @@ public class DiscountService implements IDiscountService{
 		}
 		
 		discountDAO.updateDiscountApply(discount);
+	}
+	
+	@Override
+	public void deleteDiscountById(int id) {
+		s3.fileDelete(discountDAO.selectDiscountById(id).getDiscount_thumbnailImg());
+		discountDAO.deleteDiscountById(id);
+		
 	}
 
 	//매일 밤 23시 59분 할인날짜를 확인하여 discount_state 변경
@@ -108,6 +115,8 @@ public class DiscountService implements IDiscountService{
 			discountDAO.updateDiscountState(d);			
 		}
 	}
+
+
 
 
 

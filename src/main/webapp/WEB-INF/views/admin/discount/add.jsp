@@ -60,7 +60,7 @@
 							</tr>
 							<tr>
 								<th scope="row">이벤트 품목 (다중선택 가능)</th>
-								<td><select name="product[]" class="form-control" id="select_product_list" multiple>
+								<td><select class="form-control" id="select_product_list" multiple>
 										<c:forEach var="product" items="${products}">
 											<c:if test="${product.discount_id == 0 }">
 												<option value="${product.product_id}">[${product.brand.brand_name}]${product.product_name}</option>
@@ -144,6 +144,12 @@
 				var newNode = document.createElement("p");
 				newNode.innerHTML = products[i].innerHTML;
 				$("#select_product").append(newNode);
+				
+				var hiddenNode = document.createElement("input");
+				hiddenNode.setAttribute("type", "hidden");
+				hiddenNode.setAttribute("name", "product[]");
+				hiddenNode.setAttribute("value", parseInt(products[i].value));
+				$("#select_product").append(hiddenNode);
 			}
 		})
 	</script>

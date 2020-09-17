@@ -20,4 +20,6 @@ public interface IDiscountDAO {
 
 	public abstract void updateDiscountState(Discount discount);
 
+	public abstract void deleteDiscountById(int id);
+
 }

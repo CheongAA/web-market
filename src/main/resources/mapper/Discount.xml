@@ -77,4 +77,11 @@
 		discount_id =
 		#{discount_id}
 	</update>
+
+	<delete id="deleteDiscountById" parameterType="Integer">
+		DELETE FROM
+		tb_discount
+		WHERE
+		discount_id = #{id}
+	</delete>
 </mapper>

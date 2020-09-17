@@ -49,6 +49,11 @@ public class DiscountDAO implements IDiscountDAO{
 		sqlSession.update("updateDiscountState",discount);
 	}
 
+	@Override
+	public void deleteDiscountById(int id) {
+		sqlSession.delete("deleteDiscountById", id);
+	}
+
 
 
 

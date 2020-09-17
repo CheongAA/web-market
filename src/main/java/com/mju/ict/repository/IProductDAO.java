@@ -31,7 +31,11 @@ public interface IProductDAO {
 
 	public abstract void updateProductSale(Map<String,Integer> map);
 	
+	public abstract void updateProductDiscount(Product product);
+	
 	public abstract void deleteProductById(int id);
+
+
 
 
 

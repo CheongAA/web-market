@@ -281,6 +281,16 @@
 		${product_id}
 	</update>
 
+	<update id="updateProductDiscount"
+		parameterType="com.mju.ict.model.Product">
+		UPDATE tb_product
+		SET
+		discount_id = #{discount_id}
+		WHERE
+		product_id =
+		${product_id}
+	</update>
+
 	<update id="updateProductSale" parameterType="hashMap">
 		UPDATE tb_product
 		SET

@@ -211,6 +211,23 @@ public class AdminController {
 
 		return "redirect:/admin/discount";
 	}
+	
+	// 할인 수정
+	@RequestMapping(value = "/discount/update", method = RequestMethod.POST)
+	public String updateDiscount(@ModelAttribute @Valid Discount discount, BindingResult result, MultipartFile file,
+			Model model) {
+//		brandService.updateBrand(brand, file);
+		return "redirect:/admin/brand/";
+		//+ brand.getBrand_id();
+	}
+	
+	// 할인 삭제
+	@RequestMapping(value = "/discount/delete/{id}", method = RequestMethod.GET)
+	public String deleteDiscount(@PathVariable int id, Model model) {
+		discountService.deleteDiscountById(id);
+		
+		return "redirect:/admin/discount";
+	}
 
 	// 할인 discount_apply(상단노출) 변경
 	@RequestMapping(value = "/discountApply/{id}", method = RequestMethod.GET)
