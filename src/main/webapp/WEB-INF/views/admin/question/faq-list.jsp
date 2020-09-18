@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -33,8 +32,7 @@
 			</tbody>
 		</table>
 		<div class="col-sm-12 my-5">
-			<a href="${pageContext.request.contextPath}/admin/answer/add/0"
-				class="btn btn-primary float-right px-5 mr-1">등록</a>
+			<a href="${pageContext.request.contextPath}/admin/answer/add/0" class="btn btn-primary float-right px-5 mr-1">등록</a>
 		</div>
 	</div>
 	<script type="text/javascript">

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -40,65 +39,56 @@
 								<tr>
 									<c:choose>
 										<c:when test="${cart.product.on_sale == 0}">
-											<td class="text-center"><input type="checkbox"
-												class="soldout_products" value="${cart.cart_id}" disabled />
+											<td class="text-center">
+												<input type="checkbox" class="soldout_products" value="${cart.cart_id}" disabled />
 											</td>
 											<td>
 												<div class="col-sm-12">
-													<img alt="" src="${cart.product.product_img}"
-														class="w-25">${cart.product.product_name} / <span>${cart.product.product_price}</span>원
+													<img alt="" src="${cart.product.product_img}" class="w-25">${cart.product.product_name}
+													/ <span>${cart.product.product_price}</span>원
 												</div>
 											</td>
 											<td></td>
 											<td>품절</td>
 										</c:when>
 										<c:otherwise>
-											<td class="text-center"><input type="checkbox"
-												class="product_check_input" value="${cart.cart_id}" /></td>
+											<td class="text-center">
+												<input type="checkbox" class="product_check_input" value="${cart.cart_id}" />
+											</td>
 											<td>
 												<div class="col-sm-12">
-													<img alt="" src="${cart.product.product_img}"
-														class="w-25"> <a
-														href="${pageContext.request.contextPath}/product/${cart.product.product_id}"
-														class="text-dark">${cart.product.product_name}</a> /
+													<img alt="" src="${cart.product.product_img}" class="w-25">
+													<a href="${pageContext.request.contextPath}/product/${cart.product.product_id}" class="text-dark">${cart.product.product_name}</a>
+													/
 
 													<c:choose>
 														<c:when test="${cart.product.discount_id != 0 and cart.product.discount.discount_apply != 0 and cart.product.discount.discount_state != 0}">
-															<c:set var="discount"
-																value="${(cart.product.product_price * cart.product.discount.discount_rate)/100}" />
-															<c:set var="price"
-																value="${cart.product.product_price - (discount)}" />
+															<c:set var="discount" value="${(cart.product.product_price * cart.product.discount.discount_rate)/100}" />
+															<c:set var="price" value="${cart.product.product_price - (discount)}" />
 															<c:set var="total" value="${price * cart.product_count}" />
 
 
-															<span style="text-decoration: line-through"
-																id="${cart.product.product_id}_price">${cart.product.product_price}</span>
-															<span> <fmt:formatNumber pattern="0"
-																	value="${price}" />원
+															<span style="text-decoration: line-through" id="${cart.product.product_id}_price">${cart.product.product_price}</span>
+															<span> <fmt:formatNumber pattern="0" value="${price}" />원
 															</span>
 
-															<input type="hidden"
-																value="${discount * cart.product_count}"
-																id="${cart.cart_id}_discounts">
+															<input type="hidden" value="${discount * cart.product_count}" id="${cart.cart_id}_discounts">
 														</c:when>
 														<c:otherwise>
-															<c:set var="total"
-																value="${cart.product.product_price * cart.product_count}" />
+															<c:set var="total" value="${cart.product.product_price * cart.product_count}" />
 															<span>${cart.product.product_price}</span>원
-																										<input type="hidden" value="0"
-																id="${cart.cart_id}_discounts">
+																										<input type="hidden" value="0" id="${cart.cart_id}_discounts">
 														</c:otherwise>
 													</c:choose>
-													<input type="hidden"
-														value="${cart.product.product_price * cart.product_count}"
-														id="${cart.cart_id}_products">
+													<input type="hidden" value="${cart.product.product_price * cart.product_count}" id="${cart.cart_id}_products">
 												</div>
 											</td>
-											<td><input class="form-control" id="${cart.cart_id}"
-												type="number" min="1" max="${cart.product.product_quantity}"
-												value="${cart.product_count}" /></td>
-											<td><span class="product_total_price"><fmt:formatNumber
-														pattern="0" value="${total}" /></span>원</td>
+											<td>
+												<input class="form-control" id="${cart.cart_id}" type="number" min="1" max="${cart.product.product_quantity}" value="${cart.product_count}" />
+											</td>
+											<td>
+												<span class="product_total_price"><fmt:formatNumber pattern="0" value="${total}" /></span>원
+											</td>
 										</c:otherwise>
 									</c:choose>
 								</tr>
@@ -110,10 +100,8 @@
 			</table>
 			<hr />
 			<div class="row my-5">
-				<button type="button" class="btn btn-outline-secondary p-3"
-					id="delete_btn">선택 삭제</button>
-				<button type="button" class="btn btn-outline-secondary p-3"
-					id="soldout_btn">품절 상품 삭제</button>
+				<button type="button" class="btn btn-outline-secondary p-3" id="delete_btn">선택 삭제</button>
+				<button type="button" class="btn btn-outline-secondary p-3" id="soldout_btn">품절 상품 삭제</button>
 			</div>
 			<div class="row my-5 border">
 				<table class="table table-borderless mt-3">
@@ -130,20 +118,33 @@
 					</thead>
 					<tbody>
 						<tr class="text-center">
-							<td><h1 id="products_price">0</h1></td>
-							<td><h1>-</h1></td>
-							<td><h1 id="discount_price">0</h1></td>
-							<td><h1>+</h1></td>
-							<td><h1 id="delivery_price">0</h1></td>
-							<td><h1>=</h1></td>
-							<td><h1 id="total_price">0</h1></td>
+							<td>
+								<h1 id="products_price">0</h1>
+							</td>
+							<td>
+								<h1>-</h1>
+							</td>
+							<td>
+								<h1 id="discount_price">0</h1>
+							</td>
+							<td>
+								<h1>+</h1>
+							</td>
+							<td>
+								<h1 id="delivery_price">0</h1>
+							</td>
+							<td>
+								<h1>=</h1>
+							</td>
+							<td>
+								<h1 id="total_price">0</h1>
+							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="row w-100 mt-3">
-				<button type="button"
-					class="btn btn-secondary btn-lg py-3 px-5 mx-auto" id="order_btn">주문하기</button>
+				<button type="button" class="btn btn-secondary btn-lg py-3 px-5 mx-auto" id="order_btn">주문하기</button>
 			</div>
 		</form>
 	</div>
@@ -180,7 +181,7 @@
 			for (var i = 0; i < list.length; i++) {
 				carts.push(parseInt(list[i].value));
 			}
-			
+
 			$.ajax({
 				url : "/cart/delete",
 				type : "post",

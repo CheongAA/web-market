@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -23,17 +22,13 @@
 				<h4 class="mt-3">주문상품</h4>
 				<c:forEach var="orderDetail" items="${order.orderDetail}">
 					<div class="row m-1 p-1 border-top border-bottom w-100">
-						<img alt="" src="${orderDetail.product.product_img}"
-							class="col-sm-3 w-25 h-100 mx-auto">
+						<img alt="" src="${orderDetail.product.product_img}" class="col-sm-3 w-25 h-100 mx-auto">
 						<div class=" col-sm-5 m-2">
 							<p>
-								<a
-									href="${pageContext.request.contextPath}/product/${orderDetail.product.product_id}"
-									class="text-dark">${orderDetail.product.product_name}</a>
+								<a href="${pageContext.request.contextPath}/product/${orderDetail.product.product_id}" class="text-dark">${orderDetail.product.product_name}</a>
 							</p>
 							<p>
-								<fmt:formatNumber pattern="###,###,###"
-									value="${orderDetail.product_price}" />
+								<fmt:formatNumber pattern="###,###,###" value="${orderDetail.product_price}" />
 								원 / ${orderDetail.product_count}개
 							</p>
 						</div>
@@ -83,10 +78,8 @@
 						</tbody>
 					</table>
 				</div>
-				<a class="btn btn-danger mx-1"
-					href="${pageContext.request.contextPath}/user/order">주문취소</a> <a
-					class="btn btn-primary mx-1"
-					href="${pageContext.request.contextPath}/user/order">주문목록</a>
+				<a class="btn btn-danger mx-1" href="${pageContext.request.contextPath}/user/order">주문취소</a>
+				<a class="btn btn-primary mx-1" href="${pageContext.request.contextPath}/user/order">주문목록</a>
 			</div>
 		</div>
 

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -12,12 +11,10 @@
 		<jsp:include page="../notice_header.jsp" flush="false" />
 		<div class="col text-center">
 			<div class="row pb-4 mb-2">
-				<span class="h2">자주하는 질문</span><span class="p-2 pb-0">고객님들께서
-					가장 자주하시는 질문을 모두 모았습니다.</span>
+				<span class="h2">자주하는 질문</span><span class="p-2 pb-0">고객님들께서 가장 자주하시는 질문을 모두 모았습니다.</span>
 			</div>
 			<div class="row">
-				<table class="table table-borderless text-center"
-					style="table-layout: fixed">
+				<table class="table table-borderless text-center" style="table-layout: fixed">
 					<thead>
 						<tr class="border-bottom">
 							<th>번호</th>
@@ -29,14 +26,16 @@
 						<c:forEach var="answer" items="${answers}" varStatus="status">
 							<c:if test="${answer.question_category_id != 0}">
 								<tr class="answer_tr border-bottom">
-									<td><c:out value="${status.count} " /></td>
+									<td>
+										<c:out value="${status.count} " />
+									</td>
 									<td>${answer.questionCategory.question_category_title}</td>
 									<td colspan="2">${answer.answer_title}</td>
 								</tr>
 								<tr>
-									<td colspan="4" class="p-5 text-left" style="display: none;"
-										id="content_${status.count}"><i
-										class="fas fa-font market-color"> ></i><span class="ml-2">${answer.answer_content}</span></td>
+									<td colspan="4" class="p-5 text-left" style="display: none;" id="content_${status.count}">
+										<i class="fas fa-font market-color"> ></i><span class="ml-2">${answer.answer_content}</span>
+									</td>
 								</tr>
 							</c:if>
 						</c:forEach>

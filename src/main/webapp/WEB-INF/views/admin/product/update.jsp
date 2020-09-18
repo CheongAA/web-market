@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -13,37 +12,35 @@
 	<div class="row mt-5">
 		<h3 class="col-sm-12 border-bottom p-5">상품수정</h3>
 		<div class="col-sm-12 p-5">
-			<form
-				action="${pageContext.request.contextPath}/admin/product/update"
-				method="post" enctype="multipart/form-data">
-				<input type="hidden" name="product_id"
-					value="${product.product_id }"> 
+			<form action="${pageContext.request.contextPath}/admin/product/update" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="product_id" value="${product.product_id }">
 				<input type="hidden" value="${product.category.category_code2}" id="category_code">
-				<input type="hidden"value="${product.category.category_code }" id="category_code2">
+				<input type="hidden" value="${product.category.category_code }" id="category_code2">
 				<div class="col-12 border mb-5">
 					<table class="table">
 						<tbody>
 							<tr>
 								<th scope="row" style="width: 20%">대분류</th>
-								<td><select class="form-control" id="category1"
-									onchange="changeCategory1(this.value)">
-								</select></td>
+								<td>
+									<select class="form-control" id="category1" onchange="changeCategory1(this.value)">
+									</select>
+								</td>
 
 							</tr>
 							<tr>
 								<th scope="row">중분류</th>
-								<td><select class="form-control" id="category2"
-									name="category_code">
-								</select></td>
+								<td>
+									<select class="form-control" id="category2" name="category_code">
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">브랜드명</th>
-								<td class="form-inline"><select class="form-control"
-									id="exampleFormControlSelect1" name="brand_id">
+								<td class="form-inline">
+									<select class="form-control" id="exampleFormControlSelect1" name="brand_id">
 										<c:forEach var="brand" items="${brands}">
 											<c:choose>
-												<c:when
-													test="${brand.brand_name eq product.brand.brand_name }">
+												<c:when test="${brand.brand_name eq product.brand.brand_name }">
 													<option value="${brand.brand_id}" selected>${brand.brand_name}</option>
 												</c:when>
 												<c:otherwise>
@@ -52,70 +49,71 @@
 											</c:choose>
 
 										</c:forEach>
-								</select></td>
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">상품명</th>
-								<td class="form-inline"><input type="text"
-									class="form-control" name="product_name"
-									value="${product.product_name }" required="required"></td>
+								<td class="form-inline">
+									<input type="text" class="form-control" name="product_name" value="${product.product_name }" required="required">
+								</td>
 							</tr>
 
 							<tr>
 								<th scope="row">상품대표이미지(700px * 800px)</th>
-								<td><input type="file" class="form-control-file"
-									id="product_img" name="img" accept="image/*">
+								<td>
+									<input type="file" class="form-control-file" id="product_img" name="img" accept="image/*">
 									<div class="mt-3">
-										<input type="hidden" name="product_img"
-											value="${product.product_img}" /> <img class="w-25 mb-2"
-											src="${product.product_img}" id="origin_product_img"> <img
-											class="w-25" id="select_product_img">
+										<input type="hidden" name="product_img" value="${product.product_img}" />
+										<img class="w-25 mb-2" src="${product.product_img}" id="origin_product_img">
+										<img class="w-25" id="select_product_img">
 									</div>
 
 									<div class="mt-3">
 										<img src="" id="select_product_img">
-									</div></td>
+									</div>
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">상품설명이미지(800px * 2000px)</th>
-								<td><input type="file" class="form-control-file"
-									id="product_descImage" name="descImg" accept="image/*">
+								<td>
+									<input type="file" class="form-control-file" id="product_descImage" name="descImg" accept="image/*">
 									<div class="mt-3">
-										<input type="hidden" name="product_descImg"
-											value="${product.product_descImg}" /> <img
-											class="w-25 h-25 mb-2" src="${product.product_descImg}"
-											id="origin_product_descImg"> <img class="w-25 h-25"
-											id="select_product_descImg">
-									</div></td>
+										<input type="hidden" name="product_descImg" value="${product.product_descImg}" />
+										<img class="w-25 h-25 mb-2" src="${product.product_descImg}" id="origin_product_descImg">
+										<img class="w-25 h-25" id="select_product_descImg">
+									</div>
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">가격</th>
-								<td><input type="text" class="form-control"
-									name="product_price" value="${product.product_price }"
-									required="required"></td>
+								<td>
+									<input type="text" class="form-control" name="product_price" value="${product.product_price }" required="required">
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">재고</th>
-								<td><input type="text" class="form-control"
-									name="product_quantity" value="${product.product_quantity }"
-									required="required"></td>
+								<td>
+									<input type="text" class="form-control" name="product_quantity" value="${product.product_quantity }" required="required">
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">재료</th>
-								<td><input type="text" class="form-control"
-									name="product_material" value="${product.product_material }"
-									required="required"></td>
+								<td>
+									<input type="text" class="form-control" name="product_material" value="${product.product_material }" required="required">
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">용량</th>
-								<td><input type="text" class="form-control"
-									name="product_volume" value="${product.product_volume }"
-									required="required"></td>
+								<td>
+									<input type="text" class="form-control" name="product_volume" value="${product.product_volume }" required="required">
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">간단설명</th>
-								<td><textarea class="form-control" name="product_desc"
-										rows="3" required="required">${product.product_desc }</textarea></td>
+								<td>
+									<textarea class="form-control" name="product_desc" rows="3" required="required">${product.product_desc }</textarea>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -262,15 +260,15 @@
 		}
 		// 1차 분류 셀렉트 박스에 데이터 삽입
 		var cate1Select = document.getElementById("category1");
-		
+
 		//기존 카테고리 값
 		var category_code = $("#category_code").val();
-		
+
 		for (var i = 0; i < cate1Arr.length; i++) {
 			var newNode = document.createElement("option");
 			newNode.value = cate1Arr[i].categoryCode;
 			newNode.innerHTML = cate1Arr[i].categoryName;
-			if(category_code == cate1Arr[i].categoryCode ){
+			if (category_code == cate1Arr[i].categoryCode) {
 				newNode.selected = "true";
 			}
 			cate1Select.appendChild(newNode);
@@ -295,7 +293,7 @@
 					var newNode = document.createElement("option");
 					newNode.value = cate2Arr[i].categoryCode;
 					newNode.innerHTML = cate2Arr[i].categoryName;
-					if(category_code2 == cate2Arr[i].categoryCode ){
+					if (category_code2 == cate2Arr[i].categoryCode) {
 						newNode.selected = "true";
 					}
 					cate2Select.appendChild(newNode);

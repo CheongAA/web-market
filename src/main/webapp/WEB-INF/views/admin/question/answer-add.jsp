@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -27,30 +26,33 @@
 						</tr>
 						<tr>
 							<th scope="row" class="table-secondary">작성일</th>
-							<td style="width: 10%"><fmt:formatDate
-									value="${question.question_created}" pattern="yyyy-MM-dd" /></td>
+							<td style="width: 10%">
+								<fmt:formatDate value="${question.question_created}" pattern="yyyy-MM-dd" />
+							</td>
 							<th style="width: 10%" class="table-secondary">주문</th>
-							<td><c:choose>
+							<td>
+								<c:choose>
 									<c:when test="${question.order_id eq 0}">
 												주문에 관한 문의가 아닙니다.
 											</c:when>
 									<c:otherwise>
-										<a
-											href="${pageContext.request.contextPath}/admin/order/${question.order_id}">${question.order_id}</a>
+										<a href="${pageContext.request.contextPath}/admin/order/${question.order_id}">${question.order_id}</a>
 									</c:otherwise>
-								</c:choose></td>
+								</c:choose>
+							</td>
 						</tr>
 						<tr>
 							<th scope="row" class="table-secondary">상품명</th>
-							<td style="width: 10%"><c:choose>
+							<td style="width: 10%">
+								<c:choose>
 									<c:when test="${question.product_id eq 0}">
 												상품에 관한 문의가 아닙니다.
 											</c:when>
 									<c:otherwise>
-										<a
-											href="${pageContext.request.contextPath}/admin/product/${question.product.product_id}">${question.product.product_name}</a>
+										<a href="${pageContext.request.contextPath}/admin/product/${question.product.product_id}">${question.product.product_name}</a>
 									</c:otherwise>
-								</c:choose></td>
+								</c:choose>
+							</td>
 							<th style="width: 10%" class="table-secondary">핸드폰</th>
 							<td>${question.question_phone}</td>
 						</tr>
@@ -67,36 +69,32 @@
 				<table class="table table-bordered">
 					<tbody>
 						<tr>
-							<th scope="row" style="width: 10%" class="table-secondary">제목
-								*</th>
-							<td><c:if test="${questionCategories != null}">
-									<select class="mb-2" name="question_category_id"
-										class="form-control">
-										<c:forEach var="questionCategory"
-											items="${questionCategories}">
+							<th scope="row" style="width: 10%" class="table-secondary">제목 *</th>
+							<td>
+								<c:if test="${questionCategories != null}">
+									<select class="mb-2" name="question_category_id" class="form-control">
+										<c:forEach var="questionCategory" items="${questionCategories}">
 											<option value="${questionCategory.question_category_id}">${questionCategory.question_category_title}</option>
 										</c:forEach>
 									</select>
-								</c:if> <c:choose>
+								</c:if>
+								<c:choose>
 									<c:when test="${question eq null }">
-										<input type="text" name="answer_title"
-											class="form-control col-sm-5" required>
-										<input type="hidden" name="question_id"
-											value="0">
+										<input type="text" name="answer_title" class="form-control col-sm-5" required>
+										<input type="hidden" name="question_id" value="0">
 									</c:when>
 									<c:otherwise>
-										<input type="hidden" name="question_id"
-											value="${question.question_id}">
-										<input type="text" name="answer_title"
-											class="form-control col-sm-5"
-											value="Re: ${question.question_title} " readonly required>
+										<input type="hidden" name="question_id" value="${question.question_id}">
+										<input type="text" name="answer_title" class="form-control col-sm-5" value="Re: ${question.question_title} " readonly required>
 									</c:otherwise>
-								</c:choose></td>
+								</c:choose>
+							</td>
 						</tr>
 						<tr>
 							<th scope="row" class="table-secondary">내용 *</th>
-							<td colspan="3" rowspan="10"><textarea class="form-control"
-									rows="20" cols="100" name="answer_content" required></textarea></td>
+							<td colspan="3" rowspan="10">
+								<textarea class="form-control" rows="20" cols="100" name="answer_content" required></textarea>
+							</td>
 						</tr>
 					</tbody>
 				</table>

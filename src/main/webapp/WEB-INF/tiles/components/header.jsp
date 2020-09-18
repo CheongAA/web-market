@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <header class="py-3">
@@ -23,14 +22,13 @@
 				</c:if>
 
 				<div class="btn-group">
-					<a type="button" class="p-2 text-muted" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> 고객센터 <i
-						class="fas fa-caret-down"></i>
+					<a type="button" class="p-2 text-muted" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						고객센터 <i class="fas fa-caret-down"></i>
 					</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item p-3 text-muted" href="${pageContext.request.contextPath}/notice">공지사항</a> <a
-							class="dropdown-item p-3 text-muted" href="${pageContext.request.contextPath}/faq">자주하는 질문</a> <a
-							class="dropdown-item p-3 text-muted" href="${pageContext.request.contextPath}/user/question">1:1 문의</a>
+						<a class="dropdown-item p-3 text-muted" href="${pageContext.request.contextPath}/notice">공지사항</a>
+						<a class="dropdown-item p-3 text-muted" href="${pageContext.request.contextPath}/faq">자주하는 질문</a>
+						<a class="dropdown-item p-3 text-muted" href="${pageContext.request.contextPath}/user/question">1:1 문의</a>
 					</div>
 				</div>
 			</nav>
@@ -38,42 +36,31 @@
 	</div>
 	<div class="row py-3">
 		<div class="col text-center">
-			<a
-				class="market-color display-3 font-weight-bold text-decoration-none"
-				href="/">MARKET </a>
+			<a class="market-color display-3 font-weight-bold text-decoration-none" href="/">MARKET </a>
 		</div>
 	</div>
 	<nav class="row text-center h5">
 		<div class="btn-group border-right">
-			<a type="button"
-				class="col text-muted font-weight-bold align-self-center"
-				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<a type="button" class="col text-muted font-weight-bold align-self-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				<i class="fas fa-align-justify"></i> 전체 카테고리
 			</a>
-			<div class="dropdown-menu dropdown-menu-right" id="header_category">
-			</div>
+			<div class="dropdown-menu dropdown-menu-right" id="header_category"></div>
 		</div>
-		<a
-			class="col text-muted font-weight-bold align-self-center border-right ${activeNew}"
-			href="${pageContext.request.contextPath}/products/new">신상품</a> <a
-			class="col text-muted font-weight-bold align-self-center border-right ${activeBest}"
-			href="${pageContext.request.contextPath}/products/best">베스트</a> <a
-			class="col text-muted font-weight-bold align-self-center border-right ${activeDiscount}"
-			href="${pageContext.request.contextPath}/products/discount">알뜰쇼핑</a> <a
-			class="col text-muted font-weight-bold align-self-center ${activeEvent}"
-			href="${pageContext.request.contextPath}/discount/">이벤트</a>
+		<a class="col text-muted font-weight-bold align-self-center border-right ${activeNew}" href="${pageContext.request.contextPath}/products/new">신상품</a>
+		<a class="col text-muted font-weight-bold align-self-center border-right ${activeBest}" href="${pageContext.request.contextPath}/products/best">베스트</a>
+		<a class="col text-muted font-weight-bold align-self-center border-right ${activeDiscount}" href="${pageContext.request.contextPath}/products/discount">알뜰쇼핑</a>
+		<a class="col text-muted font-weight-bold align-self-center ${activeEvent}" href="${pageContext.request.contextPath}/discount/">이벤트</a>
 		<form class="form-inline my-lg-0 main-header-input-box" action="${pageContext.request.contextPath}/product/search" method="get">
 			<input class="form-control mr-sm-2 main-header-input" type="text" name="term">
 			<button class="btn my-2 my-sm-0" type="submit">
-				<i class="fa fa-search h5 text-muted font-weight-bold"
-					aria-hidden="true"></i>
+				<i class="fa fa-search h5 text-muted font-weight-bold" aria-hidden="true"></i>
 			</button>
 		</form>
-		<a
-			class="col h3 text-muted font-weight-bold align-self-center text-decoration-none"
-			href="${pageContext.request.contextPath}/carts"><i class="fas fa-shopping-cart"></i> <c:if
-				test="${carts != null}">
+		<a class="col h3 text-muted font-weight-bold align-self-center text-decoration-none" href="${pageContext.request.contextPath}/carts">
+			<i class="fas fa-shopping-cart"></i>
+			<c:if test="${carts != null}">
 				<span class="badge badge-pill badge-secondary font-weight-light">${fn:length(carts)}</span>
-			</c:if> </a>
+			</c:if>
+		</a>
 	</nav>
 </header>

@@ -12,14 +12,11 @@
 	<jsp:include page="../admin_header.jsp" flush="false" />
 	<div class="row mt-5">
 		<h3 class="w-100 text-center border-bottom pb-5">카테고리명 수정</h3>
-		<form class="m-auto"
-			action="${pageContext.request.contextPath}/admin/category/update"
-			method="post">
+		<form class="m-auto" action="${pageContext.request.contextPath}/admin/category/update" method="post">
 			<input type="hidden" name="category_code" value="${category.category_code}" />
 			<div class="form-group">
-				<label for="category_name">카테고리명</label> <input type="text"
-					class="form-control" id="category_name" name="category_name"
-					placeholder="" required="required" value="${category.category_name}">
+				<label for="category_name">카테고리명</label>
+				<input type="text" class="form-control" id="category_name" name="category_name" placeholder="" required="required" value="${category.category_name}">
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-dark btn-block">등록</button>

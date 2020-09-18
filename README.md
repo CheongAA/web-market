@@ -17,7 +17,7 @@
 
 * Language: JDK 1.8
 * Application Framework: Spring MVC 4.3.9
-* Database: MySQL 8.0.21 + MyBatis 3.4.1
+* Database: MySQL 8.0.16 + MyBatis 3.4.1
 * Deployement: AWS EC2 , AWS RDS
 * Storage: AWS S3
 * Front-End: JSP , Javascript

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +9,9 @@
 		<h2 class="font-weight-bold text-center">고객센터</h2>
 		<div class="sidebar-sticky pt-3">
 			<ul class="nav flex-column list-group">
-				<li class="list-group-item list-group-item-light"><a class="nav-link" href="${pageContext.request.contextPath}/notice">
-						공지사항 </a></li>
-				<li class="list-group-item list-group-item-light"><a class="nav-link" href="${pageContext.request.contextPath}/faq"> 자주하는 질문
-				</a></li>
-				<li class="list-group-item list-group-item-light"><a class="nav-link" href="${pageContext.request.contextPath}/user/question"> 1:1 문의 </a>
-				</li>
+				<li class="list-group-item list-group-item-light"><a class="nav-link" href="${pageContext.request.contextPath}/notice"> 공지사항 </a></li>
+				<li class="list-group-item list-group-item-light"><a class="nav-link" href="${pageContext.request.contextPath}/faq"> 자주하는 질문 </a></li>
+				<li class="list-group-item list-group-item-light"><a class="nav-link" href="${pageContext.request.contextPath}/user/question"> 1:1 문의 </a></li>
 			</ul>
 		</div>
 	</nav>

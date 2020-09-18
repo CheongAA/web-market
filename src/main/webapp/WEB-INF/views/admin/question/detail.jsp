@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -23,30 +22,33 @@
 					</tr>
 					<tr>
 						<th scope="row" class="table-secondary">작성일</th>
-						<td style="width: 10%"><fmt:formatDate
-								value="${question.question_created}" pattern="yyyy-MM-dd" /></td>
+						<td style="width: 10%">
+							<fmt:formatDate value="${question.question_created}" pattern="yyyy-MM-dd" />
+						</td>
 						<th style="width: 10%" class="table-secondary">주문</th>
-						<td><c:choose>
+						<td>
+							<c:choose>
 								<c:when test="${question.order_id eq 0}">
 												주문에 관한 문의가 아닙니다.
 											</c:when>
 								<c:otherwise>
-									<a
-										href="${pageContext.request.contextPath}/admin/order/${question.order_id}">${question.order_id}</a>
+									<a href="${pageContext.request.contextPath}/admin/order/${question.order_id}">${question.order_id}</a>
 								</c:otherwise>
-							</c:choose></td>
+							</c:choose>
+						</td>
 					</tr>
 					<tr>
 						<th scope="row" class="table-secondary">상품명</th>
-						<td style="width: 10%"><c:choose>
+						<td style="width: 10%">
+							<c:choose>
 								<c:when test="${question.product_id eq 0}">
 												상품에 관한 문의가 아닙니다.
 											</c:when>
 								<c:otherwise>
-									<a
-										href="${pageContext.request.contextPath}/admin/product/${question.product.product_id}">${question.product.product_name}</a>
+									<a href="${pageContext.request.contextPath}/admin/product/${question.product.product_id}">${question.product.product_name}</a>
 								</c:otherwise>
-							</c:choose></td>
+							</c:choose>
+						</td>
 						<th style="width: 10%" class="table-secondary">핸드폰</th>
 						<td>${question.question_phone}</td>
 					</tr>
@@ -62,8 +64,7 @@
 			<c:choose>
 				<c:when test="${question.answer_id eq 0}">
 					<h5 class="text-center">답변을 작성해주세요.</h5>
-					<a class="btn btn-primary float-right"
-						href="${pageContext.request.contextPath}/admin/answer/add/${question.question_id}">등록</a>
+					<a class="btn btn-primary float-right" href="${pageContext.request.contextPath}/admin/answer/add/${question.question_id}">등록</a>
 				</c:when>
 				<c:otherwise>
 					<table class="table table-bordered bg-white">
@@ -78,23 +79,20 @@
 							</tr>
 							<tr>
 								<th scope="row" style="width: 10%" class="table-secondary">작성일</th>
-								<td><fmt:formatDate
-										value="${question.answer.answer_created}" pattern="yyyy-MM-dd" />
+								<td>
+									<fmt:formatDate value="${question.answer.answer_created}" pattern="yyyy-MM-dd" />
 							</tr>
 							<tr>
 								<td colspan="4">${question.answer.answer_content}</td>
 							</tr>
 						</tbody>
 					</table>
-					<a class="btn btn-danger float-right"
-						href="${pageContext.request.contextPath}/admin/answer/delete/${question.answer_id}">삭제</a>
-					<a class="btn btn-warning float-right mr-1"
-						href="${pageContext.request.contextPath}/admin/answer/update">수정</a>
+					<a class="btn btn-danger float-right" href="${pageContext.request.contextPath}/admin/answer/delete/${question.answer_id}">삭제</a>
+					<a class="btn btn-warning float-right mr-1" href="${pageContext.request.contextPath}/admin/answer/update">수정</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<a class="btn btn-primary m-5 ml-auto"
-			href="${pageContext.request.contextPath}/admin/question">목록</a>
+		<a class="btn btn-primary m-5 ml-auto" href="${pageContext.request.contextPath}/admin/question">목록</a>
 	</div>
 </body>
 </html>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -24,8 +23,9 @@
 						</tr>
 						<tr>
 							<th scope="row" class="table-secondary">작성일</th>
-							<td style="width: 10%"><fmt:formatDate
-									value="${question.question_created}" pattern="yyyy-MM-dd" /></td>
+							<td style="width: 10%">
+								<fmt:formatDate value="${question.question_created}" pattern="yyyy-MM-dd" />
+							</td>
 							<th style="width: 10%" class="table-secondary">주문</th>
 							<td></td>
 						</tr>
@@ -62,9 +62,8 @@
 								</tr>
 								<tr>
 									<th scope="row" style="width: 10%" class="table-secondary">작성일</th>
-									<td><fmt:formatDate
-											value="${question.answer.answer_created}"
-											pattern="yyyy-MM-dd" />
+									<td>
+										<fmt:formatDate value="${question.answer.answer_created}" pattern="yyyy-MM-dd" />
 								</tr>
 								<tr>
 									<td colspan="4">${question.answer.answer_content}</td>
@@ -74,8 +73,7 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-			<a class="btn btn-primary m-5 float-right"
-				href="${pageContext.request.contextPath}/user/question">목록</a>
+			<a class="btn btn-primary m-5 float-right" href="${pageContext.request.contextPath}/user/question">목록</a>
 		</div>
 	</div>
 </body>

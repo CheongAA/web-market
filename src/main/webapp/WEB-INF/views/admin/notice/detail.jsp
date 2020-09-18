@@ -25,8 +25,9 @@
 				</tr>
 				<tr>
 					<th scope="row" class="table-secondary">작성일</th>
-					<td style="width: 20%"><fmt:formatDate
-							value="${notice.notice_created}" pattern="yyyy-MM-dd" /></td>
+					<td style="width: 20%">
+						<fmt:formatDate value="${notice.notice_created}" pattern="yyyy-MM-dd" />
+					</td>
 					<th style="width: 10%" class="table-secondary">조회수</th>
 					<td>${notice.notice_view}</td>
 				</tr>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -18,19 +17,15 @@
 			<table class="table table-bordered">
 				<tbody>
 					<tr>
-						<th scope="row" style="width: 10%" class="table-secondary">제목
-							*</th>
-						<td><c:choose>
+						<th scope="row" style="width: 10%" class="table-secondary">제목 *</th>
+						<td>
+							<c:choose>
 								<c:when test="${questionCategories != null}">
-									<select class="mb-2" name="question_category_id"
-										class="form-control">
-										<c:forEach var="questionCategory"
-											items="${questionCategories}">
+									<select class="mb-2" name="question_category_id" class="form-control">
+										<c:forEach var="questionCategory" items="${questionCategories}">
 											<c:choose>
-												<c:when
-													test="${questionCategory.question_category_title eq answer.questionCategory.question_category_title}">
-													<option value="${questionCategory.question_category_id}"
-														selected>${questionCategory.question_category_title}</option>
+												<c:when test="${questionCategory.question_category_title eq answer.questionCategory.question_category_title}">
+													<option value="${questionCategory.question_category_id}" selected>${questionCategory.question_category_title}</option>
 												</c:when>
 												<c:otherwise>
 													<option value="${questionCategory.question_category_id}">${questionCategory.question_category_title}</option>
@@ -38,23 +33,20 @@
 											</c:choose>
 										</c:forEach>
 									</select>
-									<input type="text" name="answer_title"
-										class="form-control col-sm-5" value="${answer.answer_title}"
-										required>
+									<input type="text" name="answer_title" class="form-control col-sm-5" value="${answer.answer_title}" required>
 								</c:when>
 								<c:otherwise>
-									<input type="hidden" name="question_category_id"
-										value="${answer.question_category_id}">
-									<input type="text" name="answer_title"
-										class="form-control col-sm-5" value="${answer.answer_title}"
-										readonly required>
+									<input type="hidden" name="question_category_id" value="${answer.question_category_id}">
+									<input type="text" name="answer_title" class="form-control col-sm-5" value="${answer.answer_title}" readonly required>
 								</c:otherwise>
-							</c:choose></td>
+							</c:choose>
+						</td>
 					</tr>
 					<tr>
 						<th scope="row" class="table-secondary">내용 *</th>
-						<td colspan="3" rowspan="10"><textarea class="form-control"
-								rows="20" cols="100" name="answer_content" required>${answer.answer_content }</textarea></td>
+						<td colspan="3" rowspan="10">
+							<textarea class="form-control" rows="20" cols="100" name="answer_content" required>${answer.answer_content }</textarea>
+						</td>
 					</tr>
 				</tbody>
 			</table>

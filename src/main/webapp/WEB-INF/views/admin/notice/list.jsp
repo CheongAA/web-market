@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -26,11 +25,14 @@
 				<tr>
 					<c:forEach var="notice" items="${notices}" varStatus="status">
 						<tr class="rows" id="${notice.notice_id}">
-							<td><c:out value="${status.count} " /></td>
+							<td>
+								<c:out value="${status.count} " />
+							</td>
 							<td>${notice.notice_title}</td>
 							<td>${notice.notice_writer}</td>
-							<td><fmt:formatDate value="${notice.notice_created}"
-									pattern="yyyy-MM-dd" /></td>
+							<td>
+								<fmt:formatDate value="${notice.notice_created}" pattern="yyyy-MM-dd" />
+							</td>
 							<td>${notice.notice_view}</td>
 						</tr>
 					</c:forEach>

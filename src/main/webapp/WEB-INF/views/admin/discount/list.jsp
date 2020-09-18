@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -31,37 +30,40 @@
 						<td>${status.count}</td>
 						<td>${discount.discount_name}</td>
 						<td>${discount.discount_rate}%</td>
-						<td><c:set var="start">
-								<fmt:formatDate pattern="yyyy/MM/dd"
-									value="${discount.discount_start}" />
+						<td>
+							<c:set var="start">
+								<fmt:formatDate pattern="yyyy/MM/dd" value="${discount.discount_start}" />
 							</c:set>${start }</td>
-						<td><c:set var="end">
-								<fmt:formatDate pattern="yyyy/MM/dd"
-									value="${discount.discount_end}" />
+						<td>
+							<c:set var="end">
+								<fmt:formatDate pattern="yyyy/MM/dd" value="${discount.discount_end}" />
 							</c:set>${end }</td>
 						<c:set var="today">
-							<fmt:formatDate value="<%=new java.util.Date()%>"
-								pattern="yyyy/MM/dd" />
+							<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy/MM/dd" />
 						</c:set>
-						<td><c:choose>
+						<td>
+							<c:choose>
 								<c:when test="${discount.discount_state !=0}">
 									<h5 class="text-primary">O</h5>
 								</c:when>
 								<c:otherwise>
 									<h5 class="text-danger">X</h5>
 								</c:otherwise>
-							</c:choose></td>
-						<td><c:choose>
+							</c:choose>
+						</td>
+						<td>
+							<c:choose>
 								<c:when test="${discount.discount_apply !=0}">
 									<h5 class="text-primary">O</h5>
 								</c:when>
 								<c:otherwise>
 									<h5 class="text-danger">X</h5>
 								</c:otherwise>
-							</c:choose></td>
-						<td><a class="btn btn-sm btn-outline-success"
-							href="${pageContext.request.contextPath}/admin/discountApply/${discount.discount_id}">
-								변경</a></td>
+							</c:choose>
+						</td>
+						<td>
+							<a class="btn btn-sm btn-outline-success" href="${pageContext.request.contextPath}/admin/discountApply/${discount.discount_id}"> 변경</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

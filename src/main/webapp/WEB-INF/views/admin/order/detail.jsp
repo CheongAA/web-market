@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -33,11 +32,12 @@
 							<c:forEach var="orderDetail" items="${order.orderDetail}">
 								<tr>
 									<td>${orderDetail.product.product_id}</td>
-									<td><a
-										href="${pageContext.request.contextPath}/admin/product/${orderDetail.product.product_id}"
-										class="text-dark">${orderDetail.product.product_name}</a></td>
-									<td><fmt:formatNumber pattern="###,###,###"
-											value="${orderDetail.product_price}" /></td>
+									<td>
+										<a href="${pageContext.request.contextPath}/admin/product/${orderDetail.product.product_id}" class="text-dark">${orderDetail.product.product_name}</a>
+									</td>
+									<td>
+										<fmt:formatNumber pattern="###,###,###" value="${orderDetail.product_price}" />
+									</td>
 									<td>${orderDetail.product_count}</td>
 								</tr>
 							</c:forEach>
@@ -94,32 +94,36 @@
 					<tbody>
 						<tr>
 							<th scope="col">등록된 운송장</th>
-							<td scope="col"><c:choose>
+							<td scope="col">
+								<c:choose>
 									<c:when test="${order.order_tracking_number == null}">
 									등록된 운송장 번호가 없습니다.
 									</c:when>
 									<c:otherwise>
 										${order.order_tracking_number}
 									</c:otherwise>
-								</c:choose></td>
+								</c:choose>
+							</td>
 
 							<th scope="col">주문상태</th>
 							<td scope="col">${order.orderState.order_state_title }</td>
 						</tr>
 						<tr>
 							<th scope="col">운송장번호</th>
-							<td scope="col"><input id="tracking" type="text"
-								placeholder="운송장 번호" />
-								<button class="btn btn-outline-primary btn-sm" id="tracking_btn">등록</button></td>
+							<td scope="col">
+								<input id="tracking" type="text" placeholder="운송장 번호" />
+								<button class="btn btn-outline-primary btn-sm" id="tracking_btn">등록</button>
+							</td>
 
 							<th scope="col">주문상태변경</th>
-							<td scope="col"><select id="orderState">
+							<td scope="col">
+								<select id="orderState">
 									<c:forEach var="orderState" items="${orderStates }">
 										<option value="${orderState.order_state_id }">${orderState.order_state_title }</option>
 									</c:forEach>
-							</select>
-								<button class="btn btn-outline-primary btn-sm"
-									id="updateOrder_btn">등록</button></td>
+								</select>
+								<button class="btn btn-outline-primary btn-sm" id="updateOrder_btn">등록</button>
+							</td>
 						</tr>
 						<tr>
 
@@ -127,24 +131,21 @@
 					</tbody>
 				</table>
 			</div>
-			<a class="btn btn-primary mx-1"
-				href="${pageContext.request.contextPath}/admin/order">주문목록</a>
+			<a class="btn btn-primary mx-1" href="${pageContext.request.contextPath}/admin/order">주문목록</a>
 		</div>
 	</div>
 	<script type="text/javascript">
-	
-	
-		$("#tracking_btn").click(function(){
+		$("#tracking_btn").click(function() {
 			var orderId = $("#orderId").text();
 			var trackingNum = $("#tracking").val();
-			
+
 			$.ajax({
 				url : "/admin/order/updateTracking",
 				type : "get",
 				data : {
 					orderId : orderId,
-					orderTrackingNumber:trackingNum
-					
+					orderTrackingNumber : trackingNum
+
 				},
 				success : function(data) {
 					alert("운송장 번호가 등록되었습니다.");
@@ -152,18 +153,18 @@
 				}
 			});
 		});
-		
-		$("#updateOrder_btn").click(function(){
+
+		$("#updateOrder_btn").click(function() {
 			var orderId = $("#orderId").text();
 			var orderStateId = $("#orderState option:selected").val();
-			
+
 			$.ajax({
 				url : "/admin/order/updateState",
 				type : "get",
 				data : {
 					orderId : orderId,
-					orderStateId:orderStateId
-					
+					orderStateId : orderStateId
+
 				},
 				success : function(data) {
 					alert("주문 상태가 변경되었습니다.");

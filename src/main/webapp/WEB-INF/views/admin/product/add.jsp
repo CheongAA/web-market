@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -13,83 +12,89 @@
 	<div class="row mt-5">
 		<h3 class="col-sm-12 border-bottom p-5">상품추가</h3>
 		<div class="col-sm-12 p-5">
-			<form action="${pageContext.request.contextPath}/admin/product/add"
-				method="post" enctype="multipart/form-data">
+			<form action="${pageContext.request.contextPath}/admin/product/add" method="post" enctype="multipart/form-data">
 				<div class="col-12 border mb-5">
 					<table class="table">
 						<tbody>
 							<tr>
 								<th scope="row" style="width: 20%">대분류</th>
-								<td><select class="form-control" id="category1"
-									onchange="changeCategory1(this.value)">
-								</select></td>
+								<td>
+									<select class="form-control" id="category1" onchange="changeCategory1(this.value)">
+									</select>
+								</td>
 
 							</tr>
 							<tr>
 								<th scope="row">중분류</th>
-								<td><select class="form-control" id="category2"
-									name="category_code">
-								</select></td>
+								<td>
+									<select class="form-control" id="category2" name="category_code">
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">브랜드명</th>
-								<td class="form-inline"><select class="form-control"
-									id="exampleFormControlSelect1" name="brand_id">
+								<td class="form-inline">
+									<select class="form-control" id="exampleFormControlSelect1" name="brand_id">
 										<c:forEach var="brand" items="${brands}">
-											<option value="${brand.brand_id}"><c:out
-													value="${brand.brand_name}" /></option>
+											<option value="${brand.brand_id}"><c:out value="${brand.brand_name}" /></option>
 										</c:forEach>
-								</select></td>
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">상품명</th>
-								<td class="form-inline"><input type="text"
-									class="form-control" name="product_name" placeholder=""
-									required="required"></td>
+								<td class="form-inline">
+									<input type="text" class="form-control" name="product_name" placeholder="" required="required">
+								</td>
 							</tr>
 
 							<tr>
 								<th scope="row">상품대표이미지(700px * 800px)</th>
-								<td><input type="file" class="form-control-file"
-									id="product_img" name="product_img" accept="image/*">
+								<td>
+									<input type="file" class="form-control-file" id="product_img" name="product_img" accept="image/*">
 									<div class="mt-3">
 										<img src="" id="select_product_img">
-									</div></td>
+									</div>
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">상품설명이미지(800px * 2000px)</th>
-								<td><input type="file" class="form-control-file"
-									id="product_descImage" name="product_descImg" accept="image/*">
+								<td>
+									<input type="file" class="form-control-file" id="product_descImage" name="product_descImg" accept="image/*">
 									<div class="mt-3">
 										<img src="" id="select_product_descImg">
-									</div></td>
+									</div>
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">가격</th>
-								<td><input type="text" class="form-control"
-									name="product_price" placeholder="" required="required"></td>
+								<td>
+									<input type="text" class="form-control" name="product_price" placeholder="" required="required">
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">재고</th>
-								<td><input type="text" class="form-control"
-									name="product_quantity" placeholder="" required="required">
+								<td>
+									<input type="text" class="form-control" name="product_quantity" placeholder="" required="required">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">재료</th>
-								<td><input type="text" class="form-control"
-									name="product_material" placeholder="" required="required">
+								<td>
+									<input type="text" class="form-control" name="product_material" placeholder="" required="required">
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">용량</th>
-								<td><input type="text" class="form-control"
-									name="product_volume" placeholder="" required="required"></td>
+								<td>
+									<input type="text" class="form-control" name="product_volume" placeholder="" required="required">
+								</td>
 							</tr>
 							<tr>
 								<th scope="row">간단설명</th>
-								<td><textarea class="form-control" name="product_desc"
-										rows="3" required="required"></textarea></td>
+								<td>
+									<textarea class="form-control" name="product_desc" rows="3" required="required"></textarea>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -124,19 +129,19 @@
 											"png", "bmp" ]) == -1) {
 										alert("gif, jpg, jpeg, png, bmp 파일만 업로드 해주세요.");
 										$("#product_img").val("");
-										$("#select_product_img").css(
-												"display", "none");
+										$("#select_product_img").css("display",
+												"none");
 									} else if (fileSize > maxSize) {
 										alert("파일용량을 초과하였습니다.");
 										$("#product_img").val("");
-										$("#select_product_img").css(
-												"display", "none");
+										$("#select_product_img").css("display",
+												"none");
 									} else if (img.width != 700
 											|| img.height != 800) {
 										alert("이미지 가로 700px, 세로 800px로 맞춰서 올려주세요.");
 										$("#product_img").val("");
-										$("#select_product_img").css(
-												"display", "none");
+										$("#select_product_img").css("display",
+												"none");
 									} else {
 										$("#select_product_img").css("display",
 												"block");
@@ -197,7 +202,7 @@
 								reader.readAsDataURL(this.files[0]);
 							}
 						});
-		
+
 		var jsonData = JSON.parse('${categories}');
 		var cate1Arr = new Array();
 		var cate1Obj = new Object();

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -21,16 +20,14 @@
 								<input type="hidden" name="user_id" value="${user.user_id}" />
 								<div class="form-row">
 									<div class="col form-group">
-										<label>새비밀번호 </label> <input type="password"
-											name="user_password" id="user_password" class="form-control"
-											required="required"> <small
-											class="form-text text-danger" id="validation_password"></small>
+										<label>새비밀번호 </label>
+										<input type="password" name="user_password" id="user_password" class="form-control" required="required">
+										<small class="form-text text-danger" id="validation_password"></small>
 									</div>
 									<div class="col form-group">
-										<label>새비밀번호 확인</label> <input type="password"
-											 id="user_password2"
-											class="form-control" required="required"> <small
-											class="form-text text-danger" id="validation_password2"></small>
+										<label>새비밀번호 확인</label>
+										<input type="password" id="user_password2" class="form-control" required="required">
+										<small class="form-text text-danger" id="validation_password2"></small>
 									</div>
 								</div>
 								<div class="form-group my-4">
@@ -51,7 +48,7 @@
 
 		// 정규식
 		var pwdE = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-		
+
 		// 플래그
 		var pwdFlag = false;
 

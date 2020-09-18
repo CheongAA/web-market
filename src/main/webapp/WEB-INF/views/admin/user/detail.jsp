@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -28,8 +27,9 @@
 					</tr>
 					<tr>
 						<th style="width: 40%">가입일</th>
-						<td><fmt:formatDate value="${user.user_created}"
-								pattern="yyyy-MM-dd" /></td>
+						<td>
+							<fmt:formatDate value="${user.user_created}" pattern="yyyy-MM-dd" />
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -58,8 +58,7 @@
 		</div>
 	</div>
 	<div class="col-sm-12">
-		<a href="${pageContext.request.contextPath}/admin/user"
-			class="btn btn-dark float-right mx-5">목록</a>
+		<a href="${pageContext.request.contextPath}/admin/user" class="btn btn-dark float-right mx-5">목록</a>
 	</div>
 </body>
 </html>

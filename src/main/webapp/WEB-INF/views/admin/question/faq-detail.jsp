@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -25,21 +24,18 @@
 					</tr>
 					<tr>
 						<th scope="row" style="width: 10%" class="table-secondary">작성일</th>
-						<td><fmt:formatDate value="${answer.answer_created}"
-								pattern="yyyy-MM-dd" />
+						<td>
+							<fmt:formatDate value="${answer.answer_created}" pattern="yyyy-MM-dd" />
 					</tr>
 					<tr>
 						<td colspan="4">${answer.answer_content}</td>
 					</tr>
 				</tbody>
 			</table>
-			<a class="btn btn-danger float-right"
-				href="${pageContext.request.contextPath}/admin/answer/delete/${answer.answer_id}">삭제</a>
-			<a class="btn btn-warning float-right mr-1"
-				href="${pageContext.request.contextPath}/admin/answer/update/${answer.answer_id}">수정</a>
+			<a class="btn btn-danger float-right" href="${pageContext.request.contextPath}/admin/answer/delete/${answer.answer_id}">삭제</a>
+			<a class="btn btn-warning float-right mr-1" href="${pageContext.request.contextPath}/admin/answer/update/${answer.answer_id}">수정</a>
 		</div>
-		<a class="btn btn-primary m-5 ml-auto"
-			href="${pageContext.request.contextPath}/admin/faq">목록</a>
+		<a class="btn btn-primary m-5 ml-auto" href="${pageContext.request.contextPath}/admin/faq">목록</a>
 	</div>
 </body>
 </html>

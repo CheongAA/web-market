@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -13,8 +12,7 @@
 			<div class="col-sm-12">
 				<form class="form-inline m-3" action="/brand/search" method="get">
 					<div class="form-group mx-auto">
-						<input class="form-control" type="text" placeholder="브랜드 검색"
-							name="term" aria-label="Search" value="${term}" />
+						<input class="form-control" type="text" placeholder="브랜드 검색" name="term" aria-label="Search" value="${term}" />
 						<button class="btn" type="submit">
 							<i class="fa fa-search" aria-hidden="true"></i>
 						</button>
@@ -22,32 +20,52 @@
 				</form>
 			</div>
 			<div class="col-sm-12 text-dark mb-2 brand-box">
-				<a class="col" href="${pageContext.request.contextPath}/brand#all">ALL</a> <a class="col" href="${pageContext.request.contextPath}/brand#ga">ㄱ</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#na">ㄴ</a> <a class="col" href="${pageContext.request.contextPath}/brand#da">ㄷ</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#ra">ㄹ</a> <a class="col" href="${pageContext.request.contextPath}/brand#ma">ㅁ</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#ba">ㅂ</a> <a class="col" href="${pageContext.request.contextPath}/brand#sa">ㅅ</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#a">ㅇ</a> <a class="col" href="${pageContext.request.contextPath}/brand#ja">ㅈ</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#cha">ㅊ</a> <a class="col" href="${pageContext.request.contextPath}/brand#ka">ㅋ</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#ta">ㅌ</a> <a class="col" href="${pageContext.request.contextPath}/brand#fa">ㅍ</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#ha">ㅎ</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#all">ALL</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#ga">ㄱ</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#na">ㄴ</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#da">ㄷ</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#ra">ㄹ</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#ma">ㅁ</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#ba">ㅂ</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#sa">ㅅ</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#a">ㅇ</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#ja">ㅈ</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#cha">ㅊ</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#ka">ㅋ</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#ta">ㅌ</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#fa">ㅍ</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#ha">ㅎ</a>
 			</div>
 			<div class="col-sm-12 mb-2 brand-box">
-				<a class="col" href="${pageContext.request.contextPath}/brand#a">A</a> <a class="col" href="${pageContext.request.contextPath}/brand#b">B</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#c">C</a> <a class="col" href="${pageContext.request.contextPath}/brand#d">D</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#e">E</a> <a class="col" href="${pageContext.request.contextPath}/brand#f">F</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#g">G</a> <a class="col" href="${pageContext.request.contextPath}/brand#h">H</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#i">I</a> <a class="col" href="${pageContext.request.contextPath}/brand#j">J</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#k">K</a> <a class="col" href="${pageContext.request.contextPath}/brand#l">L</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#m">M</a> <a class="col" href="${pageContext.request.contextPath}/brand#n">N</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#a">A</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#b">B</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#c">C</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#d">D</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#e">E</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#f">F</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#g">G</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#h">H</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#i">I</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#j">J</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#k">K</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#l">L</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#m">M</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#n">N</a>
 			</div>
 			<div class="col-sm-12 mb-2 brand-box">
-				<a class="col" href="${pageContext.request.contextPath}/brand#o">O</a> <a class="col" href="${pageContext.request.contextPath}/brand#p">P</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#q">Q</a> <a class="col" href="${pageContext.request.contextPath}/brand#r">R</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#s">S</a> <a class="col" href="${pageContext.request.contextPath}/brand#t">T</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#u">U</a> <a class="col" href="${pageContext.request.contextPath}/brand#v">V</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#w">W</a> <a class="col" href="${pageContext.request.contextPath}/brand#x">X</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#y">Y</a> <a class="col" href="${pageContext.request.contextPath}/brand#z">Z</a> <a
-					class="col" href="${pageContext.request.contextPath}/brand#etc">ETC</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#o">O</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#p">P</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#q">Q</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#r">R</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#s">S</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#t">T</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#u">U</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#v">V</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#w">W</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#x">X</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#y">Y</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#z">Z</a>
+				<a class="col" href="${pageContext.request.contextPath}/brand#etc">ETC</a>
 			</div>
 		</div>
 		<c:choose>
@@ -55,10 +73,7 @@
 				<div class="col-sm-12 mt-5 border">
 					<h1>검색결과</h1>
 					<c:forEach var="brand" items="${brands}">
-						<a
-							href="${pageContext.request.contextPath}/brand/${brand.brand_id}"
-							class="col-sm-2 text-secondary text-decoration-none"
-							id="${brand.brand_id }">${brand.brand_name}</a>
+						<a href="${pageContext.request.contextPath}/brand/${brand.brand_id}" class="col-sm-2 text-secondary text-decoration-none" id="${brand.brand_id }">${brand.brand_name}</a>
 					</c:forEach>
 				</div>
 			</c:when>
@@ -66,10 +81,7 @@
 				<div class="col-sm-12 mt-5 border" id="all">
 					<h1>ALL</h1>
 					<c:forEach var="brand" items="${brands}">
-						<a
-							href="${pageContext.request.contextPath}/brand/${brand.brand_id}"
-							class="col-sm-2 text-secondary text-decoration-none"
-							id="${brand.brand_id }">${brand.brand_name}</a>
+						<a href="${pageContext.request.contextPath}/brand/${brand.brand_id}" class="col-sm-2 text-secondary text-decoration-none" id="${brand.brand_id }">${brand.brand_name}</a>
 					</c:forEach>
 				</div>
 				<div class="col-sm-12 mt-5 border" id="ga">

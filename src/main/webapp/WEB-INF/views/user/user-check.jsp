@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -25,13 +24,11 @@
 				<div class="my-4 p-3 border">
 					<div class="row m-3">
 						<h6 class="col-4">아이디</h6>
-						<input type="text" class="col-5 form-control"
-							name="user_identification" />
+						<input type="text" class="col-5 form-control" name="user_identification" />
 					</div>
 					<div class="row m-3">
 						<h6 class="col-4">비밀번호</h6>
-						<input type="password" class="col-5 form-control"
-							name="user_password" />
+						<input type="password" class="col-5 form-control" name="user_password" />
 					</div>
 				</div>
 				<div class="text-center">

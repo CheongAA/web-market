@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -28,10 +27,12 @@
 					<tr class="rows" id="${order.order_id}">
 						<td class="h5">${status.count }</td>
 						<td>${order.order_id}</td>
-						<td><fmt:formatDate value="${order.order_created}"
-								pattern="yyyy-MM-dd" /></td>
-						<td><fmt:formatNumber value="${order.order_total_price}"
-								pattern="###,###,###" /></td>
+						<td>
+							<fmt:formatDate value="${order.order_created}" pattern="yyyy-MM-dd" />
+						</td>
+						<td>
+							<fmt:formatNumber value="${order.order_total_price}" pattern="###,###,###" />
+						</td>
 						<td>${order.order_payment_method}</td>
 						<td>${order.orderState.order_state_title}</td>
 					</tr>
@@ -40,15 +41,15 @@
 		</table>
 		<nav aria-label="Page navigation example" class="d-block mx-auto">
 			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
+				<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a></li>
 				<li class="page-item"><a class="page-link" href="#">1</a></li>
 				<li class="page-item"><a class="page-link" href="#">2</a></li>
 				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
+				<li class="page-item"><a class="page-link" href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a></li>
 			</ul>
 		</nav>
 	</div>
