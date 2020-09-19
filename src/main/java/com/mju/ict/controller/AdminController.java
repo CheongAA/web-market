@@ -569,5 +569,10 @@ public class AdminController {
 		return "admin/review/detail";
 	}
 
-	
+	// 후기 삭제
+	@RequestMapping(value = "/review/delete/{id}", method = RequestMethod.GET)
+	public String deleteReview(@PathVariable int id, Model model) {
+		reviewService.deleteReviewById(id);
+		return "redirect:/admin/review";
+	}
 }
