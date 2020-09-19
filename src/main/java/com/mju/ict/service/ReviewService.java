@@ -66,12 +66,19 @@ public class ReviewService implements IReviewService{
 	}
 
 	@Override
-	public void updateReview(Review review) {
+	public void updateReview(Review review,MultipartFile file) {
+		if(!file.isEmpty()) {
+			if(review.getReview_img() != null) {
+				s3.fileDelete(review.getReview_img());
+			}
+			review.setReview_img(s3.uploadS3Image("review/img",file));
+		}
 		reviewDAO.updateReviewById(review);
 	}
 
 	@Override
 	public void deleteReviewById(int id) {
+		s3.fileDelete(reviewDAO.selectReviewById(id).getReview_img());
 		reviewDAO.deleteReviewById(id);
 	}
 

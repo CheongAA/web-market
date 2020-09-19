@@ -39,7 +39,9 @@
 									</div>
 								</div>
 								<div class="row border-bottom m-1" id="review_content_${review.review_id}" style="display: none;">
-									<img alt="" src="${review.review_img}" class="col-sm-4">
+									<c:if test="${not empty review.review_img }">
+										<img alt="" src="${review.review_img}" class="col-sm-4">
+									</c:if>
 									<p class="col-sm-4">${review.review_content}</p>
 									<p class="col-sm-2">조회수 : ${review.review_view}</p>
 								</div>

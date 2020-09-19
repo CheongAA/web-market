@@ -19,7 +19,7 @@ public interface IReviewService {
 
 	public abstract void registerReview(Review review, int order_detail_id, MultipartFile file);
 	
-	public abstract void updateReview(Review review);
+	public abstract void updateReview(Review review, MultipartFile file);
 
 	public abstract void deleteReviewById(int id);
 

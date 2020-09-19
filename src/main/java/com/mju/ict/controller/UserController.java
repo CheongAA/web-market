@@ -416,8 +416,8 @@ public class UserController {
 
 	// 후기 수정
 	@RequestMapping(value = "/user/review/update", method = RequestMethod.POST)
-	public String updateUserReview(@ModelAttribute @Valid Review review, BindingResult result, Model model) {
-		reviewService.updateReview(review);
+	public String updateUserReview(@ModelAttribute @Valid Review review,MultipartFile file , BindingResult result, Model model) {
+		reviewService.updateReview(review,file);
 		return "redirect:/user/review";
 	}
 

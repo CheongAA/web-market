@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,7 +155,9 @@
 									</tr>
 									<tr>
 										<td colspan="6" class="p-5 text-left px-auto" style="display: none;" id="review_content_${review.review_id}">
-											<img src="${review.review_img}" class="col-3">
+											<c:if test="${not empty review.review_img }">
+												<img alt="" src="${review.review_img}" class="col-3">
+											</c:if>
 											<span class="col-7">${review.review_content}</span>
 										</td>
 									</tr>
