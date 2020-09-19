@@ -10,7 +10,10 @@
 <body>
 	<jsp:include page="../admin_header.jsp" flush="false" />
 	<div class="row mt-5">
-		<h3 class="w-100">주문조회</h3>
+		<h3 class="w-100 mb-3">주문조회</h3>
+		<select>
+			<option>전체주문</option>
+		</select>
 		<table class="table table-hover mt-3">
 			<thead>
 				<tr>

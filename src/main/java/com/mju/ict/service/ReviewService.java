@@ -6,10 +6,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mju.ict.model.Review;
 import com.mju.ict.repository.IOrderDetailDAO;
 import com.mju.ict.repository.IReviewDAO;
+import com.mju.ict.util.S3Util;
 
 @Service
 public class ReviewService implements IReviewService{
@@ -19,6 +21,9 @@ public class ReviewService implements IReviewService{
 	
 	@Autowired
 	IOrderDetailDAO orderDetailDAO;
+	
+	@Autowired
+	private S3Util s3;
 
 	@Override
 	public List<Review> getAllReviews() {
@@ -44,7 +49,11 @@ public class ReviewService implements IReviewService{
 	
 	
 	@Override
-	public void registerReview(Review review, int order_detail_id) {
+	public void registerReview(Review review, int order_detail_id,MultipartFile file) {
+		if(!file.isEmpty()) {
+			review.setReview_img(s3.uploadS3Image("review/img",file));
+		}
+		
 		reviewDAO.insertReview(review);
 		
 		Map<String,Integer> map = new HashMap<String,Integer>();				   

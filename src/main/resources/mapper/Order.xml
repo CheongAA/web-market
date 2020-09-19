@@ -107,7 +107,7 @@
 		ON
 		tb_order.order_state_id=
 		tb_order_state.order_state_id
-		order by order_created asc
+		order by order_created desc
 	</select>
 
 	<select id="selectOrderByUser" parameterType="Integer"

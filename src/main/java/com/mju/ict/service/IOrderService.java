@@ -27,9 +27,9 @@ public interface IOrderService {
 	
 	public abstract void addOrder(Map<String, Object> param, HttpSession session);
 
-	public abstract void updateOrderTracking(String order_id, String order_tracking_number);
+	public abstract void updateOrderTracking(int order_id, int order_tracking_number);
 
-	public abstract void updateOrderState(String order_id, String order_state_id);
+	public abstract void updateOrderState(int order_id, int order_state_id);
 
 
 

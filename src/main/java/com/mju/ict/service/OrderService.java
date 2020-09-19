@@ -113,8 +113,8 @@ public class OrderService implements IOrderService{
 
 
 	@Override
-	public void updateOrderTracking(String order_id, String order_tracking_number) {
-		Map<String,String> map = new HashMap<String,String>();				   
+	public void updateOrderTracking(int order_id, int order_tracking_number) {
+		Map<String,Integer> map = new HashMap<String,Integer>();				   
 		map.put("order_id", order_id);
 		map.put("order_tracking_number", order_tracking_number);
 		
@@ -123,8 +123,8 @@ public class OrderService implements IOrderService{
 
 
 	@Override
-	public void updateOrderState(String order_id, String order_state_id) {
-		Map<String,String> map = new HashMap<String,String>();				   
+	public void updateOrderState(int order_id, int order_state_id) {
+		Map<String,Integer> map = new HashMap<String,Integer>();				   
 		map.put("order_id", order_id);
 		map.put("order_state_id", order_state_id);
 		

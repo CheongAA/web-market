@@ -446,14 +446,14 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value = "/order/updateTracking", method = RequestMethod.GET)
 	public void updateOrderTracking(HttpServletRequest req, Model model) {
-		orderService.updateOrderTracking(req.getParameter("orderId"), req.getParameter("orderTrackingNumber"));
+		orderService.updateOrderTracking(Integer.parseInt(req.getParameter("orderId")), Integer.parseInt(req.getParameter("orderTrackingNumber")));
 	}
 
 	// 주문 상태 변경
 	@ResponseBody
 	@RequestMapping(value = "/order/updateState", method = RequestMethod.GET)
 	public void updateOrderState(HttpServletRequest req, Model model) {
-		orderService.updateOrderState(req.getParameter("orderId"), req.getParameter("orderStateId"));
+		orderService.updateOrderState(Integer.parseInt(req.getParameter("orderId")), Integer.parseInt(req.getParameter("orderStateId")));
 	}
 
 	/////////////// 문의 및 답변//////////////////

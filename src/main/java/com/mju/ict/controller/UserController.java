@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mju.ict.model.Address;
@@ -157,6 +158,33 @@ public class UserController {
 		return "user/order-detail";
 	}
 
+	// 주문 취소 신청
+	@RequestMapping(value = "/user/order/cancel/{id}", method = RequestMethod.GET)
+	public String updateOrderStateCancel(@PathVariable int id, Model model, HttpSession session) {
+		orderService.updateOrderState(id, 4);
+		return "redirect:/user/order/"+id;
+	}
+
+	// 주문 환불 신청
+	@RequestMapping(value = "/user/order/return/{id}", method = RequestMethod.GET)
+	public String updateOrderStateReturn(@PathVariable int id, Model model, HttpSession session) {
+		orderService.updateOrderState(id, 6);
+		return "redirect:/user/order/"+id;
+	}
+	
+	// 주문 교환 신청
+	@RequestMapping(value = "/user/order/change/{id}", method = RequestMethod.GET)
+	public String updateOrderStateChange(@PathVariable int id, Model model, HttpSession session) {
+		orderService.updateOrderState(id, 8);
+		return "redirect:/user/order/"+id;
+	}
+	
+	// 주문 배송완료 신청
+	@RequestMapping(value = "/user/order/confirm/{id}", method = RequestMethod.GET)
+	public String updateOrderStateConfirm(@PathVariable int id, Model model, HttpSession session) {
+		orderService.updateOrderState(id, 3);
+		return "redirect:/user/order/"+id;
+	}
 	/////////////// 정보수정//////////////////
 
 	// 정보 수정 회원 확인 페이지
@@ -381,8 +409,8 @@ public class UserController {
 	// 후기 등록
 	@RequestMapping(value = "/user/review", method = RequestMethod.POST)
 	public String addUserReview(@ModelAttribute @Valid Review review, BindingResult result,
-			@RequestParam("order_detail_id") int order_detail_id, HttpSession session) {
-		reviewService.registerReview(review, order_detail_id);
+			@RequestParam("order_detail_id") int order_detail_id,@RequestParam("file") MultipartFile file , HttpSession session ) {
+		reviewService.registerReview(review, order_detail_id,file);
 		return "redirect:/user/review";
 	}
 

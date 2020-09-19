@@ -46,12 +46,12 @@ public class OrderDAO implements IOrderDAO{
 	}
 
 	@Override
-	public void updateOrderTracking(Map<String, String> map) {
+	public void updateOrderTracking(Map<String, Integer> map) {
 		sqlSession.update("updateOrderTracking", map);
 	}
 
 	@Override
-	public void updateOrderState(Map<String, String> map) {
+	public void updateOrderState(Map<String, Integer> map) {
 		sqlSession.update("updateOrderState", map);
 	}
 

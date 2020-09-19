@@ -20,9 +20,9 @@ public interface IOrderDAO {
 
 	public abstract void insertOrder(Order order);
 
-	public abstract void updateOrderTracking(Map<String, String> map);
+	public abstract void updateOrderTracking(Map<String, Integer> map);
 
-	public abstract void updateOrderState(Map<String, String> map);
+	public abstract void updateOrderState(Map<String, Integer> map);
 
 
 }

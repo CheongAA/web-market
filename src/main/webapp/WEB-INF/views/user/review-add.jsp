@@ -58,7 +58,10 @@
 								<tr>
 									<th scope="row">사진</th>
 									<td class="form-inline">
-										<input type="file" class="form-control col-sm-5 mr-3" name="review_img">
+										<input type="file" class="form-control-file" id="review_img" name="file" accept="image/*">
+										<div class="mt-3">
+											<img class="w-25" id="select_review_img">
+										</div>
 									</td>
 								</tr>
 								<tr>
@@ -77,5 +80,49 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$("#review_img")
+				.on(
+						'change',
+						function() {
+							if (this.files && this.files[0]) {
+
+								var ext = $(this).val().split(".").pop()
+										.toLowerCase();
+
+								var fileSize = this.files[0].size;
+								var maxSize = 1024 * 1024;
+
+								var _URL = window.URL || window.webkitURL;
+								var img = new Image();
+								img.src = _URL.createObjectURL(this.files[0]);
+
+								var reader = new FileReader;
+								reader.onload = function(data) {
+									//확장자 체크
+									if ($.inArray(ext, [ "gif", "jpg", "jpeg",
+											"png", "bmp" ]) == -1) {
+										alert("gif, jpg, jpeg, png, bmp 파일만 업로드 해주세요.");
+										hideImg();
+									} else if (fileSize > maxSize) {
+										alert("파일용량을 초과하였습니다.");
+										hideImg();
+									} else {
+										$("#select_review_img").css(
+												"display", "block");
+										$("#select_review_img").attr("src",
+												data.target.result).width(100);
+									}
+
+								}
+								reader.readAsDataURL(this.files[0]);
+							}
+						});
+
+		function hideImg() {
+			$("#review_img").val("");
+			$("#select_review_img").css("display", "none");
+		}
+	</script>
 </body>
 </html>

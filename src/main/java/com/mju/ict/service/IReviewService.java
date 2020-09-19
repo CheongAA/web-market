@@ -2,6 +2,8 @@ package com.mju.ict.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.mju.ict.model.Review;
 
 public interface IReviewService {
@@ -15,7 +17,7 @@ public interface IReviewService {
 	public abstract Review getReviewById(int id);
 
 
-	public abstract void registerReview(Review review, int order_detail_id);
+	public abstract void registerReview(Review review, int order_detail_id, MultipartFile file);
 	
 	public abstract void updateReview(Review review);
 

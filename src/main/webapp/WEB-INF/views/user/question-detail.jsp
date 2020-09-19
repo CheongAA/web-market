@@ -11,6 +11,11 @@
 	<div class="row">
 		<jsp:include page="mypage_header.jsp" flush="false" />
 		<div class="col py-5 ml-5">
+			<h3 class="mb-3">문의 상세</h3>
+			<ul>
+				<li><small> 거래 협의의 증거로 사용될 수 있는 상품 문의글이나 답변글을 삭제할 수 있도록 하면 매매 거래후 판매자와 구매자간에 분쟁이 발생할 수 있습니다.</small></li>
+				<li><small> 이러한 분쟁을 미연에 방지할 수 있도록 하기 위하여 상품 문의글 및 답변글의 <span class="text-danger">수정이나 삭제가 불가능</span> 하도록 한 것이니 불편하시더라도 이해를 부탁드립니다.</small></li>
+			</ul>
 			<div class="bg-light p-5">
 				<h3>Q 문의</h3>
 				<table class="table table-bordered bg-white">

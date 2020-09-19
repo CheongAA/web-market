@@ -14,7 +14,8 @@
 		<p class="ml-auto">
 			주문일:
 			<fmt:formatDate value="${order.order_created}" pattern="yyyy/M/dd" />
-			- 주문번호: <span id="orderId">${order.order_id}</span>
+			- 주문번호:
+			<span id="orderId">${order.order_id}</span>
 		</p>
 		<div class="row justify-content-center">
 			<div class="row m-1 p-1 border-top border-bottom w-100">
@@ -113,6 +114,7 @@
 							<td scope="col">
 								<input id="tracking" type="text" placeholder="운송장 번호" />
 								<button class="btn btn-outline-primary btn-sm" id="tracking_btn">등록</button>
+								<small class="text-danger d-block">운송장 등록 후 꼭 주문상태를 변경해주세요!</small>
 							</td>
 
 							<th scope="col">주문상태변경</th>
@@ -137,7 +139,7 @@
 	<script type="text/javascript">
 		$("#tracking_btn").click(function() {
 			var orderId = $("#orderId").text();
-			var trackingNum = $("#tracking").val();
+			var trackingNum = parseInt($("#tracking").val());
 
 			$.ajax({
 				url : "/admin/order/updateTracking",
