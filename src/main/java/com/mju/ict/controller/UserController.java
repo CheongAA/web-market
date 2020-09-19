@@ -179,10 +179,11 @@ public class UserController {
 		return "redirect:/user/order/"+id;
 	}
 	
-	// 주문 배송완료 신청
+	// 주문 확정 (배송완료) 신청
 	@RequestMapping(value = "/user/order/confirm/{id}", method = RequestMethod.GET)
 	public String updateOrderStateConfirm(@PathVariable int id, Model model, HttpSession session) {
 		orderService.updateOrderState(id, 3);
+		
 		return "redirect:/user/order/"+id;
 	}
 	/////////////// 정보수정//////////////////

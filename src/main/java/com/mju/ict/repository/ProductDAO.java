@@ -92,6 +92,11 @@ public class ProductDAO implements IProductDAO{
 		sqlSession.delete("deleteProductById", id);
 	}
 
+	@Override
+	public void addSalesQuantity(Map<String, Integer> map) {
+		sqlSession.update("addSalesQuantity",map);
+	}
+
 
 
 

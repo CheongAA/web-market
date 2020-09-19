@@ -27,6 +27,7 @@
 								<th scope="col">상품명</th>
 								<th scope="col">상품가격</th>
 								<th scope="col">주문수량</th>
+								<th scope="col">재고</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -40,6 +41,7 @@
 										<fmt:formatNumber pattern="###,###,###" value="${orderDetail.product_price}" />
 									</td>
 									<td>${orderDetail.product_count}</td>
+									<td>${orderDetail.product.product_quantity}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -114,7 +116,7 @@
 							<td scope="col">
 								<input id="tracking" type="text" placeholder="운송장 번호" />
 								<button class="btn btn-outline-primary btn-sm" id="tracking_btn">등록</button>
-								<small class="text-danger d-block">운송장 등록 후 꼭 주문상태를 변경해주세요!</small>
+								<small class="text-danger d-block">운송장 등록 전 상품의 재고를 꼭 확인해주세요!</small>
 							</td>
 
 							<th scope="col">주문상태변경</th>

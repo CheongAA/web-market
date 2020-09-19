@@ -31,10 +31,4 @@ public interface IOrderService {
 
 	public abstract void updateOrderState(int order_id, int order_state_id);
 
-
-
-
-
-
-
 }

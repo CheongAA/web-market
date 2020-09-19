@@ -42,16 +42,19 @@
 						<span class="d-block text-dark h3 mb-3">[<c:out value="${product.brand.brand_name}" />] <c:out value="${product.product_name}" />
 						</span>
 						<c:choose>
-							<c:when test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
-								<span class="text-muted h5 font-weight-light" id="product_price" style="text-decoration: line-through"><fmt:formatNumber pattern="###,###,###"
-										value="${product.product_price}"
-									/>원</span>
-								<span class="market-color h5" id="discount_price"><i class="fas fa-arrow-right"></i> <c:set var="price"
-										value="${product.product_price-(product.product_price * product.discount.discount_rate)/100}"
-									/> <fmt:formatNumber pattern="###,###,###" value="${price}" />원 </span>
+							<c:when test="${product.product_quantity <= 0 }">
+								<span class="d-block market-color h5">품절</span>
 							</c:when>
 							<c:otherwise>
-								<span class="d-block market-color h5"><fmt:formatNumber pattern="###,###,###" value="${product.product_price}" />원</span>
+								<c:choose>
+									<c:when test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
+										<span class="text-muted h5 font-weight-light" id="product_price" style="text-decoration: line-through"><fmt:formatNumber pattern="###,###,###" value="${product.product_price}" />원</span>
+										<span class="market-color h5" id="discount_price"><i class="fas fa-arrow-right"></i> <c:set var="price" value="${product.product_price-(product.product_price * product.discount.discount_rate)/100}" /> <fmt:formatNumber pattern="###,###,###" value="${price}" />원 </span>
+									</c:when>
+									<c:otherwise>
+										<span class="d-block market-color h5"><fmt:formatNumber pattern="###,###,###" value="${product.product_price}" />원</span>
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 						<span class="d-block text-dark font-weight-light mt-2"><c:out value="${product.product_desc}" /></span>

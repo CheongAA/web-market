@@ -70,27 +70,34 @@
 						<h4 id="product_total_price" class="">원</h4>
 					</div>
 					<div class="row justify-content-end">
-						<button type="button" class="col-sm-3 btn btn-outline-dark py-3 mx-2" id="cart_btn" data-toggle="modal" data-target="#cart_modal">장바구니</button>
-						<button type="button" class="col-sm-3 btn btn-dark py-3" id="buy_btn">바로구매</button>
+						<c:choose>
+							<c:when test="${product.product_quantity <= 0}">
+								<span> 품절 </span>
+							</c:when>
+							<c:otherwise>
+								<button type="button" class="col-sm-3 btn btn-outline-dark py-3 mx-2" id="cart_btn" data-toggle="modal" data-target="#cart_modal">장바구니</button>
+								<button type="button" class="col-sm-3 btn btn-dark py-3" id="buy_btn">바로구매</button>
 
-						<!-- Modal -->
-						<div class="modal fade" id="cart_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="staticBackdropLabel">장바구니</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">장바구니가 추가되었습니다.</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">계속 쇼핑하기</button>
-										<a type="button" class="btn btn-primary" href="${pageContext.request.contextPath}/carts">장바구니로 이동</a>
+								<!-- Modal -->
+								<div class="modal fade" id="cart_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="staticBackdropLabel">장바구니</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">장바구니가 추가되었습니다.</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">계속 쇼핑하기</button>
+												<a type="button" class="btn btn-primary" href="${pageContext.request.contextPath}/carts">장바구니로 이동</a>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-						</div>
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div class="row  mt-4">
 						<a class="col btn btn-light text-center py-4" href="${pageContext.request.contextPath}/discount/">

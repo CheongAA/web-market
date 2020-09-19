@@ -16,6 +16,12 @@ public class OrderDetailDAO implements IOrderDetailDAO{
 
 
 	@Override
+	public List<OrderDetail> selectOrderDetailByOrderId(int order_id) {
+		return sqlSession.selectList("selectOrderDetailByOrderId", order_id);
+	}
+
+
+	@Override
 	public void insertOrderDetail(OrderDetail orderDetail) {
 		sqlSession.insert("insertOrderDetail", orderDetail);
 	}
@@ -25,6 +31,10 @@ public class OrderDetailDAO implements IOrderDetailDAO{
 	public void updateReview(Map<String, Integer> map) {
 		sqlSession.update("updateReview", map);
 	}
+
+
+
+
 
 
 }

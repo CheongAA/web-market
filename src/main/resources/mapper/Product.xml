@@ -292,7 +292,8 @@
 	</update>
 
 	<update id="updateProductDiscountNull" parameterType="Integer">
-		UPDATE tb_product
+		UPDATE
+		tb_product
 		SET
 		discount_id = NULL
 		WHERE
@@ -308,4 +309,13 @@
 		product_id = #{id}
 	</update>
 
+	<update id="addSalesQuantity" parameterType="hashMap">
+		UPDATE tb_product
+		SET
+		product_sales_quantity = product_sales_quantity + #{product_count},
+		product_quantity = product_quantity - #{product_count}
+		WHERE
+		product_id =
+		#{product_id}
+	</update>
 </mapper>
