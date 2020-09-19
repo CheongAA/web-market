@@ -13,7 +13,7 @@
 		<div class="col py-5 ml-5">
 			<h3>구매후기 쓰기</h3>
 			<div class="row justify-content-center mt-5">
-				<form action="/user/review" method="post">
+				<form action="/user/review" method="post" enctype="multipart/form-data">
 					<div class="col-12 border mb-5">
 						<div class="col-sm-12 p-3 m-2">
 							<div class="row m-3">

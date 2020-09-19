@@ -25,22 +25,23 @@
 						<div class="col-sm-12 p-2 my-2">
 							<c:forEach var="review" items="${reviews}" varStatus="status">
 								<div class="row border-bottom reviews" id="${review.review_id }">
-									<p class="col-sm-1 mt-3 ">${status.count}</p>
-									<p class="col-sm-2 mt-3 ">
+									<p class="col-1 mt-3 ">${status.count}</p>
+									<p class="col-3 mt-3 ">
 										<a href="${pageContext.request.contextPath}/product/${review.product_id}" class="text-dark align-middle">${review.product.product_name}</a>
 									</p>
-									<p class="col-sm-5 mt-3">${review.review_title}[${review.review_star}점]
+									<p class="col-2 mt-3">${review.review_title}[${review.review_star}점]</p>
+									<p class="col-2 mt-3">
 										<fmt:formatDate value="${review.review_created}" pattern="yyyy-MM-dd" />
 									</p>
-									<div class="col-sm-2 text-center my-auto p-2">
+									<div class="col-2 text-center my-auto p-2">
 										<a class="btn btn-sm btn-outline-warning" href="${pageContext.request.contextPath}/user/review/update/${review.review_id}">수정</a>
 										<a class="btn btn-sm btn-outline-danger" href="${pageContext.request.contextPath}/user/review/delete/${review.review_id}">삭제</a>
 									</div>
 								</div>
 								<div class="row border-bottom m-1" id="review_content_${review.review_id}" style="display: none;">
-									<img alt="" src="${review.review_img}">
-									<p>${review.review_content}</p>
-									<p>${review.review_view}</p>
+									<img alt="" src="${review.review_img}" class="col-sm-4">
+									<p class="col-sm-4">${review.review_content}</p>
+									<p class="col-sm-2">조회수 : ${review.review_view}</p>
 								</div>
 							</c:forEach>
 						</div>
@@ -63,9 +64,9 @@
 		$(".reviews").click(function() {
 			var td = $("#review_content_" + $(this).attr("id"));
 
-			if (td.css("display") != "block") {
+			if (td.css("display") != "flex") {
 				$("[id^=content_]").css("display", "none");
-				td.css("display", "block");
+				td.css("display", "flex");
 			} else {
 				td.css("display", "none");
 			}

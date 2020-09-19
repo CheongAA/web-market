@@ -409,7 +409,7 @@ public class UserController {
 	// 후기 등록
 	@RequestMapping(value = "/user/review", method = RequestMethod.POST)
 	public String addUserReview(@ModelAttribute @Valid Review review, BindingResult result,
-			@RequestParam("order_detail_id") int order_detail_id,@RequestParam("file") MultipartFile file , HttpSession session ) {
+			@RequestParam("order_detail_id") int order_detail_id,MultipartFile file , HttpSession session ) {
 		reviewService.registerReview(review, order_detail_id,file);
 		return "redirect:/user/review";
 	}

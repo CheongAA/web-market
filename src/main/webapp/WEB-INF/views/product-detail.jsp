@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,8 +101,8 @@
 			</div>
 			<div class="row mt-5">
 				<a class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-4" href="#desc">상품설명</a>
-				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#review">고객후기</a>
-				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#qna">상품문의</a>
+				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#review">고객후기(${fn:length(reviews)})</a>
+				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#qna">상품문의(${fn:length(questions)})</a>
 			</div>
 			<div class="row pt-5" id="desc">
 				<div class="col-sm-12 text-center">
@@ -110,8 +111,8 @@
 			</div>
 			<div class="row mt-5">
 				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#desc">상품설명</a>
-				<a class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-4" href="#review">고객후기</a>
-				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#qna">상품문의</a>
+				<a class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-4" href="#review">고객후기(${fn:length(reviews)})</a>
+				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#qna">상품문의(${fn:length(questions)})</a>
 			</div>
 			<div class="row pt-5" id="review">
 				<div class="m-3">
@@ -125,6 +126,7 @@
 						<tr>
 							<th scope="col">번호</th>
 							<th scope="col" style="width: 40%">제목</th>
+							<th scope="col">평점</th>
 							<th scope="col">작성자</th>
 							<th scope="col">작성일</th>
 							<th scope="col">조회수</th>
@@ -144,6 +146,7 @@
 									<tr class="reviews" id="${review.review_id}">
 										<td>${status.count}</td>
 										<td>${review.review_title}</td>
+										<td>${review.review_star}</td>
 										<td>${review.user.user_name }</td>
 										<td>
 											<fmt:formatDate value="${review.review_created}" pattern="yyyy-MM-dd" />
@@ -151,8 +154,9 @@
 										<td>${review.review_view }</td>
 									</tr>
 									<tr>
-										<td colspan="5" class="p-5 text-left" style="display: none;" id="review_content_${review.review_id}">
-											<span class="ml-2">${review.review_content}</span>
+										<td colspan="6" class="p-5 text-left px-auto" style="display: none;" id="review_content_${review.review_id}">
+											<img src="${review.review_img}" class="col-3">
+											<span class="col-7">${review.review_content}</span>
 										</td>
 									</tr>
 								</c:forEach>
@@ -179,8 +183,8 @@
 			</div>
 			<div class="row mt-5">
 				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#desc">상품설명</a>
-				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#review">고객후기</a>
-				<a class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-4" href="#qna">상품문의</a>
+				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#review">고객후기(${fn:length(reviews)})</a>
+				<a class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-4" href="#qna">상품문의(${fn:length(questions)})</a>
 			</div>
 			<div class="row pt-5" id="qna">
 				<div class="m-3">
