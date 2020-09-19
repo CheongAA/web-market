@@ -25,6 +25,8 @@
 			property="user">
 			<id column="user_id" property="user_id" />
 			<result column="user_name" property="user_name" />
+			<result column="user_identification"
+				property="user_identification" />
 		</association>
 	</resultMap>
 
@@ -38,6 +40,23 @@
 		#{user_id},#{product_id},#{review_title},
 		#{review_star},#{review_content},#{review_img})
 	</insert>
+
+	<select id="selectAllReviews" resultMap="review">
+		SELECT * FROM
+		tb_review
+		LEFT JOIN
+		tb_product
+		ON
+		tb_product.product_id =
+		tb_review.product_id
+		LEFT
+		JOIN
+		tb_user
+		ON
+		tb_user.user_id =
+		tb_review.user_id
+	</select>
+
 	<select id="selectReviewByUser" resultMap="review">
 		SELECT * FROM
 		tb_review
@@ -66,6 +85,16 @@
 		resultMap="review">
 		SELECT * FROM
 		tb_review
+		LEFT JOIN
+		tb_product
+		ON
+		tb_product.product_id =
+		tb_review.product_id
+		LEFT JOIN
+		tb_user
+		ON
+		tb_user.user_id =
+		tb_review.user_id
 		WHERE
 		review_id = #{id}
 	</select>

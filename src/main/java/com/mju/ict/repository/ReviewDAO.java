@@ -15,8 +15,7 @@ public class ReviewDAO implements IReviewDAO{
 
 	@Override
 	public List<Review> selectAllReviews() {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("selectAllReviews");
 	}
 
 	@Override

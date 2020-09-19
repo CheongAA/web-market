@@ -35,6 +35,7 @@ import com.mju.ict.model.OrderState;
 import com.mju.ict.model.Product;
 import com.mju.ict.model.Question;
 import com.mju.ict.model.QuestionCategory;
+import com.mju.ict.model.Review;
 import com.mju.ict.model.User;
 import com.mju.ict.service.IAnswerService;
 import com.mju.ict.service.IBrandService;
@@ -44,15 +45,15 @@ import com.mju.ict.service.INoticeService;
 import com.mju.ict.service.IOrderService;
 import com.mju.ict.service.IProductService;
 import com.mju.ict.service.IQuestionService;
+import com.mju.ict.service.IReviewService;
 import com.mju.ict.service.IUserService;
+import com.mju.ict.service.ReviewService;
 
 import net.sf.json.JSONArray;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
 	IAnswerService answerService;
@@ -70,6 +71,8 @@ public class AdminController {
 	IProductService productService;
 	@Autowired
 	IQuestionService questionService;
+	@Autowired
+	IReviewService reviewService;
 	@Autowired
 	IUserService userService;
 
@@ -424,7 +427,7 @@ public class AdminController {
 	}
 	/////////////// 주문//////////////////
 
-	// 주문 조회 페이지
+	// 주문 목록 페이지
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public String getOrders(Model model) {
 		List<Order> orders = orderService.getAllOrders();
@@ -546,4 +549,25 @@ public class AdminController {
 		answerService.deleteAnswerById(id);
 		return "redirect:/admin/faq";
 	}
+	
+	/////////////// 후기//////////////////
+
+	// 후기 목록 페이지
+	@RequestMapping(value = "/review", method = RequestMethod.GET)
+	public String getReviews(Model model) {
+		List<Review> reviews = reviewService.getAllReviews();
+		model.addAttribute("reviews", reviews);
+		return "admin/review/list";
+	}
+
+	// 후기 상세 페이지
+	@RequestMapping(value = "/review/{id}", method = RequestMethod.GET)
+	public String getReviewDetail(@PathVariable int id, Model model) {
+		Review review = reviewService.getReviewById(id);
+		
+		model.addAttribute("review", review);
+		return "admin/review/detail";
+	}
+
+	
 }

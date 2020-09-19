@@ -27,8 +27,7 @@ public class ReviewService implements IReviewService{
 
 	@Override
 	public List<Review> getAllReviews() {
-		// TODO Auto-generated method stub
-		return null;
+		return reviewDAO.selectAllReviews();
 	}
 
 	@Override
