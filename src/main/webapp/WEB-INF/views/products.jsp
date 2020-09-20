@@ -16,10 +16,10 @@
 					<h3 class="mx-5 mb-3 font-weight-bold text-muted">
 						<i class="fas fa-utensils"></i> ${category.category_name}
 					</h3>
-					<a class="ml-5 mr-3 h5 text-dark " href="/products/${category.category_code }">전체보기</a>
+					<a class="code ml-5 mr-3 h5 text-dark" href="/products/${category.category_code }" id="${category.category_code}">전체보기</a>
 				</c:when>
 				<c:otherwise>
-					<a class="mr-3 h5 text-dark" href="/products/${category.category_code}">${category.category_name}</a>
+					<a class="code mr-3 h5 text-dark" href="/products/${category.category_code}" id="${category.category_code}">${category.category_name}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
@@ -29,6 +29,7 @@
 			<c:if test="${product.on_sale == 1}">
 				<input type="hidden" id="discount_rate" value="${product.discount.discount_rate}" />
 				<input type="hidden" id="product_price" value="${product.product_price}" />
+				<input type="hidden" id="currentCategory" value="${currentCategory}" />
 				<div class="col-sm-4 mb-5">
 					<a href="${pageContext.request.contextPath}/product/${product.product_id}" class="text-decoration-none">
 						<img class="w-100 h-75 mb-3 product-img" alt="" src="${product.product_img}">
@@ -39,7 +40,7 @@
 
 							</div>
 						</c:if>
-						<span class="d-block text-dark h3 mb-3">[<c:out value="${product.brand.brand_name}" />] <c:out value="${product.product_name}" />
+						<span class="d-block text-dark h3 mb-3 text-nowrap">[<c:out value="${product.brand.brand_name}" />] <c:out value="${product.product_name}" />
 						</span>
 						<c:choose>
 							<c:when test="${product.product_quantity <= 0 }">
@@ -63,5 +64,17 @@
 			</c:if>
 		</c:forEach>
 	</div>
+	<script type="text/javascript">
+		var categories = $(".code");
+		
+		for(var i =0;i<categories.length;i++){
+			if($("#currentCategory").val() == categories[i].id ){
+				$("#"+categories[i].id).addClass("market-color");
+			}
+		}
+	
+
+		
+	</script>
 </body>
 </html>

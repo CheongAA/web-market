@@ -75,6 +75,7 @@ public class ProductController {
 		
 		model.addAttribute("products", products);
 		model.addAttribute("categories", categories);
+		model.addAttribute("currentCategory", category);
 		return "/products";
 	}
 	
