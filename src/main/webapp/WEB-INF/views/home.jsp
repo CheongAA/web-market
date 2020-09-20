@@ -72,7 +72,7 @@
 		<div class="col-sm-3 ">
 			<h1 class=" font-weight-light text-center mt-5 pt-5">WHAT'S NEW?</h1>
 		</div>
-		<c:forEach var="product" items="${products}" end="2">
+		<c:forEach var="product" items="${products}" end="6">
 			<c:if test="${product.on_sale == 1}">
 				<div class="col-sm-3">
 					<a href="${pageContext.request.contextPath}/product/${product.product_id}" class="text-decoration-none">

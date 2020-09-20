@@ -57,7 +57,14 @@
 				<button type="submit" class="btn btn-primary btn-block">저장</button>
 			</div>
 		</form>
-		<a href="${pageContext.request.contextPath}/user/address/delete/${address.address_id}" class="btn btn-danger btn-block">삭제</a>
+		<c:choose>
+			<c:when test="${size <= 1 }">
+				<small class="text-danger font-weight-bold">배송지는 1개 이상부터 삭제할 수 있습니다.</small>
+			</c:when>
+			<c:otherwise>
+				<a href="${pageContext.request.contextPath}/user/address/delete/${address.address_id}" class="btn btn-danger btn-block">삭제</a>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<!-- 다음주소 -->
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

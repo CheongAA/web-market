@@ -279,10 +279,13 @@ public class UserController {
 
 	// 배송지 상세 페이지
 	@RequestMapping(value = "/user/address/{id}", method = RequestMethod.GET)
-	public String getAddressDetail(@PathVariable int id, Model model) {
+	public String getAddressDetail(@PathVariable int id, Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		List<Address> addresses = addressService.getAddressByUser(user.getUser_id());
 		Address address = addressService.getAddressById(id);
 
 		model.addAttribute("address", address);
+		model.addAttribute("size", addresses.size());
 		return "user/address/detail";
 	}
 

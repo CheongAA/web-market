@@ -19,6 +19,26 @@ public class AddressService implements IAddressService{
 	public List<Address> getAddressByUser(int user_id) {
 		return addressDAO.selectAddressByUser(user_id);
 	}
+	
+	//user_id로 기본 배송지 조회 
+	@Override
+	public Address getDefaultAddressByUser(int user_id) {
+		List<Address> addresses = addressDAO.selectAddressByUser(user_id);
+		Address address = null;
+		
+		for(Address a:addresses) {
+			if(a.getAddress_default() == 1) {
+				address = a;
+			}
+		}
+		
+		//기본 배송지가 없다면 첫번째 배송지를 반환
+		if(address == null) {
+			return addresses.get(0);
+		}
+		
+		return address;
+	}
 
 
 	//address_id로 배송지 조회
@@ -49,6 +69,9 @@ public class AddressService implements IAddressService{
 	public void deleteAddressById(int id) {
 		addressDAO.deleteAddress(id);		
 	}
+
+
+
 
 
 

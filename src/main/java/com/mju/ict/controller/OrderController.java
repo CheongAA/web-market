@@ -48,10 +48,10 @@ public class OrderController {
 			return "login";
 		} else {
 			List<Cart> carts = cartService.getCartsById(cartArr);
-			List<Address> addresses = addressService.getAddressByUser(user.getUser_id());
+			Address address = addressService.getDefaultAddressByUser(user.getUser_id());
 			
 			model.addAttribute("carts", carts);
-			model.addAttribute("addresses", addresses);
+			model.addAttribute("address", address);
 		}
 
 		return "order/direct";
