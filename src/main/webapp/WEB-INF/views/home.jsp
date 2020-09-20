@@ -69,14 +69,14 @@
 		</a>
 	</div>
 	<div class="row mt-1 pt-1">
-		<div class="col-sm-3 ">
+		<div class="col-lg-3 mb-3">
 			<h1 class=" font-weight-light text-center mt-5 pt-5">WHAT'S NEW?</h1>
 		</div>
 		<c:forEach var="product" items="${products}" end="6">
 			<c:if test="${product.on_sale == 1}">
-				<div class="col-sm-3">
+				<div class="col-md-3 pb-4">
 					<a href="${pageContext.request.contextPath}/product/${product.product_id}" class="text-decoration-none">
-						<img class="w-100 h-50 mb-3 product-img" alt="" src="${product.product_img}">
+						<img class="w-100 h-75 mb-3 product-img" alt="" src="${product.product_img}">
 						<c:if test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
 							<div class="product-img-text bg-warning text-center p-3">
 								<p class="h4 text-white font-weight-light">SAVE</p>

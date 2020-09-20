@@ -26,20 +26,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- Category -->
 <script type="text/javascript">
-	$
-			.ajax({
+	$.ajax({
 				url : "/category",
 				type : "get",
 				success : function(data) {
-					Object
-							.keys(data)
-							.forEach(
+					Object.keys(data).forEach(
 									function(k) {
 										var a = $('<a>');
 										a.text(data[k]);
 										a.attr("href", "/products/" + k);
-										a
-												.addClass("dropdown-item p-2 text-center text-muted text-decoration-none");
+										a.addClass("dropdown-item p-2 text-center text-muted text-decoration-none");
 										$("#header_category").append(a);
 									});
 				}
@@ -50,7 +46,7 @@
 	<div class="container-fluid">
 		<!-- Header -->
 		<div class="row justify-content-center">
-			<div class="col-sm-10">
+			<div class="col-sm-12">
 				<tiles:insertAttribute name="header" />
 			</div>
 		</div>
@@ -62,9 +58,7 @@
 				<tiles:insertAttribute name="content" />
 			</main>
 		</div>
-
-		<!-- Side navigation -->
-
+		
 		<!-- Footer -->
 		<div class="row justify-content-center">
 			<div class="col-sm-10">
