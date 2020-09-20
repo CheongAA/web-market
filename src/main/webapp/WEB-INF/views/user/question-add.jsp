@@ -17,14 +17,14 @@
 				<table class="table table-bordered">
 					<tbody>
 						<tr>
-							<th scope="row" style="width: 10%" class="table-secondary">제목 *</th>
+							<th scope="row" style="width: 20%" class="table-secondary">제목 *</th>
 							<td>
 								<select class="mb-2" name="question_category_id" class="form-control">
 									<c:forEach var="questionCategorie" items="${questionCategories}">
 										<option value="${questionCategorie.question_category_id}">${questionCategorie.question_category_title}</option>
 									</c:forEach>
 								</select>
-								<input type="text" name="question_title" class="form-control col-sm-5" required>
+								<input type="text" name="question_title" class="form-control" maxlength="20" placeholder="20자 이하로 입력해주세요" required>
 							</td>
 						</tr>
 						<tr>
@@ -37,14 +37,14 @@
 						<tr>
 							<th scope="row" class="table-secondary">핸드폰번호</th>
 							<td class="form-inline">
-								<input type="text" class="form-control col-sm-5 mr-3" name="question_phone">
-								번호를 입력하면 문자메시지로 답변이 전송됩니다.
+								<input type="text" class="form-control col-sm-5 mr-3" name="question_phone" id="question_phone">
+								<small id="question_phone_check" class="form-text text-danger"></small> 번호를 입력하면 문자메시지로 답변이 전송됩니다. <br/>(부정확한 번호를 입력 시 문자가 전송되지 않을 수 있습니다.)
 							</td>
 						</tr>
 						<tr>
 							<th scope="row" class="table-secondary">내용 *</th>
 							<td colspan="3" rowspan="10">
-								<textarea class="form-control" rows="20" cols="100" name="question_content" required></textarea>
+								<textarea class="form-control" rows="20" cols="100" name="question_content" maxlength="500" placeholder="500자 이하로 입력해주세요" required></textarea>
 							</td>
 						</tr>
 					</tbody>
@@ -104,11 +104,32 @@
 						</div>
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary float-right">저장</button>
+				<button type="submit" class="btn btn-secondary btn-block">저장</button>
 			</form>
 		</div>
 	</div>
 	<script type="text/javascript">
+		checkPhone();
+		$("#question_phone").on('change', checkPhone);
+
+		function checkPhone() {
+			var phoneE = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+			var $input = $("#question_phone");
+			var $small = $("#question_phone_check");
+
+			if (!phoneE.test($input.val())) {
+				phone_flag = false;
+				$small.text("-를 포함한  핸드폰 번호를 입력해주세요.");
+				$input.removeClass('is-valid');
+				$input.addClass('is-invalid');
+			} else {
+				phone_flag = true;
+				$small.text("");
+				$input.removeClass('is-invalid');
+				$input.addClass('is-valid');
+			}
+		}
+
 		$("input[name='checkOrder']").click(
 				function() {
 					$("input[name='order_id']").val(

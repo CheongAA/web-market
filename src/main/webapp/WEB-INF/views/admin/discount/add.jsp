@@ -19,25 +19,25 @@
 							<tr>
 								<th scope="row" class="w-25">이벤트명</th>
 								<td class="form-inline">
-									<input type="text" class="form-control" id="discount_name" name="discount_name">
+									<input type="text" class="form-control w-100" id="discount_name"  name="discount_name" maxlength="10" placeholder="10자 이하로 입력해주세요"  required>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">간단설명</th>
 								<td class="form-inline">
-									<input type="text" class="form-control" id="discount_desc" name="discount_desc">
+									<input type="text" class="form-control w-100" id="discount_desc" name="discount_desc" maxlength="20" placeholder="20자 이하로 입력해주세요"  required>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">할인율 (%)</th>
 								<td>
-									<input type="number" class="form-control" id="discount_rate" name="discount_rate" min="1" max="99" required="required">
+									<input type="number" class="form-control" id="discount_rate" name="discount_rate" min="1" max="99" required>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">이벤트 이미지 (2000px * 400px)</th>
 								<td>
-									<input type="file" class="form-control-file" id="discount_thumbnailImg" name="file" accept="image/*">
+									<input type="file" class="form-control-file" id="discount_thumbnailImg" name="file" accept="image/*" required>
 									<div class="mt-3">
 										<img class="w-75" id="select_discount_img">
 									</div>
@@ -49,17 +49,17 @@
 							<tr>
 								<th scope="row">할인시작일</th>
 								<td>
-									<input type="date" name="discount_start" class="form-control" placeholder="" required="required" min="${today}">
+									<input type="date" name="discount_start" class="form-control" id="discount_start" min="${today}" required >
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">할인종료일</th>
 								<td>
-									<input type="date" name="discount_end" class="form-control" placeholder="" required="required">
+									<input type="date" name="discount_end" class="form-control" id="discount_end" required>
 								</td>
 							</tr>
 							<tr>
-								<th scope="row">이벤트 품목 (다중선택 가능)</th>
+								<th scope="row">이벤트 품목</th>
 								<td>
 									<select class="form-control" id="select_product_list" multiple>
 										<c:forEach var="product" items="${products}">
@@ -68,7 +68,7 @@
 											</c:if>
 										</c:forEach>
 									</select>
-									<button type="button" class="btn btn-block btn-secondary my-2" id="select_product_btn">선택</button>
+									<small class="text-success">상품 다중선택이 가능합니다.</small>
 								</td>
 							</tr>
 							<tr>
@@ -80,7 +80,7 @@
 							<tr>
 								<th scope="row">본문설명</th>
 								<td>
-									<textarea class="form-control" id="discount_explanation" name="discount_explanation" rows="10" required="required"></textarea>
+									<textarea class="form-control" id="discount_explanation" name="discount_explanation" rows="10" maxlength="200" placeholder="200자 이하로 입력해주세요"  required></textarea>
 								</td>
 							</tr>
 						</tbody>
@@ -93,6 +93,11 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		//이벤트 종료일 MIN 설정
+		$("#discount_start").on('change',function(){
+			$("#discount_end").prop('min',$("#discount_start").val());
+		})
+		
 		$("#discount_thumbnailImg")
 				.on(
 						'change',
@@ -139,8 +144,8 @@
 			$("#discount_thumbnailImg").val("");
 			$("#select_discount_img").css("display", "none");
 		}
-
-		$("#select_product_btn").on("click", function() {
+		
+		$("#select_product_list").on('change',function() {
 			$("#select_product").empty();
 			var products = $("#select_product_list option:selected");
 

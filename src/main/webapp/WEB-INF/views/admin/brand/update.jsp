@@ -20,7 +20,7 @@
 							<tr>
 								<th class="w-25" scope="row">브랜드명</th>
 								<td class="form-inline">
-									<input type="text" class="form-control" id="brand_name" name="brand_name" required="required" value="${brand.brand_name }">
+									<input type="text" class="form-control" id="brand_name" name="brand_name" required="required" maxlength="15" value="${brand.brand_name }">
 								</td>
 							</tr>
 							<tr>
@@ -36,7 +36,7 @@
 							<tr>
 								<th scope="row">간단설명</th>
 								<td>
-									<textarea class="form-control" id="brand_desc" name="brand_desc" rows="3" required="required">${brand.brand_desc }</textarea>
+									<textarea class="form-control" id="brand_desc" name="brand_desc" rows="3" maxlength="200" required="required">${brand.brand_desc }</textarea>
 								</td>
 							</tr>
 						</tbody>

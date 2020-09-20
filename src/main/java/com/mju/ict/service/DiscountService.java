@@ -57,6 +57,7 @@ public class DiscountService implements IDiscountService {
 
 		discountDAO.insertDiscount(discount);
 
+		
 		List<Product> products = productDAO.selectAllProducts();
 		for (Product p : products) {
 			for (int id : productArr) {

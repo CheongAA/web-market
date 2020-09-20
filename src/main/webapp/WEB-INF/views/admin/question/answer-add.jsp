@@ -72,7 +72,7 @@
 							<th scope="row" style="width: 10%" class="table-secondary">제목 *</th>
 							<td>
 								<c:if test="${questionCategories != null}">
-									<select class="mb-2" name="question_category_id" class="form-control">
+									<select class="mb-2" name="question_category_id" class="form-control" required>
 										<c:forEach var="questionCategory" items="${questionCategories}">
 											<option value="${questionCategory.question_category_id}">${questionCategory.question_category_title}</option>
 										</c:forEach>
@@ -80,12 +80,12 @@
 								</c:if>
 								<c:choose>
 									<c:when test="${question eq null }">
-										<input type="text" name="answer_title" class="form-control col-sm-5" required>
+										<input type="text" name="answer_title" class="form-control col-sm-5"  maxlength="20" placeholder="20자 이하로 입력해주세요" required>
 										<input type="hidden" name="question_id" value="0">
 									</c:when>
 									<c:otherwise>
-										<input type="hidden" name="question_id" value="${question.question_id}">
 										<input type="text" name="answer_title" class="form-control col-sm-5" value="Re: ${question.question_title} " readonly required>
+										<input type="hidden" name="question_id" value="${question.question_id}">
 									</c:otherwise>
 								</c:choose>
 							</td>
@@ -93,7 +93,7 @@
 						<tr>
 							<th scope="row" class="table-secondary">내용 *</th>
 							<td colspan="3" rowspan="10">
-								<textarea class="form-control" rows="20" cols="100" name="answer_content" required></textarea>
+								<textarea class="form-control" rows="20" cols="100"  maxlength="500" placeholder="500자 이하로 입력해주세요" name="answer_content" required></textarea>
 							</td>
 						</tr>
 					</tbody>

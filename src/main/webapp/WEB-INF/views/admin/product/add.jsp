@@ -19,7 +19,7 @@
 							<tr>
 								<th scope="row" style="width: 20%">대분류</th>
 								<td>
-									<select class="form-control" id="category1" onchange="changeCategory1(this.value)">
+									<select class="form-control" id="category1" onchange="changeCategory1(this.value)" required>
 									</select>
 								</td>
 
@@ -27,14 +27,15 @@
 							<tr>
 								<th scope="row">중분류</th>
 								<td>
-									<select class="form-control" id="category2" name="category_code">
+									<select class="form-control" id="category2" name="category_code" required>
 									</select>
+									<small class="text-success">중분류 항목이 없다면 카테고리 관리에서 추가해주세요.</small>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">브랜드명</th>
 								<td class="form-inline">
-									<select class="form-control" id="exampleFormControlSelect1" name="brand_id">
+									<select class="form-control" id="exampleFormControlSelect1" name="brand_id" required>
 										<c:forEach var="brand" items="${brands}">
 											<option value="${brand.brand_id}"><c:out value="${brand.brand_name}" /></option>
 										</c:forEach>
@@ -44,14 +45,14 @@
 							<tr>
 								<th scope="row">상품명</th>
 								<td class="form-inline">
-									<input type="text" class="form-control" name="product_name" placeholder="" required="required">
+									<input type="text" class="form-control w-100" name="product_name"  maxlength="10" placeholder="10자 이하로 입력해주세요" required>
 								</td>
 							</tr>
 
 							<tr>
 								<th scope="row">상품대표이미지(700px * 800px)</th>
 								<td>
-									<input type="file" class="form-control-file" id="product_img" name="product_img" accept="image/*">
+									<input type="file" class="form-control-file" id="product_img" name="product_img" accept="image/*" required>
 									<div class="mt-3">
 										<img src="" id="select_product_img">
 									</div>
@@ -60,7 +61,7 @@
 							<tr>
 								<th scope="row">상품설명이미지(800px * 2000px)</th>
 								<td>
-									<input type="file" class="form-control-file" id="product_descImage" name="product_descImg" accept="image/*">
+									<input type="file" class="form-control-file" id="product_descImage" name="product_descImg" accept="image/*" required>
 									<div class="mt-3">
 										<img src="" id="select_product_descImg">
 									</div>
@@ -69,31 +70,32 @@
 							<tr>
 								<th scope="row">가격</th>
 								<td>
-									<input type="text" class="form-control" name="product_price" placeholder="" required="required">
+									<input type="number" class="form-control" name="product_price" placeholder="가격을 입력해주세요" required>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">재고</th>
 								<td>
-									<input type="text" class="form-control" name="product_quantity" placeholder="" required="required">
+									<input type="number" class="form-control" name="product_quantity" placeholder="재고를 입력해주세요" required>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">재료</th>
 								<td>
-									<input type="text" class="form-control" name="product_material" placeholder="" required="required">
+									<input type="text" class="form-control" name="product_material"  maxlength="20" placeholder="20자 이하로 입력해주세요"  required>
+									<small class="text-success">상품설명이미지에 재료정보가 있다면 상세참조로 적어주세요.</small>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">용량</th>
 								<td>
-									<input type="text" class="form-control" name="product_volume" placeholder="" required="required">
+									<input type="number" class="form-control" name="product_volume" placeholder="g단위의 용량을 입력해주세요" required>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">간단설명</th>
 								<td>
-									<textarea class="form-control" name="product_desc" rows="3" required="required"></textarea>
+									<textarea class="form-control" name="product_desc" rows="3" maxlength="20" placeholder="20자 이하로 입력해주세요" required></textarea>
 								</td>
 							</tr>
 						</tbody>

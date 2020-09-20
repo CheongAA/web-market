@@ -16,7 +16,7 @@
 			<input type="hidden" name="category_code" value="${category.category_code}" />
 			<div class="form-group">
 				<label for="category_name">카테고리명</label>
-				<input type="text" class="form-control" id="category_name" name="category_name" placeholder="" required="required" value="${category.category_name}">
+				<input type="text" class="form-control" id="category_name" name="category_name"  maxlength="10" required="required" value="${category.category_name}">
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-dark btn-block">등록</button>

@@ -34,19 +34,14 @@
 						</span>
 						<c:choose>
 							<c:when test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
-								<span class="text-muted h5 font-weight-light" id="product_price" style="text-decoration: line-through"><fmt:formatNumber pattern="###,###,###"
-										value="${product.product_price}"
-									/>원</span>
-								<span class="market-color h5" id="discount_price"><i class="fas fa-arrow-right"></i> <c:set var="price"
-										value="${product.product_price-(product.product_price * product.discount.discount_rate)/100}"
-									/> <fmt:formatNumber pattern="###,###,###" value="${price}" />원 </span>
+								<span class="text-muted h5 font-weight-light" id="product_price" style="text-decoration: line-through"><fmt:formatNumber pattern="###,###,###" value="${product.product_price}" />원</span>
+								<span class="market-color h5" id="discount_price"><i class="fas fa-arrow-right"></i> <c:set var="price" value="${product.product_price-(product.product_price * product.discount.discount_rate)/100}" /> <fmt:formatNumber pattern="###,###,###" value="${price}" />원 </span>
 							</c:when>
 							<c:otherwise>
 								<span class="d-block market-color h5"><fmt:formatNumber pattern="###,###,###" value="${product.product_price}" />원</span>
 							</c:otherwise>
 						</c:choose>
-						<span class="d-block text-dark font-weight-light mt-2"><c:out value="${product.product_desc}" /></span> <span class="d-block text-dark font-weight-light mt-2"> 현재
-							판매여부: <c:choose>
+						<span class="d-block text-dark font-weight-light mt-2"><c:out value="${product.product_desc}" /></span> <span class="d-block text-dark font-weight-light mt-2"> 현재 판매여부: <c:choose>
 								<c:when test="${product.on_sale eq 1}">
 										O
 									</c:when>
@@ -61,9 +56,34 @@
 			</c:if>
 		</c:forEach>
 	</div>
-	<div class="w-100 my-5">
+	<div class="col-sm-12 my-5">
 		<a href="${pageContext.request.contextPath}/admin/category" class="btn btn-dark float-right mx-5">목록</a>
-		<a href="${pageContext.request.contextPath}/admin/category/delete/${category.category_code}" class="btn btn-danger float-right px-5">삭제</a>
+		<button type="button" class="btn btn-danger float-right px-5" data-toggle="modal" data-target="#cart_modal">삭제</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="cart_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">카테고리 삭제</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<ul class="text-danger">
+							<li>카테고리 삭제 시 해당 카테고리의 상품과 그와 관련된 데이터는 즉시 삭제됩니다.</li>
+							<li>삭제 후에는 데이터를 <strong>복원할 수 없으니</strong> 이 점 유의바랍니다.
+							</li>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+						<a type="button" class="btn btn-danger" href="${pageContext.request.contextPath}/admin/category/delete/${category.category_code}">삭제</a>
+					</div>
+				</div>
+			</div>
+		</div>
 		<a href="${pageContext.request.contextPath}/admin/category/update/${category.category_code}" class="btn btn-warning float-right px-5 mr-1">수정</a>
 	</div>
 </body>

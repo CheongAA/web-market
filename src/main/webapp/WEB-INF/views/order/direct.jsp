@@ -209,9 +209,11 @@
 
 	<script>
 		$("#address_btn").on('click', getAddressList);
-		$("#buyer_phone").on('blur', checkPhone);
+		$("#buyer_phone").on('change', checkPhone);
 
+		
 		var buyer_phone_flag = false;
+		checkPhone();
 		//배송지 설정 화면 팝업
 		function getAddressList() {
 			window
@@ -227,6 +229,7 @@
 			var $small = $("#buyer_phone_check");
 
 			if (!phoneE.test($input.val())) {
+				buyer_phone_flag = false;
 				$small.text("-를 포함한  핸드폰 번호를 입력해주세요.");
 				$input.removeClass('is-valid');
 				$input.addClass('is-invalid');
@@ -239,7 +242,12 @@
 		}
 
 		function checkForm() {
-
+			checkPhone();
+			if (buyer_phone_flag == false) {
+				alert("핸드폰 번호를 확인해주세요");
+			} else {
+				pay();
+			}
 		}
 
 		function getOrderDetailJson() {

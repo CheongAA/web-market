@@ -40,7 +40,7 @@
 								<tr>
 									<th scope="row" style="width: 10%">제목 *</th>
 									<td>
-										<input type="text" name="review_title" class="form-control col-sm-5" required>
+										<input type="text" name="review_title" class="form-control" maxlength="20" placeholder="20자 이하로 입력해주세요" required>
 									</td>
 								</tr>
 								<tr>
@@ -67,7 +67,7 @@
 								<tr>
 									<th scope="row">내용 *</th>
 									<td colspan="3" rowspan="10">
-										<textarea class="form-control" rows="20" cols="100" name="review_content" required></textarea>
+										<textarea class="form-control" rows="20" cols="100" name="review_content" maxlength="500" placeholder="500자 이하로 입력해주세요" required></textarea>
 									</td>
 								</tr>
 							</tbody>

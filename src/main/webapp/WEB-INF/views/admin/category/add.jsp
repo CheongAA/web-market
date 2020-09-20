@@ -27,8 +27,6 @@
 							<td>
 								<a href="${pageContext.request.contextPath}/admin/category/${category.category_code}"> ${category.category_name}</a>
 							</td>
-							<td>
-								<a href="${pageContext.request.contextPath}/admin/category/delete/${category.category_code}" class="btn btn-danger btn-sm"> - </a>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -56,22 +54,31 @@
 							</c:if>
 						</c:forEach>
 					</select>
-				</div>
-				<div class="form-group">
-					<label for="category_name">카테고리명</label>
-					<input type="text" class="form-control" id="category_name" name="category_name">
+					<small class="text-success">대분류 코드에 맞게 중분류 코드를 작성해주세요. (ex: 대분류 -100 , 중분류 101~199)</small>
 				</div>
 				<div class="form-group">
 					<label for="category_code">코드</label>
-					<input type="number" class="form-control" id="category_code" name="category_code" min="1" max="10000" required="required">
+					<input type="number" class="form-control" id="category_code" name="category_code" min="1" max="10000" placeholder="숫자로 된 코드를 입력해주세요." required>
+					<small class="form-text text-danger" id="validation_code"></small>
 				</div>
 				<div class="form-group">
-					<button type="submit" class="btn btn-dark btn-block">등록</button>
+					<label for="category_name">카테고리명</label>
+					<input type="text" class="form-control" id="category_name" name="category_name" maxlength="10" placeholder="10자 이하로 입력해주세요" required>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-dark btn-block" id="ok_btn" disabled>등록</button>
 				</div>
 			</form>
 		</div>
 	</div>
 	<script type="text/javascript">
+		//Contextpath
+		function getContextPath() {
+			var hostIndex = location.href.indexOf(location.host)
+					+ location.host.length;
+			return location.href.substring(hostIndex, location.href.indexOf(
+					'/', hostIndex + 1));
+		}
 		function checkDepth() {
 			if ($("input:radio[name=category_depth]:checked").val() == 1) {
 				$("#large").hide();
@@ -89,6 +96,45 @@
 		$("input:radio").click(function() {
 			checkDepth();
 		});
+
+		$("#category_code").on('blur', checkCode);
+
+		// 코드 유효성 검사
+		function checkCode() {
+			var inputValue = $("#category_code").val();
+			if (inputValue != "") {
+				$.ajax({
+					url : getContextPath() + "/category/check",
+					type : "get",
+					data : {
+						category_code : inputValue
+					},
+					success : function(data) {
+						if (data == 1) {
+							$("#validation_code").text("이미 사용중인 코드입니다.");
+							$("#validation_code").removeClass('text-primary');
+							$("#validation_code").addClass('text-danger');
+
+							$("#category_code").removeClass('is-valid');
+							$("#category_code").addClass('is-invalid');
+							$("#ok_btn").attr('disabled', true);
+						} else {
+							idFlag = true;
+							$("#validation_code").text("사용 가능한 코드입니다.");
+							$("#validation_code").removeClass('text-danger');
+							$("#validation_code").addClass('text-primary');
+
+							$("#category_code").removeClass('is-invalid');
+							$("#category_code").addClass('is-valid');
+							$("#ok_btn").attr('disabled', false);
+						}
+					}
+				});
+			} else {
+				$("#ok_btn").attr('disabled', true);
+			}
+
+		}
 	</script>
 </body>
 </html>

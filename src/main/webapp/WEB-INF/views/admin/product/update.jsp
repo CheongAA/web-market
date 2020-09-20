@@ -22,7 +22,7 @@
 							<tr>
 								<th scope="row" style="width: 20%">대분류</th>
 								<td>
-									<select class="form-control" id="category1" onchange="changeCategory1(this.value)">
+									<select class="form-control" id="category1" onchange="changeCategory1(this.value)" required>
 									</select>
 								</td>
 
@@ -30,14 +30,14 @@
 							<tr>
 								<th scope="row">중분류</th>
 								<td>
-									<select class="form-control" id="category2" name="category_code">
+									<select class="form-control" id="category2" name="category_code" required>
 									</select>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">브랜드명</th>
 								<td class="form-inline">
-									<select class="form-control" id="exampleFormControlSelect1" name="brand_id">
+									<select class="form-control" id="exampleFormControlSelect1" name="brand_id" required>
 										<c:forEach var="brand" items="${brands}">
 											<c:choose>
 												<c:when test="${brand.brand_name eq product.brand.brand_name }">
@@ -55,7 +55,7 @@
 							<tr>
 								<th scope="row">상품명</th>
 								<td class="form-inline">
-									<input type="text" class="form-control" name="product_name" value="${product.product_name }" required="required">
+									<input type="text" class="form-control" name="product_name" value="${product.product_name }" maxlength="10" required>
 								</td>
 							</tr>
 
@@ -88,31 +88,31 @@
 							<tr>
 								<th scope="row">가격</th>
 								<td>
-									<input type="text" class="form-control" name="product_price" value="${product.product_price }" required="required">
+									<input type="number" class="form-control" name="product_price" value="${product.product_price }" required>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">재고</th>
 								<td>
-									<input type="text" class="form-control" name="product_quantity" value="${product.product_quantity }" required="required">
+									<input type="number" class="form-control" name="product_quantity" value="${product.product_quantity }" required>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">재료</th>
 								<td>
-									<input type="text" class="form-control" name="product_material" value="${product.product_material }" required="required">
+									<input type="text" class="form-control" name="product_material" value="${product.product_material }"  maxlength="20" required>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">용량</th>
 								<td>
-									<input type="text" class="form-control" name="product_volume" value="${product.product_volume }" required="required">
+									<input type="number" class="form-control" name="product_volume" value="${product.product_volume }" required>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">간단설명</th>
 								<td>
-									<textarea class="form-control" name="product_desc" rows="3" required="required">${product.product_desc }</textarea>
+									<textarea class="form-control" name="product_desc" rows="3" maxlength="20" required>${product.product_desc }</textarea>
 								</td>
 							</tr>
 						</tbody>

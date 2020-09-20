@@ -19,19 +19,19 @@
 							<tr>
 								<th scope="row">제목</th>
 								<td class="form-inline">
-									<input type="text" class="form-control" id="notice_title" name="notice_title" placeholder="" required="required">
+									<input type="text" class="form-control" id="notice_title" name="notice_title" maxlength="20" placeholder="20자 이하로 입력해주세요"  required>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">작성자</th>
 								<td class="form-inline">
-									<input type="text" class="form-control" id="notice_writer" name="notice_writer" value="MARKET" required="required" readonly>
+									<input type="text" class="form-control" id="notice_writer" name="notice_writer" value="MARKET" required readonly>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">내용</th>
 								<td>
-									<textarea class="form-control" id="notice_content" name="notice_content" rows="10" required="required"></textarea>
+									<textarea class="form-control" id="notice_content" name="notice_content" rows="10" maxlength="500" placeholder="500자 이하로 입력해주세요"  required></textarea>
 								</td>
 							</tr>
 						</tbody>

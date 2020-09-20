@@ -38,7 +38,7 @@
 								<tr>
 									<th scope="row" style="width: 10%">제목 *</th>
 									<td>
-										<input type="text" name="review_title" class="form-control col-sm-5" value="${review.review_title }" required>
+										<input type="text" name="review_title" class="form-control col-sm-5" value="${review.review_title }" maxlength="20" required>
 									</td>
 								</tr>
 								<tr>
@@ -74,7 +74,7 @@
 								<tr>
 									<th scope="row">내용 *</th>
 									<td colspan="3" rowspan="10">
-										<textarea class="form-control" rows="20" cols="100" name="review_content" required>${review.review_content}</textarea>
+										<textarea class="form-control" rows="20" cols="100" name="review_content" maxlength="500" required>${review.review_content}</textarea>
 									</td>
 								</tr>
 							</tbody>

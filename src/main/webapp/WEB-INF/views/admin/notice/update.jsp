@@ -21,13 +21,13 @@
 					<tr>
 						<th scope="row" style="width: 10%" class="table-secondary">제목</th>
 						<td colspan="3">
-							<input name="notice_title" type="text" value="${notice.notice_title}" />
+							<input class="form-control" name="notice_title" type="text" value="${notice.notice_title}" maxlength="20" required />
 						</td>
 					</tr>
 					<tr>
 						<th scope="row" class="table-secondary">작성자</th>
 						<td colspan="3">
-							<input name="notice_writer" type="text" value="${notice.notice_writer}" />
+							<input class="form-control" name="notice_writer" type="text" value="${notice.notice_writer}" required readonly/>
 						</td>
 					</tr>
 					<tr>
@@ -40,7 +40,7 @@
 					</tr>
 					<tr>
 						<td colspan="4">
-							<textarea rows="30" name="notice_content">
+							<textarea rows="30" name="notice_content" class="form-control" maxlength="500" required>
 						${notice.notice_content}
 					</textarea>
 						</td>

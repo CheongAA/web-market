@@ -104,7 +104,8 @@
 					</article>
 					<!-- card-body end .// -->
 					<div class="border-top card-body text-center">
-						회원이신가요? <a href="/login">로그인</a>
+						회원이신가요?
+						<a href="/login">로그인</a>
 					</div>
 				</div>
 			</div>
@@ -163,30 +164,18 @@
 		// 아이디 유효성 검사
 		function checkId() {
 			var inputValue = $("#user_identification").val();
-			$
-					.ajax({
-						url : "/idCheck",
-						type : "get",
-						data : {
-							user_identification : inputValue
-						},
-						success : function(data) {
-							if (data == 1) {
-								idFlag = false;
-								$("#validation_id").text("이미 사용중인 아이디입니다.");
-								$("#validation_id").removeClass('text-primary');
-								$("#validation_id").addClass('text-danger');
-
-								$("#user_identification").removeClass(
-										'is-valid');
-								$("#user_identification")
-										.addClass('is-invalid');
-								signup();
-							} else {
-								if (!idE.test(inputValue)) {
+			if (inputValue != "") {
+				$
+						.ajax({
+							url : "/idCheck",
+							type : "get",
+							data : {
+								user_identification : inputValue
+							},
+							success : function(data) {
+								if (data == 1) {
 									idFlag = false;
-									$("#validation_id").text(
-											"4~12자의 영문 대소문자와 숫자로만 입력해주세요.");
+									$("#validation_id").text("이미 사용중인 아이디입니다.");
 									$("#validation_id").removeClass(
 											'text-primary');
 									$("#validation_id").addClass('text-danger');
@@ -197,23 +186,39 @@
 											'is-invalid');
 									signup();
 								} else {
-									idFlag = true;
-									$("#validation_id").text("사용 가능한 아이디입니다.");
-									$("#validation_id").removeClass(
-											'text-danger');
-									$("#validation_id")
-											.addClass('text-primary');
+									if (!idE.test(inputValue)) {
+										idFlag = false;
+										$("#validation_id").text(
+												"4~12자의 영문 대소문자와 숫자로만 입력해주세요.");
+										$("#validation_id").removeClass(
+												'text-primary');
+										$("#validation_id").addClass(
+												'text-danger');
 
-									$("#user_identification").removeClass(
-											'is-invalid');
-									$("#user_identification").addClass(
-											'is-valid');
-									signup();
+										$("#user_identification").removeClass(
+												'is-valid');
+										$("#user_identification").addClass(
+												'is-invalid');
+										signup();
+									} else {
+										idFlag = true;
+										$("#validation_id").text(
+												"사용 가능한 아이디입니다.");
+										$("#validation_id").removeClass(
+												'text-danger');
+										$("#validation_id").addClass(
+												'text-primary');
+
+										$("#user_identification").removeClass(
+												'is-invalid');
+										$("#user_identification").addClass(
+												'is-valid');
+										signup();
+									}
 								}
 							}
-						}
-					});
-
+						});
+			}
 		}
 
 		// 비밀번호 유효성 검사

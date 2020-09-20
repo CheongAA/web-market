@@ -21,19 +21,19 @@
 							<tr>
 								<th scope="row" class="w-25">이벤트명</th>
 								<td class="form-inline">
-									<input type="text" class="form-control" id="discount_name" name="discount_name" value="${discount.discount_name }">
+									<input type="text" class="form-control" id="discount_name" name="discount_name" maxlength="10" value="${discount.discount_name }" required>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">간단설명</th>
 								<td class="form-inline">
-									<input type="text" class="form-control" id="discount_desc" name="discount_desc" value="${discount.discount_desc }">
+									<input type="text" class="form-control" id="discount_desc" name="discount_desc" maxlength="20" value="${discount.discount_desc }" required>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">할인율 (%)</th>
 								<td>
-									<input type="number" class="form-control" id="discount_rate" name="discount_rate" min="1" max="99" required="required" value="${discount.discount_rate }">
+									<input type="number" class="form-control" id="discount_rate" name="discount_rate" min="1" max="99" value="${discount.discount_rate }" required>
 								</td>
 							</tr>
 							<tr>
@@ -57,13 +57,13 @@
 							<tr>
 								<th scope="row">할인시작일</th>
 								<td>
-									<input type="date" name="discount_start" class="form-control" placeholder="" required="required" value="${start }">
+									<input type="date" name="discount_start" class="form-control" value="${start }" required>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">할인종료일</th>
 								<td>
-									<input type="date" name="discount_end" class="form-control" placeholder="" required="required" value="${end }">
+									<input type="date" name="discount_end" class="form-control" value="${end }" required>
 								</td>
 							</tr>
 							<tr>
@@ -95,7 +95,7 @@
 							<tr>
 								<th scope="row">본문설명</th>
 								<td>
-									<textarea class="form-control" id="discount_explanation" name="discount_explanation" rows="10" required="required">${discount.discount_explanation}</textarea>
+									<textarea class="form-control" id="discount_explanation" name="discount_explanation" maxlength="200" rows="10" required>${discount.discount_explanation}</textarea>
 								</td>
 							</tr>
 						</tbody>

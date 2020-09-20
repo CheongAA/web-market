@@ -21,7 +21,7 @@
 						<td>
 							<c:choose>
 								<c:when test="${questionCategories != null}">
-									<select class="mb-2" name="question_category_id" class="form-control">
+									<select class="mb-2" name="question_category_id" class="form-control" required>
 										<c:forEach var="questionCategory" items="${questionCategories}">
 											<c:choose>
 												<c:when test="${questionCategory.question_category_title eq answer.questionCategory.question_category_title}">
@@ -33,7 +33,7 @@
 											</c:choose>
 										</c:forEach>
 									</select>
-									<input type="text" name="answer_title" class="form-control col-sm-5" value="${answer.answer_title}" required>
+									<input type="text" name="answer_title" class="form-control col-sm-5" value="${answer.answer_title}"  maxlength="20" required>
 								</c:when>
 								<c:otherwise>
 									<input type="hidden" name="question_category_id" value="${answer.question_category_id}">
@@ -45,7 +45,7 @@
 					<tr>
 						<th scope="row" class="table-secondary">내용 *</th>
 						<td colspan="3" rowspan="10">
-							<textarea class="form-control" rows="20" cols="100" name="answer_content" required>${answer.answer_content }</textarea>
+							<textarea class="form-control" rows="20" cols="100" name="answer_content"  maxlength="500" required>${answer.answer_content }</textarea>
 						</td>
 					</tr>
 				</tbody>

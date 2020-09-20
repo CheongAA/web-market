@@ -295,6 +295,18 @@ public class AdminController {
 		categoryService.deleteCategoryByCode(category_code);
 		return "redirect:/admin/category";
 	}
+	
+	
+	// 카테고리 코드 중복체크
+	@ResponseBody
+	@RequestMapping(value = "/category/check", method = RequestMethod.GET)
+	public String getIdCheck(HttpServletRequest req) throws Exception {
+		Category category = categoryService.getCategoryByCode(Integer.parseInt((req.getParameter("category_code"))));
+		if (category != null) {
+			return "1";
+		}
+		return "0";
+	}
 
 	/////////////// 고객//////////////////
 
