@@ -37,8 +37,8 @@ public class ProductDAO implements IProductDAO{
 	}
 
 	@Override
-	public List<Product> selectDiscountProducts() {
-		return sqlSession.selectList("selectDiscountProducts");
+	public List<Product> selectDiscountProducts(PagingCriteria cri) {
+		return sqlSession.selectList("selectDiscountProducts",cri);
 	}
 
 	@Override

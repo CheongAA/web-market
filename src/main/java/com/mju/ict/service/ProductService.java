@@ -34,8 +34,8 @@ public class ProductService implements IProductService{
 
 	//할인 상품 조회
 	@Override
-	public List<Product> getDiscountProducts() {
-		return productDAO.selectDiscountProducts();
+	public List<Product> getDiscountProducts(PagingCriteria cri) {
+		return productDAO.selectDiscountProducts(cri);
 	}
 	
 	//신상품 조회

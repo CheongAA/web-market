@@ -245,7 +245,7 @@
 		tb_discount.discount_apply = 1
 		and
 		tb_discount.discount_state = 1
-		limit 12;
+		LIMIT #{pageStart}, #{perPageNum}
 	</select>
 
 	<select id="selectNewProducts" resultMap="product">

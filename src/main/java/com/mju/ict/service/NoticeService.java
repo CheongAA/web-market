@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mju.ict.model.Notice;
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.repository.INoticeDAO;
 
 @Service
@@ -16,8 +17,8 @@ public class NoticeService implements INoticeService{
 
 	//공지 전체 조회
 	@Override
-	public List<Notice> getAllNotices() {
-		return noticeDAO.selectAllNotices();
+	public List<Notice> getAllNotices(PagingCriteria cri) {
+		return noticeDAO.selectAllNotices(cri);
 	}
 	
 	//notice_id로 공지사항 조회
@@ -49,6 +50,13 @@ public class NoticeService implements INoticeService{
 	@Override
 	public void addNoticeView(int id) {
 		noticeDAO.addNoticeView(id);		
+	}
+
+	
+	//공지사항 수
+	@Override
+	public int countNotice() {
+		return noticeDAO.countNotice();
 	}
 
 }

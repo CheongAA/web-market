@@ -41,6 +41,9 @@
 			</h3>
 			<h5 class="mx-5 mb-3 font-weight-light text-muted">MARKET의 할인 상품들을 빠르게 만나보세요!</h5>
 		</c:if>
+		<c:if test="${not empty term}">
+			<h3 class="mx-5 mb-3 font-weight-bold text-muted">"${term}" 의 검색결과 :</h3>
+		</c:if>
 	</div>
 	<div class="row m-auto px-3">
 		<c:forEach var="product" items="${products}">
@@ -141,9 +144,18 @@
 					</c:forEach>
 					<c:if test="${pageMaker.next && pageMaker.endPage >0 }">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/products/${currentCategory}?page=${pageMaker.endPage+1 }">
-								<i class="fa fa-chevron-right"></i>
-							</a>
+							<c:choose>
+								<c:when test="${empty activeDiscount}">
+									<a class="page-link" href="${pageContext.request.contextPath}/products/${currentCategory}?page=${pageMaker.endPage+1 }">
+										<i class="fa fa-chevron-right"></i>
+									</a>
+								</c:when>
+								<c:otherwise>
+									<a class="page-link" href="${pageContext.request.contextPath}/products/discount?page=${pageMaker.endPage+1 }">
+										<i class="fa fa-chevron-right"></i>
+									</a>
+								</c:otherwise>
+							</c:choose>
 						</li>
 					</c:if>
 				</ul>

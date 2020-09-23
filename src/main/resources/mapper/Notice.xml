@@ -3,6 +3,14 @@
 
 <mapper namespace="com.mju.ict.repository.INoticeDAO">
 
+
+	<select id="countNotice" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		tb_notice
+	</select>
+	
 	<insert id="insertNotice"
 		parameterType="com.mju.ict.model.Notice">
 		INSERT INTO tb_notice
@@ -14,6 +22,7 @@
 	<select id="selectAllNotices"
 		resultType="com.mju.ict.model.Notice">
 		SELECT * FROM tb_notice
+		LIMIT #{pageStart}, #{perPageNum}
 	</select>
 
 	<select id="selectNoticeById"

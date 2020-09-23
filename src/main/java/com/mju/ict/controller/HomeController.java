@@ -17,6 +17,8 @@ import com.mju.ict.model.Answer;
 import com.mju.ict.model.Brand;
 import com.mju.ict.model.Discount;
 import com.mju.ict.model.Notice;
+import com.mju.ict.model.Paging;
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.Product;
 import com.mju.ict.service.IAnswerService;
 import com.mju.ict.service.IBrandService;
@@ -108,20 +110,32 @@ public class HomeController {
 	///////////////////////////////공지사항//////////////////////////
 	//공지사항 목록 페이지
 	@RequestMapping(value = "/notice", method = RequestMethod.GET)
-	public String getNotices(Model model) {
-		List<Notice> notices = noticeService.getAllNotices();
+	public String getNotices(PagingCriteria cri,Model model) {
 		
+	    Paging pageMaker = new Paging();
+	    cri.setPerPageNum(10);
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(noticeService.countNotice());
+	    
+		List<Notice> notices = noticeService.getAllNotices(cri);
+	    
 		model.addAttribute("notices", notices);
+		model.addAttribute("pageMaker", pageMaker);
 		return "notice/list";
 	}
 	
 	//공지사항 상세 페이지
 	@RequestMapping(value = "/notice/{id}", method = RequestMethod.GET)
-	public String getNoticeDetail(@PathVariable int id,Model model) {
+	public String getNoticeDetail(@PathVariable int id,PagingCriteria cri,Model model) {
 		noticeService.addNoticeView(id);
 		Notice notice = noticeService.getNoticeById(id);
-
+		
+	    Paging pageMaker = new Paging();
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(noticeService.countNotice());
+		
 		model.addAttribute("notice", notice);
+		model.addAttribute("pageMaker", pageMaker);
 		return "notice/detail";
 	}
 	
@@ -129,16 +143,22 @@ public class HomeController {
 	
 	//자주하는질문 목록 페이지
 	@RequestMapping(value = "/faq", method = RequestMethod.GET)
-	public String getFAQs(Model model) {
-		List<Answer> answers = answerService.getFaqAnswers();
+	public String getFAQs(PagingCriteria cri,Model model) {
+		List<Answer> answers = answerService.getFaqAnswers(cri);
 		
+	    Paging pageMaker = new Paging();
+	    cri.setPerPageNum(10);
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(answerService.countFaqAnswers());
+	    
 		model.addAttribute("answers", answers);
+		model.addAttribute("pageMaker", pageMaker);
 		return "notice/faq/list";
 	}
 	
 	///////////////////////////////  리뷰  //////////////////////////
 	
-	//자주하는질문 목록 페이지
+	//리뷰 조회수 증가
 	@ResponseBody
 	@RequestMapping(value = "/review/addView/{review_id}", method = RequestMethod.GET)
 	public void addReviewView(@PathVariable int review_id) {

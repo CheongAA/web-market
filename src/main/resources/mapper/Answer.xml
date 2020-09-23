@@ -18,6 +18,15 @@
 		</association>
 	</resultMap>
 
+	<select id="countFaqAnswers" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		tb_answer
+		WHERE
+		question_category_id is not NULL
+	</select>
+
 	<select id="selectAllAnswers" resultMap="answer">
 		SELECT * FROM tb_answer
 		LEFT JOIN
@@ -25,6 +34,18 @@
 		ON
 		tb_answer.question_category_id =
 		tb_question_category.question_category_id
+	</select>
+
+	<select id="selectFaqAnswers" resultMap="answer">
+		SELECT * FROM tb_answer
+		LEFT JOIN
+		tb_question_category
+		ON
+		tb_answer.question_category_id =
+		tb_question_category.question_category_id
+		WHERE
+		tb_answer.question_category_id is not NULL
+		LIMIT #{pageStart}, #{perPageNum}
 	</select>
 
 	<select id="selectAnswerById" parameterType="Integer"
@@ -62,7 +83,8 @@
 		SET
 		answer_title =#{answer_title},
 		answer_content =#{answer_content},
-		question_category_id =#{question_category_id}
+		question_category_id
+		=#{question_category_id}
 		WHERE
 		answer_id =
 		#{answer_id}

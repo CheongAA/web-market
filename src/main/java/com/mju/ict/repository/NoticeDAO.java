@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mju.ict.model.Notice;
+import com.mju.ict.model.PagingCriteria;
 
 @Repository
 public class NoticeDAO implements INoticeDAO{
@@ -14,8 +15,8 @@ public class NoticeDAO implements INoticeDAO{
     private SqlSession sqlSession;
 
 	@Override
-	public List<Notice> selectAllNotices() {
-		return sqlSession.selectList("selectAllNotices");
+	public List<Notice> selectAllNotices(PagingCriteria cri) {
+		return sqlSession.selectList("selectAllNotices",cri);
 	}
 
 	@Override
@@ -42,6 +43,11 @@ public class NoticeDAO implements INoticeDAO{
 	@Override
 	public void deleteNoticeById(int id) {
 		sqlSession.delete("deleteNoticeById", id);
+	}
+
+	@Override
+	public int countNotice() {
+		return sqlSession.selectOne("countNotice");
 	}
 
 

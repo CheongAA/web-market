@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mju.ict.model.Answer;
+import com.mju.ict.model.PagingCriteria;
 
 @Repository
 public class AnswerDAO implements IAnswerDAO{
@@ -37,6 +38,16 @@ public class AnswerDAO implements IAnswerDAO{
 	@Override
 	public void deleteAnswerById(int id) {
 		sqlSession.delete("deleteAnswerById",id);
+	}
+
+	@Override
+	public int countFaqAnswers() {
+		return sqlSession.selectOne("countFaqAnswers");
+	}
+
+	@Override
+	public List<Answer> selectFaqAnswers(PagingCriteria cri) {
+		return sqlSession.selectList("selectFaqAnswers",cri);
 	}
 
 

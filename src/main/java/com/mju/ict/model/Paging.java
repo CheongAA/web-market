@@ -70,4 +70,5 @@ public class Paging {
     public void setDisplayPageNum(int displayPageNum) {
         this.displayPageNum = displayPageNum;
     }
+    
 }

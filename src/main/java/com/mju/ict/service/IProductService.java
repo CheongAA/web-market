@@ -25,7 +25,7 @@ public interface IProductService {
 	
 	public abstract List<Product> getProductsByBrand(int id);
 
-	public abstract List<Product> getDiscountProducts();
+	public abstract List<Product> getDiscountProducts(PagingCriteria cri);
 	
 	public abstract List<Product> searchProductByTerm(String term);
 

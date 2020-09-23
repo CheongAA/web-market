@@ -24,25 +24,58 @@
 					</thead>
 					<tbody>
 						<c:forEach var="answer" items="${answers}" varStatus="status">
-							<c:if test="${answer.question_category_id != 0}">
-								<tr class="answer_tr border-bottom">
-									<td>
-										<c:out value="${status.count} " />
-									</td>
-									<td>${answer.questionCategory.question_category_title}</td>
-									<td colspan="2">${answer.answer_title}</td>
-								</tr>
-								<tr>
-									<td colspan="4" class="p-5 text-left" style="display: none;" id="content_${status.count}">
-										<i class="fas fa-font market-color"> ></i><span class="ml-2">${answer.answer_content}</span>
-									</td>
-								</tr>
-							</c:if>
+							<tr class="answer_tr border-bottom" id="${answer.answer_id}">
+								<td>${answer.answer_id}</td>
+								<td>${answer.questionCategory.question_category_title}</td>
+								<td colspan="2">${answer.answer_title}</td>
+							</tr>
+							<tr>
+								<td colspan="4" class="p-5 text-left" style="display: none;" id="content_${answer.answer_id}">
+									<i class="fas fa-font market-color"> ></i><span class="ml-2">${answer.answer_content}</span>
+								</td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
+
 		</div>
+		<nav class="col-sm-12 m-3" aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<c:if test="${pageMaker.prev}">
+					<li class="page-item">
+						<a class="page-link" href="${pageContext.request.contextPath}/faq?page=${pageMaker.startPage-1 }">
+							<i class="fa fa-chevron-left"></i>
+						</a>
+					</li>
+				</c:if>
+				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="pageNum">
+					<c:choose>
+						<c:when test="${pageNum eq pageMaker.cri.page}">
+							<li class="page-item active">
+								<a class="page-link" href="${pageContext.request.contextPath}/faq?page=${pageNum }">
+									<i class="fa">${pageNum }</i>
+								</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="${pageContext.request.contextPath}/faq?page=${pageNum }">
+									<i class="fa">${pageNum }</i>
+								</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+					<li class="page-item">
+						<a class="page-link" href="${pageContext.request.contextPath}/faq?page=${pageMaker.endPage+1 }">
+							<i class="fa fa-chevron-right"></i>
+						</a>
+					</li>
+				</c:if>
+			</ul>
+		</nav>
 	</div>
 	<script type="text/javascript">
 		$(function() {
@@ -53,8 +86,8 @@
 			});
 		});
 
-		$("tr").click(function() {
-			var td = $("#content_" + $(this).children("td").html());
+		$(".answer_tr").click(function() {
+			var td = $("#content_" + $(this).attr('id'));
 
 			if (td.css("display") != "table-cell") {
 				$("[id^=content_]").css("display", "none");

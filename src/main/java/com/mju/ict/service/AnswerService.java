@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mju.ict.model.Answer;
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.repository.IAnswerDAO;
 import com.mju.ict.repository.IQuestionDAO;
 
@@ -22,16 +23,8 @@ public class AnswerService implements IAnswerService{
 	IQuestionDAO questionDAO;
 
 	@Override
-	public List<Answer> getFaqAnswers() {
-		List<Answer> answers = answerDAO.selectAllAnswers();
-		List<Answer> result = new ArrayList<Answer>();
-		
-		for(Answer a:answers) {
-			if((Integer)a.getQuestion_category_id()!= 0) {
-				result.add(a);
-			}
-		}
-		return result;
+	public List<Answer> getFaqAnswers(PagingCriteria cri) {
+		return answerDAO.selectFaqAnswers(cri);
 	}
 	
 	@Override
@@ -62,6 +55,11 @@ public class AnswerService implements IAnswerService{
 	@Override
 	public void deleteAnswerById(int id) {
 		answerDAO.deleteAnswerById(id);
+	}
+
+	@Override
+	public int countFaqAnswers() {
+		return answerDAO.countFaqAnswers();
 	}
 
 

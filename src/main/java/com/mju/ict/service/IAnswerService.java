@@ -3,10 +3,11 @@ package com.mju.ict.service;
 import java.util.List;
 
 import com.mju.ict.model.Answer;
+import com.mju.ict.model.PagingCriteria;
 
 public interface IAnswerService {
 
-	public abstract List<Answer> getFaqAnswers();
+	public abstract List<Answer> getFaqAnswers(PagingCriteria cri);
 	
 	public abstract Answer getAnswerById(int id);
 	
@@ -15,6 +16,8 @@ public interface IAnswerService {
 	public abstract void updateAnswer(Answer answer);
 
 	public abstract void deleteAnswerById(int id);
+
+	public abstract int countFaqAnswers();
 
 
 

@@ -66,6 +66,7 @@ public class ProductController {
 		List<Product> products = productService.searchProductByTerm(term);
 		
 		model.addAttribute("products", products);
+		model.addAttribute("term", term);
 		return "/products";
 	}
 	
@@ -112,11 +113,13 @@ public class ProductController {
 	//알뜰상품 페이지
 	@RequestMapping(value = "/products/discount", method = RequestMethod.GET)
 	public String getProductsDiscount(PagingCriteria cri, Model model) {
-		List<Product> products = productService.getDiscountProducts();
+		
 		
 	    Paging pageMaker = new Paging();
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(productService.countProductByDiscount());
+	    
+	    List<Product> products = productService.getDiscountProducts(cri);
 		
 	    System.out.println(productService.countProductByDiscount());
 		model.addAttribute("products", products);
