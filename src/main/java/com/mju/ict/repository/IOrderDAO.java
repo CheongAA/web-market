@@ -5,10 +5,11 @@ import java.util.Map;
 
 import com.mju.ict.model.Order;
 import com.mju.ict.model.OrderDetail;
+import com.mju.ict.model.PagingCriteria;
 
 public interface IOrderDAO {
 	
-	public abstract List<Order> selectAllOrders();
+	public abstract List<Order> selectAllOrders(PagingCriteria cri);
 
 	public abstract List<Order> selectOrderByUser(int user_id);
 
@@ -23,6 +24,8 @@ public interface IOrderDAO {
 	public abstract void updateOrderTracking(Map<String, Integer> map);
 
 	public abstract void updateOrderState(Map<String, Integer> map);
+
+	public abstract int countOrders();
 
 
 }

@@ -11,9 +11,6 @@
 	<jsp:include page="../admin_header.jsp" flush="false" />
 	<div class="row mt-5">
 		<h3 class="w-100 mb-3">주문조회</h3>
-		<select>
-			<option>전체주문</option>
-		</select>
 		<table class="table table-hover mt-3">
 			<thead>
 				<tr>
@@ -26,9 +23,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="order" items="${orders}" varStatus="status">
+				<c:forEach var="order" items="${orders}" >
 					<tr class="rows" id="${order.order_id}">
-						<td class="h5">${status.count }</td>
 						<td>${order.order_id}</td>
 						<td>
 							<fmt:formatDate value="${order.order_created}" pattern="yyyy-MM-dd" />
@@ -42,20 +38,35 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<nav aria-label="Page navigation example" class="d-block mx-auto">
-			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					</a></li>
-			</ul>
-		</nav>
 	</div>
+	<nav class="col-sm-12 my-3" aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<c:if test="${pageMaker.prev}">
+				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=${pageMaker.startPage-1 }">
+						<i class="fa fa-chevron-left"></i>
+					</a></li>
+			</c:if>
+			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="pageNum">
+				<c:choose>
+					<c:when test="${pageNum eq pageMaker.cri.page}">
+						<li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=${pageNum }">
+								<i class="fa">${pageNum }</i>
+							</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=${pageNum }">
+								<i class="fa">${pageNum }</i>
+							</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/order?page=${pageMaker.endPage+1 }">
+						<i class="fa fa-chevron-right"></i>
+					</a></li>
+			</c:if>
+		</ul>
+	</nav>
 	<script type="text/javascript">
 		$(".rows").click(function() {
 			location.href = "/admin/order/" + $(this).attr('id');

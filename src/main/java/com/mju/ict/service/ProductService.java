@@ -31,6 +31,12 @@ public class ProductService implements IProductService{
 	public List<Product> getAllProducts() {
 		return productDAO.selectAllProducts();
 	}
+	
+	//상품 전체 조회
+	@Override
+	public List<Product> getAllProducts(PagingCriteria cri) {
+		return productDAO.selectAllProducts(cri);
+	}
 
 	//할인 상품 조회
 	@Override
@@ -144,8 +150,8 @@ public class ProductService implements IProductService{
 
 	
 	@Override
-	public int countProductList() {
-		return productDAO.countProductList();
+	public int countProducts() {
+		return productDAO.countProducts();
 	}
 
 	@Override

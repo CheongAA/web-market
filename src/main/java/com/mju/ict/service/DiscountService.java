@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mju.ict.model.Discount;
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.Product;
 import com.mju.ict.repository.IDiscountDAO;
 import com.mju.ict.repository.IProductDAO;
@@ -34,8 +35,8 @@ public class DiscountService implements IDiscountService {
 
 	// 할인 전체 조회
 	@Override
-	public List<Discount> getAllDiscounts() {
-		return discountDAO.selectAllDiscounts();
+	public List<Discount> getAllDiscounts(PagingCriteria cri) {
+		return discountDAO.selectAllDiscounts(cri);
 	}
 
 	// 메인에 노출될 3개의 할인 조회
@@ -144,6 +145,16 @@ public class DiscountService implements IDiscountService {
 			}
 			discountDAO.updateDiscountState(d);
 		}
+	}
+
+	@Override
+	public int countDiscounts() {
+		return discountDAO.countDiscounts();
+	}
+
+	@Override
+	public int countAppliedDiscounts() {
+		return discountDAO.countAppliedDiscounts();
 	}
 
 }

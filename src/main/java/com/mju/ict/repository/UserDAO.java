@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.User;
 
 @Repository
@@ -15,8 +16,8 @@ public class UserDAO implements IUserDAO{
     private SqlSession sqlSession;
 
 	@Override
-	public List<User> selectAllUsers() {
-		return sqlSession.selectList("selectAllUsers");
+	public List<User> selectAllUsers(PagingCriteria cri) {
+		return sqlSession.selectList("selectAllUsers",cri);
 	}
 
 	@Override
@@ -53,6 +54,11 @@ public class UserDAO implements IUserDAO{
 	@Override
 	public void deleteUserById(int id) {
 		sqlSession.delete("deleteUserById", id);
+	}
+
+	@Override
+	public int countUsers() {
+		return sqlSession.selectOne("countUsers");
 	}
 
 

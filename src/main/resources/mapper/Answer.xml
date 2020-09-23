@@ -45,6 +45,7 @@
 		tb_question_category.question_category_id
 		WHERE
 		tb_answer.question_category_id is not NULL
+		ORDER BY answer_created desc
 		LIMIT #{pageStart}, #{perPageNum}
 	</select>
 

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.Question;
 
 @Repository
@@ -17,8 +18,8 @@ public class QuestionDAO implements IQuestionDAO{
     
     
 	@Override
-	public List<Question> selectAllQuestions() {
-		return sqlSession.selectList("selectAllQuestions");
+	public List<Question> selectAllQuestions(PagingCriteria cri) {
+		return sqlSession.selectList("selectAllQuestions",cri);
 	}
 	
 	
@@ -48,6 +49,12 @@ public class QuestionDAO implements IQuestionDAO{
 	@Override
 	public void updateQuestionAnswerId(Map<String, Integer> map) {
 		sqlSession.update("updateQuestionAnswerId", map);
+	}
+
+
+	@Override
+	public int countQuestions() {
+		return sqlSession.selectOne("countQuestions");
 	}
 
 }

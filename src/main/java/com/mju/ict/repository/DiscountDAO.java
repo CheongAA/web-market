@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mju.ict.model.Discount;
+import com.mju.ict.model.PagingCriteria;
 
 @Repository
 public class DiscountDAO implements IDiscountDAO{
@@ -17,6 +18,11 @@ public class DiscountDAO implements IDiscountDAO{
 	@Override
 	public List<Discount> selectAllDiscounts() {
 		return sqlSession.selectList("selectAllDiscounts");
+	}
+    
+	@Override
+	public List<Discount> selectAllDiscounts(PagingCriteria cri) {
+		return sqlSession.selectList("selectAllDiscountsByCri",cri);
 	}
 	
 	@Override
@@ -52,6 +58,16 @@ public class DiscountDAO implements IDiscountDAO{
 	@Override
 	public void deleteDiscountById(int id) {
 		sqlSession.delete("deleteDiscountById", id);
+	}
+
+	@Override
+	public int countDiscounts() {
+		return sqlSession.selectOne("countDiscounts");
+	}
+
+	@Override
+	public int countAppliedDiscounts() {
+		return sqlSession.selectOne("countAppliedDiscounts");
 	}
 
 

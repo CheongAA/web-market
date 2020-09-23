@@ -22,6 +22,7 @@
 	<select id="selectAllNotices"
 		resultType="com.mju.ict.model.Notice">
 		SELECT * FROM tb_notice
+		ORDER BY notice_created desc
 		LIMIT #{pageStart}, #{perPageNum}
 	</select>
 

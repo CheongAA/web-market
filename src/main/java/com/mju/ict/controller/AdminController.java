@@ -32,6 +32,8 @@ import com.mju.ict.model.Discount;
 import com.mju.ict.model.Notice;
 import com.mju.ict.model.Order;
 import com.mju.ict.model.OrderState;
+import com.mju.ict.model.Paging;
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.Product;
 import com.mju.ict.model.Question;
 import com.mju.ict.model.QuestionCategory;
@@ -94,8 +96,16 @@ public class AdminController {
 	/////////////// 상품//////////////////
 	// 상품 목록 페이지
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
-	public String getProducts(Model model) {
-		List<Product> products = productService.getAllProducts();
+	public String getProducts(PagingCriteria cri,Model model) {
+		
+	    Paging pageMaker = new Paging();
+	    cri.setPerPageNum(15);
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(productService.countProducts());
+	    
+		model.addAttribute("pageMaker", pageMaker);
+		
+		List<Product> products = productService.getAllProducts(cri);
 
 		model.addAttribute("products", products);
 		return "admin/product/list";
@@ -170,10 +180,17 @@ public class AdminController {
 
 	// 할인 목록 페이지
 	@RequestMapping(value = "/discount", method = RequestMethod.GET)
-	public String getDiscounts(Model model) {
-		List<Discount> discounts = discountService.getAllDiscounts();
-
+	public String getDiscounts(PagingCriteria cri,Model model) {
+		
+	    Paging pageMaker = new Paging();
+	    cri.setPerPageNum(15);
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(discountService.countDiscounts());
+	    
+	    List<Discount> discounts = discountService.getAllDiscounts(cri);
+	    
 		model.addAttribute("discounts", discounts);
+		model.addAttribute("pageMaker", pageMaker);
 		return "admin/discount/list";
 	}
 
@@ -312,8 +329,15 @@ public class AdminController {
 
 	/// 고객 목록 페이지
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public String getUsers(Model model) {
-		List<User> users = userService.getAllUsers();
+	public String getUsers(PagingCriteria cri,Model model) {
+	    Paging pageMaker = new Paging();
+	    cri.setPerPageNum(15);
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(userService.countUsers());
+	    
+		model.addAttribute("pageMaker", pageMaker);
+		
+		List<User> users = userService.getAllUsers(cri);
 		model.addAttribute("users", users);
 		return "admin/user/list";
 	}
@@ -330,9 +354,16 @@ public class AdminController {
 
 	/// 브랜드 목록 페이지
 	@RequestMapping(value = "/brand", method = RequestMethod.GET)
-	public String getBrands(Model model) {
-		List<Brand> brands = brandService.getAllBrands();
+	public String getBrands(PagingCriteria cri,Model model) {
+		
+	    Paging pageMaker = new Paging();
+	    cri.setPerPageNum(15);
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(brandService.countBrands());
+	    
+		List<Brand> brands = brandService.getAllBrands(cri);
 		model.addAttribute("brands", brands);
+		model.addAttribute("pageMaker", pageMaker);
 		return "admin/brand/list";
 	}
 
@@ -387,9 +418,16 @@ public class AdminController {
 
 	// 공지사항 목록 페이지
 	@RequestMapping(value = "/notice", method = RequestMethod.GET)
-	public String getNotices(Model model) {
-		List<Notice> notices = noticeService.getAllNotices();
+	public String getNotices(PagingCriteria cri,Model model) {
+		
+	    Paging pageMaker = new Paging();
+	    cri.setPerPageNum(15);
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(answerService.countFaqAnswers());
+	    
+		List<Notice> notices = noticeService.getAllNotices(cri);
 		model.addAttribute("notices", notices);
+		model.addAttribute("pageMaker", pageMaker);
 		return "admin/notice/list";
 	}
 
@@ -441,9 +479,15 @@ public class AdminController {
 
 	// 주문 목록 페이지
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
-	public String getOrders(Model model) {
-		List<Order> orders = orderService.getAllOrders();
+	public String getOrders(PagingCriteria cri,Model model) {
+	    Paging pageMaker = new Paging();
+	    cri.setPerPageNum(15);
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(orderService.countOrders());
+		
+		List<Order> orders = orderService.getAllOrders(cri);
 		model.addAttribute("orders", orders);
+		model.addAttribute("pageMaker", pageMaker);
 		return "admin/order/list";
 	}
 
@@ -477,9 +521,16 @@ public class AdminController {
 
 	// 문의 목록 페이지
 	@RequestMapping(value = "/question", method = RequestMethod.GET)
-	public String getQuestions(Model model) {
-		List<Question> questions = questionService.getAllQuestion();
+	public String getQuestions(PagingCriteria cri,Model model) {
+		
+	    Paging pageMaker = new Paging();
+	    cri.setPerPageNum(15);
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(questionService.countQuestions());
+		
+		List<Question> questions = questionService.getAllQuestion(cri);
 		model.addAttribute("questions", questions);
+		model.addAttribute("pageMaker", pageMaker);
 		return "admin/question/list";
 	}
 
@@ -493,9 +544,17 @@ public class AdminController {
 
 	// 자주하는 질문 목록 페이지
 	@RequestMapping(value = "/faq", method = RequestMethod.GET)
-	public String getFaqs(Model model) {
-		List<Answer> answers = answerService.getFaqAnswers();
+	public String getFaqs(PagingCriteria cri,Model model) {
+		
+	    Paging pageMaker = new Paging();
+	    cri.setPerPageNum(15);
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(answerService.countFaqAnswers());
+	    
+		List<Answer> answers = answerService.getFaqAnswers(cri);
+		
 		model.addAttribute("answers", answers);
+		model.addAttribute("pageMaker", pageMaker);
 		return "admin/question/faq-list";
 	}
 
@@ -568,8 +627,14 @@ public class AdminController {
 
 	// 후기 목록 페이지
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
-	public String getReviews(Model model) {
-		List<Review> reviews = reviewService.getAllReviews();
+	public String getReviews(PagingCriteria cri,Model model) {
+	    Paging pageMaker = new Paging();
+	    cri.setPerPageNum(15);
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(reviewService.countReviews());
+	    
+		model.addAttribute("pageMaker", pageMaker);
+		List<Review> reviews = reviewService.getAllReviews(cri);
 		model.addAttribute("reviews", reviews);
 		return "admin/review/list";
 	}

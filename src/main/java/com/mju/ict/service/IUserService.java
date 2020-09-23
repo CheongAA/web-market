@@ -4,11 +4,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.User;
 
 public interface IUserService {
 	
-	public abstract List<User> getAllUsers();
+	public abstract List<User> getAllUsers(PagingCriteria cri);
 	
 	public abstract User getUserByIdentification(String user_identification);
 	
@@ -27,6 +28,8 @@ public interface IUserService {
 	public abstract User checkUser(String identification, String password);
 
 	public abstract void deleteUserById(int id);
+
+	public abstract int countUsers();
 
 
 }

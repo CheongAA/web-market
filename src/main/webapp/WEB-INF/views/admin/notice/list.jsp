@@ -14,7 +14,7 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th scope="col">번호</th>
+					<th scope="col"></th>
 					<th scope="col">제목</th>
 					<th scope="col">작성자</th>
 					<th scope="col">작성일</th>
@@ -23,11 +23,9 @@
 			</thead>
 			<tbody>
 				<tr>
-					<c:forEach var="notice" items="${notices}" varStatus="status">
+					<c:forEach var="notice" items="${notices}" >
 						<tr class="rows" id="${notice.notice_id}">
-							<td>
-								<c:out value="${status.count} " />
-							</td>
+							<td>${notice.notice_id}</td>
 							<td>${notice.notice_title}</td>
 							<td>${notice.notice_writer}</td>
 							<td>
@@ -38,6 +36,34 @@
 					</c:forEach>
 			</tbody>
 		</table>
+		<nav class="col-sm-12 m-3" aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<c:if test="${pageMaker.prev}">
+					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/notice?page=${pageMaker.startPage-1 }">
+							<i class="fa fa-chevron-left"></i>
+						</a></li>
+				</c:if>
+				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="pageNum">
+					<c:choose>
+						<c:when test="${pageNum eq pageMaker.cri.page}">
+							<li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/admin/notice?page=${pageNum }">
+									<i class="fa">${pageNum }</i>
+								</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/notice?page=${pageNum }">
+									<i class="fa">${pageNum }</i>
+								</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/notice?page=${pageMaker.endPage+1 }">
+							<i class="fa fa-chevron-right"></i>
+						</a></li>
+				</c:if>
+			</ul>
+		</nav>
 	</div>
 	<script type="text/javascript">
 		$(".rows").click(function() {

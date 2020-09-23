@@ -2,11 +2,12 @@ package com.mju.ict.repository;
 
 import java.util.List;
 
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.User;
 
 public interface IUserDAO {
 
-	public abstract List<User> selectAllUsers();
+	public abstract List<User> selectAllUsers(PagingCriteria cri);
 		
 	public abstract User selectUserByIdentification(String user_identification);
 	
@@ -21,6 +22,8 @@ public interface IUserDAO {
 	public abstract void updateUserPassword(User user);
 
 	public abstract void deleteUserById(int id);
+
+	public abstract int countUsers();
 
 
 

@@ -20,9 +20,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="brand" items="${brands}" varStatus="status">
+				<c:forEach var="brand" items="${brands}" >
 					<tr class="rows" id="${brand.brand_id}">
-						<td>${status.count}</td>
+						<td>${brand.brand_id}</td>
 						<td>${brand.brand_name}</td>
 						<td>
 							<fmt:formatDate value="${brand.brand_created}" pattern="yyyy-MM-dd" />
@@ -31,7 +31,34 @@
 				</c:forEach>
 			</tbody>
 		</table>
-
+		<nav class="col-sm-12 m-3" aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<c:if test="${pageMaker.prev}">
+					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/brand?page=${pageMaker.startPage-1 }">
+							<i class="fa fa-chevron-left"></i>
+						</a></li>
+				</c:if>
+				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="pageNum">
+					<c:choose>
+						<c:when test="${pageNum eq pageMaker.cri.page}">
+							<li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/admin/brand?page=${pageNum }">
+									<i class="fa">${pageNum }</i>
+								</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/brand?page=${pageNum }">
+									<i class="fa">${pageNum }</i>
+								</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/brand?page=${pageMaker.endPage+1 }">
+							<i class="fa fa-chevron-right"></i>
+						</a></li>
+				</c:if>
+			</ul>
+		</nav>
 	</div>
 	<script type="text/javascript">
 		$(".rows").click(function() {

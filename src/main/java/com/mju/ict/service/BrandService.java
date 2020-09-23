@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mju.ict.model.Brand;
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.repository.IBrandDAO;
 import com.mju.ict.util.S3Util;
 import com.mju.ict.util.UploadFileUtils;
@@ -64,6 +65,16 @@ public class BrandService implements IBrandService{
 		s3.fileDelete(brandDAO.selectBrandById(id).getBrand_img());
 		brandDAO.deleteBrandById(id);
 		
+	}
+
+	@Override
+	public List<Brand> getAllBrands(PagingCriteria cri) {
+		return brandDAO.selectAllBrands(cri);
+	}
+
+	@Override
+	public int countBrands() {
+		return brandDAO.countBrands();
 	}
 
 

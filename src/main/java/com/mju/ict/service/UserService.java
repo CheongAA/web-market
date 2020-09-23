@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.User;
 import com.mju.ict.repository.IUserDAO;
 
@@ -23,8 +24,8 @@ public class UserService implements IUserService {
 	
 	//고객 전체 조회
 	@Override
-	public List<User> getAllUsers() {
-		return userDAO.selectAllUsers();
+	public List<User> getAllUsers(PagingCriteria cri) {
+		return userDAO.selectAllUsers(cri);
 	}
 
 	//user_id로 고객 조회
@@ -111,6 +112,11 @@ public class UserService implements IUserService {
 	@Override
 	public void deleteUserById(int id) {
 		userDAO.deleteUserById(id);
+	}
+
+	@Override
+	public int countUsers() {
+		return userDAO.countUsers();
 	}
 
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mju.ict.model.Brand;
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.Product;
 
 @Repository
@@ -43,6 +44,16 @@ public class BrandDAO implements IBrandDAO{
 	@Override
 	public void deleteBrandById(int id) {
 		sqlSession.delete("deleteBrandById", id);
+	}
+
+	@Override
+	public List<Brand> selectAllBrands(PagingCriteria cri) {
+		return sqlSession.selectList("selectAllBrandsByCri",cri);
+	}
+
+	@Override
+	public int countBrands() {
+		return sqlSession.selectOne("countBrands");
 	}
 
 	

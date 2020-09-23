@@ -15,6 +15,14 @@
 		)
 
 	</insert>
+
+	<select id="countUsers" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		tb_user
+	</select>
+
 	<select id="selectUserByIdentification" parameterType="String"
 		resultType="com.mju.ict.model.User">
 		SELECT * FROM tb_user WHERE
@@ -37,6 +45,7 @@
 
 	<select id="selectAllUsers" resultType="com.mju.ict.model.User">
 		SELECT * FROM tb_user
+		LIMIT #{pageStart}, #{perPageNum}
 	</select>
 	<update id="updateUser" parameterType="com.mju.ict.model.User">
 		UPDATE tb_user

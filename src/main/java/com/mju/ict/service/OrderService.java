@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import com.mju.ict.model.Order;
 import com.mju.ict.model.OrderDetail;
 import com.mju.ict.model.OrderState;
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.User;
 import com.mju.ict.repository.IOrderDAO;
 import com.mju.ict.repository.IOrderDetailDAO;
@@ -58,8 +59,8 @@ public class OrderService implements IOrderService{
 	
 	//주문 전체 조회
 	@Override
-	public List<Order> getAllOrders() {
-		return orderDAO.selectAllOrders();
+	public List<Order> getAllOrders(PagingCriteria cri) {
+		return orderDAO.selectAllOrders(cri);
 	}
 	
 	//user_id로 주문 조회
@@ -155,6 +156,12 @@ public class OrderService implements IOrderService{
 				productDAO.addSalesQuantity(map2);
 			}
 		}
+	}
+
+
+	@Override
+	public int countOrders() {
+		return orderDAO.countOrders();
 	}
 
 

@@ -15,9 +15,34 @@
 		,#{discount_rate},#{discount_start},#{discount_end})
 	</insert>
 
+	<select id="countDiscounts" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		tb_discount
+	</select>
+
+	<select id="countAppliedDiscounts" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		tb_discount
+		WHERE
+		discount_apply = 1
+	</select>
+
 	<select id="selectAllDiscounts"
 		resultType="com.mju.ict.model.Discount">
 		SELECT * from tb_discount
+	</select>
+
+	<select id="selectAllDiscountsByCri"
+		resultType="com.mju.ict.model.Discount">
+		SELECT *
+		FROM
+		tb_discount
+		LIMIT
+		#{pageStart}, #{perPageNum}
 	</select>
 
 	<select id="selectRecentDiscounts"

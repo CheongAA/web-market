@@ -41,6 +41,12 @@
 		#{review_star},#{review_content},#{review_img})
 	</insert>
 
+	<select id="countReviews" resultType="Integer">
+		SELECT count(*)
+		FROM
+		tb_review
+	</select>
+
 	<select id="selectAllReviews" resultMap="review">
 		SELECT * FROM
 		tb_review
@@ -55,6 +61,8 @@
 		ON
 		tb_user.user_id =
 		tb_review.user_id
+		LIMIT #{pageStart},
+		#{perPageNum}
 	</select>
 
 	<select id="selectReviewByUser" resultMap="review">

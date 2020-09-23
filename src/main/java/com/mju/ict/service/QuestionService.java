@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.Question;
 import com.mju.ict.model.QuestionCategory;
 import com.mju.ict.model.User;
@@ -33,8 +34,8 @@ public class QuestionService implements IQuestionService{
 	}
 	
 	@Override
-	public List<Question> getAllQuestion() {
-		return questionDAO.selectAllQuestions();
+	public List<Question> getAllQuestion(PagingCriteria cri) {
+		return questionDAO.selectAllQuestions(cri);
 	}
 	
 	@Override
@@ -59,6 +60,11 @@ public class QuestionService implements IQuestionService{
 		question.setUser_id(user.getUser_id());
 		
 		questionDAO.insertQuestion(question);
+	}
+
+	@Override
+	public int countQuestions() {
+		return questionDAO.countQuestions();
 	}
 
 

@@ -2,11 +2,12 @@ package com.mju.ict.repository;
 
 import java.util.List;
 
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.Review;
 
 public interface IReviewDAO {
 
-	public abstract List<Review> selectAllReviews();
+	public abstract List<Review> selectAllReviews(PagingCriteria cri);
 
 	public abstract Review selectReviewById(int id);
 	
@@ -21,6 +22,8 @@ public interface IReviewDAO {
 	public abstract void deleteReviewById(int id);
 
 	public abstract void addReviewView(int id);
+
+	public abstract int countReviews();
 
 
 

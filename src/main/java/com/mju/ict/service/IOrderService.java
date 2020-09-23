@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import com.mju.ict.model.Order;
 import com.mju.ict.model.OrderDetail;
 import com.mju.ict.model.OrderState;
+import com.mju.ict.model.PagingCriteria;
 
 public interface IOrderService {
 	
@@ -17,7 +18,7 @@ public interface IOrderService {
 	
 	public abstract OrderDetail getOrderDetailByReview(int id);
 
-	public abstract List<Order> getAllOrders();
+	public abstract List<Order> getAllOrders(PagingCriteria cri);
 	
 	public abstract List<Order> getOrderByUser(int user_id);
 
@@ -30,5 +31,7 @@ public interface IOrderService {
 	public abstract void updateOrderTracking(int order_id, int order_tracking_number);
 
 	public abstract void updateOrderState(int order_id, int order_state_id);
+
+	public abstract int countOrders();
 
 }

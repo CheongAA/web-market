@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.Review;
 import com.mju.ict.repository.IOrderDetailDAO;
 import com.mju.ict.repository.IReviewDAO;
@@ -26,8 +27,8 @@ public class ReviewService implements IReviewService{
 	private S3Util s3;
 
 	@Override
-	public List<Review> getAllReviews() {
-		return reviewDAO.selectAllReviews();
+	public List<Review> getAllReviews(PagingCriteria cri) {
+		return reviewDAO.selectAllReviews(cri);
 	}
 
 	@Override
@@ -84,6 +85,11 @@ public class ReviewService implements IReviewService{
 	@Override
 	public void addReviewView(int id) {
 		reviewDAO.addReviewView(id);
+	}
+
+	@Override
+	public int countReviews() {
+		return reviewDAO.countReviews();
 	}
 
 

@@ -22,9 +22,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="product" items="${products}" varStatus="status">
+				<c:forEach var="product" items="${products}">
 					<tr class="rows" id="${product.product_id}">
-						<td>${status.count}</td>
+						<td>${product.product_id}</td>
 						<td>${product.product_name}</td>
 						<td>${product.brand.brand_name}</td>
 						<td>
@@ -54,20 +54,35 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<nav aria-label="Page navigation example" class="d-block mx-auto">
-			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					</a></li>
-			</ul>
-		</nav>
 	</div>
+	<nav class="col-sm-12 my-3" aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<c:if test="${pageMaker.prev}">
+				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/product?page=${pageMaker.startPage-1 }">
+						<i class="fa fa-chevron-left"></i>
+					</a></li>
+			</c:if>
+			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="pageNum">
+				<c:choose>
+					<c:when test="${pageNum eq pageMaker.cri.page}">
+						<li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/admin/product?page=${pageNum }">
+								<i class="fa">${pageNum }</i>
+							</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/product?page=${pageNum }">
+								<i class="fa">${pageNum }</i>
+							</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/product?page=${pageMaker.endPage+1 }">
+						<i class="fa fa-chevron-right"></i>
+					</a></li>
+			</c:if>
+		</ul>
+	</nav>
 	<script type="text/javascript">
 		$(".rows").click(function() {
 			location.href = "/admin/product/" + $(this).attr('id');

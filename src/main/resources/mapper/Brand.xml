@@ -3,16 +3,32 @@
 
 <mapper namespace="com.mju.ict.repository.IBrandDAO">
 
+	<select id="countBrands" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		tb_brand
+	</select>
+
 	<select id="selectAllBrands"
 		resultType="com.mju.ict.model.Brand">
 		SELECT * FROM tb_brand
+	</select>
+
+	<select id="selectAllBrandsByCri"
+		resultType="com.mju.ict.model.Brand">
+		SELECT * FROM tb_brand
+		ORDER BY brand_created desc
+		LIMIT
+		#{pageStart}, #{perPageNum}
 	</select>
 
 	<select id="selectBrandByTerm" parameterType="String"
 		resultType="com.mju.ict.model.Brand">
 		SELECT * FROM tb_brand
 		WHERE
-		brand_name like CONCAT('%', #{term}, '%')
+		brand_name like CONCAT('%',
+		#{term}, '%')
 	</select>
 
 	<select id="selectBrandById" parameterType="Integer"
@@ -41,7 +57,8 @@
 		SET
 		brand_name =#{brand_name},
 		brand_desc =#{brand_desc},
-		brand_img =#{brand_img}
+		brand_img
+		=#{brand_img}
 		WHERE
 		brand_id =
 		#{brand_id}

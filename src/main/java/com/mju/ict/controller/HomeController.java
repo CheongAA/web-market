@@ -144,12 +144,13 @@ public class HomeController {
 	//자주하는질문 목록 페이지
 	@RequestMapping(value = "/faq", method = RequestMethod.GET)
 	public String getFAQs(PagingCriteria cri,Model model) {
-		List<Answer> answers = answerService.getFaqAnswers(cri);
 		
 	    Paging pageMaker = new Paging();
 	    cri.setPerPageNum(10);
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(answerService.countFaqAnswers());
+	    
+	    List<Answer> answers = answerService.getFaqAnswers(cri);
 	    
 		model.addAttribute("answers", answers);
 		model.addAttribute("pageMaker", pageMaker);

@@ -21,9 +21,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="user" items="${users}" varStatus="status">
+				<c:forEach var="user" items="${users}">
 					<tr class="rows" id="${user.user_id }">
-						<td>${status.count}</td>
+						<td>${user.user_id }</td>
 						<td>${user.user_identification}</td>
 						<td>${user.user_name }</td>
 						<td>
@@ -34,6 +34,34 @@
 			</tbody>
 		</table>
 	</div>
+	<nav class="col-sm-12 my-3" aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<c:if test="${pageMaker.prev}">
+				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/product?page=${pageMaker.startPage-1 }">
+						<i class="fa fa-chevron-left"></i>
+					</a></li>
+			</c:if>
+			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="pageNum">
+				<c:choose>
+					<c:when test="${pageNum eq pageMaker.cri.page}">
+						<li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/admin/product?page=${pageNum }">
+								<i class="fa">${pageNum }</i>
+							</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/product?page=${pageNum }">
+								<i class="fa">${pageNum }</i>
+							</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/product?page=${pageMaker.endPage+1 }">
+						<i class="fa fa-chevron-right"></i>
+					</a></li>
+			</c:if>
+		</ul>
+	</nav>
 	<script type="text/javascript">
 		$(".rows").click(function() {
 			location.href = "/admin/user/" + $(this).attr('id');

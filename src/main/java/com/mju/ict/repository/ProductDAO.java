@@ -101,8 +101,8 @@ public class ProductDAO implements IProductDAO{
 
 
 	@Override
-	public int countProductList() {
-		return sqlSession.selectOne("countProductList");
+	public int countProducts() {
+		return sqlSession.selectOne("countProducts");
 	}
 
 	@Override
@@ -113,6 +113,11 @@ public class ProductDAO implements IProductDAO{
 	@Override
 	public int countProductByDiscount() {
 		return  sqlSession.selectOne("countProductByDiscount");
+	}
+
+	@Override
+	public List<Product> selectAllProducts(PagingCriteria cri) {
+		return sqlSession.selectList("selectAllProductsByCri",cri);
 	}
 
 

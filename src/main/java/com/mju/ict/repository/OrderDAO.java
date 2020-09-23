@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mju.ict.model.Order;
 import com.mju.ict.model.OrderDetail;
+import com.mju.ict.model.PagingCriteria;
 
 @Repository
 public class OrderDAO implements IOrderDAO{
@@ -26,8 +27,8 @@ public class OrderDAO implements IOrderDAO{
 	}
 	
 	@Override
-	public List<Order> selectAllOrders() {
-		return sqlSession.selectList("selectAllOrders");
+	public List<Order> selectAllOrders(PagingCriteria cri) {
+		return sqlSession.selectList("selectAllOrders",cri);
 	}
 
 	@Override
@@ -53,6 +54,11 @@ public class OrderDAO implements IOrderDAO{
 	@Override
 	public void updateOrderState(Map<String, Integer> map) {
 		sqlSession.update("updateOrderState", map);
+	}
+
+	@Override
+	public int countOrders() {
+		return sqlSession.selectOne("countOrders");
 	}
 
 

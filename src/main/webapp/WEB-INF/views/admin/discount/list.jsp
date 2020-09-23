@@ -25,9 +25,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="discount" items="${discounts}" varStatus="status">
+				<c:forEach var="discount" items="${discounts}" >
 					<tr class="rows" id="${discount.discount_id}">
-						<td>${status.count}</td>
+						<td>${discount.discount_id}</td>
 						<td>${discount.discount_name}</td>
 						<td>${discount.discount_rate}%</td>
 						<td>
@@ -68,6 +68,34 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<nav class="col-sm-12 m-3" aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<c:if test="${pageMaker.prev}">
+					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/discount?page=${pageMaker.startPage-1 }">
+							<i class="fa fa-chevron-left"></i>
+						</a></li>
+				</c:if>
+				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="pageNum">
+					<c:choose>
+						<c:when test="${pageNum eq pageMaker.cri.page}">
+							<li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/admin/discount?page=${pageNum }">
+									<i class="fa">${pageNum }</i>
+								</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/discount?page=${pageNum }">
+									<i class="fa">${pageNum }</i>
+								</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/discount?page=${pageMaker.endPage+1 }">
+							<i class="fa fa-chevron-right"></i>
+						</a></li>
+				</c:if>
+			</ul>
+		</nav>
 	</div>
 	<script type="text/javascript">
 		$(".rows").click(function() {

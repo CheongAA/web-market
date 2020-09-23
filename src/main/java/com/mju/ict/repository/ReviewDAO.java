@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.Review;
 
 @Repository
@@ -14,8 +15,8 @@ public class ReviewDAO implements IReviewDAO{
     private SqlSession sqlSession;
 
 	@Override
-	public List<Review> selectAllReviews() {
-		return sqlSession.selectList("selectAllReviews");
+	public List<Review> selectAllReviews(PagingCriteria cri) {
+		return sqlSession.selectList("selectAllReviews",cri);
 	}
 
 	@Override
@@ -53,6 +54,11 @@ public class ReviewDAO implements IReviewDAO{
 	@Override
 	public void addReviewView(int id) {
 		sqlSession.update("addReviewView",id);
+	}
+
+	@Override
+	public int countReviews() {
+		return sqlSession.selectOne("countReviews");
 	}
 
 

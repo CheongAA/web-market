@@ -99,6 +99,12 @@
 		#{order_request},#{order_payment_method},#{order_total_price},
 		#{order_products_price},#{order_discount_price},#{order_delivery_price},#{order_state_id})
 	</insert>
+	
+	<select id="countOrders" resultType="Integer">
+		SELECT count(*)
+		FROM
+		tb_order
+	</select>
 
 	<select id="selectAllOrders" resultMap="order">
 		SELECT * FROM tb_order

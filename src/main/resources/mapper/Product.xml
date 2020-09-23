@@ -46,7 +46,7 @@
 			<result column="discount_state" property="discount_state" />
 		</association>
 	</resultMap>
-	<select id="countProductList" resultType="Integer">
+	<select id="countProducts" resultType="Integer">
 		SELECT
 		count(*)
 		FROM
@@ -68,6 +68,8 @@
 		OR
 		tb_category.category_code2 =
 		#{category_code}
+		and
+		on_sale = 1
 	</select>
 
 	<select id="countProductByDiscount" resultType="Integer">
@@ -86,11 +88,12 @@
 		tb_discount.discount_apply = 1
 		and
 		tb_discount.discount_state = 1
+		and 
+		on_sale = 1
 	</select>
 
 	<!-- 페이징 처리 후 게시글 조회 -->
-	<select id="selectProductList" resultType="hashmap"
-		parameterType="hashmap">
+	<select id="selectAllProductsByCri" resultMap="product">
 		SELECT *
 		FROM tb_product
 		ORDER BY product_created DESC

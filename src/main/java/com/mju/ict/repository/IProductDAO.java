@@ -41,11 +41,13 @@ public interface IProductDAO {
 
 	public abstract void addSalesQuantity(Map<String,Integer> map);
 
-	public abstract int countProductList();
+	public abstract int countProducts();
 
 	public abstract int countProductByCategory(int category_code);
 
 	public abstract int countProductByDiscount();
+
+	public abstract List<Product> selectAllProducts(PagingCriteria cri);
 
 
 

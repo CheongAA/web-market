@@ -38,10 +38,12 @@ public interface IProductService {
 	public abstract void changeProductSale(int id);
 	
 	// 상품 총 갯수
-	public abstract int countProductList();
+	public abstract int countProducts();
 
 	public abstract int countProductByCategory(int category_code);
 
 	public abstract int countProductByDiscount();
+
+	public abstract List<Product> getAllProducts(PagingCriteria cri);
 
 }
