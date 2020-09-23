@@ -15,7 +15,7 @@
 					<c:choose>
 						<c:when test="${discount.discount_state !=0 }">
 							<div class="row mx-5 my-3">
-								<div class="jumbotron jumbotron-fluid w-100">
+								<div class="jumbotron jumbotron-fluid w-100 " style="background: url(${discount.discount_thumbnailImg }) no-repeat; background-size: cover;">
 									<div class="container pl-5 ">
 										<a class="text-decoration-none text-dark" href="${pageContext.request.contextPath}/discount/${discount.discount_id}">
 											<h1 class="display-5 pb-2">${discount.discount_name}</h1>

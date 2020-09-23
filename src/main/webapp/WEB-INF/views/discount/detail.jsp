@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="row pt-5">
-		<div class="row p-5 m-2 border w-100">
+		<div class="jumbotron jumbotron-fluid w-100 text-center" style="background: url(${discount.discount_thumbnailImg }) no-repeat; background-size: cover;">
 			<h3 class="w-100 mb-3">${discount.discount_name }</h3>
 			<p class="W-100">${discount.discount_explanation}</p>
 			<small> <fmt:formatDate pattern="MM/dd" value="${discount.discount_start}" /> ( <fmt:formatDate pattern="E" value="${discount.discount_start}" /> ) ~ <fmt:formatDate
@@ -20,7 +20,7 @@
 		<div class="row w-100 p-5">
 			<c:forEach var="product" items="${products}">
 				<c:if test="${product.on_sale == 1}">
-					<div class="col-sm-4 mb-5">
+					<div class="col-sm-3 mb-5">
 						<a href="${pageContext.request.contextPath}/product/${product.product_id}" class="text-decoration-none">
 							<img class="w-100 h-50 mb-3 product-img" alt="" src="${product.product_img}">
 							<c:if test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">

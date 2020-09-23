@@ -16,43 +16,20 @@
 						<div class="carousel-item active">
 							<div class="jumbotron col-sm-12 text-center py-5" style="background: url(${discount.discount_thumbnailImg }) no-repeat; background-size: cover;">
 								<a href="${pageContext.request.contextPath}/discount/${discount.discount_id}" class="text-decoration-none">
-									<span class="display-4 font-weight-bold text-white d-block">${discount.discount_name}  ${discount.discount_rate}%</span>
-									<span class="d-block text-white">${discount.discount_desc}</span>
-									<span class="text-white">
-										<fmt:formatDate pattern="yyyy/MM/dd" value="${discount.discount_start}" />
-										(
-										<fmt:formatDate pattern="E" value="${discount.discount_start}" />
-										) ~
-										<fmt:formatDate pattern="yyyy/MM/dd" value="${discount.discount_end}" />
-										(
-										<fmt:formatDate pattern="E" value="${discount.discount_end}" />
-										)
+									<span class="display-4 font-weight-bold text-white d-block">${discount.discount_name} ${discount.discount_rate}%</span> <span class="d-block text-white">${discount.discount_desc}</span> <span class="text-white"> <fmt:formatDate pattern="yyyy/MM/dd" value="${discount.discount_start}" /> ( <fmt:formatDate pattern="E" value="${discount.discount_start}" /> ) ~ <fmt:formatDate pattern="yyyy/MM/dd" value="${discount.discount_end}" /> ( <fmt:formatDate pattern="E" value="${discount.discount_end}" /> )
 									</span>
 								</a>
 							</div>
-
-
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div class="carousel-item">
-							<a href="${pageContext.request.contextPath}/discount/${discount.discount_id}">
-								<img src="https://blog.dineout-cdn.co.in/blog/wp-content/uploads/2018/05/BANNER-1-845x321.png" class="d-block w-100" alt="${discount.discount_name}">
-								<div class="carousel-caption d-none d-md-block">
-									<h1 class="display-3 pb-5 font-weight-bold">${discount.discount_name}${discount.discount_rate}%</h1>
-									<h3 class="pb-2">${discount.discount_desc}</h3>
-									<h4 class="pb-5 mb-5 font-weight-light">
-										<fmt:formatDate pattern="yyyy/MM/dd" value="${discount.discount_start}" />
-										(
-										<fmt:formatDate pattern="E" value="${discount.discount_start}" />
-										) ~
-										<fmt:formatDate pattern="yyyy/MM/dd" value="${discount.discount_end}" />
-										(
-										<fmt:formatDate pattern="E" value="${discount.discount_end}" />
-										)
-									</h4>
-								</div>
-							</a>
+							<div class="jumbotron col-sm-12 text-center py-5" style="background: url(${discount.discount_thumbnailImg }) no-repeat; background-size: cover;">
+								<a href="${pageContext.request.contextPath}/discount/${discount.discount_id}" class="text-decoration-none">
+									<span class="display-4 font-weight-bold text-white d-block">${discount.discount_name} ${discount.discount_rate}%</span> <span class="d-block text-white">${discount.discount_desc}</span> <span class="text-white"> <fmt:formatDate pattern="yyyy/MM/dd" value="${discount.discount_start}" /> ( <fmt:formatDate pattern="E" value="${discount.discount_start}" /> ) ~ <fmt:formatDate pattern="yyyy/MM/dd" value="${discount.discount_end}" /> ( <fmt:formatDate pattern="E" value="${discount.discount_end}" /> )
+									</span>
+								</a>
+							</div>
 						</div>
 					</c:otherwise>
 				</c:choose>
@@ -60,12 +37,10 @@
 			</c:forEach>
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
 		</a>
 		<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
+			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
 		</a>
 	</div>
 	<div class="row mt-1 pt-1">
@@ -84,11 +59,7 @@
 
 							</div>
 						</c:if>
-						<span class="d-block text-dark h3 mb-3">
-							[
-							<c:out value="${product.brand.brand_name}" />
-							]
-							<c:out value="${product.product_name}" />
+						<span class="d-block text-dark h3 mb-3"> [ <c:out value="${product.brand.brand_name}" /> ] <c:out value="${product.product_name}" />
 						</span>
 						<c:choose>
 							<c:when test="${product.product_quantity <= 0 }">
@@ -106,8 +77,7 @@
 								</c:choose>
 							</c:otherwise>
 						</c:choose>
-						<span class="d-block text-dark font-weight-light mt-2">
-							<c:out value="${product.product_desc}" />
+						<span class="d-block text-dark font-weight-light mt-2"> <c:out value="${product.product_desc}" />
 						</span>
 					</a>
 				</div>
