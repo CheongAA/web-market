@@ -23,6 +23,24 @@
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
+		<c:if test="${not empty activeNew}">
+			<h3 class="mx-5 mb-3 font-weight-bold text-muted">
+				<i class="fas fa-pizza-slice"></i> 신상품
+			</h3>
+			<h5 class="mx-5 mb-3 font-weight-light text-muted">MARKET의 다양한 신상품을 만나보세요!</h5>
+		</c:if>
+		<c:if test="${not empty activeBest}">
+			<h3 class="mx-5 mb-3 font-weight-bold text-muted">
+				<i class="fas fa-carrot"></i> 베스트
+			</h3>
+			<h5 class="mx-5 mb-3 font-weight-light text-muted">MARKET의 인기상품들을 한눈에 만나보세요!</h5>
+		</c:if>
+		<c:if test="${not empty activeDiscount}">
+			<h3 class="mx-5 mb-3 font-weight-bold text-muted">
+				<i class="fas fa-fish"></i> 알뜰상품
+			</h3>
+			<h5 class="mx-5 mb-3 font-weight-light text-muted">MARKET의 할인 상품들을 빠르게 만나보세요!</h5>
+		</c:if>
 	</div>
 	<div class="row m-auto px-3">
 		<c:forEach var="product" items="${products}">
@@ -30,7 +48,7 @@
 				<input type="hidden" id="discount_rate" value="${product.discount.discount_rate}" />
 				<input type="hidden" id="product_price" value="${product.product_price}" />
 				<input type="hidden" id="currentCategory" value="${currentCategory}" />
-				<div class="col-sm-4 mb-5">
+				<div class="col-lg-3 mb-5">
 					<a href="${pageContext.request.contextPath}/product/${product.product_id}" class="text-decoration-none">
 						<img class="w-100 h-75 mb-3 product-img" alt="" src="${product.product_img}">
 						<c:if test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
@@ -63,18 +81,83 @@
 				</div>
 			</c:if>
 		</c:forEach>
+
+		<c:if test="${not empty pageMaker}">
+			<nav class="col-sm-12" aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+					<c:if test="${pageMaker.prev}">
+						<li class="page-item">
+							<c:choose>
+								<c:when test="${empty activeDiscount}">
+									<a class="page-link" href="${pageContext.request.contextPath}/products/${currentCategory}?page=${pageMaker.startPage-1 }">
+										<i class="fa fa-chevron-left"></i>
+									</a>
+								</c:when>
+								<c:otherwise>
+									<a class="page-link" href="${pageContext.request.contextPath}/products/discount?page=${pageMaker.startPage-1 }">
+										<i class="fa fa-chevron-left"></i>
+									</a>
+								</c:otherwise>
+							</c:choose>
+
+						</li>
+					</c:if>
+					<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="pageNum">
+						<c:choose>
+							<c:when test="${pageNum eq pageMaker.cri.page}">
+								<li class="page-item active">
+									<c:choose>
+										<c:when test="${empty activeDiscount}">
+											<a class="page-link" href="${pageContext.request.contextPath}/products/${currentCategory}?page=${pageNum }">
+												<i class="fa">${pageNum }</i>
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a class="page-link" href="${pageContext.request.contextPath}/products/discount?page=${pageNum }">
+												<i class="fa">${pageNum }</i>
+											</a>
+										</c:otherwise>
+									</c:choose>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item">
+									<c:choose>
+										<c:when test="${empty activeDiscount}">
+											<a class="page-link" href="${pageContext.request.contextPath}/products/${currentCategory}?page=${pageNum }">
+												<i class="fa">${pageNum }</i>
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a class="page-link" href="${pageContext.request.contextPath}/products/discount?page=${pageNum }">
+												<i class="fa">${pageNum }</i>
+											</a>
+										</c:otherwise>
+									</c:choose>
+								</li>
+							</c:otherwise>
+						</c:choose>
+
+					</c:forEach>
+					<c:if test="${pageMaker.next && pageMaker.endPage >0 }">
+						<li class="page-item">
+							<a class="page-link" href="${pageContext.request.contextPath}/products/${currentCategory}?page=${pageMaker.endPage+1 }">
+								<i class="fa fa-chevron-right"></i>
+							</a>
+						</li>
+					</c:if>
+				</ul>
+			</nav>
+		</c:if>
 	</div>
 	<script type="text/javascript">
 		var categories = $(".code");
-		
-		for(var i =0;i<categories.length;i++){
-			if($("#currentCategory").val() == categories[i].id ){
-				$("#"+categories[i].id).addClass("market-color");
+
+		for (var i = 0; i < categories.length; i++) {
+			if ($("#currentCategory").val() == categories[i].id) {
+				$("#" + categories[i].id).addClass("font-weight-bold");
 			}
 		}
-	
-
-		
 	</script>
 </body>
 </html>

@@ -3,13 +3,15 @@ package com.mju.ict.repository;
 import java.util.List;
 import java.util.Map;
 
+import com.mju.ict.model.Paging;
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.Product;
 
 public interface IProductDAO {
 	
 	public abstract List<Product> selectAllProducts();
 	
-	public abstract List<Product> selectProductsByCategory(int category);
+	public abstract List<Product> selectProductsByCategory(Map<String,Object> map);
 
 	public abstract Product selectProductById(int id);
 
@@ -38,6 +40,12 @@ public interface IProductDAO {
 	public abstract void deleteProductById(int id);
 
 	public abstract void addSalesQuantity(Map<String,Integer> map);
+
+	public abstract int countProductList();
+
+	public abstract int countProductByCategory(int category_code);
+
+	public abstract int countProductByDiscount();
 
 
 

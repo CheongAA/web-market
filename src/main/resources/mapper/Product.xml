@@ -46,6 +46,58 @@
 			<result column="discount_state" property="discount_state" />
 		</association>
 	</resultMap>
+	<select id="countProductList" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		tb_product
+	</select>
+
+	<select id="countProductByCategory" parameterType="Integer"
+		resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		tb_product
+		LEFT JOIN
+		tb_category
+		ON
+		tb_category.category_code= tb_product.category_code
+		WHERE
+		tb_product.category_code = #{category_code}
+		OR
+		tb_category.category_code2 =
+		#{category_code}
+	</select>
+
+	<select id="countProductByDiscount" resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		tb_product
+		LEFT JOIN
+		tb_discount
+		ON
+		tb_discount.discount_id=
+		tb_product.discount_id
+		WHERE
+		tb_product.discount_id is not NULL
+		and
+		tb_discount.discount_apply = 1
+		and
+		tb_discount.discount_state = 1
+	</select>
+
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<select id="selectProductList" resultType="hashmap"
+		parameterType="hashmap">
+		SELECT *
+		FROM tb_product
+		ORDER BY product_created DESC
+		LIMIT #{pageStart}, #{perPageNum}
+	</select>
+
+
 
 	<select id="selectProductByTerm" parameterType="String"
 		resultMap="product">
@@ -68,19 +120,9 @@
 		on_sale = 1
 	</select>
 
-	<insert id="insertProduct"
-		parameterType="com.mju.ict.model.Product">
-		INSERT INTO tb_product
-		(brand_id,category_code,product_name,product_price,product_quantity,product_desc,
-		product_material,product_volume,product_img,product_descImg)
-		VALUES(
-		#{brand_id},#{category_code},#{product_name},#{product_price},
-		#{product_quantity},#{product_desc},#{product_material},#{product_volume},#{product_img},#{product_descImg}
-		)
 
-	</insert>
 
-	<select id="selectProductsByCategory" parameterType="Integer"
+	<select id="selectProductsByCategory" parameterType="hashmap"
 		resultMap="product">
 		SELECT * FROM tb_product
 		LEFT JOIN
@@ -96,10 +138,13 @@
 		ON
 		tb_discount.discount_id= tb_product.discount_id
 		WHERE
-		tb_product.category_code = #{category}
+		tb_product.category_code = #{category_code}
 		OR
 		tb_category.category_code2 =
-		#{category}
+		#{category_code}
+		ORDER BY product_created
+		DESC
+		LIMIT #{pageStart}, #{perPageNum}
 	</select>
 
 	<select id="selectProductById" parameterType="Integer"
@@ -196,6 +241,11 @@
 		tb_discount.discount_id= tb_product.discount_id
 		WHERE
 		tb_product.discount_id is not NULL
+		and
+		tb_discount.discount_apply = 1
+		and
+		tb_discount.discount_state = 1
+		limit 12;
 	</select>
 
 	<select id="selectNewProducts" resultMap="product">
@@ -221,7 +271,7 @@
 		on_sale = 1
 		order by
 		product_created desc
-		limit 10;
+		limit 12;
 	</select>
 
 	<select id="selectBestProducts" resultMap="product">
@@ -245,15 +295,21 @@
 		tb_product.discount_id
 		order by
 		product_sales_quantity desc
-		limit 10;
+		limit 12;
 	</select>
 
-	<delete id="deleteProductById" parameterType="Integer">
-		DELETE FROM
-		tb_product
-		WHERE
-		product_id = #{id}
-	</delete>
+	<insert id="insertProduct"
+		parameterType="com.mju.ict.model.Product">
+		INSERT INTO tb_product
+		(brand_id,category_code,product_name,product_price,product_quantity,product_desc,
+		product_material,product_volume,product_img,product_descImg)
+		VALUES(
+		#{brand_id},#{category_code},#{product_name},#{product_price},
+		#{product_quantity},#{product_desc},#{product_material},#{product_volume},#{product_img},#{product_descImg}
+		)
+
+	</insert>
+
 
 	<update id="updateProduct"
 		parameterType="com.mju.ict.model.Product">
@@ -315,7 +371,16 @@
 		product_sales_quantity = product_sales_quantity + #{product_count},
 		product_quantity = product_quantity - #{product_count}
 		WHERE
-		product_id =
+		product_id
+		=
 		#{product_id}
 	</update>
+
+
+	<delete id="deleteProductById" parameterType="Integer">
+		DELETE FROM
+		tb_product
+		WHERE
+		product_id = #{id}
+	</delete>
 </mapper>

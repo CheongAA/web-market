@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mju.ict.model.Cart;
 import com.mju.ict.model.Category;
+import com.mju.ict.model.Paging;
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.Product;
 import com.mju.ict.model.Question;
 import com.mju.ict.model.Review;
@@ -49,6 +51,7 @@ public class ProductController {
 	IReviewService reviewService;	
 
 	
+	
 	//카테고리 조회
 	@ResponseBody
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
@@ -69,11 +72,17 @@ public class ProductController {
 	
 	//카테고리별 상품 페이지
 	@RequestMapping(value = "/products/{category}", method = RequestMethod.GET)
-	public String getProducts(@PathVariable int category,Model model) {
-		List<Product> products = productService.getProductsByCategory(category);
+	public String getProducts(@PathVariable int category,PagingCriteria cri,Model model) {
+	    
+		List<Product> products = productService.getProductsByCategory(category,cri);
 		List<Category> categories = categoryService.getCurrentCategories(category);
 		
+	    Paging pageMaker = new Paging();
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(productService.countProductByCategory(category));
+		
 		model.addAttribute("products", products);
+		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("categories", categories);
 		model.addAttribute("currentCategory", category);
 		return "/products";
@@ -82,7 +91,9 @@ public class ProductController {
 	//신상품  페이지
 	@RequestMapping(value = "/products/new", method = RequestMethod.GET)
 	public String getProductsNew(Model model) {
+
 		List<Product> products = productService.getNewProducts();
+		
 		model.addAttribute("products", products);
 		model.addAttribute("activeNew", "h2");
 		return "/products";
@@ -92,6 +103,7 @@ public class ProductController {
 	@RequestMapping(value = "/products/best", method = RequestMethod.GET)
 	public String getProductsBest(Model model) {
 		List<Product> products = productService.getBestProducts();
+		
 		model.addAttribute("products", products);
 		model.addAttribute("activeBest", "h2");
 		return "/products";
@@ -99,9 +111,16 @@ public class ProductController {
 	
 	//알뜰상품 페이지
 	@RequestMapping(value = "/products/discount", method = RequestMethod.GET)
-	public String getProductsDiscount(Model model) {
+	public String getProductsDiscount(PagingCriteria cri, Model model) {
 		List<Product> products = productService.getDiscountProducts();
+		
+	    Paging pageMaker = new Paging();
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(productService.countProductByDiscount());
+		
+	    System.out.println(productService.countProductByDiscount());
 		model.addAttribute("products", products);
+		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("activeDiscount", "h2");
 		return "/products";
 	}

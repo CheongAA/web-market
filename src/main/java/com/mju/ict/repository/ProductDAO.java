@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mju.ict.model.Paging;
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.Product;
 
 @Repository
@@ -20,8 +22,8 @@ public class ProductDAO implements IProductDAO{
 	}
     
 	@Override
-	public List<Product> selectProductsByCategory(int category) {
-		return sqlSession.selectList("selectProductsByCategory",category);
+	public List<Product> selectProductsByCategory(Map<String,Object> map) {
+		return sqlSession.selectList("selectProductsByCategory",map);
 	}
 
 	@Override
@@ -95,6 +97,22 @@ public class ProductDAO implements IProductDAO{
 	@Override
 	public void addSalesQuantity(Map<String, Integer> map) {
 		sqlSession.update("addSalesQuantity",map);
+	}
+
+
+	@Override
+	public int countProductList() {
+		return sqlSession.selectOne("countProductList");
+	}
+
+	@Override
+	public int countProductByCategory(int category_code) {
+		return sqlSession.selectOne("countProductByCategory",category_code);
+	}
+
+	@Override
+	public int countProductByDiscount() {
+		return  sqlSession.selectOne("countProductByDiscount");
 	}
 
 

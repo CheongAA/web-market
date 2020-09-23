@@ -256,10 +256,10 @@ public class AdminController {
 	@RequestMapping(value = "/category/{category_code}", method = RequestMethod.GET)
 	public String getCategoryDetail(@PathVariable int category_code, Model model) {
 		Category category = categoryService.getCategoryByCode(category_code);
-		List<Product> products = productService.getProductsByCategory(category_code);
+//		List<Product> products = productService.getProductsByCategory(category_code);
 
 		model.addAttribute("category", category);
-		model.addAttribute("products", products);
+//		model.addAttribute("products", products);
 		return "admin/category/detail";
 	}
 

@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mju.ict.model.Paging;
+import com.mju.ict.model.PagingCriteria;
 import com.mju.ict.model.Product;
 import com.mju.ict.repository.IProductDAO;
 import com.mju.ict.util.S3Util;
@@ -50,8 +52,13 @@ public class ProductService implements IProductService{
 	
 	//category_code로 상품 조회
 	@Override
-	public List<Product> getProductsByCategory(int category) {
-		return productDAO.selectProductsByCategory(category);
+	public List<Product> getProductsByCategory(int category,PagingCriteria cri) {
+		Map<String,Object> map = new HashMap<String,Object>();				   
+		map.put("category_code", category);
+		map.put("pageStart", cri.getPageStart());
+		map.put("perPageNum", cri.getPerPageNum());
+		
+		return productDAO.selectProductsByCategory(map);
 	}
 
 	//product_id로 상품 조회
@@ -135,6 +142,21 @@ public class ProductService implements IProductService{
 		productDAO.updateProductSale(map);
 	}
 
+	
+	@Override
+	public int countProductList() {
+		return productDAO.countProductList();
+	}
+
+	@Override
+	public int countProductByCategory(int category_code) {
+		return productDAO.countProductByCategory(category_code);
+	}
+
+	@Override
+	public int countProductByDiscount() {
+		return productDAO.countProductByDiscount();
+	}
 
 
 
