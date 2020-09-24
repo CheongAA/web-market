@@ -25,7 +25,7 @@
 							<tr>
 								<th scope="row">간단설명</th>
 								<td class="form-inline">
-									<input type="text" class="form-control w-100" id="discount_desc" name="discount_desc" maxlength="20" placeholder="20자 이하로 입력해주세요"  required>
+									<input type="text" class="form-control w-100" id="discount_desc" name="discount_desc" maxlength="50" placeholder="50자 이하로 입력해주세요"  required>
 								</td>
 							</tr>
 							<tr>

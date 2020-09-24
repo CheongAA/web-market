@@ -14,51 +14,17 @@
 				<c:if test="${discount.discount_apply !=0 }">
 					<c:choose>
 						<c:when test="${discount.discount_state !=0 }">
-							<div class="row mx-5 my-3">
-								<div class="jumbotron jumbotron-fluid w-100 " style="background: url(${discount.discount_thumbnailImg }) no-repeat; background-size: cover;">
-									<div class="container pl-5 ">
-										<a class="text-decoration-none text-dark" href="${pageContext.request.contextPath}/discount/${discount.discount_id}">
-											<h1 class="display-5 pb-2">${discount.discount_name}</h1>
-											<p>${discount.discount_desc}</p>
-											<p>
-												<fmt:formatDate pattern="MM/dd" value="${discount.discount_start}" />
-												(
-												<fmt:formatDate pattern="E" value="${discount.discount_start}" />
-												) ~
-												<fmt:formatDate pattern="MM/dd" value="${discount.discount_end}" />
-												(
-												<fmt:formatDate pattern="E" value="${discount.discount_end}" />
-												)
-											</p>
-
-										</a>
-									</div>
-								</div>
-							</div>
+							<a class="text-decoration-none text-dark" href="${pageContext.request.contextPath}/discount/${discount.discount_id}">
+								<img class="mw-100" src="${discount.discount_thumbnailImg}" alt="${discount.discount_name }" />
+							</a>
 						</c:when>
 						<c:otherwise>
-							<div class="row mx-5 my-3">
-								<div class="jumbotron jumbotron-fluid w-100">
-									<div class="container pl-5 ">
-										<h1 class="display-5 pb-2">${discount.discount_name}-종료</h1>
-										<p>${discount.discount_desc}</p>
-										<p>
-											<fmt:formatDate pattern="MM/dd" value="${discount.discount_start}" />
-											(
-											<fmt:formatDate pattern="E" value="${discount.discount_start}" />
-											) ~
-											<fmt:formatDate pattern="MM/dd" value="${discount.discount_end}" />
-											(
-											<fmt:formatDate pattern="E" value="${discount.discount_end}" />
-											)
-										</p>
-									</div>
-								</div>
-							</div>
+							<button class="p-0 m-0" onclick="alert('진행중인 이벤트가 아닙니다.')">
+								<img class="mw-100" src="${discount.discount_thumbnailImg}" alt="${discount.discount_name }" />
+							</button>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
-
 			</c:forEach>
 		</div>
 	</div>

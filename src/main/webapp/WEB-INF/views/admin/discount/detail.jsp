@@ -11,7 +11,8 @@
 	<jsp:include page="../admin_header.jsp" flush="false" />
 	<div class="row mt-5">
 		<h3 class="w-100 mb-3">이벤트</h3>
-		<div class="jumbotron w-100 text-center" style="background: url(${discount.discount_thumbnailImg }) no-repeat; background-size: cover;">
+		<img class="mw-100" src="${discount.discount_thumbnailImg}" alt="${discount.discount_name }" />
+		<div class="col-sm-12 bg-light p-5 mt-3">
 			<small>이벤트 코드 : ${discount.discount_id}</small>
 			<h1 class="display-4">${discount.discount_name}</h1>
 			<h1 class="display-4">${discount.discount_rate}%</h1>

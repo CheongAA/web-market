@@ -8,28 +8,22 @@
 <title>MARKET:: 오늘도 신선한 하루</title>
 </head>
 <body>
-	<div id="carouselExampleControls" class="row carousel slide" data-ride="carousel">
+	<div id="carouselExampleControls" class="row carousel slide mb-3" data-ride="carousel">
 		<div class="carousel-inner">
 			<c:forEach var="discount" items="${discounts}" varStatus="status">
 				<c:choose>
 					<c:when test="${status.count eq 1}">
 						<div class="carousel-item active">
-							<div class="jumbotron col-sm-12 text-center py-5" style="background: url(${discount.discount_thumbnailImg }) no-repeat; background-size: cover;">
-								<a href="${pageContext.request.contextPath}/discount/${discount.discount_id}" class="text-decoration-none">
-									<span class="display-4 font-weight-bold text-white d-block">${discount.discount_name} ${discount.discount_rate}%</span> <span class="d-block text-white">${discount.discount_desc}</span> <span class="text-white"> <fmt:formatDate pattern="yyyy/MM/dd" value="${discount.discount_start}" /> ( <fmt:formatDate pattern="E" value="${discount.discount_start}" /> ) ~ <fmt:formatDate pattern="yyyy/MM/dd" value="${discount.discount_end}" /> ( <fmt:formatDate pattern="E" value="${discount.discount_end}" /> )
-									</span>
-								</a>
-							</div>
+							<a class="text-decoration-none text-dark" href="${pageContext.request.contextPath}/discount/${discount.discount_id}">
+								<img class="mw-100" src="${discount.discount_thumbnailImg}" alt="${discount.discount_name }" />
+							</a>
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div class="carousel-item">
-							<div class="jumbotron col-sm-12 text-center py-5" style="background: url(${discount.discount_thumbnailImg }) no-repeat; background-size: cover;">
-								<a href="${pageContext.request.contextPath}/discount/${discount.discount_id}" class="text-decoration-none">
-									<span class="display-4 font-weight-bold text-white d-block">${discount.discount_name} ${discount.discount_rate}%</span> <span class="d-block text-white">${discount.discount_desc}</span> <span class="text-white"> <fmt:formatDate pattern="yyyy/MM/dd" value="${discount.discount_start}" /> ( <fmt:formatDate pattern="E" value="${discount.discount_start}" /> ) ~ <fmt:formatDate pattern="yyyy/MM/dd" value="${discount.discount_end}" /> ( <fmt:formatDate pattern="E" value="${discount.discount_end}" /> )
-									</span>
-								</a>
-							</div>
+							<a class="text-decoration-none text-dark" href="${pageContext.request.contextPath}/discount/${discount.discount_id}">
+								<img class="mw-100" src="${discount.discount_thumbnailImg}" alt="${discount.discount_name }" />
+							</a>
 						</div>
 					</c:otherwise>
 				</c:choose>

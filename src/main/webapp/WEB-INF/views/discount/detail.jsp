@@ -9,15 +9,14 @@
 </head>
 <body>
 	<div class="row pt-5">
-		<div class="jumbotron jumbotron-fluid w-100 text-center" style="background: url(${discount.discount_thumbnailImg }) no-repeat; background-size: cover;">
+		<img class="mw-100" src="${discount.discount_thumbnailImg}" alt="${discount.discount_name }" />
+		<div class="col-sm-12 p-3 bg-light">
 			<h3 class="w-100 mb-3">${discount.discount_name }</h3>
 			<p class="W-100">${discount.discount_explanation}</p>
-			<small> <fmt:formatDate pattern="MM/dd" value="${discount.discount_start}" /> ( <fmt:formatDate pattern="E" value="${discount.discount_start}" /> ) ~ <fmt:formatDate
-					pattern="MM/dd" value="${discount.discount_end}"
-				/> ( <fmt:formatDate pattern="E" value="${discount.discount_end}" /> )
+			<small> <fmt:formatDate pattern="MM/dd" value="${discount.discount_start}" /> ( <fmt:formatDate pattern="E" value="${discount.discount_start}" /> ) ~ <fmt:formatDate pattern="MM/dd" value="${discount.discount_end}" /> ( <fmt:formatDate pattern="E" value="${discount.discount_end}" /> )
 			</small>
 		</div>
-		<div class="row w-100 p-5">
+		<div class="col-sm-12 my-3 py-3 border-top">
 			<c:forEach var="product" items="${products}">
 				<c:if test="${product.on_sale == 1}">
 					<div class="col-sm-3 mb-5">
@@ -34,12 +33,8 @@
 							</span>
 							<c:choose>
 								<c:when test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
-									<span class="text-muted h5 font-weight-light" id="product_price" style="text-decoration: line-through"><fmt:formatNumber pattern="###,###,###"
-											value="${product.product_price}"
-										/>원</span>
-									<span class="market-color h5" id="discount_price"><i class="fas fa-arrow-right"></i> <c:set var="price"
-											value="${product.product_price-(product.product_price * product.discount.discount_rate)/100}"
-										/> <fmt:formatNumber pattern="###,###,###" value="${price}" />원 </span>
+									<span class="text-muted h5 font-weight-light" id="product_price" style="text-decoration: line-through"><fmt:formatNumber pattern="###,###,###" value="${product.product_price}" />원</span>
+									<span class="market-color h5" id="discount_price"><i class="fas fa-arrow-right"></i> <c:set var="price" value="${product.product_price-(product.product_price * product.discount.discount_rate)/100}" /> <fmt:formatNumber pattern="###,###,###" value="${price}" />원 </span>
 								</c:when>
 								<c:otherwise>
 									<span class="d-block market-color h5"><fmt:formatNumber pattern="###,###,###" value="${product.product_price}" />원</span>

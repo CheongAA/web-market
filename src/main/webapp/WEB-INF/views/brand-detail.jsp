@@ -7,13 +7,11 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<div class="row my-5">
-		<div class="jumbotron col-sm-12 text-center py-5" style="background: url(${brand.brand_img }) no-repeat; background-size: cover;">
-			<h1 class="display-4 font-weight-bold text-white">${brand.brand_name}</h1>
-		</div>
-		<div class="col-sm-12 bg-light p-5">
-			<p class="lead">${brand.brand_desc }
-			<p>
+	<div class="row my-5 p-3">
+		<img class="mw-100" src="${brand.brand_img}" alt="${brand.brand_name }" />
+		<div class="col-sm-12 bg-light my-3 p-3 text-center">
+			<h1 class="display-4 font-weight-bold">${brand.brand_name}</h1>
+			<p class="lead">${brand.brand_desc }</p>
 		</div>
 	</div>
 	<hr />
@@ -43,12 +41,8 @@
 								</span>
 								<c:choose>
 									<c:when test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
-										<span class="text-muted h5 font-weight-light" id="product_price" style="text-decoration: line-through"><fmt:formatNumber pattern="###,###,###"
-												value="${product.product_price}"
-											/>원</span>
-										<span class="market-color h5" id="discount_price"><i class="fas fa-arrow-right"></i> <c:set var="price"
-												value="${product.product_price-(product.product_price * product.discount.discount_rate)/100}"
-											/> <fmt:formatNumber pattern="###,###,###" value="${price}" />원 </span>
+										<span class="text-muted h5 font-weight-light" id="product_price" style="text-decoration: line-through"><fmt:formatNumber pattern="###,###,###" value="${product.product_price}" />원</span>
+										<span class="market-color h5" id="discount_price"><i class="fas fa-arrow-right"></i> <c:set var="price" value="${product.product_price-(product.product_price * product.discount.discount_rate)/100}" /> <fmt:formatNumber pattern="###,###,###" value="${price}" />원 </span>
 									</c:when>
 									<c:otherwise>
 										<span class="d-block market-color h5"><fmt:formatNumber pattern="###,###,###" value="${product.product_price}" />원</span>
