@@ -8,25 +8,29 @@
 <title>MARKET:: 이벤트</title>
 </head>
 <body>
-	<div class="row pt-5">
-		<div class="col">
-			<c:forEach var="discount" items="${discounts}" varStatus="status">
-				<c:if test="${discount.discount_apply !=0 }">
-					<c:choose>
-						<c:when test="${discount.discount_state !=0 }">
+	<div class="row pt-5 ">
+		<c:forEach var="discount" items="${discounts}" varStatus="status">
+			<c:if test="${discount.discount_apply !=0 }">
+				<c:choose>
+					<c:when test="${discount.discount_state !=0 }">
+						<div class="col-sm-12 my-3">
 							<a class="text-decoration-none text-dark" href="${pageContext.request.contextPath}/discount/${discount.discount_id}">
 								<img class="mw-100" src="${discount.discount_thumbnailImg}" alt="${discount.discount_name }" />
 							</a>
-						</c:when>
-						<c:otherwise>
-							<button class="p-0 m-0" onclick="alert('진행중인 이벤트가 아닙니다.')">
-								<img class="mw-100" src="${discount.discount_thumbnailImg}" alt="${discount.discount_name }" />
-							</button>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
-			</c:forEach>
-		</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="col-sm-12 my-3">
+							<div class="card">
+								<img class="card-img mw-100" src="${discount.discount_thumbnailImg}" alt="${discount.discount_name }" />
+								<div class="card-img-overlay" style="background: rgba(255, 255, 255, 0.7);">
+								</div>
+							</div>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</c:if>
+		</c:forEach>
 	</div>
 	<nav class="col-sm-12 m-3" aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">

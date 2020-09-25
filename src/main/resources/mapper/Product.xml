@@ -88,15 +88,21 @@
 		tb_discount.discount_apply = 1
 		and
 		tb_discount.discount_state = 1
-		and 
+		and
 		on_sale = 1
 	</select>
 
-	<!-- 페이징 처리 후 게시글 조회 -->
+
 	<select id="selectAllProductsByCri" resultMap="product">
 		SELECT *
-		FROM tb_product
-		ORDER BY product_created DESC
+		FROM
+		tb_product
+		LEFT JOIN
+		tb_brand
+		ON
+		tb_brand.brand_id = tb_product.brand_id
+		ORDER BY
+		product_created DESC
 		LIMIT #{pageStart}, #{perPageNum}
 	</select>
 

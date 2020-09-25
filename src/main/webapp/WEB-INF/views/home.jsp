@@ -38,12 +38,12 @@
 		</a>
 	</div>
 	<div class="row mt-1 pt-1">
-		<div class="col-lg-3 mb-3">
+		<div class="col-md-4 mb-3">
 			<h1 class=" font-weight-light text-center mt-5 pt-5">WHAT'S NEW?</h1>
 		</div>
-		<c:forEach var="product" items="${products}" end="6">
+		<c:forEach var="product" items="${products}" end="4">
 			<c:if test="${product.on_sale == 1}">
-				<div class="col-md-3 pb-4">
+				<div class="col-md-4 pb-4 h-100">
 					<a href="${pageContext.request.contextPath}/product/${product.product_id}" class="text-decoration-none">
 						<img class="w-100 h-75 mb-3 product-img" alt="" src="${product.product_img}">
 						<c:if test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">

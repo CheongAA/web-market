@@ -41,6 +41,7 @@
 		SELECT *
 		FROM
 		tb_discount
+		order by discount_state desc,discount_start asc
 		LIMIT
 		#{pageStart}, #{perPageNum}
 	</select>
