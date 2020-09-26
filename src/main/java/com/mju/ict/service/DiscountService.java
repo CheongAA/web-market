@@ -3,9 +3,7 @@ package com.mju.ict.service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -119,14 +117,14 @@ public class DiscountService implements IDiscountService {
 		discountDAO.updateDiscountApply(discount);
 	}
 
+	
 	// 매일 밤 23시 59분 할인날짜를 확인하여 discount_state 변경
-	@Scheduled(cron = "0 59 23 1/1 * ?")
+	@Scheduled(cron = "0 59 23 1/1 * ?", zone="Asia/Seoul")
 	public void changeDiscountState() {
 		Date today = new Date();
 		SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
 
 		List<Discount> discounts = discountDAO.selectAllDiscounts();
-
 		for (Discount d : discounts) {
 			try {
 				int startCompare = d.getDiscount_start().compareTo(date.parse(date.format(today)));

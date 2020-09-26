@@ -12,7 +12,20 @@
 		<jsp:include page="mypage_header.jsp" flush="false" />
 		<div class="col py-5 ml-5">
 			<h3>주문조회</h3>
-			<div class="row justify-content-center mt-5">
+			<div class="row mt-5">
+				<c:choose>
+					<c:when test="${empty activeCanceledOrder}">
+						<a class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-6" href="${pageContext.request.contextPath}/user/order">전체 주문조회</a>
+						<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-6" href="${pageContext.request.contextPath}/user/canceledOrder">취소/반품/교환 주문조회</a>
+					</c:when>
+					<c:otherwise>
+						<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-6" href="${pageContext.request.contextPath}/user/order">전체 주문조회</a>
+						<a class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-6" href="${pageContext.request.contextPath}/user/canceledOrder">취소/반품/교환 주문조회</a>
+					</c:otherwise>
+				</c:choose>
+
+			</div>
+			<div class="row justify-content-center mt-5 p-3">
 				<c:choose>
 					<c:when test="${empty orders}">
 						<div class="col-sm-12 border text-center">

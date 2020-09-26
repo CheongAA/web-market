@@ -138,6 +138,7 @@ public class UserController {
 		User user = (User) session.getAttribute("user");
 		List<Order> orders = orderService.getOrderByUser(user.getUser_id());
 		model.addAttribute("orders", orders);
+		model.addAttribute("activeOrder", "active");
 		return "user/order-list";
 	}
 
@@ -147,6 +148,8 @@ public class UserController {
 		User user = (User) session.getAttribute("user");
 		List<Order> orders = orderService.getCanceledOrderByUser(user.getUser_id());
 		model.addAttribute("orders", orders);
+		model.addAttribute("activeOrder", "active");
+		model.addAttribute("activeCanceledOrder", "active");
 		return "user/order-list";
 	}
 
@@ -155,6 +158,7 @@ public class UserController {
 	public String getUserOrderDetail(@PathVariable int id, Model model, HttpSession session) {
 		Order order = orderService.getOrderById(id);
 		model.addAttribute("order", order);
+		model.addAttribute("activeOrder", "active");
 		return "user/order-detail";
 	}
 
@@ -191,30 +195,35 @@ public class UserController {
 	// 정보 수정 회원 확인 페이지
 	@RequestMapping(value = "/user/check", method = RequestMethod.GET)
 	public String getUserCheck(Model model, HttpSession session) {
+		model.addAttribute("activeUser", "active");
 		return "user/user-check";
 	}
 
 	// 정보 수정 메뉴 페이지 (정보수정,비밀번호수정,탈퇴)
 	@RequestMapping(value = "/user/check/nav", method = RequestMethod.GET)
 	public String getUserUpdateNav(Model model, HttpSession session) {
+		model.addAttribute("activeUser", "active");
 		return "user/user-update-nav";
 	}
 
 	// 정보 수정 페이지
 	@RequestMapping(value = "/user/update", method = RequestMethod.GET)
 	public String getUserUpdate(Model model, HttpSession session) {
+		model.addAttribute("activeUser", "active");
 		return "user/user-update";
 	}
 
 	// 비밀번호 수정 페이지
 	@RequestMapping(value = "/user/update/password", method = RequestMethod.GET)
 	public String getUserUpdatePassword(Model model, HttpSession session) {
+		model.addAttribute("activeUser", "active");
 		return "user/user-update-password";
 	}
 
 	// 정보 수정 완료 페이지
 	@RequestMapping(value = "/user/update/ok", method = RequestMethod.GET)
 	public String getUserUpdateOK(Model model, HttpSession session) {
+		model.addAttribute("activeUser", "active");
 		return "user/user-update-ok";
 	}
 
@@ -325,6 +334,7 @@ public class UserController {
 		List<Question> questions = questionService.getQuestionByUser(user.getUser_id());
 
 		model.addAttribute("questions", questions);
+		model.addAttribute("activeQuestion", "active");
 		return "user/question-list";
 	}
 
@@ -334,6 +344,7 @@ public class UserController {
 		Question question = questionService.getQuestionById(id);
 
 		model.addAttribute("question", question);
+		model.addAttribute("activeQuestion", "active");
 		return "user/question-detail";
 	}
 
@@ -347,6 +358,7 @@ public class UserController {
 
 		model.addAttribute("questionCategories", questionCategories);
 		model.addAttribute("orders", orders);
+		model.addAttribute("activeAddQuestion", "active");
 		return "user/question-add";
 	}
 
@@ -377,6 +389,7 @@ public class UserController {
 		List<Order> orders = orderService.getOrderByUser(user.getUser_id());
 
 		model.addAttribute("orders", orders);
+		model.addAttribute("activeReview", "active");
 		return "user/reviewable-list";
 	}
 
@@ -387,6 +400,7 @@ public class UserController {
 		List<Review> reviews = reviewService.getReviewByUser(user.getUser_id());
 
 		model.addAttribute("reviews", reviews);
+		model.addAttribute("activeReview", "active");
 		return "user/review-list";
 	}
 
@@ -396,6 +410,7 @@ public class UserController {
 		OrderDetail orderDetail = orderService.getOrderDetailById(id);
 
 		model.addAttribute("orderDetail", orderDetail);
+		model.addAttribute("activeReview", "active");
 		return "user/review-add";
 	}
 
@@ -407,6 +422,7 @@ public class UserController {
 
 		model.addAttribute("review", review);
 		model.addAttribute("orderDetail", orderDetail);
+		model.addAttribute("activeReview", "active");
 		return "user/review-update";
 	}
 

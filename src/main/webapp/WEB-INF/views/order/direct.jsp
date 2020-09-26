@@ -17,15 +17,15 @@
 			<h2>주문/결제</h2>
 		</div>
 		<div class="col-sm-12 my-5 border border-dark py-3">
-			<input type="hidden" value="${cart.cart_id}" class="cart_id" />
-			<input type="hidden" value="${cart.product_id}" class="product_id" />
-			<input type="hidden" value="${cart.product_count}" class="product_count" />
 			<div class="row">
 				<h5 class="col-6">상품정보</h5>
 				<h5 class="col-3">수량</h5>
 				<h5 class="col-3">금액</h5>
 			</div>
 			<c:forEach var="cart" items="${carts}">
+				<input type="hidden" value="${cart.cart_id}" class="cart_id" />
+				<input type="hidden" value="${cart.product_id}" class="product_id" />
+				<input type="hidden" value="${cart.product_count}" class="product_count" />
 				<c:set var="total_products" value="${total_products + (cart.product.product_price * cart.product_count)}" />
 				<div class="row border-top border-dark py-2">
 					<img alt="${cart.product.product_name }" src="${cart.product.product_img }" class="col-2">
@@ -166,6 +166,7 @@
 		</div>
 		<div class="col-sm-12 my-5 border-bottom border-dark py-3">
 			<h4 class="col-sm-12 border-bottom border-dark py-3">결제수단</h4>
+			<small class="text-danger">테스트 결제로 100원이 결제됩니다.</small>
 			<table class="table table-borderless mt-3">
 				<tbody>
 					<tr>
@@ -211,7 +212,6 @@
 		$("#address_btn").on('click', getAddressList);
 		$("#buyer_phone").on('change', checkPhone);
 
-		
 		var buyer_phone_flag = false;
 		checkPhone();
 		//배송지 설정 화면 팝업
@@ -256,6 +256,7 @@
 			var id = $(".product_id");
 			var count = $(".product_count");
 			var price = $(".product_price");
+
 
 			for (var i = 0; i < id.length; i++) {
 				var data = new Object();
