@@ -116,8 +116,8 @@
 			</div>
 			<div class="row mt-5">
 				<a class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-4" href="#desc">상품설명</a>
-				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#review">고객후기(${fn:length(reviews)})</a>
-				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#qna">상품문의(${fn:length(questions)})</a>
+				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#review">고객후기(${ReviewPageMaker.totalCount})</a>
+				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#qna">상품문의(${QuestionPageMaker.totalCount})</a>
 			</div>
 			<div class="row pt-5" id="desc">
 				<div class="col-sm-12 text-center">
@@ -126,8 +126,8 @@
 			</div>
 			<div class="row mt-5">
 				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#desc">상품설명</a>
-				<a class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-4" href="#review">고객후기(${fn:length(reviews)})</a>
-				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#qna">상품문의(${fn:length(questions)})</a>
+				<a class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-4" href="#review">고객후기(${ReviewPageMaker.totalCount})</a>
+				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#qna">상품문의(${QuestionPageMaker.totalCount})</a>
 			</div>
 			<div class="row pt-5" id="review">
 				<div class="m-3">
@@ -139,7 +139,6 @@
 				<table class="table table-hover text-center border-bottom">
 					<thead>
 						<tr>
-							<th scope="col">번호</th>
 							<th scope="col" style="width: 40%">제목</th>
 							<th scope="col">평점</th>
 							<th scope="col">작성자</th>
@@ -147,65 +146,37 @@
 							<th scope="col">조회수</th>
 						</tr>
 					</thead>
-					<tbody>
-						<c:choose>
-							<c:when test="${empty reviews}">
-								<tr>
-									<td colspan="5" rowspan="5">
-										<h6 class="py-5 my-5 font-weight-bold text-center">후기가 존재하지 않습니다.</h6>
-									</td>
-								</tr>
-							</c:when>
-							<c:otherwise>
-								<c:forEach var="review" items="${reviews }" varStatus="status">
-									<tr class="reviews" id="${review.review_id}">
-										<td>${status.count}</td>
-										<td>${review.review_title}
-											<c:if test="${not empty review.review_img }">
-												<i class="fas fa-camera"></i>
-											</c:if>
-										</td>
-										<td>${review.review_star}</td>
-										<td>${review.user.user_name }</td>
-										<td>
-											<fmt:formatDate value="${review.review_created}" pattern="yyyy-MM-dd" />
-										</td>
-										<td>${review.review_view }</td>
-									</tr>
-									<tr>
-										<td colspan="6" class="p-5 text-left px-auto" style="display: none;" id="review_content_${review.review_id}">
-											<c:if test="${not empty review.review_img }">
-												<img alt="" src="${review.review_img}" class="col-3">
-											</c:if>
-											<span class="col-7">${review.review_content}</span>
-										</td>
-									</tr>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
+					<tbody id="review_tr">
+
 					</tbody>
 				</table>
-				<div class="w-100">
+				<div class="col-sm-12">
 					<a class="btn btn-secondary m-5 float-right " href="${pageContext.request.contextPath}/user/reviewable">후기작성</a>
 				</div>
-				<nav aria-label="Page navigation example" class="d-block mx-auto">
-					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span>
-							</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-							</a></li>
+				<nav class="col-sm-12" aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						<c:if test="${ReviewPageMaker.prev}">
+							<li class="page-item"><button class="page-link" onclick="getReviews(${ReviewPageMaker.startPage-1 })">
+									<i class="fa fa-chevron-left"></i>
+								</button></li>
+						</c:if>
+						<c:forEach begin="${ReviewPageMaker.startPage}" end="${ReviewPageMaker.endPage }" var="pageNum">
+							<li id="reviewPage_${pageNum }" class="page-item"><button class="page-link" onclick="getReviews(${pageNum})">
+									<i class="fa">${pageNum }</i>
+								</button></li>
+						</c:forEach>
+						<c:if test="${ReviewPageMaker.next && ReviewPageMaker.endPage >0 }">
+							<li class="page-item"><button class="page-link" onclick="getReviews(${ReviewPageMaker.endPage+1 })">
+									<i class="fa fa-chevron-right"></i>
+								</button></li>
+						</c:if>
 					</ul>
 				</nav>
 			</div>
 			<div class="row mt-5">
 				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#desc">상품설명</a>
-				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#review">고객후기(${fn:length(reviews)})</a>
-				<a class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-4" href="#qna">상품문의(${fn:length(questions)})</a>
+				<a class="border bg-light h5 p-3 m-0 text-dark text-decoration-none col-4" href="#review">고객후기(${ReviewPageMaker.totalCount})</a>
+				<a class="border-top border-left border-right bg-white h5 p-3 m-0 text-dark text-decoration-none col-4" href="#qna">상품문의(${QuestionPageMaker.totalCount})</a>
 			</div>
 			<div class="row pt-5" id="qna">
 				<div class="m-3">
@@ -218,86 +189,33 @@
 				<table class="table table-hover text-center border-bottom">
 					<thead>
 						<tr>
-							<th scope="col">번호</th>
 							<th scope="col" style="width: 40%">제목</th>
 							<th scope="col">작성자</th>
 							<th scope="col">작성일</th>
 						</tr>
 					</thead>
-					<tbody>
-						<c:choose>
-							<c:when test="${empty questions}">
-								<tr>
-									<td colspan="4" rowspan="4">
-										<h6 class="py-5 my-5 font-weight-bold text-center">문의 내역이 존재하지 않습니다.</h6>
-									</td>
-								</tr>
-							</c:when>
-							<c:otherwise>
-								<c:forEach var="question" items="${questions}" varStatus="status">
-									<tr class="questions" id="${question.question_id}">
-										<td>${status.count}</td>
-										<td>${question.question_title}</td>
-										<td>${question.user.user_name}</td>
-										<td>
-											<fmt:formatDate value="${question.question_created}" pattern="yyyy-MM-dd" />
-										</td>
-									</tr>
-									<tr>
-										<td colspan="4" class="p-5 text-left" style="display: none;" id="question_content_${status.count}">
-											<span class="ml-2">${question.question_content}</span>
-										</td>
-									</tr>
-									<c:if test="${question.answer_id != 0 }">
-										<tr class="answers" id="${question.answer_id}">
-											<td>
-												<span class="badge badge-warning">Re</span>
-											</td>
-											<td>${question.answer.answer_title }</td>
-											<td>MARKET</td>
-											<td>
-												<fmt:formatDate value="${question.answer.answer_created}" pattern="yyyy-MM-dd" />
-											</td>
-										</tr>
-										<tr>
-											<td colspan="4" class="p-5 text-left" style="display: none;" id="answer_content_${question.answer_id}">
-												<i class="fas fa-font market-color"> ></i><span class="ml-2">${question.answer.answer_content}</span>
-											</td>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
+					<tbody id="question_tr">
 					</tbody>
 				</table>
-				<div class="w-100">
+				<div class="col-sm-12">
 					<a class="btn btn-secondary m-5 float-right " href="${pageContext.request.contextPath}/user/productQuestionAdd/${product.product_id}">상품문의</a>
 				</div>
 				<nav class="col-sm-12" aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
-						<c:if test="${pageMaker.prev}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/product/${product.product_id}?page=${pageMaker.startPage-1 }#qna">
+						<c:if test="${QuestionPageMaker.prev}">
+							<li class="page-item"><button class="page-link" onclick="getQuestions(${QuestionPageMaker.startPage-1 })">
 									<i class="fa fa-chevron-left"></i>
-								</a></li>
+								</button></li>
 						</c:if>
-						<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="pageNum">
-							<c:choose>
-								<c:when test="${pageNum eq pageMaker.cri.page}">
-									<li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/product/${product.product_id}?page=${pageNum }#qna">
-											<i class="fa">${pageNum }</i>
-										</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/product/${product.product_id}?page=${pageNum }#qna">
-											<i class="fa">${pageNum }</i>
-										</a></li>
-								</c:otherwise>
-							</c:choose>
+						<c:forEach begin="${QuestionPageMaker.startPage}" end="${QuestionPageMaker.endPage }" var="pageNum">
+							<li id="questionPage_${pageNum }" class="page-item"><button class="page-link" onclick="getQuestions(${pageNum})">
+									<i class="fa">${pageNum }</i>
+								</button></li>
 						</c:forEach>
-						<c:if test="${pageMaker.next && pageMaker.endPage >0 }">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/product/${product.product_id}?page=${pageMaker.endPage+1 }#qna">
+						<c:if test="${QuestionPageMaker.next && QuestionPageMaker.endPage >0 }">
+							<li class="page-item"><button class="page-link" onclick="getQuestions(${QuestionPageMaker.endPage+1 })">
 									<i class="fa fa-chevron-right"></i>
-								</a></li>
+								</button></li>
 						</c:if>
 					</ul>
 				</nav>
@@ -305,7 +223,156 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$(document).ready(calTotalPrice);
+	
+	function showTr(type,id){
+		var td = $("#"+type+"_content_" + id);
+		if (td.css("display") != "table-cell") {
+			$("[id^="+type+"_content_]").css("display", "none");
+			td.css("display", "table-cell");
+
+			if(type == "review"){
+				$.ajax({
+					url : "/review/addView/" + id,
+					type : "get"
+				});
+			}
+		} else {
+			td.css("display", "none");
+		}
+	}
+	
+	function getReviews(pageNum){
+		$("#review_tr").empty();
+		
+		$("[id^=reviewPage_]").removeClass("active");
+		$("#reviewPage_"+pageNum).addClass("active");
+		
+		$.ajax({
+			url : "/product/review",
+			type : "get",
+			contentType : 'application/json;charset=UTF-8',
+			data : {
+				product_id : $("#product_id").val(),
+				page : pageNum
+			},
+			success : function(data) {
+				if (data.length == 0) {
+					var $tr = $('<tr><td colspan="5" rowspan="5"><h6 class="py-5 my-5 font-weight-bold text-center">후기가 존재하지 않습니다.</h6></td></tr>');
+					$tr.appendTo($("#review_tr"));
+				} else {
+					for (var i = 0; i <data.length; i++) {
+						var $tr = $('<tr id='+data[i].review_id+'></tr>');
+						$tr.on('click',function(){
+							showTr("review",$(this).attr('id'));
+						});
+						var $td_title;
+						var $tr_content;
+						
+						if(data[i].review_img){
+							$td_title = $('<td>'+data[i].review_title+'<i class="fas fa-camera"></i></td>');
+							$tr_content = $('<tr><td colspan="6" class="p-5 text-left px-auto" style="display: none;" id="review_content_'+data[i].review_id+'">'+
+							'<img src='+data[i].review_img+' class="col-3"><span class="col-7">'+data[i].review_content+'</span></td></tr>');
+						}else{
+							$td_title = $('<td>'+data[i].review_title+'</td>');
+							$tr_content = $('<tr><td colspan="6" class="p-5 text-left px-auto" style="display: none;" id="review_content_'+data[i].review_id+'"><span class="col-7">'+
+							data[i].review_content+'</span></td></tr>');
+						}
+						
+						var $td_star = $('<td>'+data[i].review_star+'</td>');
+						var $td_user = $('<td>'+data[i].user.user_name+'</td>');
+						var $td_created = $('<td>'+getFormatDate(new Date(data[i].review_created))+'</td>');
+						var $td_view = $('<td>'+data[i].review_view+'</td>');
+						
+
+						$td_title.appendTo($tr);
+						$td_star.appendTo($tr);
+						$td_user.appendTo($tr);
+						$td_created.appendTo($tr);
+						$td_view.appendTo($tr);
+						
+						$tr.appendTo($("#review_tr"));
+						$tr_content.appendTo($("#review_tr"));
+					}
+				}
+			}
+		});
+	}
+	
+	function getQuestions(pageNum){
+		$("#question_tr").empty();
+		
+		$("[id^=questionPage_]").removeClass("active");
+		$("#questionPage_"+pageNum).addClass("active");
+		
+		$.ajax({
+			url : "/product/question",
+			type : "get",
+			contentType : 'application/json;charset=UTF-8',
+			data : {
+				product_id : $("#product_id").val(),
+				page : pageNum
+			},
+			success : function(data) {
+				if (data.length == 0) {
+					var $tr = $('<tr><td colspan="3" rowspan="4"><h6 class="py-5 my-5 font-weight-bold text-center">문의 내역이 존재하지 않습니다.</h6></td></tr>');
+					$tr.appendTo($("#question_tr"));
+				} else {
+					for (var i = 0; i <data.length; i++) {
+						//문의 내역
+						var $tr = $('<tr id='+data[i].question_id+'></tr>');
+						$tr.on('click',function(){
+							showTr("question",$(this).attr('id'));
+						});
+						var $td_title = $('<td>'+data[i].question_title+'</td>');
+						var $tr_content = $('<tr><td colspan="3" class="p-5 text-left" style="display: none;" id="question_content_'+data[i].question_id+'"><span class="ml-2">'+
+								data[i].question_content+'</span></td></tr>');
+						
+						var $td_user = $('<td>'+data[i].user.user_name+'</td>');
+						var $td_created = $('<td>'+getFormatDate(new Date(data[i].question_created))+'</td>');
+						
+
+						$td_title.appendTo($tr);
+						$td_user.appendTo($tr);
+						$td_created.appendTo($tr);
+						
+						$tr.appendTo($("#question_tr"));
+						$tr_content.appendTo($("#question_tr"));
+						
+						
+						if(data[i].answer_id != 0){
+							//답변 내역
+							var $tr_answer = $('<tr id='+data[i].answer_id+'></tr>');
+							$tr_answer.on('click',function(){
+								showTr("answer",$(this).attr('id'));
+							});
+							var $td_answer_title = $('<td><span class="badge badge-warning mx-2"><i class="fas fa-arrow-right"></i></span>'+data[i].answer.answer_title+'</td>');
+							var $tr_answer_content = $('<tr><td colspan="3" class="p-5 text-left" style="display: none;" id="answer_content_'+data[i].answer_id+'"><span class="ml-2">'+
+									data[i].answer.answer_content+'</span></td></tr>');
+							
+							var $td_answer_user = $('<td>MARKET</td>');
+							var $td_answer_created = $('<td>'+getFormatDate(new Date(data[i].answer.answer_created))+'</td>');
+							
+
+							$td_answer_title.appendTo($tr_answer);
+							$td_answer_user.appendTo($tr_answer);
+							$td_answer_created.appendTo($tr_answer);
+							
+							$tr_answer.appendTo($("#question_tr"));
+							$tr_answer_content.appendTo($("#question_tr"));
+						}
+						
+					}
+				}
+			}
+		});
+	}
+	
+		$(document).ready(function(){
+			calTotalPrice();
+			getReviews(1);
+			getQuestions(1);
+		});
+
 
 		$("#product_count").on("change", calTotalPrice);
 
@@ -340,47 +407,16 @@
 				}
 			});
 		}
+		
+		function getFormatDate(date){
+		    var year = date.getFullYear();             
+		    var month = (1 + date.getMonth());          
+		    month = month >= 10 ? month : '0' + month;  
+		    var day = date.getDate();                  
+		    day = day >= 10 ? day : '0' + day;         
+		    return  year + '/' + month + '/' + day;      
+		}
 
-		$(".reviews").click(function() {
-			var review_id = $(this).attr("id");
-			var td = $("#review_content_" + review_id);
-
-			if (td.css("display") != "table-cell") {
-				$("[id^=review_content_]").css("display", "none");
-				td.css("display", "table-cell");
-
-				$.ajax({
-					url : "/review/addView/" + review_id,
-					type : "get"
-				});
-			} else {
-				td.css("display", "none");
-			}
-		});
-
-		$(".questions").click(function() {
-			var td = $("#question_content_" + $(this).children("td").html());
-
-			if (td.css("display") != "table-cell") {
-				$("[id^=question_content_]").css("display", "none");
-				$("[id^=answer_content_]").css("display", "none");
-				td.css("display", "table-cell");
-			} else {
-				td.css("display", "none");
-			}
-		});
-
-		$(".answers").click(function() {
-			var td = $("#answer_content_" + $(this).attr("id"));
-
-			if (td.css("display") != "table-cell") {
-				$("[id^=answer_content_]").css("display", "none");
-				$("[id^=question_content_]").css("display", "none");
-				td.css("display", "table-cell");
-			} else {
-				td.css("display", "none");
-			}
-		});
 	</script>
 </body>
 </html>

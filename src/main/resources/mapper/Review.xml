@@ -47,6 +47,15 @@
 		tb_review
 	</select>
 
+	<select id="countReviewsByProduct" parameterType="Integer"
+		resultType="Integer">
+		SELECT count(*)
+		FROM
+		tb_review
+		WHERE
+		product_id = #{id}
+	</select>
+
 	<select id="selectAllReviews" resultMap="review">
 		SELECT * FROM
 		tb_review
@@ -87,6 +96,8 @@
 		tb_review.user_id
 		WHERE
 		product_id = #{product_id}
+		LIMIT #{pageStart},
+		#{perPageNum}
 	</select>
 
 	<select id="selectReviewById" parameterType="Integer"

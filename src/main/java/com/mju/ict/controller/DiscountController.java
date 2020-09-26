@@ -32,7 +32,6 @@ public class DiscountController {
 	public String getDiscount(PagingCriteria cri,Model model) {
 		
 	    Paging pageMaker = new Paging();
-	    cri.setPerPageNum(5);
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(discountService.countAppliedDiscounts());
 	    

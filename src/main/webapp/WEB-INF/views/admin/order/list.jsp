@@ -14,7 +14,6 @@
 		<table class="table table-hover mt-3">
 			<thead>
 				<tr>
-					<th scope="col"></th>
 					<th scope="col">주문번호</th>
 					<th scope="col">주문날짜</th>
 					<th scope="col">결제금액</th>

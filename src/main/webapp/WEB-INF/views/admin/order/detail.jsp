@@ -114,7 +114,7 @@
 						<tr>
 							<th scope="col">운송장번호</th>
 							<td scope="col">
-								<input id="tracking" type="text" placeholder="운송장 번호" />
+								<input id="tracking" type="text" placeholder="운송장 번호" maxlength="10" />
 								<button class="btn btn-outline-primary btn-sm" id="tracking_btn">등록</button>
 								<small class="text-danger d-block">운송장 등록 전 상품의 재고를 꼭 확인해주세요!</small>
 							</td>

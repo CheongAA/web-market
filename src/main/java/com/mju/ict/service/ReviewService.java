@@ -43,8 +43,13 @@ public class ReviewService implements IReviewService{
 	}
 	
 	@Override
-	public List<Review> getReviewByProduct(int product_id) {
-		return reviewDAO.selectReviewByProduct(product_id);
+	public List<Review> getReviewByProduct(int product_id,PagingCriteria cri) {
+		Map<String,Integer> map = new HashMap<String,Integer>();				   
+		map.put("product_id", product_id);
+		map.put("pageStart", cri.getPageStart());
+		map.put("perPageNum", cri.getPerPageNum());
+		
+		return reviewDAO.selectReviewByProduct(map);
 	}
 	
 	
@@ -90,6 +95,11 @@ public class ReviewService implements IReviewService{
 	@Override
 	public int countReviews() {
 		return reviewDAO.countReviews();
+	}
+
+	@Override
+	public int countReviewsByProduct(int id) {
+		return reviewDAO.countReviewsByProduct(id);
 	}
 
 

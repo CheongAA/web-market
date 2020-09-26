@@ -19,8 +19,6 @@ public class AdminCheckInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		User userSession = (User) session.getAttribute("user");
 		
-		System.out.println("Admin interceptor");
-		
 		if(userSession == null || userSession.getUser_level() != 1) {
 			response.sendRedirect(request.getContextPath()+"/");
 			return false;

@@ -268,13 +268,13 @@
 
 			return JSON.stringify({
 				order : {
-					buyer_name : $("#buyer_name").val(),
-					buyer_email : $("#buyer_email").val(),
+					buyer_name : $("#buyer_name").text(),
+					buyer_email : $("#buyer_email").text(),
 					buyer_phone : $("#buyer_phone").val(),
-					recipient_name : $("#recipient_name").val(),
-					recipient_zip : $("#recipient_zip").val(),
-					recipient_address : $("#recipient_address").val(),
-					recipient_phone : $("#recipient_phone").val(),
+					recipient_name : $("#recipient_name").text(),
+					recipient_zip : $("#recipient_zip").text(),
+					recipient_address : $("#recipient_address").text(),
+					recipient_phone : $("#recipient_phone").text(),
 					order_request : $("#order_request").val(),
 					order_payment_method : $("#order_payment_method").val(),
 					order_state_id : 1,

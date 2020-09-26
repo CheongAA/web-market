@@ -53,6 +53,16 @@
 		tb_question
 	</select>
 
+	<select id="countQuestionsByProduct" parameterType="Integer"
+		resultType="Integer">
+		SELECT
+		count(*)
+		FROM
+		tb_question
+		WHERE
+		product_id = #{id}
+	</select>
+
 	<select id="selectAllQuestions" resultMap="question">
 		SELECT * FROM
 		tb_question
@@ -105,6 +115,8 @@
 		WHERE tb_question.product_id = #{product_id}
 		order by
 		question_created desc
+		LIMIT #{pageStart},
+		#{perPageNum}
 	</select>
 
 	<select id="selectQuestionById" resultMap="question">

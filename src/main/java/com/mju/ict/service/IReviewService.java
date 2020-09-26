@@ -1,6 +1,7 @@
 package com.mju.ict.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,7 +14,7 @@ public interface IReviewService {
 
 	public abstract List<Review> getReviewByUser(int user_id);
 	
-	public abstract List<Review> getReviewByProduct(int product_id);
+	public abstract List<Review> getReviewByProduct(int product_id,PagingCriteria cri);
 
 	public abstract Review getReviewById(int id);
 
@@ -28,7 +29,7 @@ public interface IReviewService {
 
 	public abstract int countReviews();
 
-
+	public abstract int countReviewsByProduct(int id);
 
 
 }

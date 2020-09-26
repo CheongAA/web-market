@@ -99,7 +99,6 @@ public class AdminController {
 	public String getProducts(PagingCriteria cri,Model model) {
 		
 	    Paging pageMaker = new Paging();
-	    cri.setPerPageNum(15);
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(productService.countProducts());
 	    
@@ -183,7 +182,6 @@ public class AdminController {
 	public String getDiscounts(PagingCriteria cri,Model model) {
 		
 	    Paging pageMaker = new Paging();
-	    cri.setPerPageNum(15);
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(discountService.countDiscounts());
 	    
@@ -331,7 +329,6 @@ public class AdminController {
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String getUsers(PagingCriteria cri,Model model) {
 	    Paging pageMaker = new Paging();
-	    cri.setPerPageNum(15);
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(userService.countUsers());
 	    
@@ -357,7 +354,6 @@ public class AdminController {
 	public String getBrands(PagingCriteria cri,Model model) {
 		
 	    Paging pageMaker = new Paging();
-	    cri.setPerPageNum(15);
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(brandService.countBrands());
 	    
@@ -421,7 +417,6 @@ public class AdminController {
 	public String getNotices(PagingCriteria cri,Model model) {
 		
 	    Paging pageMaker = new Paging();
-	    cri.setPerPageNum(15);
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(answerService.countFaqAnswers());
 	    
@@ -481,7 +476,6 @@ public class AdminController {
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public String getOrders(PagingCriteria cri,Model model) {
 	    Paging pageMaker = new Paging();
-	    cri.setPerPageNum(15);
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(orderService.countOrders());
 		
@@ -524,7 +518,6 @@ public class AdminController {
 	public String getQuestions(PagingCriteria cri,Model model) {
 		
 	    Paging pageMaker = new Paging();
-	    cri.setPerPageNum(15);
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(questionService.countQuestions());
 		
@@ -547,7 +540,6 @@ public class AdminController {
 	public String getFaqs(PagingCriteria cri,Model model) {
 		
 	    Paging pageMaker = new Paging();
-	    cri.setPerPageNum(15);
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(answerService.countFaqAnswers());
 	    
@@ -629,7 +621,6 @@ public class AdminController {
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
 	public String getReviews(PagingCriteria cri,Model model) {
 	    Paging pageMaker = new Paging();
-	    cri.setPerPageNum(15);
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(reviewService.countReviews());
 	    

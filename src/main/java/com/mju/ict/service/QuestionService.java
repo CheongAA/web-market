@@ -1,6 +1,8 @@
 package com.mju.ict.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,11 +17,11 @@ import com.mju.ict.repository.IQuestionCategoryDAO;
 import com.mju.ict.repository.IQuestionDAO;
 
 @Service
-public class QuestionService implements IQuestionService{
+public class QuestionService implements IQuestionService {
 
 	@Autowired
 	IQuestionCategoryDAO questionCategoryDAO;
-	
+
 	@Autowired
 	IQuestionDAO questionDAO;
 
@@ -27,38 +29,42 @@ public class QuestionService implements IQuestionService{
 	public List<QuestionCategory> getAllQuestionCategories() {
 		return questionCategoryDAO.selectAllQuestionCategories();
 	}
-	
+
 	@Override
 	public QuestionCategory getProductQuestionCategory() {
 		return questionCategoryDAO.selectProductQuestionCategory();
 	}
-	
+
 	@Override
 	public List<Question> getAllQuestion(PagingCriteria cri) {
 		return questionDAO.selectAllQuestions(cri);
 	}
-	
+
 	@Override
 	public List<Question> getQuestionByUser(int user_id) {
 		return questionDAO.selectQuestionByUser(user_id);
 	}
-	
+
 	@Override
-	public List<Question> getQuestionByProduct(int id) {
-		return questionDAO.selectQuestionByProduct(id);
+	public List<Question> getQuestionByProduct(int product_id, PagingCriteria cri) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("product_id", product_id);
+		map.put("pageStart", cri.getPageStart());
+		map.put("perPageNum", cri.getPerPageNum());
+
+		return questionDAO.selectQuestionByProduct(map);
 	}
-	
+
 	@Override
 	public Question getQuestionById(int id) {
 		return questionDAO.selectQuestionById(id);
 	}
 
-
 	@Override
 	public void registerQuestion(Question question, HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		question.setUser_id(user.getUser_id());
-		
+
 		questionDAO.insertQuestion(question);
 	}
 
@@ -67,13 +73,9 @@ public class QuestionService implements IQuestionService{
 		return questionDAO.countQuestions();
 	}
 
-
-
-
-
-
-
-
-
+	@Override
+	public int countQuestionsByProduct(int id) {
+		return questionDAO.countQuestionsByProduct(id);
+	}
 
 }

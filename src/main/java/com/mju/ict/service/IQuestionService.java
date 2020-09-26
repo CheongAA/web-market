@@ -18,13 +18,15 @@ public interface IQuestionService {
 
 	public abstract List<Question> getQuestionByUser(int user_id);
 	
-	public abstract List<Question> getQuestionByProduct(int id);
+	public abstract List<Question> getQuestionByProduct(int product_id, PagingCriteria cri);
 	
 	public abstract Question getQuestionById(int id);
 
 	public abstract void registerQuestion(Question question, HttpSession session);
 
 	public abstract int countQuestions();
+
+	public abstract int countQuestionsByProduct(int id);
 
 
 

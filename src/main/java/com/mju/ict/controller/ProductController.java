@@ -1,8 +1,10 @@
 package com.mju.ict.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -130,15 +132,37 @@ public class ProductController {
 	
 	//상품 디테일 페이지
 	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
-	public String getProductDetail(@PathVariable int id,Model model) {
+	public String getProductDetail(@PathVariable int id,PagingCriteria cri,Model model) {
 		Product product = productService.getProductById(id);
-		List<Question> questions = questionService.getQuestionByProduct(id);
-		List<Review> reviews = reviewService.getReviewByProduct(id);
+		
+	    Paging QuestionPageMaker = new Paging();
+	    QuestionPageMaker.setCri(cri);
+	    QuestionPageMaker.setTotalCount(questionService.countQuestionsByProduct(id));
+	    
+	    Paging ReviewPageMaker = new Paging();
+	    ReviewPageMaker.setCri(cri);
+	    ReviewPageMaker.setTotalCount(reviewService.countReviewsByProduct(id));
 		
 		model.addAttribute("product", product);
-		model.addAttribute("questions", questions);
-		model.addAttribute("reviews", reviews);
+		model.addAttribute("QuestionPageMaker", QuestionPageMaker);
+		model.addAttribute("ReviewPageMaker", ReviewPageMaker);
 		return "/product-detail";
+	}
+	
+	// 상품 리뷰 목록
+	@ResponseBody
+	@RequestMapping(value = "/product/review", method = RequestMethod.GET)
+	public List<Review> getReviewByProduct(HttpServletRequest req,PagingCriteria cri) throws Exception {
+		List<Review> reviews= reviewService.getReviewByProduct(Integer.parseInt((req.getParameter("product_id"))),cri);
+		return reviews;
+	}
+	
+	// 상품 문의 목록
+	@ResponseBody
+	@RequestMapping(value = "/product/question", method = RequestMethod.GET)
+	public List<Question> getQuestionByProduct(HttpServletRequest req,PagingCriteria cri) throws Exception {
+		List<Question> questions= questionService.getQuestionByProduct(Integer.parseInt((req.getParameter("product_id"))),cri);
+		return questions;
 	}
 	
 	

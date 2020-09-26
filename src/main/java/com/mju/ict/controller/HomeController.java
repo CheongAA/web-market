@@ -113,7 +113,6 @@ public class HomeController {
 	public String getNotices(PagingCriteria cri,Model model) {
 		
 	    Paging pageMaker = new Paging();
-	    cri.setPerPageNum(10);
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(noticeService.countNotice());
 	    
@@ -146,7 +145,6 @@ public class HomeController {
 	public String getFAQs(PagingCriteria cri,Model model) {
 		
 	    Paging pageMaker = new Paging();
-	    cri.setPerPageNum(10);
 	    pageMaker.setCri(cri);
 	    pageMaker.setTotalCount(answerService.countFaqAnswers());
 	    

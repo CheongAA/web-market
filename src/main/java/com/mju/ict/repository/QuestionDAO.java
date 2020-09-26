@@ -36,8 +36,8 @@ public class QuestionDAO implements IQuestionDAO{
 
 
 	@Override
-	public List<Question> selectQuestionByProduct(int product_id) {
-		return sqlSession.selectList("selectQuestionByProduct",product_id);
+	public List<Question> selectQuestionByProduct(Map<String, Integer> map) {
+		return sqlSession.selectList("selectQuestionByProduct",map);
 	}
 
 	@Override
@@ -55,6 +55,12 @@ public class QuestionDAO implements IQuestionDAO{
 	@Override
 	public int countQuestions() {
 		return sqlSession.selectOne("countQuestions");
+	}
+
+
+	@Override
+	public int countQuestionsByProduct(int id) {
+		return sqlSession.selectOne("countQuestionsByProduct",id);
 	}
 
 }

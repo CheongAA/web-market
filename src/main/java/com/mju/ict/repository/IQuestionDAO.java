@@ -14,12 +14,14 @@ public interface IQuestionDAO {
 	
 	public abstract Question selectQuestionById(int id);
 	
-	public abstract List<Question> selectQuestionByProduct(int product_id);
+	public abstract List<Question> selectQuestionByProduct(Map<String, Integer> map);
 
 	public abstract void insertQuestion(Question question);
 
 	public abstract void updateQuestionAnswerId(Map<String, Integer> map);
 
 	public abstract int countQuestions();
+
+	public abstract int countQuestionsByProduct(int id);
 
 }

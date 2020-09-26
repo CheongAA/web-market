@@ -1,6 +1,7 @@
 package com.mju.ict.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,9 @@ public class ReviewDAO implements IReviewDAO{
 	}
 	
 	@Override
-	public List<Review> selectReviewByProduct(int product_id) {
-		return sqlSession.selectList("selectReviewByProduct",product_id);
+	public List<Review> selectReviewByProduct(Map<String, Integer> map) {
+		return sqlSession.selectList("selectReviewByProduct",map);
 	}
-
 
 
 	@Override
@@ -60,6 +60,12 @@ public class ReviewDAO implements IReviewDAO{
 	public int countReviews() {
 		return sqlSession.selectOne("countReviews");
 	}
+
+	@Override
+	public int countReviewsByProduct(int id) {
+		return sqlSession.selectOne("countReviewsByProduct",id);
+	}
+
 
 
 
