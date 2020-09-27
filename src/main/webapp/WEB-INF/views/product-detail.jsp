@@ -10,10 +10,10 @@
 </head>
 <body>
 	<div class="row m-4">
-		<div class="col">
-			<div class="row mb-5 pb-5">
-				<div class="col-sm-5 pl-0 mr-5">
-					<img class="w-100 h-100 mb-3 product-img" alt="" src="${product.product_img}">
+		<div class="col-sm-12">
+			<div class="row mb-5 pb-5 justify-content-center">
+				<div class="col-md-6 pl-0">
+					<img class="mw-100 mb-3 product-img" alt="" src="${product.product_img}">
 					<c:if test="${product.discount_id != 0 and product.discount.discount_apply != 0 and product.discount.discount_state != 0}">
 						<div class="product-img-text bg-warning text-center p-3">
 							<p class="h4 text-white font-weight-light">SAVE</p>
@@ -22,7 +22,7 @@
 						</div>
 					</c:if>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-md-6">
 					<input type="hidden" id="product_id" value="${product.product_id}" />
 					<h2>[${product.brand.brand_name}] ${product.product_name}</h2>
 					<p class="text-muted">${product.product_desc}</p>
@@ -80,11 +80,11 @@
 										<button type="button" class="col-sm-3 btn btn-outline-dark py-3 mx-2" id="cart_btn" data-toggle="modal" data-target="#cart_modal">장바구니</button>
 									</c:when>
 									<c:otherwise>
-										<a class="col-sm-3 btn btn-outline-dark py-3 mx-2" href="${pageContext.request.contextPath}/carts">장바구니</a>
+										<a class="col-md-3 btn btn-outline-dark py-3 mx-2" href="${pageContext.request.contextPath}/carts">장바구니</a>
 									</c:otherwise>
 								</c:choose>
 
-								<button type="button" class="col-sm-3 btn btn-dark py-3" id="buy_btn">바로구매</button>
+								<button type="button" class="col-md-3 btn btn-dark py-3 mx-2" id="buy_btn">바로구매</button>
 
 								<!-- Modal -->
 								<div class="modal fade" id="cart_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -121,7 +121,7 @@
 			</div>
 			<div class="row pt-5" id="desc">
 				<div class="col-sm-12 text-center">
-					<img alt="상품설명" src="${product.product_descImg }">
+					<img class="mw-100" alt="상품설명" src="${product.product_descImg }">
 				</div>
 			</div>
 			<div class="row mt-5">
